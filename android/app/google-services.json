@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1072176325931",
+    "firebase_url": "https://oildatabase-781a4-default-rtdb.firebaseio.com",
+    "project_id": "oildatabase-781a4",
+    "storage_bucket": "oildatabase-781a4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072176325931:android:3901d2d7d8c1b53431116e",
+        "android_client_info": {
+          "package_name": "com.example.oilapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1072176325931-c4cg6g0e22b01tm06m5t7d8n136jrbfb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.oilapp",
+            "certificate_hash": "0a09de20d7c21e06d2eef8b0556a8cd2957ace48"
+          }
+        },
+        {
+          "client_id": "1072176325931-9ulrovnl9d8jv4d0c24odu9ich83s129.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsBIQHQpmeyZ254RhjLeARLHgRqlTtKEE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1072176325931-9ulrovnl9d8jv4d0c24odu9ich83s129.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1072176325931-uas9rjalu3po2nrps6824l3p3b00685c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.oilapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
