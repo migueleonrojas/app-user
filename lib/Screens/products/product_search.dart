@@ -6,6 +6,8 @@ import 'package:oilapp/service/wishlist_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:oilapp/widgets/emptycardmessage.dart';
+import 'package:oilapp/widgets/loading_widget.dart';
 
 class ProductSearch extends StatefulWidget {
   @override
@@ -69,6 +71,25 @@ class _ProductSearchState extends State<ProductSearch> {
     return "Completo";
   }
 
+  Future <List<Map<String,dynamic>>> getProducts() async {
+
+    List <Map<String,dynamic>> listProducts = [];
+
+    QuerySnapshot<Map<String, dynamic>> products = await FirebaseFirestore.instance
+        .collection('products')
+        .orderBy("publishedDate", descending: true)
+        .get();
+
+    for(final product in products.docs) {
+
+      listProducts.add(product.data());
+
+    }
+
+    return listProducts;
+
+  }
+
   @override
   Widget build(BuildContext context) {
     int quantity = 1;
@@ -122,10 +143,32 @@ class _ProductSearchState extends State<ProductSearch> {
           ),
         ],
       ),
-      body: SearchProductGridCard(
+
+      body:  FutureBuilder(
+        future: getProducts(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+              return circularProgress();
+          }
+          if(snapshot.data!.isEmpty) {
+            return const EmptyCardMessage(
+              listTitle: 'No hay notas de productos',
+              message: 'No hay productos disponibles',
+            );
+          }
+
+          return SearchProductGridCard(
+            productResultList: _productResultList,
+            quantity: quantity,
+          );
+
+        },
+
+      )
+      /* body: SearchProductGridCard(
         productResultList: _productResultList,
         quantity: quantity,
-      ),
+      ), */
     );
   }
 }

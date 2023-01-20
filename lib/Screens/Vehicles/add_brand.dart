@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:oilapp/config/config.dart';
+import 'package:oilapp/widgets/emptycardmessage.dart';
+import 'package:oilapp/widgets/loading_widget.dart';
 
 
 class AddBrand extends StatefulWidget {
@@ -56,15 +58,31 @@ class _AddBrandState extends State<AddBrand> {
             .collection(AutoParts.brandsVehicle)
             .snapshots(),
             builder: (context, snapshot) {
+
               if (!snapshot.hasData) {
-                return Container(height: 120,);
+                return Container(
+                  width: 40,
+                  height: 40,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
               }
+
+              if(snapshot.data!.docs.isEmpty) {
+                return const EmptyCardMessage(
+                  listTitle: 'No hay marcas',
+                  message: 'No hay marcas disponibles',
+                );
+              }
+
               return ListView.builder(
                 controller: scrollController,
                 shrinkWrap: true,
                 itemExtent:40,
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
+
                   
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
