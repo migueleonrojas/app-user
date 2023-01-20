@@ -105,12 +105,13 @@ class _CartScreenState extends State<CartScreen> {
                   .collection('carts')
                   .snapshots(),
               builder: (context, snapshot) {
-                if (snapshot.data == null)
+                if (!snapshot.hasData)
                   return Center(
                     child: circularProgress(),
-                  );
+                );
+                
                 return (snapshot.data!.docs.length == 0)
-                    ? const EmptyCardMessage(
+                    ?  const  EmptyCardMessage(
                         listTitle: "El Carro de compra esta vacio",
                         message: "Comienza a agregar artículos a tu carro de compras",
                       )

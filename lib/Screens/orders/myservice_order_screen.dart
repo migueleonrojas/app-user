@@ -9,6 +9,7 @@ import 'package:oilapp/widgets/emptycardmessage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:oilapp/widgets/loading_widget.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 
@@ -80,16 +81,16 @@ class _MyServiceOrderScreenState extends State<MyServiceOrderScreen> {
               stream: backEndOrderService.suggestionStream,
               builder: ((context, snapshot) {
 
-                if (snapshot.data == null) return Center(
-                  child:  Column(
-                    children: [
-                      SizedBox(height: 20,),
-                      Container(
-                        child:  CircularProgressIndicator(),
-                      ),
-                    ],
-                  ),
-                );
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+
+                if (snapshot.data!.isEmpty) {
+                  return const EmptyCardMessage(
+                    listTitle: 'No tiene servicios',
+                    message: 'Solicite un servicio desde Global Oil',
+                  );
+                }
                 
 
                 return ListView.builder(

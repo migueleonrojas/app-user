@@ -1,6 +1,7 @@
 import 'package:oilapp/Screens/home_screen.dart';
 import 'package:oilapp/Screens/orders/myOrder_details_secreen.dart';
 import 'package:oilapp/Screens/orders/myservice_order_screen.dart';
+import 'package:oilapp/Screens/products/product_search.dart';
 
 import 'package:oilapp/config/config.dart';
 import 'package:oilapp/widgets/emptycardmessage.dart';
@@ -24,17 +25,7 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
   List listDocument = [];
   QuerySnapshot? collectionState;
 
-  @override
-  void initState() {
-    super.initState();
-    getDocuments();
-    scrollController.addListener(() {
-      if(scrollController.position.pixels + 500 > scrollController.position.maxScrollExtent){
-        getDocumentsNext();
-      }
-      
-    });
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -74,105 +65,52 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
           ),
         ], */
       ),
-      body:  (listDocument.isNotEmpty) 
-        ? OrderBody(
-            itemCount: listDocument.length,
-            data: listDocument,
+      body: FutureBuilder(
+        future: gerOrder(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return circularProgress();
+          }
+
+          if(snapshot.data!.isEmpty) {
+            return const EmptyCardMessage(
+              listTitle: 'No tiene productos',
+              message: 'Compre desde Global Oil',
+            );
+          }
+
+          return OrderBody(
+            itemCount: snapshot.data!.length,
+            data: snapshot.data!,
             scrollController: scrollController,
-          )
-        : (listDocument.isNotEmpty)
-          ? circularProgress()
-          : const EmptyCardMessage(
-              listTitle: "Sin orden!",
-              message: "Comience a comprar desde GlobalOil!",
-          )
+          );
+        },
+      ),
     );
   }
-  Future<void> getDocuments() async {
-    
 
-    int limit = 1;
 
-    _docSnapStream = await AutoParts.firestore!
+  Future<List<Map<String,dynamic>>> gerOrder() async {
+
+    List <Map<String,dynamic>> listOrders = [];
+
+    QuerySnapshot<Map<String, dynamic>> orders = await AutoParts.firestore!
       .collection(AutoParts.collectionUser)
       .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
       .collection(AutoParts.collectionOrders)
       .orderBy("orderTime", descending: true)
       .get();
 
-    lengthCollection = _docSnapStream!.docs.length;
-    if(lengthCollection == 0) {
-      return;
+    for(final order in orders.docs) {
+
+      listOrders.add(order.data());
+
     }
 
-    if(lengthCollection <= 4){
-      limit = lengthCollection;
-    }
-    else if(lengthCollection > 4){
-      limit = 5;
-    }
-
-    
-    final collection =  AutoParts.firestore!
-      .collection(AutoParts.collectionUser)
-      .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
-      .collection(AutoParts.collectionOrders)
-      .orderBy("orderTime", descending: true)
-      .limit(limit);
-
-      fetchDocuments(collection);
-  }
-  fetchDocuments(Query collection){
-    collection.get().then((values) {
-      collectionState = values; 
-      for(final value in values.docs){
-        
-        listDocument.add(value.data());
-      }
-      
-      setState((){});
-      
-    
-    });
-  }
-  Future<void> getDocumentsNext() async {
-  
-    if (isLoading) return;
-    isLoading = true;
-    await Future.delayed(const Duration(seconds: 1));
-
-    int limit = 1;
-
-    if(lengthCollection == listDocument.length){
-      return;
-    }
-    if((lengthCollection - listDocument.length ) % 5 == 0){
-      limit = 5;
-    }
-    else if((lengthCollection - listDocument.length ) % 5 != 0 && (lengthCollection - listDocument.length ) <= 5){
-      limit = lengthCollection - listDocument.length;
-    }
-    
-    // Get the last visible document
-    final lastVisible = collectionState!.docs[collectionState!.docs.length-1];
-    final collection = AutoParts.firestore!
-      .collection(AutoParts.collectionUser)
-      .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
-      .collection(AutoParts.collectionOrders)
-      .orderBy("orderTime", descending: true)
-      .startAfterDocument(lastVisible)
-      .limit(limit);
-
-    fetchDocuments(collection);
-    isLoading = false;
-    if(scrollController.position.pixels + 100 <= scrollController.position.maxScrollExtent) return;
-    scrollController.animateTo(
-      scrollController.position.pixels + 120, 
-      duration: const Duration(milliseconds: 300), 
-      curve: Curves.fastOutSlowIn
-    );
+    return listOrders;
 
   }
+
 }
 
 class OrderBody extends StatelessWidget {

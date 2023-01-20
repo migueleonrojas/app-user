@@ -107,19 +107,14 @@ class _ViewCarNotesState extends State<ViewCarNotes> {
           IconButton(
               icon: const Icon(Icons.add),
               onPressed: () async {
-
-                List <Map<String, dynamic>> listServices = [];
-                
+         
                 
                 final vehicleSelected = await ModalBottomSheetListVehicle().showModalBottomSheetListVehicle(context: context);
 
                 if(vehicleSelected is bool) return;
 
-                QuerySnapshot<Map<String, dynamic>> servicesNotes =  await FirebaseFirestore.instance.collection("servicesNotes").get();
-                for(final serviceNote in servicesNotes.docs){
-                  listServices.add(serviceNote.data());                  
-                }
-                await carNotes.showModalBottomSheetByAddCarNotes(context: context, items: listServices, vehicle: vehicleSelected );
+                
+                await carNotes.showModalBottomSheetByAddCarNotes(context: context, vehicle: vehicleSelected );
                 
               },
             )
@@ -141,7 +136,7 @@ class _ViewCarNotesState extends State<ViewCarNotes> {
 
                 
                 if(snapshot.data!.size == 0) {
-                   return const EmptyCardMessage(
+                   return const  EmptyCardMessage(
                     listTitle: "No hay notas de servicio",
                     message: "Comienza a agregar notas de servicio",
                   );

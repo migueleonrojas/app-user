@@ -6,6 +6,7 @@ import 'package:oilapp/widgets/emptycardmessage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:oilapp/widgets/loading_widget.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 
@@ -30,17 +31,6 @@ class _MyServiceOrderByVehicleScreenState extends State<MyServiceOrderByVehicleS
   List listDocument = [];
   QuerySnapshot? collectionState;
 
-  @override
-  void initState() {
-    super.initState();
-    getDocuments();
-    scrollController.addListener(() {
-      if(scrollController.position.pixels + 500 > scrollController.position.maxScrollExtent){
-        getDocumentsNext();
-      }
-      
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,101 +57,62 @@ class _MyServiceOrderByVehicleScreenState extends State<MyServiceOrderByVehicleS
         ),
         centerTitle: true,
       ),
-      body: OrderBody(
+      body: FutureBuilder(
+        future: gerServiceOrders(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return circularProgress();
+          }
+
+          if(snapshot.data!.isEmpty) {
+            return const EmptyCardMessage(
+              listTitle: 'No tiene servicios para este vehiculo',
+              message: 'Solicite un servicio desde Global Oil',
+            );
+          }
+
+          return OrderBody(
+            itemCount: snapshot.data!.length,
+            data: snapshot.data!,
+            vehicleModel: widget.vehicleModel!,
+            scrollController: scrollController,
+          );
+
+
+        },
+      ),
+      /* body: OrderBody(
         itemCount: listDocument.length,
         data: listDocument,
         vehicleModel: widget.vehicleModel!,
         scrollController: scrollController,
-      ),
+      ), */
       
     );
   }
 
-    Future<void> getDocuments() async {
-    int limit = 1;
-    _docSnapStream = await AutoParts.firestore!
-      .collection(AutoParts.collectionUser)
-      .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
-      .collection(AutoParts.vehicles)
-      .doc(widget.vehicleModel!.vehicleId ?? "")
-      .collection('serviceOrder')
-      .orderBy("orderTime", descending: true)
-      .get();
+    Future<List<Map<String,dynamic>>> gerServiceOrders() async {
 
-    lengthCollection = _docSnapStream!.docs.length;
-    if(lengthCollection <= 4){
-      limit = lengthCollection;
-    }
-    else if(lengthCollection > 4){
-      limit = 5;
-    }
+      List <Map<String,dynamic>> listServiceOrders = [];
 
-    final collection =  AutoParts.firestore!
-      .collection(AutoParts.collectionUser)
-      .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
-      .collection(AutoParts.vehicles)
-      .doc(widget.vehicleModel!.vehicleId ?? "")
-      .collection('serviceOrder')
-      .orderBy("orderTime", descending: true)
-      .limit(limit);
+      QuerySnapshot<Map<String, dynamic>> serviceOrders = await AutoParts.firestore!
+        .collection(AutoParts.collectionUser)
+        .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
+        .collection(AutoParts.vehicles)
+        .doc(widget.vehicleModel!.vehicleId ?? "")
+        .collection('serviceOrder')
+        .orderBy("orderTime", descending: true)
+        .get();
 
-      fetchDocuments(collection);
-  }
-  fetchDocuments(Query collection){
-    collection.get().then((values) {
-      collectionState = values; 
-      for(final value in values.docs){
-        
-        listDocument.add(value.data());
+      for(final serviceOrder in serviceOrders.docs) {
+
+        listServiceOrders.add(serviceOrder.data());
+
       }
-      
-      setState((){});
-      
-    
-    });
-  }
-  Future<void> getDocumentsNext() async {
-  
-    if (isLoading) return;
-    isLoading = true;
-    await Future.delayed(const Duration(seconds: 1));
 
-    int limit = 1;
+      return listServiceOrders;
 
-    if(lengthCollection == listDocument.length){
-      return;
     }
-    if((lengthCollection - listDocument.length ) % 5 == 0){
-      limit = 5;
-    }
-    else if((lengthCollection - listDocument.length ) % 5 != 0 && (lengthCollection - listDocument.length ) <= 5){
-      limit = lengthCollection - listDocument.length;
-    }
-        
-    // Get the last visible document
-    final lastVisible = collectionState!.docs[collectionState!.docs.length-1];
-    final collection = AutoParts.firestore!
-      .collection(AutoParts.collectionUser)
-      .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
-      .collection(AutoParts.vehicles)
-      .doc(widget.vehicleModel!.vehicleId ?? "")
-      .collection('serviceOrder')
-      .orderBy("orderTime", descending: true)
-      .startAfterDocument(lastVisible)
-      .limit(limit);
-
-    fetchDocuments(collection);
-  
-    isLoading = false;
-
-    if(scrollController.position.pixels + 100 <= scrollController.position.maxScrollExtent) return;
-    scrollController.animateTo(
-      scrollController.position.pixels + 120, 
-      duration: const Duration(milliseconds: 300), 
-      curve: Curves.fastOutSlowIn
-    );
-
-  }
 
 }
 

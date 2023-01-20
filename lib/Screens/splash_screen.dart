@@ -26,19 +26,44 @@ class _SplashScreenState extends State<SplashScreen> {
     
      
 
-    Timer(const Duration(seconds: 5), () async {
+    Timer(const Duration(seconds: 1), () async {
+
+      if(AutoParts.sharedPreferences!.getString(AutoParts.userUID) == null) {
+        setState(() {
+          Route route = MaterialPageRoute(builder: (_) => LoginScreen());
+          Navigator.pushReplacement(context, route);
+        });  
+        return;
+      }
       
       QuerySnapshot<Map<String, dynamic>> user = await AutoParts.firestore!
         .collection(AutoParts.collectionUser)
         .where("uid",isEqualTo: AutoParts.sharedPreferences!.getString(AutoParts.userUID))
         .get();
       
-      if(user.size == 0  ){
-        Route route = MaterialPageRoute(builder: (_) => LoginScreen());
-        Navigator.pushReplacement(context, route);
-        
+      if(user.size != 0  ){
+
+        if(user.docs[0].data()["logged"] == true){
+          setState(() {
+            Route route = MaterialPageRoute(builder: (_) => HomeScreen());
+            Navigator.pushReplacement(context, route);
+          });
+        }
+        else{
+          setState(() {
+            Route route = MaterialPageRoute(builder: (_) => LoginScreen());
+            Navigator.pushReplacement(context, route);
+          });
+        } 
       }
-      else if(user.docs[0].data()["logged"] == true) {
+
+      else {
+        setState(() {
+            Route route = MaterialPageRoute(builder: (_) => LoginScreen());
+            Navigator.pushReplacement(context, route);
+          });
+      }
+      /* else if(user.docs[0].data()["logged"] == true) {
         setState(() {
           Route route = MaterialPageRoute(builder: (_) => HomeScreen());
           Navigator.pushReplacement(context, route);
@@ -49,7 +74,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Route route = MaterialPageRoute(builder: (_) => LoginScreen());
           Navigator.pushReplacement(context, route);
         });
-      }
+      } */
       
       /* if (await AutoParts.auth!.currentUser == null) {
         Route route = MaterialPageRoute(builder: (_) => LoginScreen());

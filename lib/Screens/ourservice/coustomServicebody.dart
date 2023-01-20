@@ -10,6 +10,7 @@ import 'package:oilapp/Screens/ourservice/service_shipping_address.dart';
 import 'package:oilapp/config/config.dart';
 import 'package:oilapp/service/rating_review_service.dart';
 import 'package:oilapp/widgets/confirm_animation_button.dart';
+import 'package:oilapp/widgets/emptycardmessage.dart';
 import 'package:oilapp/widgets/loading_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -71,6 +72,15 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return circularProgress();
+              }
+
+              if(snapshot.data!.docs.isEmpty) {
+
+                return const EmptyCardMessage(
+                  listTitle: 'No tiene servicios',
+                  message: 'No hay servicios disponibles',
+                );
+
               }
 
               return ListView.builder(
