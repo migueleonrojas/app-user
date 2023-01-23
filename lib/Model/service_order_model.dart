@@ -26,6 +26,7 @@ class ServiceOrderModel {
   String? serviceId;
   String? serviceImage;
   String? serviceName;
+  String? categoryName;
   int? totalPrice;
 
   ServiceOrderModel({
@@ -54,6 +55,7 @@ class ServiceOrderModel {
     this.serviceId,
     this.serviceImage,
     this.serviceName,
+    this.categoryName,
     this.totalPrice
   });
 
@@ -83,6 +85,7 @@ class ServiceOrderModel {
     serviceId = json['serviceId'];
     serviceImage = json['serviceImage'];
     serviceName = json['serviceName'];
+    categoryName = json['categoryName'];
     totalPrice = json['totalPrice'];
   }
   ServiceOrderModel.fromSnaphot(DocumentSnapshot snapshot) {
@@ -111,6 +114,7 @@ class ServiceOrderModel {
     serviceId = (snapshot.data() as dynamic)['serviceId'];
     serviceImage = (snapshot.data() as dynamic)['serviceImage'];
     serviceName = (snapshot.data() as dynamic)['serviceName'];
+    categoryName = (snapshot.data() as dynamic)['categoryName'];
     totalPrice = (snapshot.data() as dynamic)['totalPrice'];
   }
   Map<String, dynamic> toJson() {
@@ -140,6 +144,7 @@ class ServiceOrderModel {
     data['serviceId'] = this.serviceId;
     data['serviceImage'] = this.serviceImage;
     data['serviceName'] = this.serviceName;
+    data['categoryName'] = this.categoryName;
     data['totalPrice'] = this.totalPrice;
     return data;
   }

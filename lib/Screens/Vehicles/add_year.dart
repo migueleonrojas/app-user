@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:oilapp/config/config.dart';
+import 'package:oilapp/widgets/emptycardmessage.dart';
 
 
 class AddYear extends StatefulWidget {
@@ -49,9 +50,26 @@ class _AddYearState extends State<AddYear> {
             .collection(AutoParts.yearsVehicle)
             .snapshots(),
             builder: (context, snapshot) {
+
+
               if (!snapshot.hasData) {
-                return Container(height: 120,);
+                return Container(
+                  width: 40,
+                  height: 40,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
               }
+
+              if(snapshot.data!.docs.isEmpty) {
+                return const EmptyCardMessage(
+                  listTitle: 'No hay años',
+                  message: 'No hay años disponibles',
+                );
+              }
+
+
               return ListView.builder(
                 controller: scrollController,
                 shrinkWrap: true,

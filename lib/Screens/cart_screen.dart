@@ -69,7 +69,8 @@ class _CartScreenState extends State<CartScreen> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    backgroundColor: Colors.deepOrangeAccent[200],
+                    
+                    backgroundColor: Color.fromARGB(255, 3, 3, 247),
                     icon: Icon(Icons.shopping_cart_outlined),
                   );
           }),

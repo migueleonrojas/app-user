@@ -1,4 +1,4 @@
-import 'package:background_fetch/background_fetch.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:oilapp/Helper/login_helper.dart';
 import 'package:oilapp/Screens/splash_screen.dart';
@@ -11,102 +11,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:oilapp/services/notification_services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:oilapp/counter/cart_item_counter.dart';
 import 'package:oilapp/counter/total_money.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:whatsapp/whatsapp.dart';
-
-import 'firebase_options.dart';
-
-void headlessTask(HeadlessTask task){
-
-  String taskId = task.taskId;
-  bool isTimeout = task.timeout;
-  
-  if (isTimeout) {
-    sendMessageWs(
-      msg: 'Mensaje con el intervalo de 15 segundos ejecutado fuera del app',
-      useTemplate: false
-    );
-    BackgroundFetch.finish(taskId);
-  }
-  sendMessageWs(
-    msg: 'Mensaje con el intervalo de 15 segundos ejecutado fuera del app, Nombre de la tarea ${task.taskId}',
-    useTemplate: false
-  );
-  BackgroundFetch.finish(taskId);
-
-}
-
-sendMessageWs({String msg = "", bool useTemplate = true}) async {
-
-  WhatsApp whatsapp = WhatsApp();
-  whatsapp.setup(
-	  accessToken: "EAAISTvJmRyQBAHzIjVlyfS3q4CG8I2VV00XlAQZBhWXWwfMjV2h4SKWcpiOS7ep2WoT8Ig21RE9RwQ72Pu5TzSJpcmEASp5u4NJJZBViSsTW3ipu4g84kdq1mt5iGHgRArZCljY7rcopueWvKr4tmLCPWTKBHqS5ZBwQjIcZAP7Yt9FgCcZB3D",
-	  fromNumberId: 115672898059238
-  );
-  
-
-  if(useTemplate) {
-    await whatsapp.messagesTemplate(
-      to: 584125853626,
-      templateName: "hello_world"
-    );
-  }
-  else{
-    await whatsapp.messagesText(
-      to: 584125853626,
-      message: msg
-    );
-  }
-  
-
-  /* await whatsapp.messagesTemplate(
-    to: 584125853626,
-    templateName: "hello_world"
-  ); */
-
-}
-
-initBackgroundFetch() async {
-  int status = await BackgroundFetch.configure(
-    BackgroundFetchConfig(
-      minimumFetchInterval: 15,
-      stopOnTerminate: false,
-      enableHeadless: true
-    ),
-    (String taskId){//fetch
-      if(taskId == 'notification'){
-        sendMessageWs(
-          msg: "Mensaje usando notificacion interna",
-          useTemplate: false,
-        );
-      }
-    },
-    (String taskId) {//timeout
-
-    }
-  );
-
-  BackgroundFetch.scheduleTask(
-    TaskConfig(
-      taskId: "notification",
-      delay: 25000,
-      stopOnTerminate: false,
-      enableHeadless: true
-    )
-  );
-
-  
-
-  
 
 
-}
 
 initFirebaseMessaging() async {
 
@@ -132,7 +43,7 @@ initFirebaseMessaging() async {
 
   
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    /* sendMessageWs(); */
+ 
     Fluttertoast.showToast(
       msg: "Notificacion desde Firebase",
       toastLength: Toast.LENGTH_LONG
@@ -164,41 +75,36 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  /* await showNotification(); */
+  
   await Firebase.initializeApp();
   await initFirebaseMessaging();
   
   AutoParts.auth = FirebaseAuth.instance;
   AutoParts.sharedPreferences = await SharedPreferences.getInstance();
-  AutoParts.firebaseAppCheck = FirebaseAppCheck.instance;
+  /* AutoParts.firebaseAppCheck = FirebaseAppCheck.instance;
   await AutoParts.firebaseAppCheck!.activate(
      webRecaptchaSiteKey: '92933631-F622-40CC-9DC6-DA96A6491FC2',
      androidProvider: AndroidProvider.playIntegrity
-  );
+  ); */
   AutoParts.firestore = FirebaseFirestore.instance;
+  
 
-  runApp(MyApp());
 
-  BackgroundFetch.registerHeadlessTask(headlessTask);
+  runApp(const MyApp());
+
+ 
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-   
-    
-    /* initFirebaseMessaging();
-    initBackgroundFetch(); */
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -225,7 +131,7 @@ class _MyAppState extends State<MyApp> {
             titleTextStyle: TextStyle(color: Colors.black)
           )
         ),
-        home: SplashScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

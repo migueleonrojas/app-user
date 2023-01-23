@@ -201,6 +201,10 @@ class OrderBody extends StatelessWidget {
                               .toString())!)
                           .toString()),
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                          shape: const StadiumBorder()
+                        ),
                         /* shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ), */

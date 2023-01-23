@@ -71,6 +71,7 @@ dependencies:
   mailer: ^5.2.0
   googleapis_auth: '^1.0.0'
   flutter_otp_text_field: ^1.1.1
+  timelines: ^0.1.0
 
 dev_dependencies:
   flutter_test:

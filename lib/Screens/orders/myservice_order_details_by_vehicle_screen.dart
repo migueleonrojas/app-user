@@ -362,7 +362,10 @@ class _MyServiceOrderDetailsByVehicleScreenState
                             ),
                             SizedBox(height: 10,),
                             ElevatedButton(
-
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                                shape: const StadiumBorder()
+                              ),
                               onPressed: () async {
                                 AddressModel addressModel = AddressModel.fromJson(
                                   (snapshot.data!.docs[index] as dynamic).data()
@@ -456,7 +459,10 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                         ),
                                       ),
                                       ElevatedButton(
-                                        
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                                          shape: const StadiumBorder()
+                                        ),
                                         onPressed: () async {
                                           bool confirm = await _onBackPressed('De que quieres cancelar la orden');
                                           if(!confirm) return;

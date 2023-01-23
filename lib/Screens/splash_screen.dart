@@ -9,30 +9,63 @@ import 'package:oilapp/Screens/Authentication/login_screen.dart';
 
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  SplashScreenState createState() => SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
-
- 
-
- 
+class SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
     super.initState();
-    
-    
-     
 
-    Timer(const Duration(seconds: 1), () async {
-
+    Future.delayed(Duration.zero,() async {
       if(AutoParts.sharedPreferences!.getString(AutoParts.userUID) == null) {
-        setState(() {
+        
+        Route route = MaterialPageRoute(builder: (_) => const LoginScreen());
+        Navigator.pushReplacement(context, route);
+        
+        return;
+      }
+
+      QuerySnapshot<Map<String, dynamic>> user = await AutoParts.firestore!
+        .collection(AutoParts.collectionUser)
+        .where("uid",isEqualTo: AutoParts.sharedPreferences!.getString(AutoParts.userUID))
+        .get();
+
+      if(user.size != 0  ){
+
+        if(user.docs[0].data()["logged"] == true){
+          
+          Route route = MaterialPageRoute(builder: (_) => HomeScreen());
+          Navigator.pushReplacement(context, route);
+          
+        }
+        else{
+          
           Route route = MaterialPageRoute(builder: (_) => LoginScreen());
           Navigator.pushReplacement(context, route);
-        });  
+         
+        } 
+      }
+      else {
+        
+        Route route = MaterialPageRoute(builder: (_) => LoginScreen());
+        Navigator.pushReplacement(context, route);
+         
+      }
+      
+    });
+
+    /* Timer(const Duration(seconds: 0), () async {
+
+      if(AutoParts.sharedPreferences!.getString(AutoParts.userUID) == null) {
+        
+        Route route = MaterialPageRoute(builder: (_) => LoginScreen());
+        Navigator.pushReplacement(context, route);
+        
         return;
       }
       
@@ -44,162 +77,30 @@ class _SplashScreenState extends State<SplashScreen> {
       if(user.size != 0  ){
 
         if(user.docs[0].data()["logged"] == true){
-          setState(() {
-            Route route = MaterialPageRoute(builder: (_) => HomeScreen());
-            Navigator.pushReplacement(context, route);
-          });
+          
+          Route route = MaterialPageRoute(builder: (_) => HomeScreen());
+          Navigator.pushReplacement(context, route);
+          
         }
         else{
-          setState(() {
-            Route route = MaterialPageRoute(builder: (_) => LoginScreen());
-            Navigator.pushReplacement(context, route);
-          });
+          
+          Route route = MaterialPageRoute(builder: (_) => LoginScreen());
+          Navigator.pushReplacement(context, route);
+         
         } 
       }
 
       else {
-        setState(() {
-            Route route = MaterialPageRoute(builder: (_) => LoginScreen());
-            Navigator.pushReplacement(context, route);
-          });
-      }
-      /* else if(user.docs[0].data()["logged"] == true) {
-        setState(() {
-          Route route = MaterialPageRoute(builder: (_) => HomeScreen());
-          Navigator.pushReplacement(context, route);
-        });
-      }
-      else if(user.docs[0].data()["logged"] == false){
-        setState(() {
-          Route route = MaterialPageRoute(builder: (_) => LoginScreen());
-          Navigator.pushReplacement(context, route);
-        });
-      } */
-      
-      /* if (await AutoParts.auth!.currentUser == null) {
+        
         Route route = MaterialPageRoute(builder: (_) => LoginScreen());
         Navigator.pushReplacement(context, route);
-      } else {
-        setState(() {
-          Route route = MaterialPageRoute(builder: (_) => HomeScreen());
-          Navigator.pushReplacement(context, route);
-        });
-      } */
-    });
+         
+      }
+      
+    }); */
   }
 
-  /* @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      body: StreamBuilder(
-        stream: AutoParts.firestore!
-        .collection(AutoParts.collectionUser)
-        .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
-        .snapshots(),
-        builder: (context, snapshot) {
-          print('Peeraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-          print(AutoParts.sharedPreferences!.getString(AutoParts.userUID));
-
-          if(snapshot.data == null){
-            return Scaffold(
-              body: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  //-------------------logo & title-----------------------//
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          const CircleAvatar(
-                            backgroundColor: Color(0xFFF8991D),
-                            radius: 65.0,
-                            child: Image(
-                              image: AssetImage('assets/splash/autoparts.png'),
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.only(top: 10.0),
-                          ),
-                          RichText(
-                            text:const TextSpan(
-                              text: "Global",
-                              style: TextStyle(
-                                shadows: [
-                                  BoxShadow(
-                                    color: Colors.deepPurple,
-                                    blurRadius: 2,
-                                  ),
-                                ],
-                                color: Colors.black,
-                                fontSize: 30.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: "Oil",
-                                  style: TextStyle(
-                                    shadows: [
-                                      BoxShadow(
-                                        color: Colors.deepPurple,
-                                        blurRadius: 2,
-                                      ),
-                                    ],
-                                    color: Colors.deepOrange,
-                                    fontSize: 30.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  //------------------------short msg----------------------------//
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const <Widget> [
-                        SpinKitThreeBounce(
-                          color: Colors.deepOrangeAccent,
-                          size: 25.0,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 20.0),
-                        ),
-                        Text(
-                          'Ahorre tiempo \nAdministrece con Global Oil',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }
-          else if( (snapshot.data!.data() as dynamic)['uid'] == AutoParts.sharedPreferences!.getString(AutoParts.userUID) && (snapshot.data!.data() as dynamic)['logged'] == true){
-            
-            return HomeScreen();
-          }
-          else{
-            return LoginScreen();
-          }
-
-        },
-      ),
-    );
-  } */
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -215,48 +116,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   LoginHelper().loginLog(),
-                  /* const CircleAvatar(
-                    
-                    
-                    child: Image(
-                      image: AssetImage('assets/authenticaiton/global-oil.jpg'),
-                    ),
-                  ), */
                   const Padding(
                     padding: EdgeInsets.only(top: 10.0),
                   ),
-                  /* RichText(
-                    text:const TextSpan(
-                      text: "Global",
-                      style: TextStyle(
-                        shadows: [
-                          BoxShadow(
-                            color: Colors.deepPurple,
-                            blurRadius: 2,
-                          ),
-                        ],
-                        color: Colors.black,
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: "Oil",
-                          style: TextStyle(
-                            shadows: [
-                              BoxShadow(
-                                color: Colors.deepPurple,
-                                blurRadius: 2,
-                              ),
-                            ],
-                            color: Colors.deepOrange,
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ), */
                 ],
               ),
             ),

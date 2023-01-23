@@ -169,10 +169,11 @@ class _AddressCardState extends State<AddressCard> {
           children: [
             Row(
               children: [
+                
                 Radio(
                   value: widget.value,
                   groupValue: widget.currentIndex,
-                  activeColor: Colors.deepOrangeAccent,
+                  activeColor: Color.fromARGB(255, 3, 3, 247),
                   onChanged: (val) {
                     Provider.of<AddressChange>(context, listen: false)
                         .displayResult(val!);
@@ -231,6 +232,7 @@ class _AddressCardState extends State<AddressCard> {
             ),
             widget.value == Provider.of<AddressChange>(context).count
                 ? WideButton(
+
                     message: "Proceder",
                     onPressed: () {
                       Route route = MaterialPageRoute(

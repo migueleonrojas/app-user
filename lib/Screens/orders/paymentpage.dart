@@ -110,8 +110,13 @@ class _PaymentPageState extends State<PaymentPage> {
                         ),
                         (isTap)
                             ? 
-                            ElevatedButton(onPressed: () async {
-
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                                shape: const StadiumBorder()
+                              ),
+                              onPressed: () async {
+                              
                               loading = true;
                               setState(() {});
                               
@@ -212,6 +217,11 @@ class _PaymentPageState extends State<PaymentPage> {
                                   ],
                                 ),
                                 child: ElevatedButton.icon(
+                                  
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                                    shape: const StadiumBorder()
+                                  ),
                                   /* padding: EdgeInsets.symmetric(
                                     horizontal: 14,
                                     vertical: 10,

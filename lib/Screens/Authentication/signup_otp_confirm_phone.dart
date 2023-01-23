@@ -80,28 +80,7 @@ class _SignUpOtpConfirmPhoneScreenState extends State<SignUpOtpConfirmPhoneScree
                       setState(() {});
                     }
                   ),
-                  const SizedBox(height: 45),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: MediaQuery.of(context).size.width * 0.15),
-                      backgroundColor: Color.fromARGB(255, 3, 3, 247),
-                      shape: const StadiumBorder()
-                    ),
-                    child: const Text("Enviar nuevo código"),
-                    onPressed: () async {
-                      int codeEmail = Random().nextInt(9999 - 1000 + 1) + 1000;
-                      bool confirmSend= await sendCodeByPhone(
-                        int.parse('58${widget.phoneUser}'.replaceFirst('0', '')),
-                        codeEmail.toString()
-                      );
-                      if(!confirmSend){
-                        showSnackBar(title: 'El codigo no se pudo enviar, intente de nuevo.');
-                        return;
-                      }
-                      codePhoneOtp = codeEmail; 
-                      setState(() {});
-                    }
-                  ),
+                  
                   const SizedBox(height: 45),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -122,7 +101,7 @@ class _SignUpOtpConfirmPhoneScreenState extends State<SignUpOtpConfirmPhoneScree
                         return; 
                       }
                       else{
-                        showSnackBar(title: 'El código ingresado es exitoso.');
+                        showSnackBar(title: 'El código ingresado es exitoso.', seconds: 2);
 
                         showDialog(
                           barrierDismissible: false,
@@ -134,12 +113,36 @@ class _SignUpOtpConfirmPhoneScreenState extends State<SignUpOtpConfirmPhoneScree
                         await createUser();
                         if(!mounted) return;
                         Navigator.pop(context);
+                        showSnackBar(title: 'El usuario fue creado con exito.');
                         Route route = MaterialPageRoute(builder: (_) => LoginScreen());
                         Navigator.pushAndRemoveUntil(context, route, (route) => false);
                         
                       }
       
                       
+                    }
+                  ),
+                  const SizedBox(height: 45),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: MediaQuery.of(context).size.width * 0.15),
+                      backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                      shape: const StadiumBorder()
+                    ),
+                    child: const Text("Enviar nuevo código"),
+                    onPressed: () async {
+                      int codeEmail = Random().nextInt(9999 - 1000 + 1) + 1000;
+                      bool confirmSend= await sendCodeByPhone(
+                        int.parse('58${widget.phoneUser}'.replaceFirst('0', '')),
+                        codeEmail.toString()
+                      );
+                      if(!confirmSend){
+                        showSnackBar(title: 'El codigo no se pudo enviar, intente de nuevo.');
+                        return;
+                      }
+                      showSnackBar(title: 'El codigo se envio de nuevo a +58${widget.phoneUser.replaceFirst("0","")}');
+                      codePhoneOtp = codeEmail; 
+                      setState(() {});
                     }
                   ),
                 ]

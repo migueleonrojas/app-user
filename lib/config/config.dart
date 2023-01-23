@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 
@@ -9,6 +10,8 @@ class AutoParts {
   static SharedPreferences? sharedPreferences;
   static User? user;
   static FirebaseAuth? auth;
+  static FirebaseMessaging? messaging;
+  static NotificationSettings? settingsMessaging;
   static FirebaseFirestore? firestore;
   static FirebaseAppCheck? firebaseAppCheck; 
 

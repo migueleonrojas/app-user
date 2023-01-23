@@ -84,28 +84,8 @@ class _UpdateOtpConfirmPhoneScreenState extends State<UpdateOtpConfirmPhoneScree
                     }
                   ),
                   const SizedBox(height: 45),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: MediaQuery.of(context).size.width * 0.15),
-                      backgroundColor: Color.fromARGB(255, 3, 3, 247),
-                      shape: const StadiumBorder()
-                    ),
-                    child: const Text("Enviar nuevo código"),
-                    onPressed: () async {
-                      int codeEmail = Random().nextInt(9999 - 1000 + 1) + 1000;
-                      bool confirmSend= await sendCodeByPhone(
-                        int.parse('${widget.phoneUser}'),
-                        codeEmail.toString()
-                      );
-                      if(!confirmSend){
-                        showSnackBar(title: 'El codigo no se pudo enviar, intente de nuevo.');
-                        return;
-                      }
-                      codePhoneOtp = codeEmail; 
-                      setState(() {});
-                    }
-                  ),
-                  const SizedBox(height: 45),
+                  
+                  
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: 20, horizontal: MediaQuery.of(context).size.width * 0.35),
@@ -125,7 +105,7 @@ class _UpdateOtpConfirmPhoneScreenState extends State<UpdateOtpConfirmPhoneScree
                         return; 
                       }
                       else{
-                        showSnackBar(title: 'El código ingresado es exitoso.');
+                        showSnackBar(title: 'El código ingresado es exitoso.', seconds: 2);
 
                         
                         
@@ -134,6 +114,29 @@ class _UpdateOtpConfirmPhoneScreenState extends State<UpdateOtpConfirmPhoneScree
                       }
       
                       
+                    }
+                  ),
+                  const SizedBox(height: 45),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: MediaQuery.of(context).size.width * 0.15),
+                      backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                      shape: const StadiumBorder()
+                    ),
+                    child: const Text("Enviar nuevo código"),
+                    onPressed: () async {
+                      int codeEmail = Random().nextInt(9999 - 1000 + 1) + 1000;
+                      bool confirmSend= await sendCodeByPhone(
+                        int.parse('${widget.phoneUser}'),
+                        codeEmail.toString()
+                      );
+                      if(!confirmSend){
+                        showSnackBar(title: 'El codigo no se pudo enviar, intente de nuevo.');
+                        return;
+                      }
+                      showSnackBar(title: 'El codigo se envio de nuevo a +${widget.phoneUser}');
+                      codePhoneOtp = codeEmail; 
+                      setState(() {});
                     }
                   ),
                 ]

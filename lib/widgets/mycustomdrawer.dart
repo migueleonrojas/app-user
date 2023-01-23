@@ -394,6 +394,19 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
                     title: "Cerrar sesión",
                     traillingIcon: Icons.keyboard_arrow_right,
                     onPressed: () async {
+                      
+                      var connectivityResult =
+                          await Connectivity().checkConnectivity();
+                      if (connectivityResult != ConnectivityResult.mobile &&
+                          connectivityResult != ConnectivityResult.wifi) {
+                        return showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return NoInternetConnectionAlertDialog();
+                          },
+                        );
+                      }
+
                       bool confirm = await _onBackPressed();
                       if(!mounted) return;
                       if(!confirm) return;

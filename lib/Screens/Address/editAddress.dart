@@ -166,10 +166,12 @@ class _EditAddressState extends State<EditAddress> {
             ),
             const SizedBox(height: 25,),
             TextButton(
+              
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 13),
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.white
+                backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                foregroundColor: Colors.white,
+                shape: const StadiumBorder()
               ),
               onPressed:() {
                 getCurrentPosition();
@@ -181,10 +183,15 @@ class _EditAddressState extends State<EditAddress> {
             ),
             const SizedBox(height: 20,),
             TextButton(
+              /* style: ElevatedButton.styleFrom(
+                                backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                                shape: const StadiumBorder()
+                              ), */
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 13),
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.white
+                backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                foregroundColor: Colors.white,
+                shape: const StadiumBorder()
               ),
               onPressed:() async {
                 await _controllerPage.animateToPage(1, duration: const Duration(seconds: 1), curve: Curves.linear);
@@ -256,6 +263,10 @@ class _EditAddressState extends State<EditAddress> {
                         height: 50,
                         child:
                         ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                            shape: const StadiumBorder()
+                          ),
                           child: Text(
                             "Actualizar Dirección".toUpperCase(),
                             style: const TextStyle(
@@ -316,10 +327,15 @@ class _EditAddressState extends State<EditAddress> {
                       ),
                       SizedBox(height: 20,),
                       TextButton(
+                        /* style: ElevatedButton.styleFrom(
+                            backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                            shape: const StadiumBorder()
+                          ), */
                         style: TextButton.styleFrom(
                           padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 13),
-                          backgroundColor: Colors.red,
-                          foregroundColor: Colors.white
+                          backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                          foregroundColor: Colors.white,
+                          shape: const StadiumBorder()
                         ),
                         onPressed:() async {
                           FocusScope.of(context).requestFocus(FocusNode());

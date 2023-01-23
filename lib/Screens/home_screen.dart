@@ -1,12 +1,15 @@
 /* import 'package:firebase_messaging/firebase_messaging.dart'; */
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:oilapp/Helper/home_helper.dart';
 import 'package:oilapp/Helper/login_helper.dart';
 import 'package:oilapp/Screens/Vehicles/vehicles.dart';
 import 'package:oilapp/Screens/cart_screen.dart';
+import 'package:oilapp/Screens/orders/timeline_service_order.dart';
 import 'package:oilapp/Screens/products/product_search.dart';
+import 'package:oilapp/Screens/products/time_line_products.dart';
 import 'package:oilapp/config/config.dart';
 import 'package:oilapp/services/notification_services.dart';
 import 'package:oilapp/widgets/mycustom_appbar.dart';
@@ -23,34 +26,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen>  {
-  
-  /* WhatsApp whatsapp = WhatsApp(); */
-
-  @override
-  void initState() {
-    super.initState();
-
-    /* showNotification(); */
-    /* whatsapp.setup(
-	    accessToken: "EAAISTvJmRyQBAGFatYJxQqTVmmV4mLSK95MrQZCA21GLdNoMrYAudmeZBrhAJyaIgAdvFZBkJrYa5IMphSMo81RWQDTJpX9ZBXLdAE3TtczlIm95oxdlxphZClg7FHOslFFUTG9BqndykfPWuKMz0iAhrUZCbG8PwZCoFpuk04bSgKm5jRNMm15",
-	    fromNumberId: 115672898059238
-    ); */
-    
-    /* Timer(const Duration(seconds: 60), () async {
-      
-      sendMessagge();
-      
-    }); */
-    /* init(); */
-    /*  */
-  }
-
-  /* init() async {
-    String deviceIdToken = await getDeviceToken();
-    print('DEVICE TOKEN');
-    print(deviceIdToken);
-  } */
-
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -199,16 +174,7 @@ class _HomeScreenState extends State<HomeScreen>  {
             // ),
           ],
         ),
-        IconButton(
-          icon: const Icon(
-            Icons.search_outlined,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Route route = MaterialPageRoute(builder: (_) => ProductSearch());
-            Navigator.push(context, route);
-          },
-        ),
+        
       ],
       
       )
@@ -225,99 +191,11 @@ class _HomeScreenState extends State<HomeScreen>  {
 
               LoginHelper().loginLog(),
               const SizedBox(height: 10,),
+              HomeHelper().mainButtons(context),
+              const SizedBox(height: 20,),
+              const TimeLineServiceOrder(),
+              /* const TimeLineProducts() */
               
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  
-                  Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Route route = MaterialPageRoute(builder: (_) => ProductSearch());
-                          Navigator.push(context, route);
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            border: Border.all(color: Colors.blueAccent)
-                          ),
-                          width: MediaQuery.of(context).size.width * 0.30,
-                          child: Column(
-                            children: [
-                              Container(
-                                
-                                color: Colors.amber,
-                                child: IconButton(
-                                  icon: const Icon(
-                                    Icons.search_outlined,
-                                  ),
-                                  onPressed: () {
-                                      Route route = MaterialPageRoute(builder: (_) => ProductSearch());
-                                      Navigator.push(context, route);
-                                  },
-                                ),
-                              ),
-                              const SizedBox(height: 5,),
-                              
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 5,),
-                      const Text(
-                        'Tienda GO',
-                        style: TextStyle(fontSize: 14),
-                      )
-                    ],
-                  ),
-                  const SizedBox(width: 10,),
-                  Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Route route = MaterialPageRoute(builder: (_) => Vehicles());
-                          Navigator.push(context, route);
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(  
-                            borderRadius: BorderRadius.circular(10.0),
-                            border: Border.all(color: Colors.blueAccent)
-                          ),
-                          width: MediaQuery.of(context).size.width * 0.30,
-                          child: Column(
-                            children: [
-                              Container(
-                                color: const Color.fromARGB(255, 27, 93, 179),
-                                child: IconButton(
-                                  icon: const Icon(
-                                    Icons.garage,
-                                  ),
-                                  onPressed: () {
-                                    Route route = MaterialPageRoute(builder: (_) => Vehicles());
-                                    Navigator.push(context, route);
-                                  },
-                                ),
-                              ),
-                              const SizedBox(height: 5,),
-                              
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 5,),
-                      const Text(
-                        'Mis Vehiculos',
-                        style: TextStyle(fontSize: 14),
-                      )
-                    ],
-                  ),
-                  
-                  
-                ],
-              )
               
               /* HomeHelper().homeCarousel(context),
               HomeHelper().categoriesCard(context),
@@ -364,30 +242,7 @@ class _HomeScreenState extends State<HomeScreen>  {
         ) ??
         false;
   }
-
-
-  /* sendMessagge() async {
-    await whatsapp.messagesText(
-      to: 584125853626,
-      message: 'Mensaje con un temporizador de 1 minuto'
-    );
-  } */
-
-  /* Future getDeviceToken() async {
-    FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-    NotificationSettings settings = await _firebaseMessaging.requestPermission(
-      alert: true,
-      announcement: true,
-      badge: true,
-      carPlay: true,
-      criticalAlert: false,
-      provisional: false,
-      sound: true
-    );
-    print('User granted permission: ${settings.authorizationStatus}');
-    String? deviceToken = await _firebaseMessaging.getToken();
-    return (deviceToken == null) ? "" : deviceToken;
-  } */
+  
 
 
 }

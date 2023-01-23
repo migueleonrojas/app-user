@@ -16,7 +16,8 @@ class WideButton extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.50,
             height: 40,
             decoration: BoxDecoration(
-              color: Colors.deepOrangeAccent[200],
+              
+              color: Color.fromARGB(255, 3, 3, 247),
               borderRadius: BorderRadius.circular(30),
             ),
             child: Center(

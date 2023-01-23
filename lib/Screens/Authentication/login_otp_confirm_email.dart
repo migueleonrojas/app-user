@@ -82,25 +82,6 @@ class _LoginOtpConfirmEmailScreenState extends State<LoginOtpConfirmEmailScreen>
                   const SizedBox(height: 45),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: MediaQuery.of(context).size.width * 0.15),
-                      backgroundColor: Color.fromARGB(255, 3, 3, 247),
-                      shape: const StadiumBorder()
-                    ),
-                    child: const Text("Enviar nuevo código"),
-                    onPressed: () async {
-                      int codeEmail = Random().nextInt(9999 - 1000 + 1) + 1000;
-                      bool confirmSend = await sendCodeByEmail(codeEmail);
-                      if(!confirmSend){
-                        showSnackBar(title: 'El codigo no se pudo enviar, intente de nuevo.');
-                        return;
-                      }
-                      codeEmailOtp = codeEmail; 
-                      setState(() {});
-                    }
-                  ),
-                  const SizedBox(height: 45),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: 20, horizontal: MediaQuery.of(context).size.width * 0.35),
                       backgroundColor: Color.fromARGB(255, 3, 3, 247),
                       shape: const StadiumBorder()
@@ -118,7 +99,7 @@ class _LoginOtpConfirmEmailScreenState extends State<LoginOtpConfirmEmailScreen>
                         return; 
                       }
                       else{
-                        showSnackBar(title: 'El código ingresado es exitoso.');
+                        showSnackBar(title: 'El código ingresado es exitoso.', seconds: 2);
                         showDialog(
                           barrierDismissible: false,
                           context: context,
@@ -129,6 +110,7 @@ class _LoginOtpConfirmEmailScreenState extends State<LoginOtpConfirmEmailScreen>
                         await loginUser();
                         if(!mounted) return;
                         Navigator.pop(context);
+                        showSnackBar(title: 'Ingreso con exito a Global Oil.');
                         Route route = MaterialPageRoute(builder: (_) => HomeScreen());
                         Navigator.pushAndRemoveUntil(context, route, (route) => false);
                       }
@@ -136,6 +118,27 @@ class _LoginOtpConfirmEmailScreenState extends State<LoginOtpConfirmEmailScreen>
                       
                     }
                   ),
+                  const SizedBox(height: 45),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: MediaQuery.of(context).size.width * 0.15),
+                      backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                      shape: const StadiumBorder()
+                    ),
+                    child: const Text("Enviar nuevo código"),
+                    onPressed: () async {
+                      int codeEmail = Random().nextInt(9999 - 1000 + 1) + 1000;
+                      bool confirmSend = await sendCodeByEmail(codeEmail);
+                      if(!confirmSend){
+                        showSnackBar(title: 'El codigo no se pudo enviar, intente de nuevo.');
+                        return;
+                      }
+                      showSnackBar(title: 'El codigo se envio de nuevo a ${widget.emailUser}.');
+                      codeEmailOtp = codeEmail; 
+                      setState(() {});
+                    }
+                  ),
+                  const SizedBox(height: 45),
                 ],
               ),
              )

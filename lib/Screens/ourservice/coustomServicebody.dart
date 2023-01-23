@@ -229,11 +229,13 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                           alignment: Alignment.centerRight,
                           child: Container(
                             height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.blueGrey,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                            
                             child: TextButton(
+                              style: TextButton.styleFrom(
+                                padding: EdgeInsets.symmetric(vertical: 0, horizontal: MediaQuery.of(context).size.width * 0.15),
+                                backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                                shape: const StadiumBorder()
+                              ),
                               onPressed: () {
                                 setState(() {
                                   istap = true;
@@ -241,7 +243,10 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                               },
                               child: const Text(
                                 "Reservar ahora",
+
+                                
                                 style: TextStyle(
+                                  
                                   color: Colors.white,
                                   fontFamily: "Brand-Regular",
                                   fontWeight: FontWeight.bold,
@@ -387,15 +392,16 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                                 });
                                               });
                                             },
+                                            
                                             animationDuration: const Duration(
                                                 milliseconds: 2000),
                                             initialText: "Confirmar",
                                             finalText: "Hecho",
                                             iconData: Icons.check,
                                             iconSize: 32.0,
+                                            
                                             buttonStyle: ConfirmButtonStyle(
-                                              primaryColor:
-                                                  Colors.green.shade600,
+                                              primaryColor:Color.fromARGB(255, 3, 3, 247),
                                               secondaryColor: Colors.white,
                                               elevation: 10.0,
                                               initialTextStyle: const TextStyle(
@@ -404,9 +410,9 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                               ),
                                               finalTextStyle: TextStyle(
                                                 fontSize: 22.0,
-                                                color: Colors.green.shade600,
+                                                color: Color.fromARGB(255, 3, 3, 247),
                                               ),
-                                              borderRadius: 10.0,
+                                              borderRadius: 30.0,
                                             ),
                                           ),
                                         ),
@@ -430,7 +436,17 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                   ],
                                 ),
                                 child: TextButton.icon(
-                                  /* padding: EdgeInsets.symmetric(
+                                  style: TextButton.styleFrom(
+                                    backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                                    shape: const StadiumBorder()
+                                  ),
+                                  /* 
+                                  /* style: TextButton.styleFrom(
+                                padding: EdgeInsets.symmetric(vertical: 0, horizontal: MediaQuery.of(context).size.width * 0.15),
+                                backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                                shape: const StadiumBorder()
+                              ), */
+                                  padding: EdgeInsets.symmetric(
                                     horizontal: 14,
                                     vertical: 9,
                                   ),

@@ -74,17 +74,7 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.deepOrangeAccent, Colors.orange],
-              begin: FractionalOffset(0.0, 0.0),
-              end: FractionalOffset(1.0, 0.0),
-              stops: [0.0, 1.0],
-              tileMode: TileMode.clamp,
-            ),
-          ),
-        ),
+        
         title: const Text(
           "Editar Vehiculo",
           style: TextStyle(
@@ -252,7 +242,14 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                   }
       
                 },
-                child: const Text('Editar vehiculo')
+                style: ElevatedButton.styleFrom(
+                    shape: const StadiumBorder(),
+                    backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                  ),
+                child: const Text(
+                  'Editar vehiculos',
+                  
+                )
               ),
             ),
             const SizedBox(height: 10,),
@@ -279,7 +276,11 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                     (route) => false
                   );
                 },
-                child: const Text('Eliminar vehiculo')
+                child: const Text('Eliminar vehiculo'),
+                style: ElevatedButton.styleFrom(
+                  shape: const StadiumBorder(),
+                  backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                ),
               )
             ),
             const SizedBox(height: 10,),

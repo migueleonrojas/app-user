@@ -116,6 +116,10 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                         ),
                         (isTap)
                             ? ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                                  shape: const StadiumBorder()
+                                ),
                                 onPressed: () async {
                                   loading = true;
                                   setState(() {});

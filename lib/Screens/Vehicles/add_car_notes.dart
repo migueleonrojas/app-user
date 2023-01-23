@@ -259,6 +259,11 @@ class _AddCarNoteState extends State<AddCarNote> {
                     const SizedBox(height: 20),
                     
                     ElevatedButton(
+
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                        shape: const StadiumBorder()
+                      ),
                       onPressed: () async {
 
                         await showModalBottomSheet(

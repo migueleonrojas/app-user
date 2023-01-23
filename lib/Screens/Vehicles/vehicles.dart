@@ -134,8 +134,9 @@ class _VehiclesState extends State<Vehicles> {
                       const SizedBox(height: 10,),
                       TextButton(                      
                         style: TextButton.styleFrom(
-                          padding: const EdgeInsets.all(10),
-                          backgroundColor: Colors.blue,
+                          padding: EdgeInsets.symmetric(vertical: 15, horizontal: MediaQuery.of(context).size.width * 0.15),
+                          backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                          shape: const StadiumBorder()
                         ),
                         onPressed: () {
                           Navigator.push(
@@ -163,9 +164,11 @@ class _VehiclesState extends State<Vehicles> {
                       ),
                       TextButton(
                         style: TextButton.styleFrom(
-                          padding: const EdgeInsets.all(10),
-                          backgroundColor: Colors.blue,
+                          padding: EdgeInsets.symmetric(vertical: 15, horizontal: MediaQuery.of(context).size.width * 0.15),
+                          backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                          shape: const StadiumBorder()
                         ),
+                        
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -191,8 +194,9 @@ class _VehiclesState extends State<Vehicles> {
                       ),
                       TextButton(
                         style: TextButton.styleFrom(
-                          padding: const EdgeInsets.all(10),
-                          backgroundColor: Colors.blue,
+                          padding: EdgeInsets.symmetric(vertical: 15, horizontal: MediaQuery.of(context).size.width * 0.15),
+                          backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                          shape: const StadiumBorder()
                         ),
                         onPressed: () async {
                           
@@ -216,8 +220,9 @@ class _VehiclesState extends State<Vehicles> {
                       ),
                       TextButton(
                         style: TextButton.styleFrom(
-                          padding: const EdgeInsets.all(10),
-                          backgroundColor: Colors.blue,
+                          padding: EdgeInsets.symmetric(vertical: 15, horizontal: MediaQuery.of(context).size.width * 0.15),
+                          backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                          shape: const StadiumBorder()
                         ),
                         onPressed: () async {
                           Navigator.push(
@@ -264,7 +269,7 @@ class _VehiclesState extends State<Vehicles> {
       .collection(AutoParts.vehicles)
       .get();
 
-    for(final vehicle in vehicles.docs) {
+    for(final vehicle in vehicles.docs.reversed) {
 
       listVehicles.add(vehicle.data());
 

@@ -9,11 +9,16 @@ class NoInternetConnectionAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        "No Internet Connection",
+        "No posee conexión a internet",
       ),
-      content: Text("Check your network settings and try again."),
+      content: Text("Comprueba la configuración de tu red e inténtalo de nuevo."),
       actions: [
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+            backgroundColor: Color.fromARGB(255, 3, 3, 247),
+            shape: const StadiumBorder()
+          ),
           onPressed: () {
             Navigator.pop(context);
           },

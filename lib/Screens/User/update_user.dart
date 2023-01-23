@@ -11,6 +11,7 @@ import 'package:http/http.dart' as http;
 import 'package:oilapp/Model/user_model.dart';
 import 'package:oilapp/Screens/Authentication/update_otp_confirm_email.dart';
 import 'package:oilapp/Screens/Authentication/update_otp_confirm_phone.dart';
+import 'package:oilapp/Screens/home_screen.dart';
 import 'package:oilapp/Screens/myaccount_screen.dart';
 import 'package:oilapp/Screens/splash_screen.dart';
 import 'package:oilapp/widgets/progressdialog.dart';
@@ -477,17 +478,30 @@ class _UpdateUserState extends State<UpdateUser> {
 
 
       
+      
+      Navigator.of(context).pop(); 
+      await Fluttertoast.showToast(
+        msg: "Actualización exitosa",
+        toastLength: Toast.LENGTH_LONG
+      );
+
+      if(
+        widget.userModel.name != nameController.text &&
+        widget.userModel.email == emailController.text && 
+        widget.userModel.phone == phoneController.text
+      )
+      {
+        Route route = MaterialPageRoute(builder: (_) => HomeScreen());
+        Navigator.pushAndRemoveUntil(context, route, (route) => false);
+        return;
+      }
       await FirebaseFirestore.instance
         .collection('users')
         .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
         .update({
           "logged":false
         });
-      Navigator.of(context).pop(); 
-      await Fluttertoast.showToast(
-        msg: "Actualización exitosa",
-        toastLength: Toast.LENGTH_LONG
-      );
+
       Route route = MaterialPageRoute(builder: (_) => SplashScreen());
       Navigator.pushAndRemoveUntil(context, route, (route) => false);
       /* AutoParts.auth!.signOut().then((c) {

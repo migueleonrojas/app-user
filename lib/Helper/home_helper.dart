@@ -1,5 +1,7 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:oilapp/Screens/Vehicles/vehicles.dart';
+import 'package:oilapp/Screens/products/product_search.dart';
 import 'package:oilapp/service/category_data.dart';
 import 'package:oilapp/widgets/category_tile.dart';
 import 'package:oilapp/widgets/loading_widget.dart';
@@ -122,4 +124,100 @@ class HomeHelper {
       stream: _db.where("categoryName", isEqualTo: 'Air Fresheners').snapshots(),
     );
   }
+
+  Widget mainButtons (BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        
+        Column(
+          children: [
+            GestureDetector(
+              onTap: () {
+                Route route = MaterialPageRoute(builder: (_) => ProductSearch());
+                Navigator.push(context, route);
+              },
+              child: Container(
+                padding: const EdgeInsets.all(5.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(color: Colors.blueAccent)
+                ),
+                width: MediaQuery.of(context).size.width * 0.30,
+                child: Column(
+                  children: [
+                    Container(
+                      
+                      color: Colors.amber,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.search_outlined,
+                        ),
+                        onPressed: () {
+                            Route route = MaterialPageRoute(builder: (_) => ProductSearch());
+                            Navigator.push(context, route);
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 5,),
+                    
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 5,),
+            const Text(
+              'Tienda GO',
+              style: TextStyle(fontSize: 14),
+            )
+          ],
+        ),
+        const SizedBox(width: 10,),
+        Column(
+          children: [
+            GestureDetector(
+              onTap: () {
+                Route route = MaterialPageRoute(builder: (_) => Vehicles());
+                Navigator.push(context, route);
+              },
+              child: Container(
+                padding: const EdgeInsets.all(5.0),
+                decoration: BoxDecoration(  
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(color: Colors.blueAccent)
+                ),
+                width: MediaQuery.of(context).size.width * 0.30,
+                child: Column(
+                  children: [
+                    Container(
+                      color: const Color.fromARGB(255, 27, 93, 179),
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.garage,
+                        ),
+                        onPressed: () {
+                          Route route = MaterialPageRoute(builder: (_) => Vehicles());
+                          Navigator.push(context, route);
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 5,),
+                    
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 5,),
+            const Text(
+              'Mis Vehiculos',
+              style: TextStyle(fontSize: 14),
+            )
+          ],
+        ),
+        
+        
+      ],
+    );
+  }
+
 }
