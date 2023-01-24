@@ -70,6 +70,9 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
       indexBrandController = await getIndexBrand();
       indexModelController =  await getIndexModel();
       indexYearController = await getIndexYear();
+      setState(() {
+      
+    });
       
     },);
     
