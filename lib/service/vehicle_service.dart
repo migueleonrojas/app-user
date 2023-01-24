@@ -16,6 +16,7 @@ class VehicleService {
     String? tuitionVehicle,
     String? nameVehicle,
     String? logoVehicle,
+    DateTime? updateDate
   ){
     final model = VehicleModel(
       vehicleId: vehicleId,
@@ -29,7 +30,7 @@ class VehicleService {
       tuition: tuitionVehicle ?? "",
       logo: logoVehicle,
       registrationDate: DateTime.now(),
-      updateDate: DateTime.now(),
+      updateDate: updateDate,
       phoneUser: int.parse(AutoParts.sharedPreferences!.getString(AutoParts.userPhone)!)
     ).toJson();
 
@@ -40,7 +41,7 @@ class VehicleService {
       .doc(vehicleId)
       .set(model)
       .whenComplete(() { 
-        addVehicleForAdmin(brandVehicle, modelVehicle, mileageVehicle, yearVehicle, colorVehicle, tuitionVehicle, nameVehicle, logoVehicle);
+        addVehicleForAdmin(brandVehicle, modelVehicle, mileageVehicle, yearVehicle, colorVehicle, tuitionVehicle, nameVehicle, logoVehicle, updateDate);
       })
       .then((value) => {
 
@@ -56,6 +57,7 @@ class VehicleService {
     String? tuitionVehicle,
     String? nameVehicle,
     String? logoVehicle,
+    DateTime? updateDate
   ){
     final model = VehicleModel(
       vehicleId: vehicleId,
@@ -69,7 +71,7 @@ class VehicleService {
       tuition: tuitionVehicle ?? "",
       logo: logoVehicle,
       registrationDate: DateTime.now(),
-      updateDate: DateTime.now(),
+      updateDate: updateDate,
       phoneUser: int.parse(AutoParts.sharedPreferences!.getString(AutoParts.userPhone)!)
     ).toJson();
 

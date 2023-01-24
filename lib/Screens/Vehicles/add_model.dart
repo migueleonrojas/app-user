@@ -20,15 +20,18 @@ class AddModel extends StatefulWidget {
 }
 
 class _AddModelState extends State<AddModel> {
-
-  late ScrollController scrollController = ScrollController(
+  late FixedExtentScrollController scrollController;
+  /* late ScrollController scrollController = ScrollController(
     initialScrollOffset:(widget.selectedIndex == null)? 0 : (widget.selectedIndex!.toDouble() * 40) - 80
-  );
+  ); */
   
   
   @override
   void initState() {
     super.initState();
+    scrollController = FixedExtentScrollController(
+      initialItem: widget.selectedIndex ?? 0
+    );
     widget.holdIndex = (widget.selectedIndex == null) ? false: true;
     widget.previousSelectedIndex = (widget.selectedIndex == null) ? 0: widget.selectedIndex!;
     widget.previousModelName = (widget.modelName == null)? "": widget.modelName!;
@@ -49,6 +52,7 @@ class _AddModelState extends State<AddModel> {
       title: const Center(child: Text('Models')),
       content:
         Container(
+          height: MediaQuery.of(context).size.height * 0.20,
           child: StreamBuilder<QuerySnapshot>(
             stream: AutoParts.firestore!
             .collection(AutoParts.modelsVehicle)
@@ -56,13 +60,7 @@ class _AddModelState extends State<AddModel> {
             .snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
-                return Container(
-                  width: 40,
-                  height: 40,
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
+                return circularProgress();
               }
 
               if(snapshot.data!.docs.isEmpty) {
@@ -72,7 +70,53 @@ class _AddModelState extends State<AddModel> {
                 );
               }
 
-              return ListView.builder(
+              return ListWheelScrollView.useDelegate(
+                physics: FixedExtentScrollPhysics(),
+                controller: scrollController,
+                perspective: 0.010,
+                diameterRatio: 1.5,
+                squeeze: 0.8,
+                itemExtent: 40,
+                onSelectedItemChanged: (value) {
+                  changeIndex(
+                    value, 
+                    (snapshot.data!.docs[value] as dynamic).data()["name"]
+                  );
+                },
+
+                childDelegate: ListWheelChildBuilderDelegate(
+                  childCount: snapshot.data!.docs.length,
+                  builder: (context, index) {
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        
+                        GestureDetector(
+                          onTap: () {
+                            changeIndex(
+                              index, 
+                              (snapshot.data!.docs[index] as dynamic).data()["name"]
+                            );
+                          }, 
+                          child: Material(
+                            color: widget.modelName == (snapshot.data!.docs[index] as dynamic).data()["name"] ? Colors.blue:Colors.transparent,
+                            /* color: widget.selectedIndex == index ? Colors.blue : Colors.transparent, */
+                            borderRadius: BorderRadius.circular(30),
+                            child: Container(
+                              width: 120,
+                              child: Center(child: Text((snapshot.data!.docs[index] as dynamic).data()["name"],style: const TextStyle(fontSize: 15)),),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+                ),
+
+              );
+
+              /* return ListView.builder(
                 controller: scrollController,
                 shrinkWrap: true,
                 itemExtent:40,
@@ -86,7 +130,10 @@ class _AddModelState extends State<AddModel> {
                       
                       GestureDetector(
                         onTap: () {
-                          changeIndex(index, (snapshot.data!.docs[index] as dynamic).data()["name"]);
+                          changeIndex(
+                            index, 
+                            (snapshot.data!.docs[index] as dynamic).data()["name"]
+                          );
                         }, 
                         child: Material(
                           color: widget.modelName == (snapshot.data!.docs[index] as dynamic).data()["name"] ? Colors.blue:Colors.transparent,
@@ -101,7 +148,7 @@ class _AddModelState extends State<AddModel> {
                     ],
                   );
                 },
-              );
+              ); */
             },
           ),
         ),

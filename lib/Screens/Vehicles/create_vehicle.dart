@@ -12,7 +12,7 @@ import 'package:oilapp/config/config.dart';
 import 'package:oilapp/service/vehicle_service.dart';
 
 import '../../widgets/erroralertdialog.dart';
-
+enum DateOfLastOilChangeService { OneMonth, TwoMonth, ThreeMonth, MoreThreeMonth }
 class CreateVehicleScreen extends StatefulWidget {
   const CreateVehicleScreen({super.key});
 
@@ -26,6 +26,7 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
    setState(() => selectedIndex = index);
   }
   
+  DateOfLastOilChangeService? dateOfLastOilChangeService;
   
   GlobalKey<FormState> _vehicleformkey = GlobalKey<FormState>();
 
@@ -64,168 +65,236 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Container(
-            child: Form(
-              key: _vehicleformkey,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 30, top: 30, right: 30),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: GestureDetector(
-                        onTap:addBrand,
-                        child: Row(
-                          children: [
-                            const Text('* Marca'),
-                            const Expanded(child: SizedBox(width: double.infinity,)),
-                            Text((brandController.text.isEmpty? 'Seleccione la Marca': brandController.text))
-                          ],
+      body: SingleChildScrollView(
+
+        child: Column(
+          children: [
+            Container(
+              child: Form(
+                key: _vehicleformkey,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 30, top: 30, right: 30),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: GestureDetector(
+                          onTap:addBrand,
+                          child: Row(
+                            children: [
+                              const Text('* Marca'),
+                              const Expanded(child: SizedBox(width: double.infinity,)),
+                              Text((brandController.text.isEmpty? 'Seleccione la Marca': brandController.text))
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: GestureDetector(
-                        onTap:addModel,
-                        child: Row(
-                          children: [
-                            const Text('* Modelo'),
-                            const Expanded(child: SizedBox(width: double.infinity,)),
-                            Text((modelController.text.isEmpty? 'Seleccione el Modelo': modelController.text))
-                          ],
+                      SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: GestureDetector(
+                          onTap:addModel,
+                          child: Row(
+                            children: [
+                              const Text('* Modelo'),
+                              const Expanded(child: SizedBox(width: double.infinity,)),
+                              Text((modelController.text.isEmpty? 'Seleccione el Modelo': modelController.text))
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: GestureDetector(
-                        onTap:addYear,
-                        child: Row(
-                          children: [
-                            const Text('* Año'),
-                            const Expanded(child: SizedBox(width: double.infinity,)),
-                            Text((yearController.text.isEmpty? 'Seleccion el año': yearController.text))
-                          ],
+                      SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: GestureDetector(
+                          onTap:addYear,
+                          child: Row(
+                            children: [
+                              const Text('* Año'),
+                              const Expanded(child: SizedBox(width: double.infinity,)),
+                              Text((yearController.text.isEmpty? 'Seleccion el año': yearController.text))
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: GestureDetector(
-                        onTap: addColor,
-                        child: Row(
-                          children: [
-                            const Text('* Color'),
-                            const Expanded(child: SizedBox(width: double.infinity,)),
-                            (colorController.text.isEmpty) 
-                              ? const Text('Seleccione el color')
-                              : Container(height: 20,width: 60,color:Color(int.parse(colorController.text)))
-                          ],
+                      SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: GestureDetector(
+                          onTap: addColor,
+                          child: Row(
+                            children: [
+                              const Text('* Color'),
+                              const Expanded(child: SizedBox(width: double.infinity,)),
+                              (colorController.text.isEmpty) 
+                                ? const Text('Seleccione el color')
+                                : Container(height: 20,width: 60,color:Color(int.parse(colorController.text)))
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      controller: mileageController,
-                      decoration: const InputDecoration(
-                        hintText: "Agregar Kilometraje",
+                      const SizedBox(height: 10),
+                      TextFormField(
+                        keyboardType: TextInputType.number,
+                        controller: mileageController,
+                        decoration: const InputDecoration(
+                          hintText: "Agregar Kilometraje",
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                    TextFormField(
-                      controller: tuitionController,
-                      decoration: const InputDecoration(
-                        hintText: "Agregar Matricula (Opcional)",
+                      const SizedBox(height: 10),
+                      TextFormField(
+                        controller: tuitionController,
+                        decoration: const InputDecoration(
+                          hintText: "Agregar Matricula (Opcional)",
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                    TextFormField(
-                      controller: nameOwnerController,
-                      decoration: const InputDecoration(
-                        hintText: "Agregar Nombre (Opcional)",
+                      const SizedBox(height: 10),
+                      TextFormField(
+                        controller: nameOwnerController,
+                        decoration: const InputDecoration(
+                          hintText: "Agregar Nombre (Opcional)",
+                        ),
                       ),
-                    ),
-                ]),
+                  ]),
+                ),
+              )
+      
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              width: MediaQuery.of(context).size.width * 0.90,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '¿Cuando fue el ultimo cambio de aceite a tu vehiculo${brandController.text.isEmpty?'': ' '+ brandController.text}${modelController.text.isEmpty?'':' ' + modelController.text}${yearController.text.isEmpty?'':' ' + yearController.text}?',
+                    style: const TextStyle(
+                      fontSize: 18
+                    ),    
+                  ),
+      
+                  ListTile(
+                    title: const Text('Hace 1 mes'),
+                    leading: Radio(
+                      groupValue: dateOfLastOilChangeService,
+                      value: DateOfLastOilChangeService.OneMonth,
+                      onChanged: (DateOfLastOilChangeService? value) {
+                        dateOfLastOilChangeService = value!;
+                        setState(() {});
+                      },
+                    )
+                  ),
+                  ListTile(
+                    title: const Text('Hace 2 meses'),
+                    leading: Radio(
+                      groupValue: dateOfLastOilChangeService,
+                      value: DateOfLastOilChangeService.TwoMonth,
+                      onChanged: (DateOfLastOilChangeService? value) {
+                        dateOfLastOilChangeService = value!;
+                        setState(() {});
+                      },
+                    )
+                  ),
+                  ListTile(
+                    title: const Text('Hace 3 meses'),
+                    leading: Radio(
+                      groupValue: dateOfLastOilChangeService,
+                      value: DateOfLastOilChangeService.ThreeMonth,
+                      onChanged: (DateOfLastOilChangeService? value) {
+                        dateOfLastOilChangeService = value!;
+                        setState(() {});
+                      },
+                    )
+                  ),
+                  ListTile(
+                    title: const Text('No lo recuerdo más de 3 meses'),
+                    leading: Radio(
+                      groupValue: dateOfLastOilChangeService,
+                      value: DateOfLastOilChangeService.MoreThreeMonth,
+                      onChanged: (DateOfLastOilChangeService? value) {
+                        dateOfLastOilChangeService = value!;
+                        setState(() {});
+                      },
+                    )
+                  ),
+                ],
+              ),
+            ),
+            /* const Expanded(child: SizedBox(height: double.infinity,)), */
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () async {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                  if(brandController.text.isNotEmpty && modelController.text.isNotEmpty &&
+                     yearController.text.isNotEmpty && colorController.text.isNotEmpty &&
+                     mileageController.text.isNotEmpty && dateOfLastOilChangeService != null
+                  ){
+                    VehicleService vehicleService = VehicleService();
+
+                    
+
+                    DateTime date = generateUpdateDateValue(dateOfLastOilChangeService!);
+                  
+                    vehicleService.addVehicle(
+                      brandController.text, 
+                      modelController.text, 
+                      int.parse(mileageController.text), 
+                      int.parse(yearController.text), 
+                      int.parse(colorController.text), 
+                      tuitionController.text,
+                      nameOwnerController.text,
+                      logoBrand,
+                      date
+                    );
+                    Fluttertoast.showToast(msg: 'Vehiculo agregado exitosamente');
+                    
+                    setState(() {
+                      selectedIndex = 0;
+                      idBrand = null;
+                      logoBrand = null;
+                      indexBrandController = null;
+                      indexModelController = null;
+                      indexYearController = null;
+                      indexColorController = null;
+                      brandController.text = '';
+                      modelController.text = '';
+                      yearController.text = '';
+                      colorController.text = '';
+                      tuitionController.text = '';
+                      nameOwnerController.text = '';
+                      mileageController.text = '';
+                    });
+                    if(!mounted) return;
+                    Navigator.pushAndRemoveUntil(
+                      context, 
+                      MaterialPageRoute(
+                        builder: (c) => const Vehicles(),
+                      ), 
+                      (route) => false
+                    );
+                    
+      
+                  }
+      
+                  else {
+                    showDialog(
+                    context: context,
+                    builder: (c) {
+                      return const ErrorAlertDialog(
+                        message: "Por favor ingrese toda la información solicitada.",
+                      );
+                    },
+                  );
+                  }
+      
+                },
+                child: const Text('Agregar vehiculo')
               ),
             )
-
-          ),
-          const Expanded(child: SizedBox(height: double.infinity,)),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 50,
-            child: ElevatedButton(
-              onPressed: () async {
-                FocusScope.of(context).requestFocus(FocusNode());
-                if(brandController.text.isNotEmpty && modelController.text.isNotEmpty &&
-                   yearController.text.isNotEmpty && colorController.text.isNotEmpty &&
-                   mileageController.text.isNotEmpty
-                ){
-                  VehicleService vehicleService = VehicleService();
-                
-                  vehicleService.addVehicle(
-                    brandController.text, 
-                    modelController.text, 
-                    int.parse(mileageController.text), 
-                    int.parse(yearController.text), 
-                    int.parse(colorController.text), 
-                    tuitionController.text,
-                    nameOwnerController.text,
-                    logoBrand,
-                  );
-                  Fluttertoast.showToast(msg: 'Vehiculo agregado exitosamente');
-                  
-                  setState(() {
-                    selectedIndex = 0;
-                    idBrand = null;
-                    logoBrand = null;
-                    indexBrandController = null;
-                    indexModelController = null;
-                    indexYearController = null;
-                    indexColorController = null;
-                    brandController.text = '';
-                    modelController.text = '';
-                    yearController.text = '';
-                    colorController.text = '';
-                    tuitionController.text = '';
-                    nameOwnerController.text = '';
-                    mileageController.text = '';
-                  });
-                  if(!mounted) return;
-                  Navigator.pushAndRemoveUntil(
-                    context, 
-                    MaterialPageRoute(
-                      builder: (c) => const Vehicles(),
-                    ), 
-                    (route) => false
-                  );
-                  
-
-                }
-
-                else {
-                  showDialog(
-                  context: context,
-                  builder: (c) {
-                    return const ErrorAlertDialog(
-                      message: "Por favor ingrese toda la información solicitada.",
-                    );
-                  },
-                );
-                }
-
-              },
-              child: const Text('Agregar vehiculo')
-            ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -300,23 +369,58 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
     }
   }
 
-  /* void addColorSelectedCarrusel() async {
+  DateTime generateUpdateDateValue(DateOfLastOilChangeService dateOfLastOilChangeService){
 
-    
-    final alert = (indexColorController == null && colorController.text == '') ? AddColor():AddColor(selectedIndex:indexColorController, color: int.parse(colorController.text));
-    
-    final returnColor = await showDialog(context: context, barrierDismissible: false, builder: (_) => alert);
-    final indexColor = (returnColor[0] == '')? '' : returnColor[0];
-    final color = (returnColor[1] == null)? '' : returnColor[1];
-    if(indexColor != '' && color != ''){
-      indexColorController = indexColor;
-      colorController.text = color.toString();
-      setState(() {});
+    DateTime date = DateTime.now();
+    int microsecondsSinceEpochLastService = 0;
+
+    if(dateOfLastOilChangeService == DateOfLastOilChangeService.OneMonth){
+      microsecondsSinceEpochLastService = 1000000 * 60 * 60 * 24 * 30;
+
+      int microsecondsDateLastService = date.microsecondsSinceEpoch - microsecondsSinceEpochLastService;
+
+      DateTime dateLastService = DateTime.fromMicrosecondsSinceEpoch(microsecondsDateLastService);
+     
+      date = dateLastService;
+
     }
-    
-    
-  } */
+    else if(dateOfLastOilChangeService == DateOfLastOilChangeService.TwoMonth){
+      microsecondsSinceEpochLastService = 1000000 * 60 * 60 * 24 * 60;
 
-  
+      int microsecondsDateLastService = date.microsecondsSinceEpoch - microsecondsSinceEpochLastService;
+
+      DateTime dateLastService = DateTime.fromMicrosecondsSinceEpoch(microsecondsDateLastService);
+     
+      date = dateLastService;
+
+    }
+
+    else if(dateOfLastOilChangeService == DateOfLastOilChangeService.ThreeMonth){
+      microsecondsSinceEpochLastService = 1000000 * 60 * 60 * 24 * 90;
+
+      int microsecondsDateLastService = date.microsecondsSinceEpoch - microsecondsSinceEpochLastService;
+
+      DateTime dateLastService = DateTime.fromMicrosecondsSinceEpoch(microsecondsDateLastService);
+     
+      date = dateLastService;
+
+    }
+
+    else if(dateOfLastOilChangeService == DateOfLastOilChangeService.MoreThreeMonth){
+      microsecondsSinceEpochLastService = 1000000 * 60 * 60 * 24 * 83;
+
+      int microsecondsDateLastService = date.microsecondsSinceEpoch - microsecondsSinceEpochLastService;
+
+      DateTime dateLastService = DateTime.fromMicrosecondsSinceEpoch(microsecondsDateLastService);
+     
+      date = dateLastService;
+
+    }
+
+    
+
+    return date;
+
+  }
 
 }

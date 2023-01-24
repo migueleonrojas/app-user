@@ -54,6 +54,7 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
 
    @override
   void initState() {
+
     super.initState();
     brandController.text = widget.vehicleModel!.brand!;
     modelController.text = widget.vehicleModel!.model!;
@@ -63,7 +64,16 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
     tuitionController.text = widget.vehicleModel!.tuition!;
     nameOwnerController.text = widget.vehicleModel!.name!;
     logoBrand = widget.vehicleModel!.logo;
-    getIdBrand();
+    
+    Future.delayed(Duration.zero, () async {
+
+      indexBrandController = await getIndexBrand();
+      indexModelController =  await getIndexModel();
+      indexYearController = await getIndexYear();
+      
+    },);
+    
+    
     setState(() {
       
     });
@@ -291,7 +301,7 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
   }
 
   void addBrand() async {
-    final alert = (indexBrandController == null && brandController.text == '' && idBrand == null && logoBrand == null) ? AddBrand():AddBrand(selectedIndex:indexBrandController, brandName: brandController.text, brandId: idBrand, logoBrand:logoBrand);
+    final alert = (indexBrandController == null && brandController.text == '' && idBrand == null && logoBrand == null) ? AddBrand():AddBrand(selectedIndex:indexBrandController, brandName: brandController.text, brandId: idBrand, logoBrand:logoBrand,);
     
     final returnDataBrand = await showDialog(context: context, barrierDismissible: false, builder: (_) => alert);
     final indexBrand = (returnDataBrand[0] == '')? '' : returnDataBrand[0];
@@ -304,8 +314,11 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
       brandController.text = brandName;
       idBrand = idBrandReturned;
       logoBrand = logoBrandReturned;
-      if(confirmChanges) modelController.text = '';
-      indexModelController = null;
+      if(confirmChanges){ 
+        modelController.text = '';
+        indexModelController = null;
+      }
+      
       setState(() {});
     }
     
@@ -395,22 +408,67 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
       }
     }
 
-  /* void addColorSelectedCarrusel() async {
+    Future <int> getIndexBrand() async {
+      QuerySnapshot<Map<String, dynamic>> brandsVehicles = await AutoParts.firestore!
+        .collection(AutoParts.brandsVehicle)
+        .get();
+      int index = 0;
+      for(final brandsVehicle in brandsVehicles.docs){
+        
+        if(widget.vehicleModel!.brand == brandsVehicle.data()['name']){
+          break;
+        }
+        index++;
+      }
+      return index;
 
-    
-    final alert = (indexColorController == null && colorController.text == '') ? AddColor():AddColor(selectedIndex:indexColorController, color: int.parse(colorController.text));
-    
-    final returnColor = await showDialog(context: context, barrierDismissible: false, builder: (_) => alert);
-    final indexColor = (returnColor[0] == '')? '' : returnColor[0];
-    final color = (returnColor[1] == null)? '' : returnColor[1];
-    if(indexColor != '' && color != ''){
-      indexColorController = indexColor;
-      colorController.text = color.toString();
-      setState(() {});
     }
-    
-    
-  } */
+
+    Future <int> getIndexModel() async {
+
+      final brand = await AutoParts.firestore!
+        .collection('brandsVehicle')
+        .where('name', isEqualTo: widget.vehicleModel!.brand).get();
+
+      QuerySnapshot<Map<String, dynamic>> modelsVehicles = await AutoParts.firestore!
+        .collection(AutoParts.modelsVehicle)
+        .where('id_brand', isEqualTo: brand.docs[0].data()['id'])
+        .get();
+      int index = 0;
+      idBrand = brand.docs[0].data()['id'];
+      
+      for(final modelsVehicle in modelsVehicles.docs){
+        
+        if(widget.vehicleModel!.model == modelsVehicle.data()['name']){
+          break;
+        }
+        index++;
+      }
+      setState(() {});
+      return index;
+
+
+    }
+
+    Future <int> getIndexYear() async {
+
+      QuerySnapshot<Map<String, dynamic>> yearsVehicles = await AutoParts.firestore!
+        .collection(AutoParts.yearsVehicle)
+        .orderBy('year',descending: true)
+        .get();
+      int index = 0;
+      for(final yearsVehicle in yearsVehicles.docs){
+        
+        if(widget.vehicleModel!.year == yearsVehicle.data()['year']){
+          break;
+        }
+        index++;
+      }
+      return index;
+
+
+    }
+  
 
   
 
