@@ -15,7 +15,10 @@ import 'package:oilapp/widgets/emptycardmessage.dart';
 import 'package:oilapp/widgets/loading_widget.dart';
 import 'package:oilapp/widgets/modal_bottom_sheet_add_car_note.dart';
 import 'package:oilapp/widgets/simpleAppbar.dart';
+import 'package:flutter_rounded_progress_bar/flutter_icon_rounded_progress_bar.dart';
 import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
+import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
+
 class Vehicles extends StatefulWidget {
   const Vehicles({super.key});
 
@@ -140,7 +143,23 @@ class _VehiclesState extends State<Vehicles> {
                     const SizedBox(height: 10,),
                     Text(vehicleModel.year.toString()),
                     const SizedBox(height: 10,),
-                    
+                    RoundedProgressBar(
+                      milliseconds:3000,
+                      childLeft: Text(
+                        'Próximo cambio de aceite ${vehicleWithNotificationsModel.daysOfTheNextService} dias.',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontFamily: "Brand-Regular",
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                      percent: 100 - ( 100 * vehicleWithNotificationsModel.daysOfTheNextService!.toDouble()) / vehicleWithNotificationsModel.days!.toDouble(),
+                      style: RoundedProgressBarStyle(
+                        colorProgress:Color.fromARGB(255, 3, 3, 247),
+                      ),
+                      borderRadius: BorderRadius.circular(24)
+                    ),
                     const SizedBox(height: 10,),
                     TextButton(                      
                       style: TextButton.styleFrom(
