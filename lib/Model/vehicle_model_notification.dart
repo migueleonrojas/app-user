@@ -16,6 +16,8 @@ class VehicleWithNotificationsModel {
   int? days;
   String? message;
   int? minutes;
+  int? daysOfTheNextService;
+  String? dateFromNextFormat;
 
   VehicleWithNotificationsModel({
     this.vehicleId,
@@ -34,7 +36,9 @@ class VehicleWithNotificationsModel {
     this.categoryNotification,
     this.days,
     this.message,
-    this.minutes
+    this.minutes,
+    this.daysOfTheNextService,
+    this.dateFromNextFormat
   });
   VehicleWithNotificationsModel.fromJson(Map<String, dynamic> json) {
     vehicleId = json['vehicleId'];
@@ -54,6 +58,8 @@ class VehicleWithNotificationsModel {
     days = json['days'];
     message = json['message'];
     minutes = json['minutes'];
+    daysOfTheNextService = json['daysOfTheNextService'];
+    dateFromNextFormat = json['dateFromNextFormat'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -74,6 +80,8 @@ class VehicleWithNotificationsModel {
     data['days'] = this.days;
     data['message'] = this.message;
     data['minutes'] = this.minutes;
+    data['daysOfTheNextService'] = this.daysOfTheNextService;
+    data['dateFromNextFormat'] = this.dateFromNextFormat;
     return data;
   }
 }

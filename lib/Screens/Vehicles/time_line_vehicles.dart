@@ -95,14 +95,14 @@ class _TimeLineVehiclesState extends State<TimeLineVehicles> {
                         snapshot.data![index]
                       );
                      
-                      int daysActual = (DateTime.now().microsecondsSinceEpoch / 1000000 / 60 / 60 / 24).round();
+                      /* int daysActual = (DateTime.now().microsecondsSinceEpoch / 1000000 / 60 / 60 / 24).round();
                       int daysUserVehicle = (vehicleWithNotificationsModel.updateDate!.microsecondsSinceEpoch / 1000000 / 60 / 60 / 24).round(); 
                       int daysPassed = (daysActual - daysUserVehicle);
                       int daysOfTheNextService = vehicleWithNotificationsModel.days! - daysPassed;
                       int microsecondsNextService = vehicleWithNotificationsModel.updateDate!.microsecondsSinceEpoch.round() + (1000000 * 60 * 60 * 24 * vehicleWithNotificationsModel.days!).round();
                       DateTime dateFromNextService = DateTime.fromMicrosecondsSinceEpoch(microsecondsNextService);
 
-                      String dateFromNextFormat = DateFormat('yyyy/MM/dd hh:mm a').format(dateFromNextService);
+                      String dateFromNextFormat = DateFormat('yyyy/MM/dd hh:mm a').format(dateFromNextService); */
 
                       return TimelineTile(
 
@@ -127,8 +127,13 @@ class _TimeLineVehiclesState extends State<TimeLineVehicles> {
                                 Text('Marca: ${vehicleWithNotificationsModel.brand}'),
                                 Text('Modelo: ${vehicleWithNotificationsModel.model}'),
                                 Text('Año: ${vehicleWithNotificationsModel.year}'),
-                                messageDayRest(daysOfTheNextService),
-                                messageDate(daysOfTheNextService, dateFromNextFormat),
+                                messageDayRest(vehicleWithNotificationsModel.daysOfTheNextService!),
+                                messageDate(
+                                  vehicleWithNotificationsModel.daysOfTheNextService!,
+                                  vehicleWithNotificationsModel.dateFromNextFormat!
+                                )
+                                /* messageDayRest(daysOfTheNextService),
+                                messageDate(daysOfTheNextService, dateFromNextFormat), */
                                 
                               ],
                             ),
