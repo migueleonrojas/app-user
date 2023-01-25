@@ -80,7 +80,50 @@ class VehicleService {
       .set(model);
   }
 
-  
+  updateFromCarNotes(
+    String vehicleIdFromDB,
+    String brandVehicle, 
+    String modelVehicle, 
+    int mileageVehicle, 
+    int yearVehicle, 
+    int colorVehicle, 
+    String? tuitionVehicle,
+    String? nameVehicle,
+    String? logoVehicle,
+    DateTime registrationDate,
+    DateTime updateDate
+  ) async {
+    final model = VehicleModel(
+      vehicleId: vehicleIdFromDB,
+      userId: AutoParts.sharedPreferences!.getString(AutoParts.userUID),
+      brand: brandVehicle, 
+      model: modelVehicle,
+      mileage: mileageVehicle,
+      year: yearVehicle,
+      color: colorVehicle,
+      name: nameVehicle ?? "",
+      tuition: tuitionVehicle ?? "",
+      logo: logoVehicle,
+      registrationDate: registrationDate,
+      updateDate: updateDate,
+      phoneUser: int.parse(AutoParts.sharedPreferences!.getString(AutoParts.userPhone)!)
+    ).toJson();
+
+    await FirebaseFirestore.instance
+      .collection(AutoParts.collectionUser)
+      .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
+      .collection(AutoParts.vehicles)
+      .doc(vehicleIdFromDB)
+      .update(model)
+      .whenComplete(() async { 
+        await updateVehicleForAdmin(vehicleIdFromDB, brandVehicle, modelVehicle, mileageVehicle, yearVehicle, colorVehicle, tuitionVehicle, nameVehicle, logoVehicle, registrationDate, updateDate);
+      })
+      .then((value) => {
+
+      });
+
+
+  }
 
   Future <bool> updateVehicle(
     String vehicleIdFromDB,

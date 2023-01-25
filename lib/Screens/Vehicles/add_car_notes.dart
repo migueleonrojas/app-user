@@ -11,6 +11,7 @@ import 'package:oilapp/Screens/Vehicles/view_image.dart';
 import 'package:oilapp/Screens/home_screen.dart';
 import 'package:oilapp/Screens/ourservice/backend_carnoteservice.dart';
 import 'package:oilapp/config/config.dart';
+import 'package:oilapp/service/vehicle_service.dart';
 import 'package:oilapp/widgets/customTextField.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:oilapp/widgets/progressdialog.dart';
@@ -19,7 +20,7 @@ class AddCarNote extends StatefulWidget {
   final Map<String,dynamic> noteCar;
   final VehicleModel vehicleModel;
   const AddCarNote({super.key, required this.noteCar, required this.vehicleModel});
-
+  
   @override
   State<AddCarNote> createState() => _AddCarNoteState();
 }
@@ -30,7 +31,7 @@ class _AddCarNoteState extends State<AddCarNote> {
   final _mileageTextEditingController = TextEditingController();
   final _dateTextEditingController = TextEditingController();
   final _commentsTextEditingController = TextEditingController();
-
+  final VehicleService vehicleService = VehicleService();
 
   List attachments = [];
   List selectedAttachments = [];
@@ -107,6 +108,23 @@ class _AddCarNoteState extends State<AddCarNote> {
             IconButton(
               icon: const Icon(Icons.check),
               onPressed: () async {
+                /* DateTime lastTimeDeliverdTime = DateTime.now();
+                
+                QuerySnapshot<Map<String, dynamic>> serviceOrders = await FirebaseFirestore.instance
+                    .collection('serviceOrder')
+                    .where('categoryName', isEqualTo: 'Cambio de Aceite')
+                    .where('vehicleId',isEqualTo: widget.vehicleModel.vehicleId)
+                    .orderBy('deliverdTime',descending: false)                    
+                    .get();
+                  
+                
+
+                for(final serviceOrder in serviceOrders.docs){
+      
+                  lastTimeDeliverdTime = serviceOrder.data()['deliverdTime'].toDate();
+                  
+                } */
+
 
                 if(_serviceNameTextEditingController.text.isEmpty ||
                   _mileageTextEditingController.text.isEmpty ||
@@ -136,7 +154,7 @@ class _AddCarNoteState extends State<AddCarNote> {
                     );
                 
                 final DateTime date = DateTime.parse(_dateTextEditingController.text.split('/').reversed.join('-'));
-                
+
                 await BackEndCarNotesService().addCarNoteService(
                   vehicleId: widget.vehicleModel.vehicleId!, 
                   serviceName: _serviceNameTextEditingController.text.trim(),
@@ -147,6 +165,62 @@ class _AddCarNoteState extends State<AddCarNote> {
                   attachments: attachments,
                   vehicleModel: widget.vehicleModel
                 );
+
+                if(widget.noteCar['name'] == 'Aceite con filtro'){
+
+                  DateTime? lastTimeDeliverdTime;
+
+                  QuerySnapshot<Map<String, dynamic>> serviceOrders = await FirebaseFirestore.instance
+                    .collection('serviceOrder')
+                    .where('categoryName', isEqualTo: 'Cambio de Aceite')
+                    .where('vehicleId',isEqualTo: widget.vehicleModel.vehicleId)
+                    .orderBy('deliverdTime',descending: false)                    
+                    .get();
+
+                  for(final serviceOrder in serviceOrders.docs){
+        
+                    lastTimeDeliverdTime = serviceOrder.data()['deliverdTime'].toDate();
+                    
+                  }
+
+                  if(lastTimeDeliverdTime == null){
+
+                    if(date.compareTo(widget.vehicleModel.updateDate!) > 0){
+                      await vehicleService.updateFromCarNotes(
+                        widget.vehicleModel.vehicleId!, 
+                        widget.vehicleModel.brand!, 
+                        widget.vehicleModel.model!, 
+                        int.parse(_mileageTextEditingController.text.trim()), 
+                        widget.vehicleModel.year!, 
+                        widget.vehicleModel.color!, 
+                        widget.vehicleModel.tuition!, 
+                        widget.vehicleModel.name!, 
+                        widget.vehicleModel.logo!, 
+                        widget.vehicleModel.registrationDate!, 
+                        date
+                      );
+                    }
+
+                  }
+                  else {
+                    if(date.compareTo(lastTimeDeliverdTime) > 0){
+                      await vehicleService.updateFromCarNotes(
+                        widget.vehicleModel.vehicleId!, 
+                        widget.vehicleModel.brand!, 
+                        widget.vehicleModel.model!, 
+                        int.parse(_mileageTextEditingController.text.trim()), 
+                        widget.vehicleModel.year!, 
+                        widget.vehicleModel.color!, 
+                        widget.vehicleModel.tuition!, 
+                        widget.vehicleModel.name!, 
+                        widget.vehicleModel.logo!, 
+                        widget.vehicleModel.registrationDate!, 
+                        date
+                      );
+                    }
+                  }
+                  
+                }
 
                 Navigator.pop(context);
               
@@ -212,14 +286,19 @@ class _AddCarNoteState extends State<AddCarNote> {
                       showCursor: false,
                       function: () async {
                         final initialDate = DateTime.now();
-                        final newDate = await showDatePicker(
+                        final newDate = await showDatePicker(                          
                           context: context,
                           initialDate: initialDate,
                           firstDate: DateTime(DateTime.now().year - 5),
-                          lastDate: DateTime(DateTime.now().year + 5),
+                          lastDate: DateTime.now(),
                         );
                         if (newDate == null) return;
-                        _dateTextEditingController.text = DateFormat('dd/MM/yyyy').format(newDate);
+
+                        DateTime newDateSpecific = newDate.
+                          add(Duration(hours: DateTime.now().hour)).
+                          add(Duration(minutes:DateTime.now().minute)).
+                          add(Duration(seconds: DateTime.now().second));
+                        _dateTextEditingController.text = DateFormat('dd/MM/yyyy').format(newDateSpecific);
                       },
                     ),
                     const SizedBox(height: 10),
