@@ -57,7 +57,7 @@ class _TimeLineVehiclesState extends State<TimeLineVehicles> {
             controller: scrollController,
             scrollDirection: Axis.vertical,
             child: StreamBuilder(
-              stream: backEndVehiclesService.suggestionStream,
+              stream: backEndVehiclesService.suggestionUsersVehiclesStream,
               /* stream: FirebaseFirestore.instance
                 .collection(AutoParts.collectionUser)
                 .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
