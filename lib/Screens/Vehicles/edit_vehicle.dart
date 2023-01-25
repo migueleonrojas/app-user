@@ -11,6 +11,7 @@ import 'package:oilapp/Screens/Vehicles/add_year.dart';
 import 'package:oilapp/Screens/Vehicles/vehicles.dart';
 import 'package:oilapp/config/config.dart';
 import 'package:oilapp/service/vehicle_service.dart';
+import 'package:oilapp/widgets/loading_widget.dart';
 
 import '../../widgets/erroralertdialog.dart';
 
@@ -66,20 +67,16 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
     logoBrand = widget.vehicleModel!.logo;
     
     Future.delayed(Duration.zero, () async {
-
-      indexBrandController = await getIndexBrand();
-      indexModelController =  await getIndexModel();
-      indexYearController = await getIndexYear();
-      setState(() {
       
-    });
+      await getIndexBrand();
+      await getIndexModel();
+      await getIndexYear();
+      setState((){});
       
     },);
     
     
-    setState(() {
-      
-    });
+    
   }
   
   
@@ -99,7 +96,11 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
         ),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
+      body: 
+      
+      (indexBrandController == null && indexModelController == null && indexYearController == null)
+      ? circularProgress()
+      : SingleChildScrollView(
         child: Column(
           children: [
             Container(
@@ -118,7 +119,11 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                       Padding(
                         padding: const EdgeInsets.all(10),
                         child: GestureDetector(
-                          onTap:addBrand,
+                          onTap: () {
+                            if(indexBrandController != null){
+                              addBrand();
+                            }
+                          },
                           child: Row(
                             children: [
                               const Text('* Marca'),
@@ -132,7 +137,11 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                       Padding(
                         padding: const EdgeInsets.all(10),
                         child: GestureDetector(
-                          onTap:addModel,
+                          onTap: () {
+                            if(indexModelController != null) {
+                              addModel();
+                            }
+                          },
                           child: Row(
                             children: [
                               const Text('* Modelo'),
@@ -146,7 +155,11 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                       Padding(
                         padding: const EdgeInsets.all(10),
                         child: GestureDetector(
-                          onTap:addYear,
+                          onTap: () {
+                            if(indexYearController != null) {
+                              addYear();
+                            }
+                          },
                           child: Row(
                             children: [
                               const Text('* Año'),
@@ -423,6 +436,8 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
         }
         index++;
       }
+      indexBrandController = index;
+      setState(() {});
       return index;
 
     }
@@ -447,6 +462,7 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
         }
         index++;
       }
+      indexModelController = index;
       setState(() {});
       return index;
 
@@ -467,6 +483,8 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
         }
         index++;
       }
+      indexYearController = index;
+      setState(() {});
       return index;
 
 
