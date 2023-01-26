@@ -76,6 +76,7 @@ class _TimeLineVehiclesState extends State<TimeLineVehicles> {
                   );
                 }
                 
+                
                 return ListView.builder(
                    physics: const NeverScrollableScrollPhysics(),
                    shrinkWrap: true,
@@ -104,42 +105,81 @@ class _TimeLineVehiclesState extends State<TimeLineVehicles> {
 
                       String dateFromNextFormat = DateFormat('yyyy/MM/dd hh:mm a').format(dateFromNextService); */
 
-                      return TimelineTile(
+                      
 
-                        node:  TimelineNode(
-                          indicator: DotIndicator(
-                            color: Color(vehicleWithNotificationsModel.color!),
-                          ),
-                          startConnector: SolidLineConnector(
-                            color: Color(vehicleWithNotificationsModel.color!),
-                          ),
-                          endConnector: SolidLineConnector(
-                            color: Color(vehicleWithNotificationsModel.color!),
-                          ),
-                        ),
-                        oppositeContents: Card(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.50,
-                            padding: EdgeInsets.all(8.0),
-                            child: Column(
-                              
-                              children: [
-                                Text('Marca: ${vehicleWithNotificationsModel.brand}'),
-                                Text('Modelo: ${vehicleWithNotificationsModel.model}'),
-                                Text('Año: ${vehicleWithNotificationsModel.year}'),
-                                messageDayRest(vehicleWithNotificationsModel.daysOfTheNextService!),
-                                messageDate(
-                                  vehicleWithNotificationsModel.daysOfTheNextService!,
-                                  vehicleWithNotificationsModel.dateFromNextFormat!
-                                )
-                                /* messageDayRest(daysOfTheNextService),
-                                messageDate(daysOfTheNextService, dateFromNextFormat), */
-                                
-                              ],
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: TimelineTile(
+                          
+                          nodeAlign: TimelineNodeAlign.start,
+                          node:  TimelineNode(
+                            
+                            indicator: DotIndicator(
+                              size: 50,
+                              color: Color(vehicleWithNotificationsModel.color!),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Image.asset(
+                                  scale: 0.5,
+                                  'assets/icons/car_oilchange.png',
+                                  width:40 ,
+                                  color: Colors.white,
+                                  fit: BoxFit.scaleDown,
+                                ),
+                              ),
+                              /* child: Image.asset(
+                                'assets/icons/car_oilchange.png',
+                                width: 5,
+                                height: 5,
+                                color: Colors.white,
+                                fit: BoxFit.scaleDown,
+                              ), */
+                              /* child: Image.asset(
+                                "assets/icons/car_oilchange.png",
+                                color: Colors.white,
+                                height: 2,
+                                width: 2,
+                              ), */
+                            ),
+                            startConnector: SolidLineConnector(
+                              color: Color(vehicleWithNotificationsModel.color!),
+                            ),
+                            endConnector: SolidLineConnector(
+                              color: Color(vehicleWithNotificationsModel.color!),
                             ),
                           ),
+                          contents: Card(
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              padding: EdgeInsets.all(8.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+
+                                  Text(
+                                    '${vehicleWithNotificationsModel.brand} ${vehicleWithNotificationsModel.model} ${vehicleWithNotificationsModel.year}',
+                                    style: TextStyle(
+                                      color: Color(vehicleWithNotificationsModel.color!)
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5,),
+                                  messageDayRest(
+                                    vehicleWithNotificationsModel.daysOfTheNextService!,
+                                    vehicleWithNotificationsModel.dateFromNextFormat!
+                                  ),
+                                  /* messageDate(
+                                    vehicleWithNotificationsModel.daysOfTheNextService!,
+                                    vehicleWithNotificationsModel.dateFromNextFormat!
+                                  ) */
+                                  /* messageDayRest(daysOfTheNextService),
+                                  messageDate(daysOfTheNextService, dateFromNextFormat), */
+                                  
+                                ],
+                              ),
+                            ),
+                          ),
+                          
                         ),
-                        
                       );
                    }
                 );
@@ -168,26 +208,28 @@ class _TimeLineVehiclesState extends State<TimeLineVehicles> {
 
   }
 
-  Widget messageDayRest(int daysOfTheNextService) {
+  Widget messageDayRest(int daysOfTheNextService,  String dateFromNextFormat) {
 
     Widget text = Text('');
 
+    /* Restan 6 dias para el proximo cambio de aceite */
+
     if(daysOfTheNextService <= 0) {
       text =  Text(
-        'Ya se le paso la fecha del cambio de aceite',
+        'Restan ${0} dias para el proximo cambio de aceite. El ${dateFromNextFormat}',
         style: const TextStyle(color: Colors.red),
       );
     }
 
     if(daysOfTheNextService > 0 && daysOfTheNextService <= 7) {
       text =  Text(
-        'Le quedan solo ${daysOfTheNextService} dias para hacer el cambio de aceite.',
+        'Restan ${daysOfTheNextService} dias para el proximo cambio de aceite. El ${dateFromNextFormat}.',
         style: const TextStyle(color: Colors.orange),
       );
     }
 
     if(daysOfTheNextService > 7){
-      text = Text('Su próximo cambio de aceite es en: ${daysOfTheNextService} dias');
+      text = Text('Restan ${daysOfTheNextService} dias para el proximo cambio de aceite. El ${dateFromNextFormat}.');
     }
 
     
@@ -202,14 +244,14 @@ class _TimeLineVehiclesState extends State<TimeLineVehicles> {
 
     if(daysOfTheNextService <= 0) {
       text =  Text(
-        'Fecha del ultimo cambio de aceite realizado: ${dateFromNextFormat}',
+        'El: ${dateFromNextFormat}',
         style: const TextStyle(color: Colors.red),
       );
     }
 
     else{
       text =  Text(
-        'Fecha del próximo cambio de aceite: ${dateFromNextFormat}',
+        'El: ${dateFromNextFormat}',
        
       );
     }

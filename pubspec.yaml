@@ -73,6 +73,7 @@ dependencies:
   flutter_otp_text_field: ^1.1.1
   timelines: ^0.1.0
   flutter_rounded_progress_bar: 0.2.0
+  gauges: ^1.0.0
   
 dev_dependencies:
   flutter_test:

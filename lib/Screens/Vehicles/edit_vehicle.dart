@@ -186,25 +186,37 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      TextFormField(
-                        keyboardType: TextInputType.number,
-                        controller: mileageController,
-                        decoration: const InputDecoration(
-                          hintText: "Editar Kilometraje",
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          controller: mileageController,
+                          decoration: const InputDecoration(
+                            hintText: "Editar Kilometraje",
+                            labelText: "Kilometraje:"
+                          ),
                         ),
                       ),
                       const SizedBox(height: 10),
-                      TextFormField(
-                        controller: tuitionController,
-                        decoration: const InputDecoration(
-                          hintText: "Editar Matricula (Opcional)",
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        child: TextFormField(
+                          controller: tuitionController,
+                          decoration: const InputDecoration(
+                            hintText: "Editar Matricula (Opcional)",
+                            labelText: "Matricula:"
+                          ),
                         ),
                       ),
                       const SizedBox(height: 10),
-                      TextFormField(
-                        controller: nameOwnerController,
-                        decoration: const InputDecoration(
-                          hintText: "Editar Nombre (Opcional)",
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        child: TextFormField(
+                          controller: nameOwnerController,
+                          decoration: const InputDecoration(
+                            hintText: "Editar Nombre (Opcional)",
+                            labelText: "Nombre del vehiculo:"
+                          ),
                         ),
                       ),
                   ]),

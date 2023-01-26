@@ -36,7 +36,7 @@ class BackEndVehiclesService {
       int daysOfTheNextService = (querySnapshotNotificationMessage.docs[0].data() as dynamic)["days"] - daysPassed;
       int microsecondsNextService = (documentsUsersVehicle.data() as dynamic )['updateDate']!.microsecondsSinceEpoch.round() + (1000000 * 60 * 60 * 24 * (querySnapshotNotificationMessage.docs[0].data() as dynamic)["days"]).round();
       DateTime dateFromNextService = DateTime.fromMicrosecondsSinceEpoch(microsecondsNextService);
-      String dateFromNextFormat = DateFormat('yyyy/MM/dd hh:mm a').format(dateFromNextService);
+      String dateFromNextFormat = DateFormat('dd/MM/yyyy').format(dateFromNextService);
 
       vehiclesWithNotification.add({
         "brand":                  (documentsUsersVehicle.data() as dynamic )['brand'],

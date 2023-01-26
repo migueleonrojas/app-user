@@ -7,6 +7,7 @@ class LoginHelper extends ChangeNotifier {
     return Image.asset(
       "assets/authenticaiton/global-oil.jpg",
       width: 300,
+      height: 150,
     );
   }
 

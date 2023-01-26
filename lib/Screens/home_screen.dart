@@ -183,31 +183,29 @@ class _HomeScreenState extends State<HomeScreen>  {
       
       ,
       drawer: MyCustomDrawer(),
-      body: SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-
-          child: Column(
-            mainAxisAlignment:MainAxisAlignment.center ,
-            children: [
-
-              LoginHelper().loginLog(),
-              const SizedBox(height: 10,),
-              HomeHelper().mainButtons(context),
-              const SizedBox(height: 20,),
-              /* const TimeLineServiceOrder(), */
-              /* const TimeLineProducts() */
-              TimeLineVehicles()
-              
-              /* HomeHelper().homeCarousel(context),
-              HomeHelper().categoriesCard(context),
-              HomeHelper().uptoFiftyPercentOFFCard(),
-              HomeHelper().newArrivalCard(),
-              HomeHelper().vacuumsCard(),
-              HomeHelper().helmetCard(),
-              HomeHelper().airfresnersCard(), */
-            ],
-          ),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height - AppBar().preferredSize.height ,
+        child: Column(
+          mainAxisAlignment:MainAxisAlignment.spaceBetween,
+          
+          children: [
+            
+            LoginHelper().loginLog(),
+            
+            HomeHelper().mainButtons(context),
+            
+            
+            const TimeLineVehicles()
+            
+            /* HomeHelper().homeCarousel(context),
+            HomeHelper().categoriesCard(context),
+            HomeHelper().uptoFiftyPercentOFFCard(),
+            HomeHelper().newArrivalCard(),
+            HomeHelper().vacuumsCard(),
+            HomeHelper().helmetCard(),
+            HomeHelper().airfresnersCard(), */
+          ],
         ),
       ),
     );

@@ -207,7 +207,7 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
                     )
                   ),
                   ListTile(
-                    title: const Text('No lo recuerdo más de 3 meses'),
+                    title: const Text('No lo recuerdo'),
                     leading: Radio(
                       groupValue: dateOfLastOilChangeService,
                       value: DateOfLastOilChangeService.MoreThreeMonth,
