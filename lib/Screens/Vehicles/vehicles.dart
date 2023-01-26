@@ -183,7 +183,10 @@ class _VehiclesState extends State<Vehicles> {
                                 
                             ),
                             (vehicleWithNotificationsModel.daysOfTheNextService! <= 0)
-                              ? Text('Restan ${0} dias para el próximo cambio de aceite.')
+                              ? Text(
+                                  'Restan ${0} dias \npara el próximo \ncambio de aceite.',
+                                  maxLines: 3,
+                                )
                               : Text(
                                 
                                   'Restan ${vehicleWithNotificationsModel.daysOfTheNextService} dias \npara el próximo \ncambio de aceite.',
