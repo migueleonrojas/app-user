@@ -128,7 +128,7 @@ class _VehiclesState extends State<Vehicles> {
                     Stack(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(2.0),
                           child: Container(
                             width: 80,
                             height: 90,
@@ -190,8 +190,8 @@ class _VehiclesState extends State<Vehicles> {
                         Center(
                           child: Image.network(
                             vehicleModel.logo!,
-                            width: 50,
-                            height: 50,
+                            width: 80,
+                            height: 80,
                             fit: BoxFit.scaleDown,
                           ),
                         )
