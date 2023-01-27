@@ -74,6 +74,7 @@ dependencies:
   timelines: ^0.1.0
   flutter_rounded_progress_bar: 0.2.0
   gauges: ^1.0.0
+  syncfusion_flutter_gauges: ^20.4.44
   
 dev_dependencies:
   flutter_test:

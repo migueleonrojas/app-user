@@ -9,6 +9,7 @@ import 'package:oilapp/Screens/home_screen.dart';
 import 'package:oilapp/Screens/orders/myservice_order_by_vehicle_screen.dart';
 import 'package:oilapp/Screens/orders/myservice_order_screen.dart';
 import 'package:gauges/gauges.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:oilapp/Screens/ourservice/backend_vehicles.dart';
 import 'package:oilapp/Screens/ourservice/our_service_screen.dart';
 import 'package:oilapp/config/config.dart';
@@ -126,76 +127,66 @@ class _VehiclesState extends State<Vehicles> {
                     
                     Stack(
                       children: [
-                        Column(
-                          children: [
-                            RadialGauge(
-                              radius: 30,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: 80,
+                            height: 90,
+                            child: SfRadialGauge(
                               
-                              axes: [
-                                RadialGaugeAxis(
-                                  pointers: [
-                                    RadialNeedlePointer(
+                              enableLoadingAnimation: true,
+                              axes: <RadialAxis> [
+                                RadialAxis(
+                                  showLabels: false,
+                                  showAxisLine: false,
+                                  radiusFactor: 1.0,
+                                  minimum: 0,
+                                  maximum: vehicleWithNotificationsModel.days!.toDouble(),
+                                  isInversed: true,
+                                  
 
-                                      minValue: 0,
-                                      maxValue: vehicleWithNotificationsModel.days!.toDouble(),
-                                      value: (90 - vehicleWithNotificationsModel.daysOfTheNextService!.toDouble() <= 0)
-                                        ? 90
-                                        : 90 - vehicleWithNotificationsModel.daysOfTheNextService!.toDouble(),
-                                      thicknessStart: 5,
-                                      thicknessEnd: 0,
-                                      length: 0.85,
-                                      knobRadiusAbsolute: 5,
-                                          
+                                  ranges: <GaugeRange> [
+
+                                    GaugeRange(startValue: vehicleWithNotificationsModel.days!.toDouble(), endValue: 30,color: Colors.green),
+                                    GaugeRange(startValue: 30, endValue: 8,color: Colors.orange),
+                                    GaugeRange(startValue: 8, endValue: 0, color: Colors.red),
+                                    
+                                  ],
+                                  pointers: <GaugePointer> [
+                                    
+                                    NeedlePointer(
+                                       
+                                      value: (vehicleWithNotificationsModel.daysOfTheNextService! < 0) 
+                                        ? 0
+                                        : vehicleWithNotificationsModel.daysOfTheNextService!.toDouble(),
+                                      
+                                      needleStartWidth: 0,
+                                      needleEndWidth: 3,
+                                      needleLength: 0.85,
+                                      
                                     )
                                   ],
-                                  color: Colors.transparent,
-                                  maxValue: vehicleWithNotificationsModel.days!.toDouble(),
-                                  minValue: 0,
-                                  minAngle: -160,
-                                  maxAngle: 165,
-                                  segments: [
-                                      /* sumatoria de los 3 secciones de 325 grados */
-                                    RadialGaugeSegment(
-                                      minValue: 31, 
-                                      maxValue: vehicleWithNotificationsModel.days!.toDouble(), 
-                                      minAngle: -160, 
-                                      maxAngle: 56.66,
-                                      color: Colors.green,
-                                    ),
-                                    const RadialGaugeSegment(
-                                      minValue: 8, 
-                                      maxValue: 30, 
-                                      minAngle: 56.66, 
-                                      maxAngle: 139.71,
-                                      color: Colors.yellow,
-                                    ),
-                                    const RadialGaugeSegment(
-                                      minValue: 0, 
-                                      maxValue: 7, 
-                                      minAngle: 139.71, 
-                                      maxAngle: 165,
-                                      color: Colors.red,
-                                    ),
-                                      
+                                  annotations: <GaugeAnnotation> [
+                                    GaugeAnnotation(
+                                      widget: Container(
+                                        child: Text(
+                                          (vehicleWithNotificationsModel.daysOfTheNextService! < 0) 
+                                            ? 'Restan 0 días para el próximo cambio de aceite.'
+                                            :'Restan ${vehicleWithNotificationsModel.daysOfTheNextService} dias para el próximo cambio de aceite.', 
+                                        ),
+                                        
+                                      ),
+                                      angle: 90,
+                                      positionFactor: 2,
+                                    )
                                   ],
-                                ),
-                              ],
-                                
-                            ),
-                            (vehicleWithNotificationsModel.daysOfTheNextService! <= 0)
-                              ? Text(
-                                  'Restan ${0} dias \npara el próximo \ncambio de aceite.',
-                                  maxLines: 3,
-                                )
-                              : Text(
-                                
-                                  'Restan ${vehicleWithNotificationsModel.daysOfTheNextService} dias \npara el próximo \ncambio de aceite.',
-                                  maxLines: 3,
                                   
-                                ),
-
-                          ],
+                                )
+                              ],
+                            ),
+                          ),
                         ),
+                        
                         Center(
                           child: Image.network(
                             vehicleModel.logo!,
