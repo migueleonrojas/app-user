@@ -4,6 +4,7 @@ import 'package:oilapp/Model/vehicle_model.dart';
 import 'package:oilapp/Model/vehicle_model_notification.dart';
 import 'package:oilapp/Screens/Vehicles/create_vehicle.dart';
 import 'package:oilapp/Screens/Vehicles/edit_vehicle.dart';
+import 'package:oilapp/Screens/Vehicles/time_line_vehicles_car_notes_and_service_order.dart';
 import 'package:oilapp/Screens/Vehicles/view_cars_notes.dart';
 import 'package:oilapp/Screens/home_screen.dart';
 import 'package:oilapp/Screens/orders/myservice_order_by_vehicle_screen.dart';
@@ -112,14 +113,16 @@ class _VehiclesState extends State<Vehicles> {
               child: ListTile(
                 
                 onTap: () {
+                  //timelines
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (c) => EditVehicleScreen(
-                        vehicleModel: vehicleModel,
-                      ),
+                      builder: (c) => TimelineVehiclesCarNotesAndServiceOrder(
+                        vehicleWithNotificationsModel: vehicleWithNotificationsModel,
+                      )
                     ),
                   );
+
                 },
                 title: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -194,6 +197,27 @@ class _VehiclesState extends State<Vehicles> {
                             height: 80,
                             fit: BoxFit.scaleDown,
                           ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            IconButton(
+                              icon: const Icon(
+                                Icons.edit,
+                                color: Colors.black,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (c) => EditVehicleScreen(
+                                      vehicleModel: vehicleModel,
+                                    ),
+                                  ),
+                                );
+                              },
+                            )
+                          ],
                         )
                       ],
                     ),

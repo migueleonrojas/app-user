@@ -183,9 +183,7 @@ class _HomeScreenState extends State<HomeScreen>  {
       
       ,
       drawer: MyCustomDrawer(),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height - AppBar().preferredSize.height ,
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment:MainAxisAlignment.spaceBetween,
           
@@ -194,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen>  {
             LoginHelper().loginLog(),
             
             HomeHelper().mainButtons(context),
-            
+            const SizedBox(height: 20,),
             
             const TimeLineVehicles()
             

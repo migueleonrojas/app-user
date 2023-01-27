@@ -13,8 +13,12 @@ class BackEndVehiclesService {
   final StreamController <List<Map<String,dynamic>>> _suggestionStreamVehicleUserControler = StreamController.broadcast();
   Stream<List<Map<String,dynamic>>> get suggestionVehicleUserStream => _suggestionStreamVehicleUserControler.stream;
 
+  final StreamController <List<Map<String,dynamic>>> _suggestionStreamCarNotesAndOrderServiceByVehicle = StreamController.broadcast();
+  Stream<List<Map<String,dynamic>>> get suggestionCarNotesAndOrderServiceByVehicle => _suggestionStreamCarNotesAndOrderServiceByVehicle.stream;
+
+
   getVehiclesWithNotification() async {
-    List<Map<String,dynamic>> vehiclesWithNotification = [];
+    List<Map<String,dynamic>> vehiclesWithNotifications = [];
 
     QuerySnapshot<Map<String, dynamic>> querySnapshotNotificationMessage = await FirebaseFirestore.instance
       .collection('notificationMessage')
@@ -38,39 +42,27 @@ class BackEndVehiclesService {
       DateTime dateFromNextService = DateTime.fromMicrosecondsSinceEpoch(microsecondsNextService);
       String dateFromNextFormat = DateFormat('dd/MM/yyyy').format(dateFromNextService);
 
-      vehiclesWithNotification.add({
-        "brand":                  (documentsUsersVehicle.data() as dynamic )['brand'],
-        "color":                  (documentsUsersVehicle.data() as dynamic )['color'],
-        "logo":                   (documentsUsersVehicle.data() as dynamic )['logo'],
-        "mileage":                (documentsUsersVehicle.data() as dynamic )['mileage'],
-        "model":                  (documentsUsersVehicle.data() as dynamic )['model'],
-        "name":                   (documentsUsersVehicle.data() as dynamic )['name'],
-        "phoneUser":              (documentsUsersVehicle.data() as dynamic )['phoneUser'],
-        "registrationDate":       (documentsUsersVehicle.data() as dynamic )['registrationDate'],
-        "tuition":                (documentsUsersVehicle.data() as dynamic )['tuition'],
-        "updateDate":             (documentsUsersVehicle.data() as dynamic )['updateDate'],
-        "userId":                 (documentsUsersVehicle.data() as dynamic )['userId'],
-        "vehicleId":              (documentsUsersVehicle.data() as dynamic )['vehicleId'],
-        "year":                   (documentsUsersVehicle.data() as dynamic )['year'],
-        "categoryNotification":   (querySnapshotNotificationMessage.docs[0].data() as dynamic)["categoryNotification"],
-        "days":                   (querySnapshotNotificationMessage.docs[0].data() as dynamic)["days"],
-        "message":                (querySnapshotNotificationMessage.docs[0].data() as dynamic)["message"],
-        "minutes":                (querySnapshotNotificationMessage.docs[0].data() as dynamic)["minutes"],
+      vehiclesWithNotifications.add({
+        ...documentsUsersVehicle.data(),
+        ...querySnapshotNotificationMessage.docs[0].data(),
         "daysOfTheNextService":   daysOfTheNextService,
         "dateFromNextFormat":     dateFromNextFormat
+
+
       });
+      
     }
 
     
-    vehiclesWithNotification.sort((a, b) => (a['daysOfTheNextService']).compareTo(b['daysOfTheNextService']));
+    vehiclesWithNotifications.sort((a, b) => (a['daysOfTheNextService']).compareTo(b['daysOfTheNextService']));
 
-    _suggestionStreamUsersVehiclesControler.add(vehiclesWithNotification);
+    _suggestionStreamUsersVehiclesControler.add(vehiclesWithNotifications);
   }
 
 
   getUserVehiclesWithNotification() async{
 
-    List<Map<String,dynamic>> vehiclesUserWithNotification = [];
+    List<Map<String,dynamic>> vehiclesUserWithNotifications = [];
 
     QuerySnapshot<Map<String, dynamic>> querySnapshotNotificationMessage = await FirebaseFirestore.instance
       .collection('notificationMessage')
@@ -93,36 +85,64 @@ class BackEndVehiclesService {
       int microsecondsNextService = (documentsUsersVehicle.data() as dynamic )['updateDate']!.microsecondsSinceEpoch.round() + (1000000 * 60 * 60 * 24 * (querySnapshotNotificationMessage.docs[0].data() as dynamic)["days"]).round();
       DateTime dateFromNextService = DateTime.fromMicrosecondsSinceEpoch(microsecondsNextService);
       String dateFromNextFormat = DateFormat('yyyy/MM/dd hh:mm a').format(dateFromNextService);
-
-      vehiclesUserWithNotification.add({
-        "brand":                  (documentsUsersVehicle.data() as dynamic )['brand'],
-        "color":                  (documentsUsersVehicle.data() as dynamic )['color'],
-        "logo":                   (documentsUsersVehicle.data() as dynamic )['logo'],
-        "mileage":                (documentsUsersVehicle.data() as dynamic )['mileage'],
-        "model":                  (documentsUsersVehicle.data() as dynamic )['model'],
-        "name":                   (documentsUsersVehicle.data() as dynamic )['name'],
-        "phoneUser":              (documentsUsersVehicle.data() as dynamic )['phoneUser'],
-        "registrationDate":       (documentsUsersVehicle.data() as dynamic )['registrationDate'],
-        "tuition":                (documentsUsersVehicle.data() as dynamic )['tuition'],
-        "updateDate":             (documentsUsersVehicle.data() as dynamic )['updateDate'],
-        "userId":                 (documentsUsersVehicle.data() as dynamic )['userId'],
-        "vehicleId":              (documentsUsersVehicle.data() as dynamic )['vehicleId'],
-        "year":                   (documentsUsersVehicle.data() as dynamic )['year'],
-        "categoryNotification":   (querySnapshotNotificationMessage.docs[0].data() as dynamic)["categoryNotification"],
-        "days":                   (querySnapshotNotificationMessage.docs[0].data() as dynamic)["days"],
-        "message":                (querySnapshotNotificationMessage.docs[0].data() as dynamic)["message"],
-        "minutes":                (querySnapshotNotificationMessage.docs[0].data() as dynamic)["minutes"],
+      vehiclesUserWithNotifications.add({
+        ...documentsUsersVehicle.data(),
+        ...querySnapshotNotificationMessage.docs[0].data(),
         "daysOfTheNextService":   daysOfTheNextService,
         "dateFromNextFormat":     dateFromNextFormat
       });
+      
     }
 
-    vehiclesUserWithNotification.sort((a, b) => (a['daysOfTheNextService']).compareTo(b['daysOfTheNextService']));
+    vehiclesUserWithNotifications.sort((a, b) => (a['daysOfTheNextService']).compareTo(b['daysOfTheNextService']));
 
-    _suggestionStreamVehicleUserControler.add(vehiclesUserWithNotification);
+    _suggestionStreamVehicleUserControler.add(vehiclesUserWithNotifications);
+
+  }
+
+  getCarNotesAndOrderServiceByVehicle(String vehicleId) async {
+
+    List<Map<String,dynamic>> carNotesAndOrderServiceByVehicles = [];
+
+    QuerySnapshot<Map<String, dynamic>> querySnapshotServiceOrderByVehicle = await FirebaseFirestore.instance
+      .collection("serviceOrder")
+      .where("orderBy", isEqualTo: AutoParts.sharedPreferences!.getString(AutoParts.userUID))
+      .where("vehicleId", isEqualTo: vehicleId)
+      .get();
+      
+      
+    QuerySnapshot<Map<String, dynamic>> querySnapshotcarNotesByVehicle = await FirebaseFirestore.instance
+      .collection("carNotesUserVehicles")
+      .where('userId', isEqualTo: AutoParts.sharedPreferences!.getString(AutoParts.userUID))
+      .where('vehicleId', isEqualTo: vehicleId)
+      .get();
+      
+
+    
+    List<Map<String, dynamic>> spreadQuerySnapshotServiceOrderByVehicles  = querySnapshotServiceOrderByVehicle.docs.map((doc) => doc.data() ).toList();
+    List<Map<String, dynamic>> spreadQuerySnapshotcarNotesByVehicles  = querySnapshotcarNotesByVehicle.docs.map((doc) => doc.data() ).toList();
+    List<Map<String, dynamic>> spreadQuerySnapshotcarNotesByVehiclesAndServiceOrderByVehicles = [
+      ...spreadQuerySnapshotServiceOrderByVehicles,
+      ...spreadQuerySnapshotcarNotesByVehicles
+    ];
+    
+    for(final sprdQrySnpshtcarNotByVehiAndServcOrdByVehi in spreadQuerySnapshotcarNotesByVehiclesAndServiceOrderByVehicles){
+
+      
+      carNotesAndOrderServiceByVehicles.add({
+        ...sprdQrySnpshtcarNotByVehiAndServcOrdByVehi,
+        "dateOrdered": sprdQrySnpshtcarNotByVehiAndServcOrdByVehi["deliverdTime"] ?? sprdQrySnpshtcarNotByVehiAndServcOrdByVehi["date"]
+      });
+
+      
+
+    }
+  
+    carNotesAndOrderServiceByVehicles.sort((a, b) => (b['dateOrdered']).compareTo(a['dateOrdered']));
+    _suggestionStreamCarNotesAndOrderServiceByVehicle.add(carNotesAndOrderServiceByVehicles);
 
   }
 
 
-
+  
 }

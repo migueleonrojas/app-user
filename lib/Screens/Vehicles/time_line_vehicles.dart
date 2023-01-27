@@ -18,7 +18,7 @@ import 'package:intl/intl.dart';
 
 class TimeLineVehicles extends StatefulWidget {
 
-
+  
 
   const TimeLineVehicles({super.key});
 
@@ -50,7 +50,7 @@ class _TimeLineVehiclesState extends State<TimeLineVehicles> {
         ),
         const SizedBox(height: 15,),
         Container(
-          height: MediaQuery.of(context).size.height * 0.20,
+          height: MediaQuery.of(context).size.height * 0.30,
           child: SingleChildScrollView(
             
             physics: const BouncingScrollPhysics(),
@@ -127,19 +127,7 @@ class _TimeLineVehiclesState extends State<TimeLineVehicles> {
                                   fit: BoxFit.scaleDown,
                                 ),
                               ),
-                              /* child: Image.asset(
-                                'assets/icons/car_oilchange.png',
-                                width: 5,
-                                height: 5,
-                                color: Colors.white,
-                                fit: BoxFit.scaleDown,
-                              ), */
-                              /* child: Image.asset(
-                                "assets/icons/car_oilchange.png",
-                                color: Colors.white,
-                                height: 2,
-                                width: 2,
-                              ), */
+                              
                             ),
                             startConnector: SolidLineConnector(
                               color: Color(vehicleWithNotificationsModel.color!),
@@ -167,13 +155,6 @@ class _TimeLineVehiclesState extends State<TimeLineVehicles> {
                                     vehicleWithNotificationsModel.daysOfTheNextService!,
                                     vehicleWithNotificationsModel.dateFromNextFormat!
                                   ),
-                                  /* messageDate(
-                                    vehicleWithNotificationsModel.daysOfTheNextService!,
-                                    vehicleWithNotificationsModel.dateFromNextFormat!
-                                  ) */
-                                  /* messageDayRest(daysOfTheNextService),
-                                  messageDate(daysOfTheNextService, dateFromNextFormat), */
-                                  
                                 ],
                               ),
                             ),
