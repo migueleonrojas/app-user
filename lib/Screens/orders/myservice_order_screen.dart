@@ -229,6 +229,7 @@ class OrderBody extends StatelessWidget {
                         orderId: data.orderId!,
                         addressId: data.addressID!,
                         vehicleModel: vehicleModel,
+                        idOrderPaymentDetails: data.idOrderPaymentDetails!,
                       ),
                     ),
                   );

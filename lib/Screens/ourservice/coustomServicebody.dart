@@ -16,6 +16,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:oilapp/widgets/modal.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 
 class CoustomServiceBody extends StatefulWidget {
@@ -32,7 +33,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
   TextEditingController reviewController = TextEditingController();
   TextEditingController observationsController = TextEditingController();
   double totalrating = 0;
-  bool istap = false;
+  bool istap = true;
   bool isContinue = false;
 
   int quantity = 1;
@@ -49,10 +50,26 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
   Future pickDate(BuildContext context) async {
     final initialDate = DateTime.now();
     final newDate = await showDatePicker(
+      cancelText: 'Cancelar',
+      confirmText: 'Aceptar',
       context: context,
       initialDate: date ?? initialDate,
       firstDate: DateTime(DateTime.now().year - 5),
       lastDate: DateTime(DateTime.now().year + 5),
+      builder: (context, child) {
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 50.0),
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.60,
+                width: MediaQuery.of(context).size.width * 0.90,
+                child: child,
+              ),
+            ),
+          ],
+        );
+      }
     );
 
     if (newDate == null) return;
@@ -85,7 +102,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
 
               return ListView.builder(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
                   ServiceModel serviceModel = ServiceModel.fromJson(
@@ -94,6 +111,114 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Container(
+                        height: 100,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Center(
+                              child: Text(
+                                serviceModel.serviceName!,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  
+                                  letterSpacing: 1.5,
+                                  fontFamily: "Brand-Regular",
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                ),
+                              ),
+                            ),
+                            /* const Center(
+                              child:  Text(
+                                "Empezar desde",
+                                style: TextStyle(
+                                  letterSpacing: 1,
+                                  fontFamily: "Brand-Regular",
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ), */
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Costo: ${serviceModel.newprice}',
+                                  style: const TextStyle(
+                                    letterSpacing: 1,
+                                    fontFamily: "Brand-Regular",
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                SizedBox(width: 5,),
+                                Container(
+                                  
+                                  /* color: Colors.blue, */
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: Colors.transparent,
+                                    border: Border.all(color: Colors.blueAccent),
+                                    
+                                  ),
+                                  child: IconButton(
+                                    tooltip: 'Información',
+                                    icon: const Icon(  
+                                      Icons.question_mark,
+                                      color: Colors.blue,
+                                      
+                                    ),
+                                    onPressed: () {
+                                
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return  ModalAlertDialog(
+                                            title: 'Descripción',
+                                            content: serviceModel.aboutInfo!.replaceAll("\\n", "\n"),
+                                          );
+                                        },
+                                      );
+                                      
+                                    },
+                                  ),
+                                ),
+                              ],
+                            )
+                            /* RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: '${serviceModel.newprice} \$',
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      letterSpacing: 1,
+                                      fontFamily: "Brand-Regular",
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  (serviceModel.offervalue! < 1)
+                                  ? TextSpan()
+                                  : TextSpan(
+                                    text: '(Descuento ${serviceModel.offervalue}%)',
+                                    style: const TextStyle(
+                                      
+                                      letterSpacing: 1,
+                                      fontFamily: "Brand-Regular",
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ), */
+                          ],
+                        ),
+                      ),
+                      
                       Stack(
                         children: [
                           Container(
@@ -106,7 +231,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                               ),
                             ),
                           ),
-                          Container(
+                          /* Container(
                             height: 200,
                             color: Colors.black54,
                             child: Column(
@@ -166,12 +291,12 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                 ),
                               ],
                             ),
-                          ),
+                          ), */
                         ],
                       ),
 
                       //----------------------about title--------------------//
-                      const Padding(
+                      /* const Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(
                           "Sobre el servicio",
@@ -182,10 +307,10 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                             fontSize: 20,
                           ),
                         ),
-                      ),
+                      ), */
 
 //------------------------about text---------------------//
-                      Padding(
+                      /* Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(
                           serviceModel.aboutInfo!.replaceAll("\\n", "\n"),
@@ -195,10 +320,10 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                             fontSize: 18,
                           ),
                         ),
-                      ),
+                      ), */
 
                       //----------------expect title-------------------//
-                      const Padding(
+                      /* const Padding(
                         padding:  EdgeInsets.all(10),
                         child:  Text(
                           "Qué esperar",
@@ -209,9 +334,9 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                             fontSize: 20,
                           ),
                         ),
-                      ),
+                      ), */
                       //----------------------expectText-----------------//
-                      Padding(
+                      /* Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(
                           serviceModel.expectation!.replaceAll("\\n", "\n"),
@@ -221,9 +346,9 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                             fontSize: 18,
                           ),
                         ),
-                      ),
+                      ), */
 
-                      Padding(
+                      /* Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Align(
                           alignment: Alignment.centerRight,
@@ -256,13 +381,13 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                             ),
                           ),
                         ),
-                      ),
+                      ), */
 
                       (istap)
                           ? Card(
                               elevation: 3,
                               child: Container(
-                                  height: 400,
+                                  height: 300,
                                   width: double.infinity,
                                   child: Padding(
                                     padding: const EdgeInsets.all(14.0),
@@ -280,15 +405,21 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                         ),
                                         const SizedBox(height: 10),
                                         Text(
+                                          'Va a solicitar $quantity de ${serviceModel.serviceName!}',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        /* Text(
                                           "Cuántos servicios de" +
                                               "\"${serviceModel.serviceName!}\"" +
                                               " necesita?",
                                           maxLines: 3,
-                                        ),
+                                        ), */
                                         const SizedBox(height: 5),
                                         Row(
                                           children: [
-                                            Expanded(
+                                            /* Expanded(
                                               child: SizedBox(
                                                 width: 55,
                                                 child: OutlinedButton(
@@ -302,8 +433,8 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                                   },
                                                 ),
                                               ),
-                                            ),
-                                            Padding(
+                                            ), */
+                                            /* Padding(
                                               padding:
                                                   const EdgeInsets.symmetric(
                                                 horizontal: 30,
@@ -316,8 +447,8 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                               ),
-                                            ),
-                                            Expanded(
+                                            ), */
+                                            /* Expanded(
                                               child: SizedBox(
                                                 width: 55,
                                                 child: OutlinedButton(
@@ -329,7 +460,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                                   },
                                                 ),
                                               ),
-                                            ),
+                                            ), */
                                           ],
                                         ),
                                         SizedBox(height: 5),
@@ -368,53 +499,86 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                         ),
                                         const SizedBox(height: 20),
                                         Center(
-                                          child: AnimatedConfirmButton(
-                                            onTap: () {
-                                              Timer(Duration(seconds: 1), () {
-                                                BackEndOrderService()
-                                                    .addService(
-                                                      widget.vehicleModel.vehicleId!,
-                                                      serviceModel.serviceId!,
-                                                      serviceModel.newprice = serviceModel.newprice! * quantity,
-                                                      serviceModel.orginalprice!,
-                                                      serviceModel.serviceImgUrl!,
-                                                      serviceModel.serviceName!,
-                                                      getDateText(),
-                                                      quantity,
-                                                      observationsController.text,
-                                                      serviceModel.categoryName!
-                                                    );
-                                                Fluttertoast.showToast(
-                                                    msg:
-                                                        "El servicio está listo para ser pedido!");
-                                                setState(() {
-                                                  isContinue = true;
+                                          child: (!isContinue) 
+                                            ? AnimatedConfirmButton(
+
+                                                onTap: () async {
+                                              
+                                              
+
+                                                Timer(const Duration(seconds: 1), () async {
+                                                  await BackEndOrderService()
+                                                      .addService(
+                                                        widget.vehicleModel.vehicleId!,
+                                                        serviceModel.serviceId!,
+                                                        serviceModel.newprice = serviceModel.newprice! * quantity,
+                                                        serviceModel.orginalprice!,
+                                                        serviceModel.serviceImgUrl!,
+                                                        serviceModel.serviceName!,
+                                                        getDateText(),
+                                                        quantity,
+                                                        observationsController.text,
+                                                        serviceModel.categoryName!
+                                                      );
+                                                  Fluttertoast.showToast(
+                                                      msg:
+                                                          "El servicio está listo para ser pedido!");
+                                                  setState(() {
+                                                    isContinue = true;
+                                                  });
                                                 });
-                                              });
+
+                                                
+
+                                              
+                                              
                                             },
                                             
                                             animationDuration: const Duration(
                                                 milliseconds: 2000),
-                                            initialText: "Confirmar",
-                                            finalText: "Hecho",
+                                            initialText: "Solicitar",
+                                            finalText: "Listo",
                                             iconData: Icons.check,
                                             iconSize: 32.0,
                                             
                                             buttonStyle: ConfirmButtonStyle(
-                                              primaryColor:Color.fromARGB(255, 3, 3, 247),
+                                              primaryColor: const Color.fromARGB(255, 3, 3, 247),
                                               secondaryColor: Colors.white,
                                               elevation: 10.0,
                                               initialTextStyle: const TextStyle(
                                                 fontSize: 22.0,
                                                 color: Colors.white,
                                               ),
-                                              finalTextStyle: TextStyle(
+                                              finalTextStyle: const TextStyle(
                                                 fontSize: 22.0,
                                                 color: Color.fromARGB(255, 3, 3, 247),
                                               ),
                                               borderRadius: 30.0,
                                             ),
-                                          ),
+                                          )
+                                          :ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                                              shape: const StadiumBorder(),
+                                              padding: EdgeInsets.symmetric(vertical: 18, horizontal: 75)                                            ),
+                                            child: Text('Siguiente'),
+                                            onPressed: () {
+
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (_) =>
+                                                    ServiceShippingAddress(
+                                                      vehicleModel: widget.vehicleModel,
+                                                      totalPrice: serviceModel.newprice! * quantity,
+                                                    )
+                                            
+                                                  )
+                                                );
+                                                
+
+                                            }, 
+                                          )
                                         ),
                                       ],
                                     ),
@@ -422,7 +586,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                             )
                           : Container(),
                       const SizedBox(height: 10),
-                      (isContinue)
+                      /* (isContinue)
                           ? Center(
                               child: Container(
                                 decoration: const BoxDecoration(
@@ -487,7 +651,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                               ),
                             )
                           : Container(),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 10), */
                       StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance
                               .collection(AutoParts.collectionUser)
@@ -956,21 +1120,55 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
 
                       //---------------------Note-------------------//
                       Padding(
+
                         padding: const EdgeInsets.all(10),
-                        child: Text(
-                          "Nota:",
-                          style: TextStyle(
-                            letterSpacing: 0.5,
-                            color: Colors.deepOrangeAccent[200],
-                            fontStyle: FontStyle.italic,
-                            decoration: TextDecoration.underline,
-                            fontFamily: "Brand-Regular",
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
-                          ),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Nota:",
+                              style: TextStyle(
+                                letterSpacing: 0.5,
+                                color: Colors.deepOrangeAccent[200],
+                                fontStyle: FontStyle.italic,
+                                decoration: TextDecoration.underline,
+                                fontFamily: "Brand-Regular",
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14,
+                              ),
+                            ),
+                            SizedBox(width: 10,),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: Colors.transparent,
+                                border: Border.all(color: Colors.blueAccent),
+                                    
+                              ),
+                              child: IconButton(
+                                tooltip: 'Información',
+                                icon: const Icon(  
+                                  Icons.question_mark,
+                                  color: Colors.blue,
+                                ),
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return  ModalAlertDialog(
+                                        title: 'Nota',
+                                        content: "Los precios mencionados son cargos de servicio estimados que pueden variar ligeramente dependiendo de: El tipo de vehículo, el modelo y la disponibilidad del servicio.\n\nPolítica de servicio a domicilio: El cargo por servicio a domicilio de un máximo de 5\$ es aplicable si el cliente decide no tomar el servicio después de que el proveedor de servicios visitó el lugar.",
+                                      );
+                                    },
+                                  );
+                                      
+                                },
+                              ),
+                            ),
+                            
+                          ],
                         ),
                       ),
-                      const Padding(
+                      /* const Padding(
                         padding:  EdgeInsets.symmetric(
                             horizontal: 10, vertical: 5),
                         child: Text(
@@ -982,8 +1180,8 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                             fontSize: 14,
                           ),
                         ),
-                      ),
-                      const Padding(
+                      ), */
+                      /* const Padding(
                         padding:  EdgeInsets.symmetric(
                             horizontal: 10, vertical: 5),
                         child: Text(
@@ -995,7 +1193,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                             fontSize: 14,
                           ),
                         ),
-                      ),
+                      ), */
                     ],
                   );
                 },

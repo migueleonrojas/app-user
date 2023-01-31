@@ -7,6 +7,7 @@ import 'package:oilapp/Screens/ourservice/service_payment.dart';
 import 'package:oilapp/config/config.dart';
 import 'package:oilapp/counter/changeAddress.dart';
 import 'package:oilapp/service/category_data.dart';
+import 'package:oilapp/widgets/emptycardmessage.dart';
 import 'package:oilapp/widgets/erroralertdialog.dart';
 import 'package:oilapp/widgets/loading_widget.dart';
 import 'package:oilapp/widgets/widebutton.dart';
@@ -29,13 +30,15 @@ class ServiceShippingAddress extends StatefulWidget {
 }
 
 class _ServiceShippingAddressState extends State<ServiceShippingAddress> {
+
+  List<AddressModel> addressModel = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         
         title: const Text(
-          "Global Oil",
+          "Mis direcciones",
           style: TextStyle(
             fontSize: 20,
             letterSpacing: 1.5,
@@ -44,7 +47,7 @@ class _ServiceShippingAddressState extends State<ServiceShippingAddress> {
           ),
         ),
         centerTitle: true,
-        actions: [
+        /* actions: [
           IconButton(
             icon: const Icon(Icons.add_location),
             onPressed: () {
@@ -52,25 +55,126 @@ class _ServiceShippingAddressState extends State<ServiceShippingAddress> {
               Navigator.push(context, route);
             },
           ),
-        ],
+        ], */
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Align(
+            Align(
               alignment: Alignment.topCenter,
-              child: Padding(
-                padding: EdgeInsets.all(8),
-                child: Text(
-                  "Seleccionar Dirección",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+              child: Column(
+                children:  [
+                  const Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Text(
+                      "Seleccionar Dirección",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
-                ),
+                  IconButton(
+                    iconSize: 60,
+                    icon: const Icon(
+                      Icons.add_location,
+                      color: Color.fromARGB(255, 212, 175, 55),
+                    ),
+                    onPressed: () {
+                      Route route = MaterialPageRoute(builder: (_) => AddAddress());
+                      Navigator.push(context, route);
+                    },
+                  ),
+                  Stack(
+                    alignment: AlignmentDirectional.centerStart,
+                    children:  [
+                      const Center(
+                        child:  Text(
+                          'Agregar Dirección',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              if(addressModel.isEmpty) return;
+                              int index = Provider.of<AddressChange>(context, listen: false).count;
+                              
+
+                              
+                              Route route = MaterialPageRoute(
+                                builder: (_) => EditAddress(
+                                  addressModel: addressModel[index],    
+                                ),
+                              );
+                              Navigator.push(context, route);
+                              
+                            }, 
+                            icon: const Icon(
+                              Icons.edit,
+                              
+                            ),
+                          ),
+
+                          IconButton(
+                            onPressed: () async {
+
+                              if(addressModel.isEmpty) return;
+                              
+                              int index = Provider.of<AddressChange>(context, listen: false).count;             
+
+                              bool confirm = await _onBackPressed('De que quiere eliminar la dirección');
+
+                              if(!confirm) return;
+
+                              bool isSuccess = await AddressService().deleteAddress(addressId: addressModel[index].addressId);
+
+                              if(isSuccess){
+                                Provider.of<AddressChange>(context, listen: false).displayResult(0);
+                                Fluttertoast.showToast(msg:"Se elimino exitosamente la dirección");
+                              }
+                              else{
+                                return showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return const ErrorAlertDialog(
+                                      message: "No se puede eliminar una dirección la cual esta asignada a una orden de servico que ya fue recibida",
+                                    );
+                                  }
+                                );
+                              }
+
+
+                            }, 
+                            icon: const Icon(
+                              Icons.delete,
+                              
+                            ),
+                          ),
+                          
+                        ],
+                      )
+                      
+                    ],
+                  ),
+
+                  
+                  Row(
+
+                  ),
+                  const SizedBox(height: 10,)
+                  
+                  
+                ],
               ),
             ),
             Consumer<AddressChange>(builder: (context, address, c) {
@@ -82,26 +186,41 @@ class _ServiceShippingAddressState extends State<ServiceShippingAddress> {
                       .collection(AutoParts.subCollectionAddress)
                       .snapshots(),
                   builder: (context, snapshot) {
-                    return !snapshot.hasData
-                        ? Center(child: circularProgress())
-                        : snapshot.data!.docs.length == 0
-                            ? noAddressCard()
-                            : ListView.builder(
-                                itemCount: snapshot.data!.docs.length,
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, index) {
-                                  return AddressCard(
-                                    vehicleModel: widget.vehicleModel!,
-                                    currentIndex: address.count,
-                                    value: index,
-                                    addressId: snapshot.data!.docs[index].id,
-                                    totalPrice: widget.totalPrice!,
-                                    model: AddressModel.fromJson(
-                                        (snapshot.data!.docs[index] as dynamic).data()),
-                                  );
-                                },
-                              );
+
+                    addressModel = [];
+
+                    if(!snapshot.hasData) {
+                      return Center(child: circularProgress());
+                    }
+
+                    if(snapshot.data!.docs.length == 0) {
+                      return noAddressCard();
+                    }
+
+                    
+                   
+                    
+                    
+                    return ListView.builder(
+                      itemCount: snapshot.data!.docs.length,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        addressModel.add(
+                          AddressModel.fromJson(
+                            (snapshot.data!.docs[index] as dynamic).data())
+                        );
+                        return AddressCard(
+                          vehicleModel: widget.vehicleModel!,
+                          currentIndex: address.count,
+                          value: index,
+                          addressId: snapshot.data!.docs[index].id,
+                          totalPrice: widget.totalPrice!,
+                          model: AddressModel.fromJson(
+                            (snapshot.data!.docs[index] as dynamic).data()),
+                        );
+                      },
+                    );
                   },
                 ),
               );
@@ -110,6 +229,7 @@ class _ServiceShippingAddressState extends State<ServiceShippingAddress> {
         ),
       ),
     );
+
   }
 
   noAddressCard() {
@@ -131,6 +251,35 @@ class _ServiceShippingAddressState extends State<ServiceShippingAddress> {
         ),
       ),
     );
+  }
+
+  Future<bool> _onBackPressed(String msg) async {
+    return await showDialog(
+          context: context,
+          builder: (context) =>  AlertDialog(
+            title:  Text('Estas seguro?'),
+            content:  Text(msg),
+            actions: <Widget>[
+               GestureDetector(
+                onTap: () => Navigator.of(context).pop(true),
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text("YES"),
+                ),
+              ),
+              const SizedBox(height: 16),
+               GestureDetector(
+                onTap: () => Navigator.of(context).pop(false),
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text("NO"),
+                ),
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
+        ) ??
+        false;
   }
 }
 
@@ -172,11 +321,13 @@ class _AddressCardState extends State<AddressCard> {
                 
                 Radio(
                   value: widget.value,
+
                   groupValue: widget.currentIndex,
                   activeColor: Color.fromARGB(255, 3, 3, 247),
                   onChanged: (val) {
                     Provider.of<AddressChange>(context, listen: false)
                         .displayResult(val!);
+                        
                   },
                 ),
                 Column(
@@ -228,9 +379,37 @@ class _AddressCardState extends State<AddressCard> {
                     ),
                   ],
                 ),
+                /* Column(
+                  children: const [
+                     IconButton(
+                      icon:  Icon(
+                        Icons.add_location,
+                        color: Color.fromARGB(255, 212, 175, 55),
+                      ),
+                      onPressed: null
+                    )
+                  ],
+                ) */
               ],
             ),
             widget.value == Provider.of<AddressChange>(context).count
+              ? WideButton(
+
+                    message: "Proceder",
+                    onPressed: () {
+                      Route route = MaterialPageRoute(
+                        builder: (_) => ServicePaymentPage(
+                          vehicleModel: widget.vehicleModel,
+                          addressId: widget.addressId,
+                          totalPrice: widget.totalPrice,
+                        ),
+                      );
+                      Navigator.push(context, route);
+                    },
+                  )
+              : Container(),
+            
+            /* widget.value == Provider.of<AddressChange>(context).count
                 ? WideButton(
 
                     message: "Proceder",
@@ -283,7 +462,7 @@ class _AddressCardState extends State<AddressCard> {
                       
               },
             ),
-              
+               */
           ],
         ),
       ),

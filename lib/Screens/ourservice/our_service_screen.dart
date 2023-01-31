@@ -24,7 +24,7 @@ class _OurServiceState extends State<OurService> {
       appBar: AppBar(
         
         title:const Text(
-          "Nuestros servicios",
+          "Servicios GlobalOil",
           style: TextStyle(
             fontSize: 20,
             letterSpacing: 1.5,
@@ -50,11 +50,12 @@ class _OurServiceState extends State<OurService> {
         children: [
           LayoutBuilder(builder: (context, constraint) {
             return SingleChildScrollView(
-              child: ConstrainedBox(
+              child: ConstrainedBox(                
                 constraints: BoxConstraints(minHeight: constraint.maxHeight),
                 child: IntrinsicHeight(
-                  child: NavigationRail(
-                    backgroundColor: Colors.deepOrangeAccent,
+                  child: NavigationRail(                    
+                    elevation: 30,
+                    backgroundColor: Colors.black,
                     selectedIndex: selectedIndex,
                     labelType: NavigationRailLabelType.selected,
                     onDestinationSelected: (index) {
@@ -68,6 +69,7 @@ class _OurServiceState extends State<OurService> {
                       });
                     },
                     destinations: [
+                      /* modifique el codigo de este widget NavigationRailDestination, el destinations.length >= 1 */
                       NavigationRailDestination(
                         icon: Image.asset(
                           "assets/icons/car_oilchange.png",
@@ -79,7 +81,8 @@ class _OurServiceState extends State<OurService> {
                         ),
                         label: Text(""),
                       ),
-                      NavigationRailDestination(
+                      
+                      /* NavigationRailDestination(
                         icon: Image.asset(
                           "assets/icons/car_wash.png",
                           width: width,
@@ -144,7 +147,7 @@ class _OurServiceState extends State<OurService> {
                               : Colors.white70,
                         ),
                         label: Text(""),
-                      ),
+                      ), */
                     ],
                   ),
                 ),
@@ -161,7 +164,7 @@ class _OurServiceState extends State<OurService> {
                   isEqualTo: "Cambio de Aceite",
                   vehicleModel: widget.vehicleModel,
                 ),
-                CoustomServiceBody(
+                /* CoustomServiceBody(
                   isEqualTo: "Car Wash",
                   vehicleModel: widget.vehicleModel,
                 ),
@@ -184,7 +187,7 @@ class _OurServiceState extends State<OurService> {
                 CoustomServiceBody(
                   isEqualTo: "Car windshield Replacment",
                   vehicleModel: widget.vehicleModel,
-                ),
+                ), */
               ],
             ),
           )

@@ -28,6 +28,7 @@ class ServiceOrderModel {
   String? serviceName;
   String? categoryName;
   int? totalPrice;
+  String? idOrderPaymentDetails;
 
   ServiceOrderModel({
     this.addressID,
@@ -56,7 +57,8 @@ class ServiceOrderModel {
     this.serviceImage,
     this.serviceName,
     this.categoryName,
-    this.totalPrice
+    this.totalPrice,
+    this.idOrderPaymentDetails
   });
 
   ServiceOrderModel.fromJson(Map<String, dynamic> json) {
@@ -87,6 +89,7 @@ class ServiceOrderModel {
     serviceName = json['serviceName'];
     categoryName = json['categoryName'];
     totalPrice = json['totalPrice'];
+    idOrderPaymentDetails = json['idOrderPaymentDetails'];
   }
   ServiceOrderModel.fromSnaphot(DocumentSnapshot snapshot) {
     addressID = (snapshot.data() as dynamic)['addressID'];
@@ -116,6 +119,8 @@ class ServiceOrderModel {
     serviceName = (snapshot.data() as dynamic)['serviceName'];
     categoryName = (snapshot.data() as dynamic)['categoryName'];
     totalPrice = (snapshot.data() as dynamic)['totalPrice'];
+    idOrderPaymentDetails = (snapshot.data() as dynamic)['idOrderPaymentDetails'];
+    
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -146,6 +151,8 @@ class ServiceOrderModel {
     data['serviceName'] = this.serviceName;
     data['categoryName'] = this.categoryName;
     data['totalPrice'] = this.totalPrice;
+    data['idOrderPaymentDetails'] = this.idOrderPaymentDetails;
+    
     return data;
   }
 }

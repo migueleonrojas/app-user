@@ -14,7 +14,8 @@ class AutoParts {
   static NotificationSettings? settingsMessaging;
   static FirebaseFirestore? firestore;
   static FirebaseAppCheck? firebaseAppCheck; 
-
+  static String paymentMethodDetails = "paymentMethodDetails";
+  static String dollarRate = "dollarRate";
   static String collectionUser = "users";
   static String vehicles = 'vehicles';
   static String brandsVehicle = "brandsVehicle";

@@ -134,8 +134,7 @@ class BackEndOrderService {
       Provider.of<ServiceItemCounter>(context, listen: false)
           .displayResult()
           .whenComplete(() {
-        /* addService(serviceId, newPrice, orginalPrice, serviceImage, serviceName,
-            date, quantity); */
+        
       });
     });
   }
@@ -178,32 +177,6 @@ class BackEndOrderService {
   }
 
 
-  /* Future addService(
-    String serviceId,
-    int newPrice,
-    int orginalPrice,
-    String serviceImage,
-    String serviceName,
-    String date,
-    int quantity,
-  ) async {
-    FirebaseFirestore.instance
-        .collection(AutoParts.collectionUser)
-        .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
-        .collection('ServiceCart')
-        .doc(serviceId)
-        .set({
-      "servicecartId": serviceId,
-      "serviceId": serviceId,
-      "newPrice": newPrice,
-      "date": date,
-      "orginalPrice": orginalPrice,
-      "serviceImage": serviceImage,
-      "serviceName": serviceName,
-      "quantity": quantity,
-    });
-  } */
-
   removeServiceFromUserServiceCart(
       String serviceId, int totalPrice, BuildContext context) {
     List tempServiceList =
@@ -221,7 +194,7 @@ class BackEndOrderService {
       Provider.of<ServiceItemCounter>(context, listen: false)
           .displayResult()
           .whenComplete(() {
-        /* deleteService(serviceId); */
+        
       });
       totalPrice = 0;
     });
@@ -237,43 +210,17 @@ class BackEndOrderService {
       .collection('ServiceCart')
       .get();
 
-    print(servicesCart.docs);
+    
 
     for(final serviceCart in servicesCart.docs){
-      print(serviceCart.data());
+      
 
       await serviceCart.reference.delete();
     }
       
 
-    /* FirebaseFirestore.instance
-      .collection(AutoParts.collectionUser)
-      .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
-      .collection()
-      .doc(vehicleId)
-      .collection('ServiceCart')
-      .doc(serviceId)
-      .set({
-        "servicecartId": serviceId,
-        "vehicleId": vehicleId,
-        "serviceId": serviceId,
-        "newPrice": newPrice,
-        "date": date,
-        "orginalPrice": orginalPrice,
-        "serviceImage": serviceImage,
-        "serviceName": serviceName,
-        "quantity": quantity,
-      }); */
-
   }
-  /* deleteService(String serviceId) {
-    FirebaseFirestore.instance
-        .collection(AutoParts.collectionUser)
-        .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
-        .collection('ServiceCart')
-        .doc(serviceId)
-        .delete();
-  } */
+  
 
   addServiceOrderHistory(
       String orderId,
@@ -303,18 +250,7 @@ class BackEndOrderService {
       addServiceOrderHistoryForAdmin(orderId, serviceId, serviceName, date,
           serviceImage, orginalPrice, newPrice, quantity, context);
     }).whenComplete(() {
-      // for (int i = 0;
-      //     i <
-      //         AutoParts.sharedPreferences
-      //             .getStringList(AutoParts.userServiceList)
-      //             .length;
-      //     i++) {
-      //   deleteServiceCart(
-      //     context,
-      //     AutoParts.sharedPreferences
-      //         .getStringList(AutoParts.userServiceList)[i],
-      //   );
-      // }
+      
     });
   }
 
@@ -340,89 +276,90 @@ class BackEndOrderService {
     });
   }
 
-  // deleteServiceCart(BuildContext context, String serviceId) {
-  //   FirebaseFirestore.instance
-  //       .collection(AutoParts.collectionUser)
-  //       .doc(AutoParts.sharedPreferences.getString(AutoParts.userUID))
-  //       .collection('ServiceCart')
-  //       .doc(serviceId)
-  //       .delete()
-  //       .whenComplete(() {
-  //     emptyServicCartNow(context);
-  //   });
-  // }
+  Future writeServiceOrderPaymentDetailsForUser(
+    String vehicleId,
+    String idOrderPaymentDetails,
+    String paymentMethod,
+    int identificationCard,
+    int phoneNumber,
+    String bank,
+    int confirmationNumber,
+    DateTime paymentDate,
+    String issuerName,
+    String holderName,
+    String observations
+  ) async {
 
-  // emptyServicCartNow(BuildContext context) {
-  //   AutoParts.sharedPreferences
-  //       .setStringList(AutoParts.userServiceList, ["garbageValue"]);
-  //   List tempServiceList =
-  //       AutoParts.sharedPreferences.getStringList(AutoParts.userServiceList);
-  //   FirebaseFirestore.instance
-  //       .collection("users")
-  //       .doc(AutoParts.sharedPreferences.getString(AutoParts.userUID))
-  //       .update({
-  //     AutoParts.userServiceList: tempServiceList,
-  //   }).then((value) {
-  //     AutoParts.sharedPreferences
-  //         .setStringList(AutoParts.userServiceList, tempServiceList);
-  //     Provider.of<ServiceItemCounter>(context, listen: false).displayResult();
-  //   });
-  // }
-
-  /* Future writeServiceOrderDetailsForUser(
-      String orderId,
-      String addressId,
-      int totalPrice,
-      String paymentMethod,
-      String serviceId,
-      String serviceName,
-      String date,
-      String serviceImage,
-      int orginalPrice,
-      int newPrice,
-      int quantity,
-      BuildContext context) async {
     await AutoParts.firestore!
         .collection(AutoParts.collectionUser)
         .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
-        .collection("serviceOrder")
-        .doc(orderId)
+        .collection(AutoParts.vehicles)
+        .doc(vehicleId)
+        .collection("serviceOrderPaymentDetails")
+        .doc(idOrderPaymentDetails)
         .set({
-      "orderId": orderId,
-      AutoParts.addressID: addressId,
-      AutoParts.totalPrice: totalPrice,
-      "orderBy": AutoParts.sharedPreferences!.getString(AutoParts.userUID),
-      // AutoParts.productID:
-      //     AutoParts.sharedPreferences.getStringList(AutoParts.userServiceList),
-      AutoParts.paymentDetails: paymentMethod,
-      "orderTime": DateTime.now(),
-      AutoParts.isSuccess: true,
-      "serviceId": serviceId,
-      "newPrice": newPrice,
-      "date": date,
-      "orginalPrice": orginalPrice,
-      "serviceImage": serviceImage,
-      "serviceName": serviceName,
-      "quantity": quantity,
-    }).whenComplete(() {
-      writeServiceOrderDetailsForAdmin(
-        orderId,
-        addressId,
-        totalPrice,
-        paymentMethod,
-        serviceId,
-        serviceName,
-        date,
-        serviceImage,
-        orginalPrice,
-        newPrice,
-        quantity,
-        context,
-      );
-    }).whenComplete(() {
-      /* deleteService(serviceId); */
-    });
-  } */
+          "idOrderPaymentDetails": idOrderPaymentDetails,
+          "paymentMethod": paymentMethod,
+          "identificationCard": identificationCard,
+          "phoneNumber": phoneNumber,
+          "bank": bank,
+          "confirmationNumber": confirmationNumber,
+          "paymentDate": paymentDate,
+          "issuerName": issuerName,
+          "holderName": holderName,
+          "observations": observations
+        }).whenComplete(() async {
+
+          await writeServiceOrderPaymentDetailsForAdmin(
+            vehicleId,
+            idOrderPaymentDetails,
+            paymentMethod,
+            identificationCard,
+            phoneNumber,
+            bank,
+            confirmationNumber,
+            paymentDate,
+            issuerName,
+            holderName,
+            observations
+          );
+
+        });
+
+
+  }
+
+
+  Future writeServiceOrderPaymentDetailsForAdmin(
+    String vehicleId,
+    String idOrderPaymentDetails,
+    String paymentMethod,
+    int identificationCard,
+    int phoneNumber,
+    String bank,
+    int confirmationNumber,
+    DateTime paymentDate,
+    String issuerName,
+    String holderName,
+    String observations
+  ) async {
+    await AutoParts.firestore!
+        .collection("serviceOrderPaymentDetails")
+        .doc(idOrderPaymentDetails)
+        .set({
+          "idOrderPaymentDetails": idOrderPaymentDetails,
+          "paymentMethod": paymentMethod,
+          "identificationCard": identificationCard,
+          "phoneNumber": phoneNumber,
+          "bank": bank,
+          "confirmationNumber": confirmationNumber,
+          "paymentDate": paymentDate,
+          "issuerName": issuerName,
+          "holderName": holderName,
+          "observations": observations
+        });
+  }
+  
 
   Future writeServiceOrderDetailsForUser(
     String servicecartId,
@@ -440,6 +377,7 @@ class BackEndOrderService {
     int newPrice,
     int quantity,
     String observations,
+    String idOrderPaymentDetails,
     BuildContext context) async {
 
       
@@ -469,6 +407,7 @@ class BackEndOrderService {
           "categoryName":categoryName,
           "quantity": quantity,
           "observations": observations,
+          "idOrderPaymentDetails": idOrderPaymentDetails
         })
         .whenComplete(() async {
           await writeServiceOrderDetailsForAdmin(
@@ -486,6 +425,7 @@ class BackEndOrderService {
             newPrice,
             quantity,
             observations,
+            idOrderPaymentDetails,
             context,
           );
         })
@@ -496,52 +436,7 @@ class BackEndOrderService {
         .whenComplete(() async {
           await updateOrderRecived(orderId);
         });
-
-
-      
-
-
-    /* await AutoParts.firestore!
-        .collection(AutoParts.collectionUser)
-        .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
-        .collection("serviceOrder")
-        .doc(orderId)
-        .set({
-      "orderId": orderId,
-      AutoParts.addressID: addressId,
-      AutoParts.totalPrice: totalPrice,
-      "orderBy": AutoParts.sharedPreferences!.getString(AutoParts.userUID),
-      // AutoParts.productID:
-      //     AutoParts.sharedPreferences.getStringList(AutoParts.userServiceList),
-      AutoParts.paymentDetails: paymentMethod,
-      "orderTime": DateTime.now(),
-      AutoParts.isSuccess: true,
-      "serviceId": serviceId,
-      "newPrice": newPrice,
-      "date": date,
-      "orginalPrice": orginalPrice,
-      "serviceImage": serviceImage,
-      "serviceName": serviceName,
-      "quantity": quantity,
-    }).whenComplete(() {
-      writeServiceOrderDetailsForAdmin(
-        vehicleId,
-        orderId,
-        addressId,
-        totalPrice,
-        paymentMethod,
-        serviceId,
-        serviceName,
-        date,
-        serviceImage,
-        orginalPrice,
-        newPrice,
-        quantity,
-        context,
-      );
-    }).whenComplete(() {
-      /* deleteService(serviceId); */
-    }); */
+    
   }
 
 
@@ -560,6 +455,7 @@ class BackEndOrderService {
       int newPrice,
       int quantity,
       String observations,
+      String idOrderPaymentDetails,
       BuildContext context) async {
     await AutoParts.firestore!.collection("serviceOrder").doc(orderId).set({
       "vehicleId": vehicleId,
@@ -591,7 +487,8 @@ class BackEndOrderService {
       "serviceName": serviceName,
       "categoryName":categoryName,
       "quantity": quantity,
-      "observations":observations
+      "observations":observations,
+      "idOrderPaymentDetails":idOrderPaymentDetails
     });
   }
 

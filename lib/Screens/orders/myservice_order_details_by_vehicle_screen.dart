@@ -1,5 +1,6 @@
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:oilapp/Model/addresss.dart';
+import 'package:oilapp/Model/service_order_payment_details_model.dart';
 import 'package:oilapp/Model/vehicle_model.dart';
 import 'package:oilapp/Screens/Address/editAddress.dart';
 import 'package:oilapp/Screens/ourservice/backend_orderservice.dart';
@@ -15,8 +16,9 @@ class MyServiceOrderDetailsByVehicleScreen extends StatefulWidget {
   final VehicleModel vehicleModel;
   final String orderId;
   final String addressId;
+  final String idOrderPaymentDetails;
 
-  const MyServiceOrderDetailsByVehicleScreen({Key? key, required this.orderId, required this.addressId, required this.vehicleModel})
+  const MyServiceOrderDetailsByVehicleScreen({Key? key, required this.orderId, required this.addressId, required this.vehicleModel, required this.idOrderPaymentDetails})
       : super(key: key);
   @override
   _MyServiceOrderDetailsByVehicleScreenState createState() =>
@@ -117,6 +119,112 @@ class _MyServiceOrderDetailsByVehicleScreenState
                   )
                 
               )
+            ),
+            StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                .collection(AutoParts.collectionUser)
+                .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
+                .collection(AutoParts.vehicles)
+                .doc(widget.vehicleModel.vehicleId!)
+                .collection('serviceOrderPaymentDetails')
+                .where('idOrderPaymentDetails', isEqualTo: widget.idOrderPaymentDetails)
+                .snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return circularProgress();
+                  }
+                  return Container(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+
+                        ServiceOrderPaymentDetailsModel serviceOrderPaymentDetailsModel = ServiceOrderPaymentDetailsModel
+                        .fromJson((snapshot.data!.docs[index] as dynamic).data(),);
+
+                        return Card(
+                          elevation: 3,
+                          child: Column(
+                            children: [
+                              Center(
+                                child: Text(
+                                  'detalle del pago'.toUpperCase(),
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                )
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(8),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      serviceOrderPaymentDetailsModel.paymentMethod!,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    (serviceOrderPaymentDetailsModel.confirmationNumber != 0)
+                                      ? Text(
+                                        'Número de Confirmación: ${serviceOrderPaymentDetailsModel.confirmationNumber.toString()}',
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      )
+                                      : Container(),
+                                      (serviceOrderPaymentDetailsModel.paymentMethod == "Zelle")
+                                      ? Text(
+                                        'Fecha del Pago: ${DateFormat('dd/MM/yyyy').format(serviceOrderPaymentDetailsModel.paymentDate!)}',
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      )
+                                      :Container(),
+                                    (serviceOrderPaymentDetailsModel.issuerName != "")
+                                      ?Text(
+                                        'Nombre del Emisor: ${serviceOrderPaymentDetailsModel.issuerName.toString()}',
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      )
+                                      :Container(),
+                                    (serviceOrderPaymentDetailsModel.issuerName != "")
+                                      ?Text(
+                                        'Nombre del Titular: ${serviceOrderPaymentDetailsModel.holderName.toString()}',
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      )
+                                      :Container(),
+                                    (serviceOrderPaymentDetailsModel.observations != "")
+                                      ?Text(                                        
+                                        'Observaciones: ${serviceOrderPaymentDetailsModel.observations.toString()}',
+                                        maxLines: 3,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      )
+                                      :Container(),
+                                    
+
+                                  ],
+                                )
+                              )
+                            ],
+                          ),
+                        );
+                      }
+                    ),
+                  );
+                },
             ),
             StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
