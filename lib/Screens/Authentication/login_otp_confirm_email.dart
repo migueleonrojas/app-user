@@ -54,7 +54,7 @@ class _LoginOtpConfirmEmailScreenState extends State<LoginOtpConfirmEmailScreen>
                 crossAxisAlignment:CrossAxisAlignment.center,
                 children: [
                   const SizedBox(height: 10),
-                  LoginHelper().loginLog(),
+                  LoginHelper().loginLog(context),
                   const SizedBox(height: 10),
                   LoginHelper().subtitleText(
                     msg: "Introduzca el código de confirmación enviada a",

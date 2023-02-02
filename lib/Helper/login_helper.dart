@@ -3,11 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoginHelper extends ChangeNotifier {
-  Widget loginLog() {
+  Widget loginLog(BuildContext context) {
+
     return Image.asset(
       "assets/authenticaiton/global-oil.jpg",
-      width: 300,
-      height: 150,
+      width: MediaQuery.of(context).size.width * 0.7,
+      height: MediaQuery.of(context).size.height * 0.3,
     );
   }
 
@@ -100,10 +101,10 @@ class LoginHelper extends ChangeNotifier {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        const Text(
+        Text(
           '¿No tiene una cuenta?',
           style: TextStyle(
-            fontSize: 18.0,
+            fontSize: (MediaQuery.of(context).size.height * 0.022).toDouble(),
             color: Colors.black,
             fontWeight: FontWeight.w800,
           ),
@@ -121,7 +122,7 @@ class LoginHelper extends ChangeNotifier {
             ' Registrarse',
             style: TextStyle(
               color: Colors.red,
-              fontSize: 20.0,
+              fontSize: (MediaQuery.of(context).size.height * 0.024).toDouble(),
               fontWeight: FontWeight.bold,
             ),
           ),

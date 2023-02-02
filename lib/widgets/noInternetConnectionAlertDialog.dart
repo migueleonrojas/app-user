@@ -15,7 +15,7 @@ class NoInternetConnectionAlertDialog extends StatelessWidget {
       actions: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+            padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height.toDouble() * 0.035, horizontal: MediaQuery.of(context).size.height.toDouble() * 0.035),
             backgroundColor: Color.fromARGB(255, 3, 3, 247),
             shape: const StadiumBorder()
           ),

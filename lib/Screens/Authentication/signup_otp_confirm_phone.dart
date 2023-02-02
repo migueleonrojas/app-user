@@ -54,23 +54,23 @@ class _SignUpOtpConfirmPhoneScreenState extends State<SignUpOtpConfirmPhoneScree
               child: Column(
                 crossAxisAlignment:CrossAxisAlignment.center,
                 children: [
-                   const SizedBox(height: 10),
-                  LoginHelper().loginLog(),
-                  const SizedBox(height: 10),
+                  SizedBox(height: MediaQuery.of(context).size.height.toDouble() * 0.015),
+                  LoginHelper().loginLog(context),
+                  SizedBox(height: MediaQuery.of(context).size.height.toDouble() * 0.015),
                   LoginHelper().subtitleText(
                     msg: "Introduzca el código de confirmación enviada a",
-                    size: 32,
+                    size: MediaQuery.of(context).size.height.toDouble() * 0.040,
                     color: Colors.black
                   ),
-                  const SizedBox(height: 5),
+                  SizedBox(height: MediaQuery.of(context).size.height.toDouble() * 0.010),
                   LoginHelper().subtitleText(
                     msg: '+58${widget.phoneUser}'.replaceFirst('0', ''),
-                    size: 17,
+                    size: MediaQuery.of(context).size.height.toDouble() * 0.022,
                     color: Colors.grey
                   ),
-                  const SizedBox(height: 25),
+                  SizedBox(height: MediaQuery.of(context).size.height.toDouble() * 0.030),
                   OtpTextField(
-                    fieldWidth: 50,
+                    fieldWidth: MediaQuery.of(context).size.height.toDouble() * 0.060,
                     numberOfFields: 4,
                     borderColor: const Color.fromARGB(255, 32, 190, 190),
                     showFieldAsBox: true, 
@@ -81,10 +81,10 @@ class _SignUpOtpConfirmPhoneScreenState extends State<SignUpOtpConfirmPhoneScree
                     }
                   ),
                   
-                  const SizedBox(height: 45),
+                  SizedBox(height: MediaQuery.of(context).size.height.toDouble() * 0.080),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: MediaQuery.of(context).size.width * 0.35),
+                      padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height.toDouble() * 0.030, horizontal: MediaQuery.of(context).size.width * 0.35),
                       backgroundColor: Color.fromARGB(255, 3, 3, 247),
                       shape: const StadiumBorder()
                     ),
@@ -122,10 +122,10 @@ class _SignUpOtpConfirmPhoneScreenState extends State<SignUpOtpConfirmPhoneScree
                       
                     }
                   ),
-                  const SizedBox(height: 45),
+                  SizedBox(height: MediaQuery.of(context).size.height.toDouble() * 0.050),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: MediaQuery.of(context).size.width * 0.15),
+                      padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height.toDouble() * 0.030, horizontal: MediaQuery.of(context).size.width * 0.15),
                       backgroundColor: Color.fromARGB(255, 3, 3, 247),
                       shape: const StadiumBorder()
                     ),
@@ -232,7 +232,7 @@ class _SignUpOtpConfirmPhoneScreenState extends State<SignUpOtpConfirmPhoneScree
       content: Text(
         title,
         textAlign: TextAlign.center,
-        style: const TextStyle(fontSize: 15),
+        style: TextStyle(fontSize: MediaQuery.of(context).size.height.toDouble() * 0.020),
       ),
       duration: Duration(seconds: seconds),
     );

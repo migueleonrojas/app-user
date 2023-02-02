@@ -189,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen>  {
           
           children: [
             
-            LoginHelper().loginLog(),
+            LoginHelper().loginLog(context),
             
             HomeHelper().mainButtons(context),
             const SizedBox(height: 20,),

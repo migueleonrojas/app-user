@@ -35,21 +35,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Column(
               crossAxisAlignment:CrossAxisAlignment.center ,
               children: [
-                const SizedBox(height: 10),
-                LoginHelper().loginLog(),
-                const SizedBox(height: 10),
+                SizedBox(height: (MediaQuery.of(context).size.height * 0.010).toDouble()),
+                LoginHelper().loginLog(context),
+                SizedBox(height: (MediaQuery.of(context).size.height * 0.010).toDouble()),
                 LoginHelper().subtitleText(
                   msg: "Registro de usuario",
-                  size: 32,
+                  size: (MediaQuery.of(context).size.height * 0.040).toDouble(),
                   color: Colors.black
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: (MediaQuery.of(context).size.height * 0.010).toDouble()),
                 LoginHelper().subtitleText(
                   msg: "Se enviará un código de confirmación a su número y correo para registrarse en la aplicación",
-                  size: 18,
-                  color: Colors.black
+                  size: (MediaQuery.of(context).size.height * 0.023).toDouble(),
+                  color: Colors.grey
                 ),
-                const SizedBox(height: 30),
+                SizedBox(height: (MediaQuery.of(context).size.height * 0.025).toDouble()),
                 Form(
                   
                   child: Column(
@@ -64,12 +64,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           
                             hintText: "Nombre",
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.0),
+                              borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height.toDouble() * 0.035),
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 15),
+                      SizedBox(height: (MediaQuery.of(context).size.height * 0.015).toDouble()),
                       SizedBox(
                         
                         width: MediaQuery.of(context).size.width * 0.80,
@@ -80,12 +80,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           
                             hintText: "04141234567",
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.0),
+                              borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height.toDouble() * 0.035),
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 15),
+                      SizedBox(height: (MediaQuery.of(context).size.height * 0.015).toDouble()),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.80,
                         child: TextFormField(
@@ -94,7 +94,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           decoration: InputDecoration(
                             hintText: "correo@dominio.com",
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.0),
+                              borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height.toDouble() * 0.035),
                             ),
                           ),
                         ),
@@ -102,14 +102,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 30),
+                SizedBox(height: (MediaQuery.of(context).size.height * 0.065).toDouble()),
                 
-                const SizedBox(height: 40),
+                
                 ElevatedButton(
                 
                   child: const Text("Continuar"),
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: MediaQuery.of(context).size.width * 0.35),
+                    padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.030, horizontal: MediaQuery.of(context).size.width * 0.35),
                     backgroundColor: Color.fromARGB(255, 3, 3, 247),
                     shape: const StadiumBorder()
 
@@ -211,14 +211,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   }, 
 
                 ),
-                const SizedBox(height: 20,),
+                SizedBox(height: (MediaQuery.of(context).size.height * 0.025).toDouble()),
                 Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  const Text(
+                  Text(
                     'Ya tienes una cuenta ?',
                     style: TextStyle(
-                      fontSize: 18.0,
+                      fontSize: (MediaQuery.of(context).size.height * 0.025).toDouble(),
                       color: Colors.blueGrey,
                       fontWeight: FontWeight.w800,
                     ),
@@ -236,7 +236,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ' Entre Aquí',
                       style: TextStyle(
                         color: Colors.red[300],
-                        fontSize: 20.0,
+                        fontSize: (MediaQuery.of(context).size.height * 0.025).toDouble(),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -331,7 +331,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       content: Text(
         title,
         textAlign: TextAlign.center,
-        style: const TextStyle(fontSize: 15),
+        style: TextStyle(fontSize: MediaQuery.of(context).size.height.toDouble() * 0.020),
       ),
       duration: Duration(seconds: seconds),
     );

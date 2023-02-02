@@ -38,22 +38,23 @@ class _LoginScreenState extends State<LoginScreen> {
             width: MediaQuery.of(context).size.width,
             child: Column(
               crossAxisAlignment:CrossAxisAlignment.center ,
+              
               children: [
-                const SizedBox(height: 10),
-                LoginHelper().loginLog(),
-                const SizedBox(height: 10),
+                SizedBox(height: (MediaQuery.of(context).size.height * 0.02).toDouble()),
+                LoginHelper().loginLog(context),
+                SizedBox(height: (MediaQuery.of(context).size.height * 0.02).toDouble()),
                 LoginHelper().subtitleText(
                   msg: "Introduzca su número celular o correo",
-                  size: 32,
+                  size: (MediaQuery.of(context).size.height * 0.04).toDouble(),
                   color: Colors.black
                 ),
-                const SizedBox(height: 30),
+                SizedBox(height: (MediaQuery.of(context).size.height * 0.02).toDouble()),
                 LoginHelper().subtitleText(
                   msg: 'Se enviará un código de confirmación a su número o correo para conectarse con la aplicación',
-                  size: 14,
+                  size: (MediaQuery.of(context).size.height * 0.022).toDouble(),
                   color: Colors.grey
                 ),
-                const SizedBox(height: 30),
+                SizedBox(height: (MediaQuery.of(context).size.height * 0.02).toDouble()),
                 Form(
                   key: _formkey,
                   child: Column(
@@ -65,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           decoration: InputDecoration(
                             hintText: "04141234567 o correo@dominio.com",
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.0),
+                              borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height.toDouble() * 0.040),
                             ),
                           ),
                         ),
@@ -73,12 +74,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 30),
+                SizedBox(height: (MediaQuery.of(context).size.height * 0.02).toDouble()),
                 LoginHelper().donthaveaccount(context),
-                const SizedBox(height: 40),
+                SizedBox(height: (MediaQuery.of(context).size.height * 0.03).toDouble()),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: MediaQuery.of(context).size.width * 0.35),
+                    padding: EdgeInsets.symmetric(vertical: (MediaQuery.of(context).size.height * 0.030).toDouble(), horizontal: MediaQuery.of(context).size.width * 0.35),
                     backgroundColor: Color.fromARGB(255, 3, 3, 247),
                     shape: const StadiumBorder()
                   ),
@@ -207,7 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
       content: Text(
         title,
         textAlign: TextAlign.center,
-        style: const TextStyle(fontSize: 15),
+        style: TextStyle(fontSize: MediaQuery.of(context).size.height.toDouble() * 0.020),
       ),
       duration: Duration(seconds: seconds),
     );
