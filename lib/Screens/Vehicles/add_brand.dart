@@ -80,6 +80,7 @@ class _AddBrandState extends State<AddBrand> {
                   message: 'No hay marcas disponibles',
                 );
               }
+              
 
               return ListWheelScrollView.useDelegate(
                 physics: FixedExtentScrollPhysics(),
@@ -87,7 +88,7 @@ class _AddBrandState extends State<AddBrand> {
                 perspective: 0.010,
                 diameterRatio: 1.5,
                 squeeze: 0.8,
-                itemExtent: size.width * 0.1,
+                itemExtent: size.height * 0.06,
                 onSelectedItemChanged: (value) {
                 
                   changeIndex(
@@ -105,11 +106,11 @@ class _AddBrandState extends State<AddBrand> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.network(
-                          (snapshot.data!.docs[index] as dynamic).data()["logo"],
-                          fit: BoxFit.scaleDown,
-                          width: size.width * 0.1,
-                          height: size.height * 0.35,
+                        FadeInImage(
+                          placeholder: const AssetImage('assets/no-image/no-image.jpg'),
+                          image: NetworkImage((snapshot.data!.docs[index] as dynamic).data()["logo"]),
+                          width: size.width * 0.2,
+                          fit:BoxFit.contain
                         ),
                         GestureDetector(
                           onTap: () {

@@ -134,10 +134,12 @@ class _VehiclesState extends State<Vehicles> {
                     Stack(
                       children: [
                         Padding(
-                          padding: EdgeInsets.all(size.height * 0.002),
+                          padding: EdgeInsets.only(right: size.width * 0.2),
+                          
                           child: Container(
-                            width: size.width * 0.235,
-                            height: size.height * 0.098,
+                        
+                            width: size.width * 0.205,
+                            height: size.height * 0.110,
                             child: SfRadialGauge(
                               enableLoadingAnimation: true,
                               axes: <RadialAxis> [
@@ -217,13 +219,13 @@ class _VehiclesState extends State<Vehicles> {
                     ),
                     
                     SizedBox(height: size.height * 0.012,),
-                    Row(
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(vehicleModel.brand!),
-                        const Text(" "),
+                        /* const Text(" "), */
                         Text(vehicleModel.model!),
-                        const Text(" "),
+                        /* const Text(" "), */
                         Text(vehicleModel.year.toString()),
                         
                         
@@ -262,7 +264,7 @@ class _VehiclesState extends State<Vehicles> {
                         );
                       },
                       child: Container(
-                        width: size.width * 0.40,
+                        width: size.width * 0.55,
                         height: size.height * 0.021,
                         child: Center(                        
                           child:  Text(
@@ -294,7 +296,7 @@ class _VehiclesState extends State<Vehicles> {
                         );
                       },
                       child: Container(
-                        width: size.width * 0.40,
+                        width: size.width * 0.55,
                         height: size.height * 0.021,
                         child: Center(
                           child:  Text(
@@ -321,7 +323,7 @@ class _VehiclesState extends State<Vehicles> {
                         
                       },
                       child: Container(
-                        width: size.width * 0.40,
+                        width: size.width * 0.55,
                         height: size.height * 0.021,
                         child: Center(
                           child: Text(
@@ -351,7 +353,7 @@ class _VehiclesState extends State<Vehicles> {
                         );
                       },
                       child: Container(
-                        width: size.width * 0.40,
+                        width: size.width * 0.55,
                         height: size.height * 0.021,
                         child: Center(
                           child: Text(

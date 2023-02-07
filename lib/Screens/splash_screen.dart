@@ -93,7 +93,7 @@ class SplashScreenState extends State<SplashScreen> {
               children:  <Widget> [
                 SpinKitThreeBounce(
                   color: Colors.deepOrangeAccent,
-                  size: (MediaQuery.of(context).size.height * 0.05).toDouble(),
+                  size: (MediaQuery.of(context).size.height * 0.03).toDouble(),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: (MediaQuery.of(context).size.height * 0.05).toDouble()),
