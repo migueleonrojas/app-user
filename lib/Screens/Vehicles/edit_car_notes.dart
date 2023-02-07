@@ -53,14 +53,16 @@ class _EditCarNoteState extends State<EditCarNote> {
   }
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
     
     return Scaffold(
       
       appBar: AppBar(
         title:  Text(
           (!selectingAttachments)?"Editar Servicio":"Selecionado: ${selectedAttachments.length}",
-          style: const TextStyle(
-            fontSize: 20,
+          style: TextStyle(
+            fontSize: size.height * 0.024,
             letterSpacing: 1.5,
             fontWeight: FontWeight.bold,
             fontFamily: "Brand-Regular",
@@ -146,25 +148,25 @@ class _EditCarNoteState extends State<EditCarNote> {
 
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.all(20),
+          margin: EdgeInsets.all(size.height * 0.024),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Center(
                 child: Container(
-                  padding: const EdgeInsets.all(5.0),
+                  padding: EdgeInsets.all(size.height * 0.011),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black)
                   ),
                   child: FadeInImage(
                     placeholder: const AssetImage('assets/no-image/no-image.jpg'),
                       image: NetworkImage(widget.noteCar["image"]),
-                      width: 70,
+                      width: size.width * 0.2,
                       fit:BoxFit.contain
                   ),
                 ),
               ),
-              const SizedBox(height: 25),
+              SizedBox(height: size.height * 0.029),
               Form(
                 key: _formkey,
                 child: Column(
@@ -178,7 +180,7 @@ class _EditCarNoteState extends State<EditCarNote> {
                       showCursor: false,
                       isObsecure: false,
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: size.height * 0.014),
                     CustomTextField(
                       controller: _mileageTextEditingController,
                       textInputType: TextInputType.none,
@@ -188,7 +190,7 @@ class _EditCarNoteState extends State<EditCarNote> {
                       showCursor: false,
                       isObsecure: false,
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: size.height * 0.014),
                     CustomTextField(
                       controller: _dateTextEditingController,
                       textInputType: TextInputType.none,
@@ -210,11 +212,11 @@ class _EditCarNoteState extends State<EditCarNote> {
                         _dateTextEditingController.text = DateFormat('dd/MM/yyyy').format(newDate);
                       },
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: size.height * 0.014),
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal:16),
+                      margin: EdgeInsets.symmetric(horizontal:size.width * 0.055),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(size.height * 0.014),
                       ),
                       child: TextFormField(
                         controller: _commentsTextEditingController,
@@ -224,7 +226,7 @@ class _EditCarNoteState extends State<EditCarNote> {
                           labelText: "Comentarios (Opcional)",
                           hintText: "Comentarios (Opcional)",
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8.0),
+                            borderRadius: BorderRadius.circular(size.height * 0.012),
                           ),
                           prefixIcon: Icon(
                             Icons.comment,
@@ -233,7 +235,7 @@ class _EditCarNoteState extends State<EditCarNote> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: size.height * 0.024),
                     
                     ElevatedButton(
                       onPressed: () async {
@@ -245,18 +247,18 @@ class _EditCarNoteState extends State<EditCarNote> {
                               children:  [
                                 Divider(
                                   color: Colors.black45,
-                                  height: 15,
+                                  height: size.height * 0.021,
                                   thickness: 3,
                                   indent: MediaQuery.of(context).size.width * 0.45,
                                   endIndent: MediaQuery.of(context).size.width * 0.45,
                                 ),
-                                const SizedBox(height: 5,),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                SizedBox(height: size.height * 0.008,),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.055, vertical: size.height * 0.014),
                                   child:  Text(
                                     'Adjuntar',                    
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: size.height * 0.022,
                                       
                                     ),
                                   ),
@@ -282,19 +284,23 @@ class _EditCarNoteState extends State<EditCarNote> {
                         );
 
                       }, 
-                      child: const Text('Adjuntar Archivo')
+                      child: const Text('Adjuntar Archivo'),
+                      style: ElevatedButton.styleFrom(
+                        shape: const StadiumBorder(),
+                        backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                      ),
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: size.height * 0.024),
                     (attachments.isNotEmpty)  
                     ? 
                     Container(
-                      width: 300,
-                      height: 180,
+                      width: size.width * 0.9,
+                      height: size.height * 0.200,
                       child: Column(
                         children: [
-                          const Text(
+                          Text(
                             'Adjunto',
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: size.height * 0.024),
                           ),
                           Expanded(
                             child: ListView.builder(
@@ -340,9 +346,9 @@ class _EditCarNoteState extends State<EditCarNote> {
                                       }
                                     },
                                     child: Container(
-                                      width:(selectedAttachments.contains(attachments[index]))? 80:100,
-                                      height:(selectedAttachments.contains(attachments[index]))? 120:140,
-                                      margin: const EdgeInsets.symmetric(horizontal: 15),
+                                      width:(selectedAttachments.contains(attachments[index]))? size.width * 0.23:size.width * 0.28,
+                                      height:(selectedAttachments.contains(attachments[index]))? size.height * 0.135:size.height * 0.1450,
+                                      margin: EdgeInsets.symmetric(horizontal: size.height * 0.019),
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                           image: NetworkImage(attachments[index]),
@@ -350,13 +356,13 @@ class _EditCarNoteState extends State<EditCarNote> {
                                         )
                                       ),
                                       child:(selectedAttachments.contains(attachments[index]))
-                                        ? const IconButton(
+                                        ? IconButton(
                                           alignment: AlignmentDirectional.topEnd,
-                                          padding: EdgeInsets.symmetric(vertical: 0),
+                                          padding: const EdgeInsets.symmetric(vertical: 0),
                                           icon: Icon(
                                             Icons.cancel,
                                             color: Colors.blue,
-                                            size: 30
+                                            size: size.height * 0.035
                                           ),
                                           onPressed: null,
                                         ): null
@@ -389,8 +395,8 @@ class _EditCarNoteState extends State<EditCarNote> {
     Navigator.pop(context);
     final imageFile = await ImagePicker().pickImage(
       source: ImageSource.camera,
-      maxHeight: 680,
-      maxWidth: 970,
+      maxHeight: MediaQuery.of(context).size.height * 0.70/* 680 */,
+      maxWidth: MediaQuery.of(context).size.width * 0.25/* 970 */,
     );
     if (imageFile == null) return;
     if(attachments.isNotEmpty) attachments = [];
@@ -413,8 +419,8 @@ class _EditCarNoteState extends State<EditCarNote> {
 
       final imageFile = await ImagePicker().pickImage(
         source:ImageSource.gallery,
-        maxHeight: 680,
-        maxWidth: 970
+        maxHeight: MediaQuery.of(context).size.height * 0.70/* 680 */,
+        maxWidth: MediaQuery.of(context).size.width * 0.25/* 970 */,
       );
       if(imageFile == null) return;
       if(attachments.isNotEmpty) attachments = [];
@@ -474,20 +480,20 @@ class _EditCarNoteState extends State<EditCarNote> {
             actions: <Widget>[
                GestureDetector(
                 onTap: () => Navigator.of(context).pop(true),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
+                child: Padding(
+                  padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.011),
                   child: Text("YES"),
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.020),
                GestureDetector(
                 onTap: () => Navigator.of(context).pop(false),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
+                child:  Padding(
+                  padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.011),
                   child: Text("NO"),
                 ),
               ),
-              const SizedBox(height: 16),
+               SizedBox(height: MediaQuery.of(context).size.height * 0.018),
             ],
           ),
         ) ??

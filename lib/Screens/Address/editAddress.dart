@@ -26,7 +26,7 @@ class EditAddress extends StatefulWidget {
 
 class _EditAddressState extends State<EditAddress> {
 
-  AppBar appBar = simpleAppBar(false, "Editar Dirección");
+  
 
   
   PageController _controllerPage = PageController(initialPage: 0, keepPage: true);
@@ -90,9 +90,12 @@ class _EditAddressState extends State<EditAddress> {
   
   @override
   Widget build(BuildContext context) {
+
+    
+
     return Scaffold(
       
-      appBar: appBar,
+      appBar: simpleAppBar(false, "Editar Dirección",context),
       body: addAddressBody(context),
       
       
@@ -100,6 +103,8 @@ class _EditAddressState extends State<EditAddress> {
   }
 
    addAddressBody(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
 
     return PageView(
       physics: NeverScrollableScrollPhysics(),
@@ -117,19 +122,19 @@ class _EditAddressState extends State<EditAddress> {
       children: [
         Column(
           children: [
-            const SizedBox(height: 25,),
+            SizedBox(height: size.height * 0.031,),
             Center(
               child: Text(
                 "Marque su ubicación".toUpperCase(),
-                style: const TextStyle(
+                style:  TextStyle(
                   color: Colors.black,
                   fontFamily: "Brand-Bold",
                   letterSpacing: 1.5,
-                  fontSize: 18,
+                  fontSize: size.height * 0.023,
                 ),
               ),
             ),
-            const SizedBox(height: 25,),
+            SizedBox(height: size.height * 0.031,),
             Container(
               height: MediaQuery.of(context).size.height * 0.55,
               child: GoogleMap(
@@ -164,11 +169,11 @@ class _EditAddressState extends State<EditAddress> {
                 }
               ),
             ),
-            const SizedBox(height: 25,),
+            SizedBox(height: size.height * 0.031,),
             TextButton(
               
               style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 13),
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.045, vertical: size.height * 0.017),
                 backgroundColor: Color.fromARGB(255, 3, 3, 247),
                 foregroundColor: Colors.white,
                 shape: const StadiumBorder()
@@ -181,14 +186,14 @@ class _EditAddressState extends State<EditAddress> {
                 
               )
             ),
-            const SizedBox(height: 20,),
+            SizedBox(height: size.height * 0.024,),
             TextButton(
               /* style: ElevatedButton.styleFrom(
                                 backgroundColor: Color.fromARGB(255, 3, 3, 247),
                                 shape: const StadiumBorder()
                               ), */
               style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 13),
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.045, vertical: size.height * 0.018),
                 backgroundColor: Color.fromARGB(255, 3, 3, 247),
                 foregroundColor: Colors.white,
                 shape: const StadiumBorder()
@@ -206,18 +211,18 @@ class _EditAddressState extends State<EditAddress> {
         SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(height: 10,),
+              SizedBox(height: size.height * 0.014,),
               Center(child: Text(
                 "descripción de la ubicación".toUpperCase(),
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.black,
                   fontFamily: "Brand-Bold",
                   letterSpacing: 1.5,
-                  fontSize: 18,
+                  fontSize: size.height * 0.023,
                 ),
               ),),
               Padding(
-                padding: const EdgeInsets.only(top: 25),
+                padding:  EdgeInsets.only(top: size.height * 0.029),
                 child: Form(
                   key: formkey,
                   child: Column(
@@ -258,9 +263,9 @@ class _EditAddressState extends State<EditAddress> {
                         hintText: "Ingrese su Código de Área",
                         labelText: "Código de Área",
                       ),
-                      const SizedBox(height: 10,),
+                      SizedBox(height: size.height * 0.014,),
                       SizedBox(
-                        height: 50,
+                        height: size.height * 0.064,
                         child:
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -269,11 +274,11 @@ class _EditAddressState extends State<EditAddress> {
                           ),
                           child: Text(
                             "Actualizar Dirección".toUpperCase(),
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.white,
                               fontFamily: "Brand-Bold",
                               letterSpacing: 1.5,
-                              fontSize: 18,
+                              fontSize: size.height * 0.022,
                             ),
                           ),
                           /* color: Theme.of(context).accentColor, */
@@ -325,14 +330,14 @@ class _EditAddressState extends State<EditAddress> {
                         ),
                         
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: size.height * 0.025,),
                       TextButton(
                         /* style: ElevatedButton.styleFrom(
                             backgroundColor: Color.fromARGB(255, 3, 3, 247),
                             shape: const StadiumBorder()
                           ), */
                         style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 13),
+                          padding: EdgeInsets.symmetric(horizontal: size.width * 0.045, vertical: size.height * 0.018),
                           backgroundColor: Color.fromARGB(255, 3, 3, 247),
                           foregroundColor: Colors.white,
                           shape: const StadiumBorder()
@@ -368,20 +373,20 @@ class _EditAddressState extends State<EditAddress> {
             actions: <Widget>[
                GestureDetector(
                 onTap: () => Navigator.of(context).pop(true),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
+                child:  Padding(
+                  padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.012),
                   child: Text("YES"),
                 ),
               ),
-              const SizedBox(height: 16),
+               SizedBox(height: MediaQuery.of(context).size.height * 0.020),
                GestureDetector(
                 onTap: () => Navigator.of(context).pop(false),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
+                child:  Padding(
+                  padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.012),
                   child: Text("NO"),
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.020),
             ],
           ),
         ) ??

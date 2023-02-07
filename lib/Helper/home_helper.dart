@@ -15,26 +15,28 @@ class HomeHelper {
   final _db = FirebaseFirestore.instance.collection('products');
   List<String> imageslider = [];
   Widget categoriesCard(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 16,
+              horizontal: size.height * 0.020,
+              vertical: size.height * 0.020 ,
             ),
             child: Text(
               'Categories',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: size.height * 0.025,
                 fontFamily: "Brand-Bold",
                 letterSpacing: 0.5,
               ),
             ),
           ),
           Container(
-            height: 80,
+            height: size.height * 0.1,
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
@@ -53,6 +55,9 @@ class HomeHelper {
   }
 
   Widget homeCarousel(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection("Carousels")
@@ -71,10 +76,10 @@ class HomeHelper {
         }
 
         return Container(
-          height: 200,
+          height:  size.height * 0.25,
           width: double.infinity,
           child: CarouselSlider(
-            options: CarouselOptions(height: 400.0),
+            options: CarouselOptions(height: size.height * 0.50),
             items: sliderImage
                 .map(
                   (e) => Container(
@@ -126,6 +131,8 @@ class HomeHelper {
   }
 
   Widget mainButtons (BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -140,7 +147,7 @@ class HomeHelper {
                 Navigator.push(context, route);
               },
               child: Container(
-                padding: const EdgeInsets.all(5.0),
+                padding: EdgeInsets.all(size.height * 0.0010),
                 /* decoration: BoxDecoration(  
                   borderRadius: BorderRadius.circular(10.0),
                   border: Border.all(color: Colors.blueAccent)
@@ -149,10 +156,10 @@ class HomeHelper {
                 child: Column(
                   children: [
                     Container(
-                      width: 75,
-                      height: 75,
+                      width: size.width * 0.21,
+                      height: size.height * 0.100,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
+                        borderRadius: BorderRadius.circular(size.height * 0.015),
                         color: const Color.fromARGB(255, 27, 93, 179),
                       ),
                       child: IconButton(
@@ -165,20 +172,20 @@ class HomeHelper {
                         },
                       ),
                     ),
-                    const SizedBox(height: 5,),
+                    
                     
                   ],
                 ),
               ),
             ),
-            const SizedBox(height: 5,),
-            const Text(
+            SizedBox(height: size.height * 0.010,),
+            Text(
               'Mis Vehiculos',
-              style: TextStyle(fontSize: 14),
+              style: TextStyle(fontSize: size.height * 0.018),
             )
           ],
         ),
-        const SizedBox(width: 10,),
+        SizedBox(width: size.width * 0.010,),
         Column(
           children: [
             GestureDetector(
@@ -187,7 +194,7 @@ class HomeHelper {
                 Navigator.push(context, route);
               },
               child: Container(
-                padding: const EdgeInsets.all(5.0),
+                padding: EdgeInsets.all(size.height * 0.0010),
                 /* decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
                   border: Border.all(color: Colors.blueAccent)
@@ -196,10 +203,10 @@ class HomeHelper {
                 child: Column(
                   children: [
                     Container(
-                      width: 75,
-                      height: 75,
+                      width: size.width * 0.21,
+                      height: size.height * 0.100,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
+                        borderRadius: BorderRadius.circular(size.height * 0.015),
                         color: Colors.amber,
                       ),
                       child: IconButton(
@@ -212,16 +219,16 @@ class HomeHelper {
                         },
                       ),
                     ),
-                    const SizedBox(height: 5,),
+                    
                     
                   ],
                 ),
               ),
             ),
-            const SizedBox(height: 5,),
-            const Text(
+            SizedBox(height: size.height * 0.010,),
+            Text(
               'Tienda GO',
-              style: TextStyle(fontSize: 14),
+              style: TextStyle(fontSize: size.height * 0.018),
             )
           ],
         ),

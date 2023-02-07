@@ -29,13 +29,15 @@ class _TimelineVehiclesCarNotesAndServiceOrderState extends State<TimelineVehicl
 
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         
-        title: const Text(
+        title: Text(
           "Mis Ordenes de Servicio y Notas de Servicio",
           style: TextStyle(
-            fontSize: 20,
+            fontSize: size.height * 0.024,
             letterSpacing: 1.5,
             fontWeight: FontWeight.bold,
             fontFamily: "Brand-Regular",
@@ -49,9 +51,9 @@ class _TimelineVehiclesCarNotesAndServiceOrderState extends State<TimelineVehicl
         children: [
           Center(
             child: Card(
-              margin: EdgeInsets.all(15),
+              margin: EdgeInsets.all(size.height * 0.021),
               child: Padding(
-                padding: const EdgeInsets.all(5.0),
+                padding: EdgeInsets.all(size.height * 0.008),
                 child: messageDayRest(
                   widget.vehicleWithNotificationsModel!.daysOfTheNextService!, 
                   widget.vehicleWithNotificationsModel!.dateFromNextFormat!
@@ -59,7 +61,7 @@ class _TimelineVehiclesCarNotesAndServiceOrderState extends State<TimelineVehicl
               )
             ),
           ),
-          const SizedBox(height: 15,),
+          SizedBox(height: size.height * 0.021,),
           Container(
             height: MediaQuery.of(context).size.height * 0.75,
             child: SingleChildScrollView(
@@ -88,8 +90,8 @@ class _TimelineVehiclesCarNotesAndServiceOrderState extends State<TimelineVehicl
                      itemCount: snapshot.data!.length,
                      itemBuilder:(context, index) {
                         return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: carNotesOrOrderServiceByVehicles(snapshot.data![index]),
+                          padding: EdgeInsets.symmetric(horizontal: size.width *0.07),
+                          child: carNotesOrOrderServiceByVehicles(snapshot.data![index],size),
                         );
                      }
                   );
@@ -108,15 +110,15 @@ class _TimelineVehiclesCarNotesAndServiceOrderState extends State<TimelineVehicl
     );
   }
 
-  Widget carNotesOrOrderServiceByVehicles(Map<String,dynamic> data ){
+  Widget carNotesOrOrderServiceByVehicles(Map<String,dynamic> data,Size size ){
 
     return TimelineTile(
       nodeAlign: TimelineNodeAlign.start,
-      node:   TimelineNode(
+      node: TimelineNode(
         indicator: DotIndicator(
-          size: 50,
+          size: size.height * 0.060,
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(size.height * 0.005),
             child: (data['carNoteId'] == null)
               ? const IconButton(onPressed: null, icon: Icon(Icons.miscellaneous_services,color: Colors.white,))
               : const IconButton(onPressed: null, icon: Icon(Icons.note, color: Colors.white,))
@@ -132,20 +134,20 @@ class _TimelineVehiclesCarNotesAndServiceOrderState extends State<TimelineVehicl
       ),
       contents: Card(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(size.height * 0.012),
           child: Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 (data['serviceId']!= null) ?Text('Orden de Servicio'):Text('Nota de Servicio'),
-                SizedBox(height: 5,),
+                SizedBox(height: size.height * 0.008,),
                 Text('${data["serviceName"]}'),
-                SizedBox(height: 5,),
+                SizedBox(height: size.height * 0.008,),
                 FadeInImage(
                   placeholder: const AssetImage('assets/no-image/no-image.jpg'),
                   image: NetworkImage('${data["serviceImage"]}'),
-                  width: 70,
-                  height: 70,
+                  width: size.width * 0.15 ,
+                  height: size.height * 0.080,
                   fit:BoxFit.contain
                 ),
                 (data["mileage"] != null) ?Text('${data["mileage"]} km'):Text('${widget.vehicleWithNotificationsModel!.mileage} km'),

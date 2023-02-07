@@ -82,13 +82,15 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
   
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         
-        title: const Text(
+        title:  Text(
           "Editar Vehiculo",
           style: TextStyle(
-            fontSize: 20,
+            fontSize: size.height * 0.024,
             letterSpacing: 1.5,
             fontWeight: FontWeight.bold,
             fontFamily: "Brand-Regular",
@@ -107,17 +109,18 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
               child: Form(
                 key: _vehicleformkey,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 30, top: 30, right: 30),
+                  padding: EdgeInsets.only(left: size.width * 0.1, top: size.height * 0.035, right: size.width * 0.1),
                   child: Column(
                     children: [
                       Image.network(
                         logoBrand!, 
-                        height: 100,
+                        height: size.height * 0.124,
                         width: double.infinity,
                         fit: BoxFit.scaleDown,
                       ),
+                      SizedBox(height: size.height * 0.016),
                       Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: EdgeInsets.all(size.height * 0.016),
                         child: GestureDetector(
                           onTap: () {
                             if(indexBrandController != null){
@@ -133,9 +136,9 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: size.height * 0.016),
                       Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: EdgeInsets.all(size.height * 0.016),
                         child: GestureDetector(
                           onTap: () {
                             if(indexModelController != null) {
@@ -151,9 +154,9 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: size.height * 0.016),
                       Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: EdgeInsets.all(size.height * 0.016),
                         child: GestureDetector(
                           onTap: () {
                             if(indexYearController != null) {
@@ -169,9 +172,9 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: size.height * 0.016),
                       Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: EdgeInsets.all(size.height * 0.016),
                         child: GestureDetector(
                           onTap: addColor,
                           child: Row(
@@ -180,12 +183,12 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                               const Expanded(child: SizedBox(width: double.infinity,)),
                               (colorController.text.isEmpty) 
                                 ? const Text('Seleccione el color')
-                                : Container(height: 20,width: 60,color:Color(int.parse(colorController.text)))
+                                : Container(height: size.height * 0.024,width: size.width * 0.15,color:Color(int.parse(colorController.text)))
                             ],
                           ),
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: size.height * 0.016),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.5,
                         child: TextFormField(
@@ -197,7 +200,7 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: size.height * 0.016),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.5,
                         child: TextFormField(
@@ -208,7 +211,7 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: size.height * 0.016),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.5,
                         child: TextFormField(
@@ -225,10 +228,10 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
       
             ),
             /* const Expanded(child: SizedBox(height: double.infinity,)), */
-            const SizedBox(height: 40,),
+            SizedBox(height: size.height * 0.056,),
             Container(
               width: MediaQuery.of(context).size.width * 0.5,
-              height: 30,
+              height: size.height * 0.036,
               child: ElevatedButton(
                 onPressed: () async {
                   FocusScope.of(context).requestFocus(FocusNode());
@@ -290,10 +293,10 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                 )
               ),
             ),
-            const SizedBox(height: 10,),
+            SizedBox(height: size.height * 0.014,),
             Container(
               width: MediaQuery.of(context).size.width * 0.5,
-              height: 30,
+              height: size.height * 0.034,
               child: ElevatedButton(
                 onPressed: () async {
                   bool confirm = await _confirm('De que quiere eliminar el vehiculo');
@@ -321,7 +324,7 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                 ),
               )
             ),
-            const SizedBox(height: 10,),
+            SizedBox(height: size.height * 0.014,),
           ],
         ),
       ),
@@ -413,12 +416,12 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                 onTap: () => Navigator.of(context).pop(true),
                 child: Text("YES"),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.021),
               GestureDetector(
                 onTap: () => Navigator.of(context).pop(false),
                 child: Text("NO"),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.021),
             ],
           ),
         ) ??

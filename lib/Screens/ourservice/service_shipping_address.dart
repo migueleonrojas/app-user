@@ -34,13 +34,16 @@ class _ServiceShippingAddressState extends State<ServiceShippingAddress> {
   List<AddressModel> addressModel = [];
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         
-        title: const Text(
+        title: Text(
           "Mis direcciones",
           style: TextStyle(
-            fontSize: 20,
+            fontSize: size.height * 0.026,
             letterSpacing: 1.5,
             fontWeight: FontWeight.bold,
             fontFamily: "Brand-Regular",
@@ -66,19 +69,19 @@ class _ServiceShippingAddressState extends State<ServiceShippingAddress> {
               alignment: Alignment.topCenter,
               child: Column(
                 children:  [
-                  const Padding(
-                    padding: EdgeInsets.all(8),
+                  Padding(
+                    padding: EdgeInsets.all(size.height * 0.012),
                     child: Text(
                       "Seleccionar Dirección",
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                        fontSize: size.height * 0.022,
                       ),
                     ),
                   ),
                   IconButton(
-                    iconSize: 60,
+                    iconSize: size.height * 0.070,
                     icon: const Icon(
                       Icons.add_location,
                       color: Color.fromARGB(255, 212, 175, 55),
@@ -91,11 +94,11 @@ class _ServiceShippingAddressState extends State<ServiceShippingAddress> {
                   Stack(
                     alignment: AlignmentDirectional.centerStart,
                     children:  [
-                      const Center(
+                      Center(
                         child:  Text(
                           'Agregar Dirección',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: size.height * 0.024,
                             fontWeight: FontWeight.bold
                           ),
                         ),
@@ -166,14 +169,7 @@ class _ServiceShippingAddressState extends State<ServiceShippingAddress> {
                       
                     ],
                   ),
-
-                  
-                  Row(
-
-                  ),
-                  const SizedBox(height: 10,)
-                  
-                  
+                  SizedBox(height: size.height * 0.016,)                  
                 ],
               ),
             ),
@@ -194,12 +190,8 @@ class _ServiceShippingAddressState extends State<ServiceShippingAddress> {
                     }
 
                     if(snapshot.data!.docs.length == 0) {
-                      return noAddressCard();
+                      return noAddressCard(size);
                     }
-
-                    
-                   
-                    
                     
                     return ListView.builder(
                       itemCount: snapshot.data!.docs.length,
@@ -232,15 +224,15 @@ class _ServiceShippingAddressState extends State<ServiceShippingAddress> {
 
   }
 
-  noAddressCard() {
+  noAddressCard(Size size) {
     return Card(
       color: Colors.blueGrey.withOpacity(0.5),
       child: Container(
-        height: 100,
+        height: size.height * 0.120,
         alignment: Alignment.center,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: const [
             Icon(Icons.add_location, color: Colors.white),
             Text("No se ha guardado ninguna dirección de envío"),
             Text(
@@ -306,6 +298,7 @@ class AddressCard extends StatefulWidget {
 class _AddressCardState extends State<AddressCard> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     double screenWidth = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: () {
@@ -334,7 +327,7 @@ class _AddressCardState extends State<AddressCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(size.height * 0.014),
                       width: screenWidth * 0.8,
                       child: Table(
                         children: [
@@ -478,20 +471,20 @@ class _AddressCardState extends State<AddressCard> {
             actions: <Widget>[
                GestureDetector(
                 onTap: () => Navigator.of(context).pop(true),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
+                child: Padding(
+                  padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.015),
                   child: Text("YES"),
                 ),
               ),
               const SizedBox(height: 16),
                GestureDetector(
                 onTap: () => Navigator.of(context).pop(false),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
+                child: Padding(
+                  padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.015),
                   child: Text("NO"),
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.021),
             ],
           ),
         ) ??

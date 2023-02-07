@@ -29,12 +29,15 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Mis Ordenes de productos",
           style: TextStyle(
-            fontSize: 15,
+            fontSize: size.height * 0.022,
             letterSpacing: 1.5,
             fontWeight: FontWeight.bold,
             fontFamily: "Brand-Regular",
@@ -125,6 +128,9 @@ class OrderBody extends StatelessWidget {
   final ScrollController scrollController;
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
     return Container(
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
@@ -136,26 +142,26 @@ class OrderBody extends StatelessWidget {
           return Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(10),
+                padding: EdgeInsets.all(size.height * 0.010),
                 child: Container(
                   child: Column(
                     children: [
                       RichText(
                         text: TextSpan(
                           children: [
-                            const TextSpan(
+                            TextSpan(
                               text: "ID de la Orden: ",
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: size.height * 0.022,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.deepOrangeAccent,
                               ),
                             ),
                             TextSpan(
                               text: data[index]['orderId'],
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 18,
+                                fontSize: size.height * 0.022,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -170,7 +176,7 @@ class OrderBody extends StatelessWidget {
                             " elemento)",
                         style: TextStyle(
                           color: Colors.grey,
-                          fontSize: 16,
+                          fontSize: size.height * 0.022,
                         ),
                       )
                       :Text(
@@ -180,7 +186,7 @@ class OrderBody extends StatelessWidget {
                             " elementos)",
                         style: TextStyle(
                           color: Colors.grey,
-                          fontSize: 16,
+                          fontSize: size.height * 0.022,
                         ),
                       ),
                       Text(
@@ -189,7 +195,7 @@ class OrderBody extends StatelessWidget {
                             " \$.",
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 18,
+                          fontSize: size.height * 0.022,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -232,7 +238,7 @@ class OrderBody extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 10,
+                height: size.height * 0.010,
                 width: double.infinity,
                 color: Colors.blueGrey[50],
               ),

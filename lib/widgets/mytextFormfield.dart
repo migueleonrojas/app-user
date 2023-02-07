@@ -15,29 +15,31 @@ class MyTextFormField extends StatelessWidget {
   final int maxLine;
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 14,
-        vertical: 8,
+      padding: EdgeInsets.symmetric(
+        horizontal: size.width * 0.075,
+        vertical: size.height * 0.012,
       ),
       child: TextFormField(
         controller: controller,
         maxLines: maxLine,
         style: TextStyle(
-          fontSize: 18,
+          fontSize: size.height * 0.022,
           fontWeight: FontWeight.w600,
           fontFamily: "Brand-Regular",
         ),
         decoration: InputDecoration(
             hintText: hintText,
             hintStyle: TextStyle(
-              fontSize: 18,
+              fontSize: size.height * 0.022,
               fontWeight: FontWeight.w600,
               fontFamily: "Brand-Regular",
             ),
             labelText: labelText,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(size.height * 0.014),
             )),
       ),
     );

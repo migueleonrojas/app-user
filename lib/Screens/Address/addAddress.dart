@@ -20,9 +20,6 @@ class AddAddress extends StatefulWidget {
 
 class _AddAddressState extends State<AddAddress> {
 
-  AppBar appBar = simpleAppBar(false, "Agregar Dirección");
-
-  
   PageController _controllerPage = PageController(initialPage: 0, keepPage: true);
 
   CameraPosition cameraPosition = const CameraPosition(
@@ -55,14 +52,14 @@ class _AddAddressState extends State<AddAddress> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar,
+      appBar: simpleAppBar(false, "Agregar Dirección",context),
       body: addAddressBody(context),
       
     );
   }
 
    addAddressBody(BuildContext context) {
-
+    Size size = MediaQuery.of(context).size;
     return PageView(
       physics: NeverScrollableScrollPhysics(),
       onPageChanged: (value) async {
@@ -79,19 +76,19 @@ class _AddAddressState extends State<AddAddress> {
       children: [
         Column(
           children: [
-            const SizedBox(height: 25,),
+            SizedBox(height: size.height * 0.030,),
             Center(
               child: Text(
                 "Marque su ubicación".toUpperCase(),
-                style: const TextStyle(
+                style:  TextStyle(
                   color: Colors.black,
                   fontFamily: "Brand-Bold",
                   letterSpacing: 1.5,
-                  fontSize: 18,
+                  fontSize: size.height * 0.022,
                 ),
               ),
             ),
-            const SizedBox(height: 25,),
+            SizedBox(height: size.height * 0.025,),
             Container(
               height: MediaQuery.of(context).size.height * 0.55,
               child: GoogleMap(
@@ -126,11 +123,11 @@ class _AddAddressState extends State<AddAddress> {
                 }
               ),
             ),
-            const SizedBox(height: 25,),
+            SizedBox(height: size.height * 0.022,),
             TextButton(
               
               style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 13),
+                padding: EdgeInsets.symmetric(horizontal: size.width *0.040, vertical: size.height *0.020),
                 backgroundColor: Color.fromARGB(255, 3, 3, 247),
                 foregroundColor: Colors.white,
                 shape: const StadiumBorder()
@@ -143,11 +140,11 @@ class _AddAddressState extends State<AddAddress> {
                 
               )
             ),
-            const SizedBox(height: 20,),
+            SizedBox(height:size.height * 0.020 ,),
             TextButton(
               
               style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 13),
+                padding:  EdgeInsets.symmetric(horizontal: size.width *0.040, vertical: size.height *0.020),
                 backgroundColor: Color.fromARGB(255, 3, 3, 247),
                 foregroundColor: Colors.white,
                 shape: const StadiumBorder()
@@ -165,18 +162,18 @@ class _AddAddressState extends State<AddAddress> {
         SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(height: 10,),
+              SizedBox(height: size.height * 0.010,),
               Center(child: Text(
                 "descripción de la ubicación".toUpperCase(),
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.black,
                   fontFamily: "Brand-Bold",
                   letterSpacing: 1.5,
-                  fontSize: 18,
+                  fontSize: size.height * 0.018,
                 ),
               ),),
               Padding(
-                padding: const EdgeInsets.only(top: 25),
+                padding: EdgeInsets.only(top: size.height * 0.025),
                 child: Form(
                   key: formkey,
                   child: Column(
@@ -217,9 +214,9 @@ class _AddAddressState extends State<AddAddress> {
                         hintText: "Ingrese su Código de Área",
                         labelText: "Código de Área",
                       ),
-                      const SizedBox(height: 10,),
+                      SizedBox(height: size.height * 0.010,),
                       SizedBox(
-                        height: 50,
+                        height: size.height * 0.055,
                         child:
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -279,11 +276,11 @@ class _AddAddressState extends State<AddAddress> {
                         ),
                         
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: size.height * 0.020,),
                       TextButton(
                         
                         style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 13),
+                          padding: EdgeInsets.symmetric(horizontal: size.width *0.040, vertical: size.height *0.020),
                           backgroundColor: Color.fromARGB(255, 3, 3, 247),
                           foregroundColor: Colors.white,
                           shape: const StadiumBorder()

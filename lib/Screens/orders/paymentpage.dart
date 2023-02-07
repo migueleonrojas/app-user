@@ -33,6 +33,9 @@ class _PaymentPageState extends State<PaymentPage> {
   
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
     return WillPopScope(
       onWillPop:(!goOrders && !loading)
         ? () async {
@@ -47,10 +50,10 @@ class _PaymentPageState extends State<PaymentPage> {
       ,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
+          title: Text(
             "Metodo de Pago",
             style: TextStyle(
-              fontSize: 20,
+              fontSize: size.height * 0.020,
               letterSpacing: 1.5,
               fontWeight: FontWeight.bold,
               fontFamily: "Brand-Regular",
@@ -73,16 +76,16 @@ class _PaymentPageState extends State<PaymentPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Align(
+              Align(
                 alignment: Alignment.topCenter,
                 child: Padding(
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.all(size.height * 0.008),
                   child:  Text(
                     "Elige el método de pago",
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontSize: size.height * 0.020,
                     ),
                   ),
                 ),
@@ -245,10 +248,10 @@ class _PaymentPageState extends State<PaymentPage> {
                                     Icons.shopping_bag,
                                     color: Colors.white,
                                   ),
-                                  label: const Text(
+                                  label:  Text(
                                     "Ver las ordenes de productos",
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: size.height *0.022,
                                       color: Colors.white,
                                     ),
                                   ),
@@ -284,25 +287,27 @@ class PaymentButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(size.height * 0.008),
       child: GestureDetector(
         onTap: onTap,
         child: Card(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(size.height * 0.008),
           ),
           elevation: 3,
           child: ListTile(
             leading: Image.asset(
               leadingImage,
-              width: 40,
-              height: 40,
+              width: size.width * 0.110,
+              height: size.height * 0.050,
             ),
             title: Text(
               title,
               style: TextStyle(
-                fontSize: 18,
+                fontSize: size.height * 0.022,
                 letterSpacing: 1,
                 fontWeight: FontWeight.w600,
                 fontFamily: "Brand-Regular",

@@ -58,12 +58,15 @@ class _MyServiceOrderScreenState extends State<MyServiceOrderScreen> {
   }
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Mis ordenes de servicio",
           style: TextStyle(
-            fontSize: 20,
+            fontSize: size.height * 0.024,
             letterSpacing: 1.5,
             fontWeight: FontWeight.bold,
             fontFamily: "Brand-Regular",
@@ -102,7 +105,7 @@ class _MyServiceOrderScreenState extends State<MyServiceOrderScreen> {
                     if (snapshot.data == null) return Center(
                       child: Column(
                         children: [
-                          SizedBox(height: 20,),
+                          SizedBox(height: size.height * 0.024,),
                           Container(
                             child: const CircularProgressIndicator(),
                           ),
@@ -129,7 +132,8 @@ class _MyServiceOrderScreenState extends State<MyServiceOrderScreen> {
                     return OrderBody(
                       itemCount: snapshot.data!.length,
                       data: serviceOrderModel,
-                      vehicleModel: vehicleModel,    
+                      vehicleModel: vehicleModel,
+                      size: size, 
                     );
                   },
                 );
@@ -148,11 +152,13 @@ class OrderBody extends StatelessWidget {
     required this.itemCount,
     required this.data,
     required this.vehicleModel,
-    Key? key,
+    Key? key, 
+    required this.size,
   }) : super(key: key);
   final int itemCount;
   final ServiceOrderModel data;
   final VehicleModel vehicleModel;
+  final Size size;
   @override
   Widget build(BuildContext context) {
 
@@ -160,26 +166,26 @@ class OrderBody extends StatelessWidget {
 
     return Container(
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: EdgeInsets.all(size.height * 0.014),
         child: Container(
           child: Column(
             children: [
               RichText(
                 text: TextSpan(
                   children: [
-                    const TextSpan(
+                    TextSpan(
                       text: "ID de la Orden: ",
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: size.height * 0.022,
                         fontWeight: FontWeight.w600,
                         color: Colors.deepOrangeAccent,
                       ),
                     ),
                     TextSpan(
                       text: data.orderId,
-                      style: const TextStyle(
+                      style:  TextStyle(
                         color: Colors.black,
-                        fontSize: 18,
+                        fontSize: size.height * 0.022,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -189,25 +195,25 @@ class OrderBody extends StatelessWidget {
               ),
               Text(
                 "Vehiculo: ${vehicleModel.brand}, ${vehicleModel.model} ",
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.black,
-                  fontSize: 18,
+                  fontSize: size.height * 0.022,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
                 "Servicio: ${data.serviceName}",
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.black,
-                  fontSize: 18,
+                  fontSize: size.height * 0.022,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
                 "Precio Total: " + data.totalPrice.toString() + " \$.",
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.black,
-                  fontSize: 18,
+                  fontSize: size.height * 0.022,
                   fontWeight: FontWeight.w600,
                 ),
               ),

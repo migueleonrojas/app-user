@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:ffi';
+
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
@@ -40,15 +40,17 @@ class _TimeLineVehiclesState extends State<TimeLineVehicles> {
 
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
     return Column(
       children: [
-        const Text(
+        Text(
           'Próximos servicios de Cambio de Aceite',
           style:  TextStyle(
-            fontSize: 20 
+            fontSize: size.height * 0.023
           ),
         ),
-        const SizedBox(height: 15,),
+        SizedBox(height: size.height * 0.015,),
         Container(
           height: MediaQuery.of(context).size.height * 0.30,
           child: SingleChildScrollView(
@@ -85,7 +87,7 @@ class _TimeLineVehiclesState extends State<TimeLineVehicles> {
                      if (snapshot.data == null) return Center(
                         child: Column(
                           children: [
-                            SizedBox(height: 20,),
+                            SizedBox(height: size.height * 0.015,),
                             Container(
                               child: const CircularProgressIndicator(),
                             ),
@@ -108,21 +110,21 @@ class _TimeLineVehiclesState extends State<TimeLineVehicles> {
                       
 
                       return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(horizontal: size.height * 0.015),
                         child: TimelineTile(
                           
                           nodeAlign: TimelineNodeAlign.start,
                           node:  TimelineNode(
                             
                             indicator: DotIndicator(
-                              size: 50,
+                              size: size.height * 0.065,
                               color: Color(vehicleWithNotificationsModel.color!),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Image.asset(
                                   scale: 0.5,
                                   'assets/icons/car_oilchange.png',
-                                  width:40 ,
+                                  width: size.height * 0.045 ,
                                   color: Colors.white,
                                   fit: BoxFit.scaleDown,
                                 ),
@@ -139,7 +141,7 @@ class _TimeLineVehiclesState extends State<TimeLineVehicles> {
                           contents: Card(
                             child: Container(
                               width: MediaQuery.of(context).size.width,
-                              padding: EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(size.height * 0.02),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -150,7 +152,7 @@ class _TimeLineVehiclesState extends State<TimeLineVehicles> {
                                       color: Color(vehicleWithNotificationsModel.color!)
                                     ),
                                   ),
-                                  const SizedBox(height: 5,),
+                                  SizedBox(height: size.height * 0.005,),
                                   messageDayRest(
                                     vehicleWithNotificationsModel.daysOfTheNextService!,
                                     vehicleWithNotificationsModel.dateFromNextFormat!

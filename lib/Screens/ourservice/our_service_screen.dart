@@ -20,13 +20,15 @@ class _OurServiceState extends State<OurService> {
   PageController pageController = PageController();
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         
-        title:const Text(
+        title:  Text(
           "Servicios GlobalOil",
           style: TextStyle(
-            fontSize: 20,
+            fontSize: size.height * 0.024,
             letterSpacing: 1.5,
             fontWeight: FontWeight.bold,
             fontFamily: "Brand-Regular",
@@ -73,13 +75,13 @@ class _OurServiceState extends State<OurService> {
                       NavigationRailDestination(
                         icon: Image.asset(
                           "assets/icons/car_oilchange.png",
-                          width: width,
-                          height: height,
+                          width: size.width * 0.1,
+                          height: size.height * 0.038,
                           color: (selectedIndex == 0)
                               ? Colors.white
                               : Colors.white70,
                         ),
-                        label: Text(""),
+                        label: const Text(""),
                       ),
                       
                       /* NavigationRailDestination(
@@ -158,7 +160,7 @@ class _OurServiceState extends State<OurService> {
             child: PageView(
               controller: pageController,
               scrollDirection: Axis.vertical,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               children:  [
                 CoustomServiceBody(
                   isEqualTo: "Cambio de Aceite",

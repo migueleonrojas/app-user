@@ -52,10 +52,10 @@ class _SignUpOtpConfirmEmailScreenState extends State<SignUpOtpConfirmEmailScree
                 children: [
                   SizedBox(height: (MediaQuery.of(context).size.height * 0.025).toDouble()),
                   LoginHelper().loginLog(context),
-                  const SizedBox(height: 10),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.014),
                   LoginHelper().subtitleText(
                     msg: "Introduzca el código de confirmación enviada a",
-                    size: 32,
+                    size: MediaQuery.of(context).size.height * 0.038,
                     color: Colors.black
                   ),
                   SizedBox(height: (MediaQuery.of(context).size.height * 0.025).toDouble()),

@@ -47,6 +47,8 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
   bool loading = false;
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop:(!goOrders && !loading)
         ? () async {
@@ -61,10 +63,10 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
       ,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
+          title: Text(
             "Metodo de Pago",
             style: TextStyle(
-              fontSize: 20,
+              fontSize: size.height * 0.024,
               letterSpacing: 1.5,
               fontWeight: FontWeight.bold,
               fontFamily: "Brand-Regular",
@@ -87,16 +89,16 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Align(
+              Align(
                 alignment: Alignment.topCenter,
                 child: Padding(
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.all(size.height * 0.008),
                   child: Text(
                     "Elija el método de pago",
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontSize: size.height * 0.024,
                     ),
                   ),
                 ),
@@ -224,10 +226,10 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                     Icons.home_outlined,
                                     color: Colors.white,
                                   ),
-                                  label: const Text(
+                                  label: Text(
                                     "Ir a Inicio",
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: size.height * 0.022,
                                       color: Colors.white,
                                     ),
                                   ),
@@ -283,7 +285,7 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                           crossAxisAlignment: CrossAxisAlignment.center,
                                           children: [
                                             Text('Datos del Pago Movil'),
-                                            SizedBox(height: 10,),
+                                            SizedBox(height: size.height * 0.014,),
                                             StreamBuilder<QuerySnapshot>(
                                               stream: FirebaseFirestore.instance
                                                 .collection(AutoParts.dollarRate)
@@ -506,14 +508,14 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                                   )
                                                 ],
                                               ),
-                                              SizedBox(height: 10,),
+                                              SizedBox(height: size.height * 0.015,),
                                               Text(
                                                 'Registro del Pago',
                                                 style: TextStyle(
-                                                  fontSize: 20
+                                                  fontSize: size.height * 0.024
                                                 ),
                                               ),
-                                              SizedBox(height: 10,),
+                                              SizedBox(height: size.height * 0.015,),
                                               Form(
                                                 key: _formkey,
                                                 child: Column(
@@ -531,7 +533,7 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                                         ),
                                                       ),
                                                     ),
-                                                    SizedBox(height: 10,),
+                                                    SizedBox(height: size.height * 0.015,),
                                                     SizedBox(
                                                       width: MediaQuery.of(context).size.width * 0.80,
                                                       child: TextFormField(
@@ -559,7 +561,7 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                                         },
                                                       ),
                                                     ),
-                                                    SizedBox(height: 10,),
+                                                    SizedBox(height: size.height * 0.015,),
                                                     SizedBox(
                                                       width: MediaQuery.of(context).size.width * 0.80,
                                                       child: TextFormField(
@@ -568,12 +570,12 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                                         decoration: InputDecoration(
                                                           hintText: "Nombre del Emisor",
                                                           border: OutlineInputBorder(
-                                                            borderRadius: BorderRadius.circular(30.0),
+                                                            borderRadius: BorderRadius.circular(size.height * 0.035),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                    SizedBox(height: 10,),
+                                                    SizedBox(height: size.height * 0.015,),
                                                     SizedBox(
                                                       width: MediaQuery.of(context).size.width * 0.80,
                                                       child: TextFormField(
@@ -582,12 +584,12 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                                         decoration: InputDecoration(
                                                           hintText: "Nombre del Titular",
                                                           border: OutlineInputBorder(
-                                                            borderRadius: BorderRadius.circular(30.0),
+                                                            borderRadius: BorderRadius.circular(size.height * 0.035),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                    SizedBox(height: 10,),
+                                                    SizedBox(height: size.height * 0.015,),
                                                     SizedBox(
                                                       width: MediaQuery.of(context).size.width * 0.80,
                                                       child: TextFormField(
@@ -597,7 +599,7 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                                         decoration: InputDecoration(
                                                           hintText: "Observaciones",
                                                           border: OutlineInputBorder(
-                                                            borderRadius: BorderRadius.circular(30.0),
+                                                            borderRadius: BorderRadius.circular(size.height * 0.035),
                                                           ),
                                                         ),
                                                       ),
@@ -1185,8 +1187,11 @@ class PaymentButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(size.height * 0.012),
       child: GestureDetector(
         onTap: onTap,
         child: Card(
@@ -1197,13 +1202,13 @@ class PaymentButton extends StatelessWidget {
           child: ListTile(
             leading: Image.asset(
               leadingImage,
-              width: 40,
-              height: 40,
+              width: size.width * 0.11,
+              height: size.height * 0.044,
             ),
             title: Text(
               title,
               style: TextStyle(
-                fontSize: 18,
+                fontSize: size.height * 0.022,
                 letterSpacing: 1,
                 fontWeight: FontWeight.w600,
                 fontFamily: "Brand-Regular",

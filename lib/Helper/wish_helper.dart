@@ -15,26 +15,28 @@ import 'package:provider/provider.dart';
 
 class WishHelper {
   Widget wishAppBar(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
     return AppBar(
 
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
+          Text(
             "Favoritos",
             style: TextStyle(
-              fontSize: 20,
+              fontSize: size.height * 0.024,
               letterSpacing: 1.5,
               fontWeight: FontWeight.bold,
               fontFamily: "Brand-Regular",
               color: Colors.black
             ),
           ),
-          const SizedBox(width: 5),
-          const Text(
+          SizedBox(width: size.width * 0.01),
+          Text(
             "(",
             style: TextStyle(
-              fontSize: 20,
+              fontSize: size.height * 0.024,
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
@@ -51,8 +53,8 @@ class WishHelper {
               }
               return Text(
                 snapshot.data!.docs.length.toString(),
-                style: const TextStyle(
-                  fontSize: 20,
+                style: TextStyle(
+                  fontSize: size.height * 0.024,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
@@ -62,7 +64,7 @@ class WishHelper {
           Text(
             ")",
             style: TextStyle(
-              fontSize: 20,
+              fontSize: size.height * 0.024,
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
@@ -84,15 +86,15 @@ class WishHelper {
               },
             ),
             Positioned(
-              top: 3,
-              left: 3,
+              top: size.height * 0.002,
+              left: size.width * 0.008,
               child: Stack(
                 children: [
                   Container(
-                    height: 20,
-                    width: 20,
+                    height: size.height * 0.024,
+                    width: size.width *0.053,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(size.height * 0.24),
                         color: Colors.red,
                         border: Border.all(color: Colors.orangeAccent)),
                   ),
@@ -102,9 +104,9 @@ class WishHelper {
                               1) <
                           10)
                       ? Positioned(
-                          top: 2,
-                          bottom: 4,
-                          left: 6,
+                          top: size.height * 0.0007 /* 2 */,
+                          bottom: size.height * 0.0014,
+                          left: size.width * 0.016/* 6 */,
                           child: Consumer<CartItemCounter>(
                             builder: (context, counter, _) {
                               return Text(
@@ -123,9 +125,9 @@ class WishHelper {
                           ),
                         )
                       : Positioned(
-                          top: 3,
-                          bottom: 2,
-                          left: 3,
+                          top: size.height * 0.002,
+                          bottom: size.height * 0.002,
+                          left: size.width * 0.008,
                           child: Consumer<CartItemCounter>(
                             builder: (context, counter, _) {
                               return Text(
@@ -137,7 +139,7 @@ class WishHelper {
                                     .toString(),
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 12.0,
+                                  fontSize: size.height * 0.016,
                                 ),
                               );
                             },
@@ -161,7 +163,9 @@ class WishHelper {
     );
   }
 
-  Widget wishlistItems() {
+  Widget wishlistItems(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
     int quantity = 1;
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
@@ -194,11 +198,11 @@ class WishHelper {
                             Card(
                               elevation: 2,
                               child: Padding(
-                                padding: const EdgeInsets.only(
-                                  top: 15,
-                                  bottom: 15,
-                                  left: 10,
-                                  right: 10,
+                                padding: EdgeInsets.only(
+                                  top: size.height * 0.021/* 15 */,
+                                  bottom: size.height * 0.021,
+                                  left: size.width * 0.02/* 10 */,
+                                  right: size.width * 0.02/* 10 */,
                                 ),
                                 child: ListTile(
                                   leading: Image.network(
@@ -211,21 +215,21 @@ class WishHelper {
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize: size.height * 0.021,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      SizedBox(height: 5),
+                                      SizedBox(height: size.height * 0.008),
                                       Row(
                                         children: [
                                           Icon(Icons.branding_watermark_outlined),
-                                          SizedBox(width: 5),
+                                          SizedBox(width: size.width *  0.01),
                                           Flexible(
                                             child: Text(
                                               wishModel.pBrand!,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
-                                                fontSize: 16,
+                                                fontSize: size.height * 0.021,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
@@ -235,12 +239,12 @@ class WishHelper {
                                     ],
                                   ),
                                   trailing: Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 10.0, bottom: 10),
+                                    padding: EdgeInsets.only(
+                                        top: size.height * 0.014, bottom: size.width *0.03),
                                     child: Text(
                                       '\$${wishModel.newPrice}',
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: size.height * 0.020,
                                         color: Colors.deepOrange,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -268,11 +272,11 @@ class WishHelper {
                               ),
                             ),
                             Positioned(
-                              bottom: 2,
-                              right: 2,
+                              bottom: size.height * 0.002/* 2 */,
+                              right:  size.width * 0.01/* 2 */,
                               child: Container(
-                                height: 35,
-                                width: 70,
+                                height: size.height * 0.042,
+                                width: size.width * 0.22,
                                 decoration: BoxDecoration(
                                   color: Colors.deepOrangeAccent,
                                   borderRadius: BorderRadius.only(
@@ -295,12 +299,12 @@ class WishHelper {
                                         icon: (snapshot.data!.docs.length == 1)
                                             ? Icon(
                                                 Icons.shopping_bag,
-                                                size: 20,
+                                                size: size.height * 0.024,
                                                 color: Colors.white,
                                               )
                                             : Icon(
                                                 Icons.add_shopping_cart_outlined,
-                                                size: 20,
+                                                size: size.height * 0.024,
                                                 color: Colors.white,
                                               ),
                                         onPressed: () {

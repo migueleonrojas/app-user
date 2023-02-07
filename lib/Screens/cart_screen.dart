@@ -32,8 +32,11 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
-      appBar: simpleAppBar(false, "Mi Carro de Compras"),
+      appBar: simpleAppBar(false, "Mi Carro de Compras", context),
       floatingActionButton: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
               .collection(AutoParts.collectionUser)
@@ -62,10 +65,10 @@ class _CartScreenState extends State<CartScreen> {
                         Navigator.push(context, route);
                       }
                     },
-                    label: const Text(
+                    label: Text(
                       "VERIFICAR",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: size.height * 0.020,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -80,7 +83,7 @@ class _CartScreenState extends State<CartScreen> {
             Consumer2<TotalAmount, CartItemCounter>(
               builder: (context, amountProvider, cartProvider, c) {
                 return Padding(
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.all(size.height * 0.010),
                   child: Center(
                     child: ((AutoParts.sharedPreferences!
                                     .getStringList(AutoParts.userCartList)!
@@ -92,7 +95,7 @@ class _CartScreenState extends State<CartScreen> {
                             "Precio Total: \$ ${amountProvider.totalPrice.toString()}",
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 20,
+                                fontSize: size.height * 0.025,
                                 fontWeight: FontWeight.w500),
                           ),
                   ),
@@ -144,8 +147,8 @@ class _CartScreenState extends State<CartScreen> {
                               child: ListTile(
                                 leading: Image.network(
                                   cartModel.pImage!,
-                                  width: 50,
-                                  height: 50,
+                                  width: size.width * 0.14,
+                                  height: size.height * 0.060,
                                 ),
                                 title: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,12 +166,12 @@ class _CartScreenState extends State<CartScreen> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         SizedBox(
-                                          width: 100,
+                                          width: size.width * 0.30,
                                           child: OutlinedButton.icon(
                                             style: ButtonStyle(
                                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                                 RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius: BorderRadius.circular(size.height * 0.005),
                                                   side: const BorderSide(color: Colors.red)
                                                 )
                                               ),
@@ -202,13 +205,13 @@ class _CartScreenState extends State<CartScreen> {
                                         Row(
                                           children: [
                                             SizedBox(
-                                              width: 25,
-                                              height: 25,
+                                              width: size.width * 0.065,
+                                              height: size.height * 0.035,
                                               child: OutlinedButton(
                                                 style: ButtonStyle(
                                                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                                     RoundedRectangleBorder(
-                                                      borderRadius: BorderRadius.circular(5),
+                                                      borderRadius: BorderRadius.circular(size.height * 0.005),
                                                       side: const BorderSide(color: Colors.red)
                                                     )
                                                   ),
@@ -216,8 +219,8 @@ class _CartScreenState extends State<CartScreen> {
                                                     EdgeInsets.zero
                                                   )
                                                 ),
-                                                child: const Icon(Icons.remove,
-                                                    size: 18),
+                                                child: Icon(Icons.remove,
+                                                    size: size.height * 0.018),
                                                 onPressed: () {
                                                   if (cartModel.quantity! > 1) {
                                                     setState(() {
@@ -243,26 +246,26 @@ class _CartScreenState extends State<CartScreen> {
                                             ),
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.symmetric(
-                                                horizontal: 6,
+                                                  EdgeInsets.symmetric(
+                                                horizontal: size.height * 0.006,
                                               ),
                                               child: Text(
                                                 '${cartModel.quantity}',
                                                 style: TextStyle(
                                                   fontFamily: "Brand-Regular",
-                                                  fontSize: 16,
+                                                  fontSize: size.height * 0.016,
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                               ),
                                             ),
                                             SizedBox(
-                                              width: 25,
-                                              height: 25,
+                                              width: size.width * 0.065,
+                                              height: size.height * 0.035,
                                               child: OutlinedButton(
                                                 style: ButtonStyle(
                                                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                                     RoundedRectangleBorder(
-                                                      borderRadius: BorderRadius.circular(5),
+                                                      borderRadius: BorderRadius.circular(size.height * 0.005),
                                                       side: const BorderSide(color: Colors.red)
                                                     )
                                                   ),
@@ -271,7 +274,7 @@ class _CartScreenState extends State<CartScreen> {
                                                   )
                                                 ),
                                                 child:
-                                                    Icon(Icons.add, size: 18),
+                                                    Icon(Icons.add, size: size.height * 0.018),
                                                 onPressed: () {
                                                   setState(() {
                                                     cartModel.quantity = cartModel.quantity! + 1;

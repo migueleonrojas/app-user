@@ -15,8 +15,10 @@ class DrawerItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
     return SizedBox(
-      height: 50,
+      height: size.height * 0.060,
       child: ListTile(
         leading: Icon(
           leadingIcon,
@@ -47,9 +49,10 @@ class DrawerDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: Divider(height: 2, color: Colors.grey[400], thickness: 1.0),
+      padding: const EdgeInsets.symmetric(horizontal: 0),
+      child: Divider(height: size.height * 0.005, color: Colors.grey[400], thickness: 1.0),
     );
   }
 }

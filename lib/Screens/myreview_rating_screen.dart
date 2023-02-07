@@ -18,6 +18,7 @@ class _MyReviewAndRatingState extends State<MyReviewAndRating> {
       appBar: simpleAppBar(
         false,
         "Mis opiniónes y valoraciones",
+        context
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance

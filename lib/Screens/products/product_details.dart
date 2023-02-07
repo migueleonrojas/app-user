@@ -30,6 +30,9 @@ class _ProductDetailsState extends State<ProductDetails> {
   ratingcalculation() {}
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
     Stream stream = FirebaseFirestore.instance
         .collection(AutoParts.collectionUser)
         .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
@@ -50,15 +53,15 @@ class _ProductDetailsState extends State<ProductDetails> {
                   .productCoverImage(context),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 10,
+                  horizontal: size.width * 0.03,
+                  vertical: size.height * 0.014,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ProductDetailsHelper(productModel: widget.productModel)
                         .productName(),
-                    SizedBox(height: 8),
+                    SizedBox(height: size.height * 0.010),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -80,13 +83,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                                       Icons.favorite_border_outlined,
                                       color: Colors.white,
                                     ),
-                                    label: const Text(
+                                    label:  Text(
                                       "Agregar a Favoritos",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: "Brand-Bold",
                                         letterSpacing: .5,
-                                        fontSize: 18,
+                                        fontSize: size.height * 0.020,
                                       ),
                                     ),
                                     /* color: Colors.blueAccent[200], */
@@ -107,7 +110,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 : Row(
                                     children: [
                                       SizedBox(
-                                        width: 55,
+                                        width: size.width * 0.15,
                                         child: OutlinedButton(
                                           child: const Icon(Icons.remove),
                                           onPressed: () {
@@ -120,20 +123,20 @@ class _ProductDetailsState extends State<ProductDetails> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 8,
+                                        padding:  EdgeInsets.symmetric(
+                                          horizontal: size.width * 0.05,
                                         ),
                                         child: Text(
                                           quantity.toString(),
                                           style: TextStyle(
                                             fontFamily: "Brand-Regular",
-                                            fontSize: 16,
+                                            fontSize: size.height * 0.020,
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 55,
+                                        width: size.width * 0.15,
                                         child: OutlinedButton(
                                           child: Icon(Icons.add),
                                           onPressed: () {
@@ -158,8 +161,8 @@ class _ProductDetailsState extends State<ProductDetails> {
               ProductDetailsHelper(productModel: widget.productModel).divider(),
               Container(
                 padding: EdgeInsets.symmetric(
-                  horizontal: 14,
-                  vertical: 8,
+                  horizontal: size.width * 0.025,
+                  vertical: size.height * 0.013,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -167,12 +170,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                     Text(
                       "Valoración y comentarios",
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: size.height * 0.024,
                         fontFamily: "Brand-Bold",
                         letterSpacing: 0.5,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: size.height * 0.014),
                     Row(
                       children: [
                         Expanded(
@@ -208,12 +211,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                                               ? "0.0"
                                               : "${(userrating / snapshot.data!.docs.length).toStringAsFixed(1)}",
                                           style: TextStyle(
-                                            fontSize: 50,
+                                            fontSize: size.height *0.064,
                                           ),
                                         ),
                                         Icon(
                                           Icons.star_half,
-                                          size: 40,
+                                          size: size.height * 0.046,
                                           color: Colors.deepOrangeAccent[200],
                                         )
                                       ],
@@ -256,7 +259,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                           return AlertDialog(
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(30),
+                                                  BorderRadius.circular(size.height * 0.035),
                                             ),
                                             title: const Text(
                                               "Dé su opinión",
@@ -272,7 +275,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                   "Escriba su valiosa opinión sobre este servicio. Nos ayudará a mejorar nuestro servicio.",
                                                   textAlign: TextAlign.center,
                                                 ),
-                                                SizedBox(height: 4),
+                                                SizedBox(height: size.height *0.008),
                                                 TextFormField(
                                                   maxLines: 3,
                                                   controller: reviewController,
@@ -282,7 +285,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                     border: OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                              5),
+                                                              size.height *0.007),
                                                     ),
                                                   ),
                                                 ),
@@ -321,12 +324,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                             "Gracias por darnos su valiosa calificación y reseña");
                                                     Navigator.pop(context);
                                                   },
-                                                  child: const Text(
+                                                  child: Text(
                                                     "Enviar",
                                                     style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      fontSize: 16,
+                                                      fontSize: size.height *0.018,
                                                       color: Colors
                                                           .deepOrangeAccent,
                                                     ),
@@ -344,11 +347,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                               );
                             },
                             child: Container(
-                              height: 100,
+                              height: size.height * 0.115,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(size.height * 0.008),
                                 border: Border.all(
-                                  width: 2,
+                                  width: size.width *0.01,
                                   color: Colors.blueGrey,
                                 ),
                               ),
@@ -391,12 +394,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                                           return ListTile(
                                             leading: ClipRRect(
                                               borderRadius:
-                                                  BorderRadius.circular(50),
+                                                  BorderRadius.circular(size.height * 0.055),
                                               child: Image.network(
                                                 ratingAndReviewModel.userAvatar!,
                                                 fit: BoxFit.cover,
-                                                width: 50,
-                                                height: 50,
+                                                width: size.width * 0.13,
+                                                height: size.height * 0.055,
                                               ),
                                             ),
                                             title: Column(
@@ -405,8 +408,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                                               children: [
                                                 Text(
                                                   ratingAndReviewModel.userName!,
-                                                  style: const TextStyle(
-                                                    fontSize: 18,
+                                                  style: TextStyle(
+                                                    fontSize: size.height * 0.022,
                                                     letterSpacing: 0.5,
                                                     fontWeight: FontWeight.w600,
                                                     fontFamily: "Brand-Regular",
@@ -475,12 +478,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                                       return ListTile(
                                         leading: ClipRRect(
                                           borderRadius:
-                                              BorderRadius.circular(50),
+                                              BorderRadius.circular(size.height * 0.055),
                                           child: Image.network(
                                             ratingAndReviewModel.userAvatar!,
                                             fit: BoxFit.cover,
-                                            width: 50,
-                                            height: 50,
+                                            width: size.width * 0.1,
+                                            height: size.height * 0.055,
                                           ),
                                         ),
                                         title: Column(
@@ -489,8 +492,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                                           children: [
                                             Text(
                                               ratingAndReviewModel.userName!,
-                                              style: const TextStyle(
-                                                fontSize: 18,
+                                              style:  TextStyle(
+                                                fontSize: size.height * 0.021,
                                                 letterSpacing: 0.5,
                                                 fontWeight: FontWeight.w600,
                                                 fontFamily: "Brand-Regular",

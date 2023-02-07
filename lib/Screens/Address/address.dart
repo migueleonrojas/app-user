@@ -28,13 +28,15 @@ class Address extends StatefulWidget {
 class _AddressState extends State<Address> {
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         
-        title: const Text(
+        title: Text(
           "Global Oil",
           style: TextStyle(
-            fontSize: 20,
+            fontSize: size.height * 0.020,
             letterSpacing: 1.5,
             fontWeight: FontWeight.bold,
             fontFamily: "Brand-Regular",
@@ -56,16 +58,16 @@ class _AddressState extends State<Address> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Align(
+            Align(
               alignment:   Alignment.topCenter,
               child: Padding(
-                padding: EdgeInsets.all(8),
+                padding: EdgeInsets.all(size.height * 0.008),
                 child: Text(
                   "Seleccionar Dirección",
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    fontSize: size.height * 0.020,
                   ),
                 ),
               ),
@@ -83,7 +85,7 @@ class _AddressState extends State<Address> {
                     return !snapshot.hasData
                         ? Center(child: circularProgress())
                         : snapshot.data!.docs.length == 0
-                            ? noAddressCard()
+                            ? noAddressCard(context)
                             : ListView.builder(
                                 itemCount: snapshot.data!.docs.length,
                                 shrinkWrap: true,
@@ -96,6 +98,7 @@ class _AddressState extends State<Address> {
                                     totalPrice: widget.totalPrice,
                                     model: AddressModel.fromJson(
                                         (snapshot.data!.docs[index] as dynamic).data()),
+                                    context: context,
                                   );
                                 },
                               );
@@ -109,11 +112,12 @@ class _AddressState extends State<Address> {
     );
   }
 
-  noAddressCard() {
+  noAddressCard(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Card(
       color: Colors.blueGrey.withOpacity(0.5),
       child: Container(
-        height: 100,
+        height: size.height * 0.15,
         alignment: Alignment.center,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -124,7 +128,7 @@ class _AddressState extends State<Address> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white70,
-                fontSize: 16,
+                fontSize: size.height * 0.020,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -142,13 +146,14 @@ class AddressCard extends StatefulWidget {
   final int totalPrice;
   final int currentIndex;
   final int value;
+  final BuildContext context;
   const AddressCard({
     Key? key,
     required this.model,
     required this.addressId,
     required this.totalPrice,
     required this.currentIndex,
-    required this.value,
+    required this.value, required this.context,
   }) : super(key: key);
   @override
   _AddressCardState createState() => _AddressCardState();
@@ -157,6 +162,7 @@ class AddressCard extends StatefulWidget {
 class _AddressCardState extends State<AddressCard> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     double screenWidth = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: () {
@@ -182,7 +188,7 @@ class _AddressCardState extends State<AddressCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(size.height * 0.010),
                       width: screenWidth * 0.8,
                       child: Table(
                         children: [
@@ -296,20 +302,20 @@ class _AddressCardState extends State<AddressCard> {
             actions: <Widget>[
                GestureDetector(
                 onTap: () => Navigator.of(context).pop(true),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
+                child: Padding(
+                  padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.008),
                   child: Text("YES"),
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.016),
                GestureDetector(
                 onTap: () => Navigator.of(context).pop(false),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
+                child:  Padding(
+                  padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.008),
                   child: Text("NO"),
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.016 ),
             ],
           ),
         ) ??

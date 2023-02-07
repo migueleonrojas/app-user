@@ -265,7 +265,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       "to":number.toString(),
       "type": "template",
       "template": {
-        "name": "sample_shipping_confirmation",
+        "name": "sample_shipping_confirmation",//nombre de la plantilla = mensajederegistrootp
         "language": {
           "code": "en_US"
         },

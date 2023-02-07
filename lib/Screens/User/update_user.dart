@@ -64,6 +64,9 @@ class _UpdateUserState extends State<UpdateUser> {
 
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
     return CupertinoAlertDialog(
       title: const Text(
         "Actualizar Perfil",
@@ -128,7 +131,7 @@ class _UpdateUserState extends State<UpdateUser> {
                   takeImage(context);
                 },
                 child: Container(
-                  height: 140.0,
+                  height: size.height * 0.140,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -654,10 +657,11 @@ class _UpdateUserState extends State<UpdateUser> {
 
     capturePhotoWithCamera() async {
       Navigator.pop(context);
+      Size size = MediaQuery.of(context).size;
       final imageFile = await ImagePicker().pickImage(
         source: ImageSource.camera,
-        maxHeight: 680,
-        maxWidth: 970,
+        maxHeight: size.height * 0.69 /* 680 */,
+        maxWidth: size.width * 0.25/* 970 */,
       );
       setState(() {
         file = imageFile;
@@ -665,11 +669,12 @@ class _UpdateUserState extends State<UpdateUser> {
     }
 
     pickPhotoFromGallery() async {
+      Size size = MediaQuery.of(context).size;
       Navigator.pop(context);
       final imageFile = await ImagePicker().pickImage(
         source: ImageSource.gallery,
-        maxHeight: 680,
-        maxWidth: 970,
+        maxHeight: size.height * 0.69 /* 680 */,
+        maxWidth: size.width * 0.25/* 970 */,
       );
       setState(() {
         file = imageFile;

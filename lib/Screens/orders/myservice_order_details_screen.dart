@@ -23,7 +23,7 @@ class _MyServiceOrderDetailsScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: simpleAppBar(false, "Detalle de la orden"),
+      appBar: simpleAppBar(false, "Detalle de la orden", context),
       body: SingleChildScrollView(
         child: Column(
           children: [

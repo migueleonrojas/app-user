@@ -47,6 +47,8 @@ class _AddModelState extends State<AddModel> {
   @override
   Widget build(BuildContext context) {
 
+    Size size = MediaQuery.of(context).size;
+
     return AlertDialog(
 
       title: const Center(child: Text('Models')),
@@ -76,7 +78,7 @@ class _AddModelState extends State<AddModel> {
                 perspective: 0.010,
                 diameterRatio: 1.5,
                 squeeze: 0.8,
-                itemExtent: 40,
+                itemExtent: size.width * 0.1,
                 onSelectedItemChanged: (value) {
                   changeIndex(
                     value, 
@@ -102,10 +104,10 @@ class _AddModelState extends State<AddModel> {
                           child: Material(
                             color: widget.modelName == (snapshot.data!.docs[index] as dynamic).data()["name"] ? Colors.blue:Colors.transparent,
                             /* color: widget.selectedIndex == index ? Colors.blue : Colors.transparent, */
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(size.height * 0.035),
                             child: Container(
-                              width: 120,
-                              child: Center(child: Text((snapshot.data!.docs[index] as dynamic).data()["name"],style: const TextStyle(fontSize: 15)),),
+                              width: size.width * 0.35,
+                              child: Center(child: Text((snapshot.data!.docs[index] as dynamic).data()["name"],style: TextStyle(fontSize: size.height * 0.020)),),
                             ),
                           ),
                         ),

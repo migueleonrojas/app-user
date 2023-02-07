@@ -34,6 +34,8 @@ class _MyServiceOrderByVehicleScreenState extends State<MyServiceOrderByVehicleS
 
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -46,10 +48,10 @@ class _MyServiceOrderByVehicleScreenState extends State<MyServiceOrderByVehicleS
             }, 
             icon: const Icon(Icons.home))
         ],
-        title: const Text(
+        title: Text(
           "Mis ordenes de servicio",
           style: TextStyle(
-            fontSize: 20,
+            fontSize: size.height * 0.025,
             letterSpacing: 1.5,
             fontWeight: FontWeight.bold,
             fontFamily: "Brand-Regular",
@@ -130,6 +132,7 @@ class OrderBody extends StatelessWidget {
   final ScrollController scrollController;
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
@@ -142,7 +145,7 @@ class OrderBody extends StatelessWidget {
             children: [
 
               Padding(
-                padding: const EdgeInsets.all(10),
+                padding: EdgeInsets.all(size.height * 0.010),
                 child: Container(
                   child: Column(
                     children: [
@@ -150,19 +153,19 @@ class OrderBody extends StatelessWidget {
                         text: TextSpan(
                           children: [
                             
-                            const TextSpan(
+                            TextSpan(
                               text: "Número: ",
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: size.height * 0.022,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.deepOrangeAccent,
                               ),
                             ),
                             TextSpan(
                               text: (index + 1 ).toString(),
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 18,
+                                fontSize: size.height * 0.022,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -173,19 +176,19 @@ class OrderBody extends StatelessWidget {
                         text: TextSpan(
                           children: [
                             
-                            const TextSpan(
+                            TextSpan(
                               text: "ID de la Orden: ",
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: size.height * 0.022,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.deepOrangeAccent,
                               ),
                             ),
                             TextSpan(
                               text: data[index]['orderId'],
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 18,
+                                fontSize: size.height * 0.022,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -204,25 +207,25 @@ class OrderBody extends StatelessWidget {
                       // ),
                       Text(
                         "Vehiculo: ${vehicleModel.brand}, ${vehicleModel.model} ",
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.black,
-                          fontSize: 18,
+                          fontSize: size.height * 0.022,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       Text(
                         "Servicio: ${data[index]['serviceName']}",
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.black,
-                          fontSize: 18,
+                          fontSize: size.height * 0.022,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       Text(
                         "Precio Total: ${data[index]['totalPrice']}\$.",                        
-                        style: const   TextStyle(
+                        style: TextStyle(
                           color: Colors.black,
-                          fontSize: 18,
+                          fontSize: size.height * 0.022,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -265,7 +268,7 @@ class OrderBody extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 10,
+                height: size.height * 0.014,
                 width: double.infinity,
                 color: Colors.blueGrey[50],
               ),

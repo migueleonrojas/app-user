@@ -47,6 +47,8 @@ class _AddYearState extends State<AddYear> {
   @override
   Widget build(BuildContext context) {
 
+    Size size = MediaQuery.of(context).size;
+
     return AlertDialog(
       title: const Center(child: Text('Años')),
       content:
@@ -76,7 +78,7 @@ class _AddYearState extends State<AddYear> {
                 perspective: 0.010,
                 diameterRatio: 1.5,
                 squeeze: 0.8,
-                itemExtent: 40,
+                itemExtent: size.width * 0.1,
                 onSelectedItemChanged: (value) {
                   changeIndex(value, (snapshot.data!.docs[value] as dynamic).data()["year"]);
                 },
@@ -97,8 +99,8 @@ class _AddYearState extends State<AddYear> {
                             /* color: widget.selectedIndex == index ? Colors.blue : Colors.transparent, */
                             borderRadius: BorderRadius.circular(30),
                             child: Container(
-                              width: 120,
-                              child: Center(child: Text((snapshot.data!.docs[index] as dynamic).data()["year"].toString(),style: TextStyle(fontSize: 15)),),
+                              width: size.width * 0.35,
+                              child: Center(child: Text((snapshot.data!.docs[index] as dynamic).data()["year"].toString(),style: TextStyle(fontSize: size.height * 0.020)),),
                             ),
                           ),
                         ),

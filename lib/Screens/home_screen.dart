@@ -28,19 +28,22 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>  {
   
+  
 
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
         elevation: 0,
         backgroundColor: Colors.white,
-        title: const Text(
+        title:  Text(
           "GlobalOil",
           style: TextStyle(
             color: Colors.black,
-            fontSize: 20,
+            fontSize: size.height * 0.028,
             letterSpacing: 1.5,
             fontWeight: FontWeight.bold,
             fontFamily: "Brand-Regular",
@@ -69,23 +72,23 @@ class _HomeScreenState extends State<HomeScreen>  {
               builder: (context, snapshot) {
                 if (!snapshot.hasData) return Container();
                 return Positioned(
-                  top: 3,
-                  left: 3,
+                  top: size.height * 0.005,
+                  left: size.height * 0.005,
                   child: Stack(
                     children: [
                       Container(
-                        height: 20,
-                        width: 20,
+                        height: size.height * 0.025,
+                        width: size.height * 0.025,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(size.height * 0.025,),
                             color: Colors.red,
                             border: Border.all(color: Colors.orangeAccent)),
                       ),
                       (snapshot.data!.docs.length < 10)
                           ? Positioned(
-                              top: 2,
-                              bottom: 4,
-                              left: 6,
+                              top: size.height * 0.005,
+                              bottom: size.height * 0.005,
+                              left: size.height * 0.0080,
                               child: Text(
                                 snapshot.data!.docs.length.toString(),
                                 style: const TextStyle(
@@ -95,14 +98,14 @@ class _HomeScreenState extends State<HomeScreen>  {
                               ),
                             )
                           : Positioned(
-                              top: 3,
-                              bottom: 2,
-                              left: 3,
+                              top: size.height * 0.005,
+                              bottom: size.height * 0.005,
+                              left: size.height * 0.0080,
                               child: Text(
                                 snapshot.data!.docs.length.toString(),
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 12.0,
+                                  fontSize: size.height * 0.016,
                                 ),
                               ),
                             ),
@@ -190,12 +193,10 @@ class _HomeScreenState extends State<HomeScreen>  {
           children: [
             
             LoginHelper().loginLog(context),
-            
             HomeHelper().mainButtons(context),
-            const SizedBox(height: 20,),
+            SizedBox(height: size.height * 0.025,),
             
-            const TimeLineVehicles()
-            
+            const TimeLineVehicles(),
             /* HomeHelper().homeCarousel(context),
             HomeHelper().categoriesCard(context),
             HomeHelper().uptoFiftyPercentOFFCard(),

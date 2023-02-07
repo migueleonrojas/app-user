@@ -19,19 +19,20 @@ class VerticalCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int quantity = 1;
+    Size size = MediaQuery.of(context).size;
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 10,
+            padding:  EdgeInsets.symmetric(
+              horizontal: size.width * 0.030,
+              vertical: size.height * 0.010,
             ),
             child: Text(
               cardTitle!,
-              style: const TextStyle(
-                fontSize: 20,
+              style:  TextStyle(
+                fontSize: size.height * 0.020,
                 fontFamily: "Brand-Bold",
                 letterSpacing: 0.5,
               ),
@@ -44,7 +45,7 @@ class VerticalCard extends StatelessWidget {
                 return Text('');
               }
               return Container(
-                height: 300,
+                height: size.height * 0.350,
                 child: ListView.builder(
                   physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
@@ -65,24 +66,24 @@ class VerticalCard extends StatelessWidget {
                           Card(
                             elevation: 2,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(size.height * 0.010),
                             ),
                             // margin: EdgeInsets.all(8),
                             child: Container(
-                              height: 290,
-                              width: 200,
+                              height: size.height * 0.350,
+                              width: size.width * 0.500,
                               child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
                                   Image.network(
                                     productModel.productImgUrl!,
-                                    width: 190,
-                                    height: 160,
+                                    width: size.width * 0.350,
+                                    height: size.height * 0.200,
                                     fit: BoxFit.contain,
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.all(5.0),
+                                    padding:  EdgeInsets.all(size.height * 0.0050),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -94,22 +95,22 @@ class VerticalCard extends StatelessWidget {
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: size.height * 0.020,
                                             fontWeight: FontWeight.w800,
                                           ),
                                         ),
-                                        SizedBox(height: 5),
+                                        SizedBox(height: size.height * 0.005),
                                         (productModel.offervalue! < 1)
                                             ? Padding(
                                                 padding:
-                                                    const EdgeInsets.symmetric(
-                                                  vertical: 5,
+                                                    EdgeInsets.symmetric(
+                                                  vertical: size.height * 0.005,
                                                 ),
                                                 child: Text(
-                                                  "\৳${productModel.orginalprice}",
+                                                  "\$${productModel.orginalprice}",
                                                   style: TextStyle(
                                                     fontFamily: "Brand-Regular",
-                                                    fontSize: 16,
+                                                    fontSize: size.height * 0.020,
                                                     color:
                                                         Colors.deepOrangeAccent,
                                                     fontWeight: FontWeight.w800,
@@ -121,11 +122,11 @@ class VerticalCard extends StatelessWidget {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    "\৳${productModel.newprice}",
+                                                    "\$${productModel.newprice}",
                                                     style: TextStyle(
                                                       fontFamily:
                                                           "Brand-Regular",
-                                                      fontSize: 16,
+                                                      fontSize: size.height * 0.020,
                                                       color: Colors
                                                           .deepOrangeAccent,
                                                       fontWeight:
@@ -140,11 +141,11 @@ class VerticalCard extends StatelessWidget {
                                                       Row(
                                                         children: [
                                                           Text(
-                                                            "\৳${productModel.orginalprice}",
+                                                            "\$${productModel.orginalprice}",
                                                             style: TextStyle(
                                                               fontFamily:
                                                                   "Brand-Regular",
-                                                              fontSize: 16,
+                                                              fontSize: size.height * 0.020,
                                                               decoration:
                                                                   TextDecoration
                                                                       .lineThrough,
@@ -153,13 +154,13 @@ class VerticalCard extends StatelessWidget {
                                                                       .w600,
                                                             ),
                                                           ),
-                                                          SizedBox(width: 5),
+                                                          SizedBox(width: size.width * 0.005),
                                                           Text(
                                                             '- ${productModel.offervalue}%',
                                                             style: TextStyle(
                                                               fontFamily:
                                                                   "Brand-Regular",
-                                                              fontSize: 16,
+                                                              fontSize: size.height * 0.020,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w600,
@@ -182,8 +183,8 @@ class VerticalCard extends StatelessWidget {
                             top: 0,
                             right: 0,
                             child: Container(
-                              height: 40,
-                              width: 40,
+                              height: size.height * 0.050,
+                              width: size.width * 0.12,
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 boxShadow: [
@@ -240,12 +241,12 @@ class VerticalCard extends StatelessWidget {
                             bottom: 3,
                             right: 3,
                             child: Container(
-                              height: 40,
+                              height: size.height * 0.050,
                               decoration: BoxDecoration(
                                 color: Colors.deepOrangeAccent,
                                 borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10),
+                                  topLeft: Radius.circular(size.width * 0.035),
+                                  bottomRight: Radius.circular(size.width * 0.035),
                                 ),
                               ),
                               child: StreamBuilder<QuerySnapshot>(
@@ -263,12 +264,12 @@ class VerticalCard extends StatelessWidget {
                                       icon: (snapshot.data!.docs.length == 1)
                                           ? Icon(
                                               Icons.shopping_bag,
-                                              size: 25,
+                                              size: size.height * 0.030,
                                               color: Colors.white,
                                             )
                                           : Icon(
                                               Icons.add_shopping_cart_outlined,
-                                              size: 25,
+                                              size: size.height * 0.030,
                                               color: Colors.white,
                                             ),
                                       onPressed: () {

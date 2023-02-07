@@ -44,6 +44,7 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Drawer(
       
       child: SafeArea(
@@ -51,7 +52,7 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
           
           children: [
             Container(
-              padding: const EdgeInsets.only(top: 20, bottom: 10),
+              padding:  EdgeInsets.only(top: size.height * 0.020, bottom: size.height * 0.015),
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Colors.deepOrangeAccent, Colors.orange],
@@ -64,11 +65,11 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
               child: Column(
                 children: [
                   Material(
-                    borderRadius: const BorderRadius.all(Radius.circular(80)),
+                    borderRadius:  BorderRadius.all(Radius.circular(size.height * 0.080)),
                     elevation: 8.0,
                     child: Container(
-                      width: 100,
-                      height: 100,
+                      width: size.width * 0.335,
+                      height: size.height * 0.15,
                       child: CircleAvatar(
                         backgroundImage: NetworkImage(
                           urlAvatar ?? '',
@@ -76,19 +77,19 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: size.height * 0.015),
                   Text(
                     AutoParts.sharedPreferences!.getString(AutoParts.userName) ?? '',
-                    style: const TextStyle(
-                      fontSize: 20,
+                    style: TextStyle(
+                      fontSize: size.height * 0.020,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
                   Text(
                     AutoParts.sharedPreferences!.getString(AutoParts.userEmail) ?? '',
-                    style: const TextStyle(
-                      fontSize: 16,
+                    style: TextStyle(
+                      fontSize: size.height * 0.020,
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
                     ),
@@ -397,6 +398,14 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
                       
                       var connectivityResult =
                           await Connectivity().checkConnectivity();
+                      if(connectivityResult == ConnectivityResult.none){
+                        return showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return NoInternetConnectionAlertDialog();
+                          },
+                        );
+                      }
                       if (connectivityResult != ConnectivityResult.mobile &&
                           connectivityResult != ConnectivityResult.wifi) {
                         return showDialog(
@@ -444,12 +453,12 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
                 onTap: () => Navigator.of(context).pop(true),
                 child: Text("YES"),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.015 ),
               GestureDetector(
                 onTap: () => Navigator.of(context).pop(false),
                 child: Text("NO"),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.015 ),
             ],
           ),
         ) ??

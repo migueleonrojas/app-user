@@ -10,6 +10,7 @@ class ModalAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return AlertDialog(
       title: Text(
         title,
@@ -18,8 +19,8 @@ class ModalAlertDialog extends StatelessWidget {
       actions: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-            backgroundColor: Color.fromARGB(255, 3, 3, 247),
+            padding: EdgeInsets.symmetric(vertical: size.height * 0.025, horizontal: size.width * 0.1),
+            backgroundColor: const Color.fromARGB(255, 3, 3, 247),
             shape: const StadiumBorder()
           ),
           onPressed: () {

@@ -12,6 +12,7 @@ class ProductOnlyDetails extends StatelessWidget {
       appBar: simpleAppBar(
         false,
         "Detalles de producto",
+        context
       ),
       body: SingleChildScrollView(
         child: Container(

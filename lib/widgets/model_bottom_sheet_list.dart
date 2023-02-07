@@ -41,19 +41,19 @@ class ModalBottomSheetListVehicle{
                     children: [
                       Divider(
                         color: Colors.black45,
-                        height: 15,
+                        height: size.height * 0.021,
                         thickness: 3,
                         indent: size.width * 0.45,
                         endIndent: size.width * 0.45,
                       ),
-                      const SizedBox(height: 5,),
-                      const Text(
+                      SizedBox(height:size.height * 0.007,),
+                      Text(
                         'Selecciona un vehiculo',                    
                         style: TextStyle(
-                          fontSize: 20
+                          fontSize: size.height * 0.027
                         ),
                       ),
-                      const SizedBox(height: 20,),
+                      SizedBox(height: size.height * 0.027,),
                     ],
                   ),
                   Expanded(
@@ -68,7 +68,7 @@ class ModalBottomSheetListVehicle{
                           leading: FadeInImage(
                             placeholder: const AssetImage('assets/no-image/no-image.jpg'),
                             image: NetworkImage((snapshot.data as dynamic)[index].logo!),
-                            width: 20,
+                            width:  size.width * 0.07,
                             fit:BoxFit.contain
                           ),
                           title: Text('Marca: ${(snapshot.data as dynamic)[index].brand}, Modelo: ${(snapshot.data as dynamic)[index].model!}'),

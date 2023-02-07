@@ -10,6 +10,7 @@ class CategoryTile extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () async {
         var connectivityResult = await Connectivity().checkConnectivity();
@@ -43,32 +44,32 @@ class CategoryTile extends StatelessWidget {
         );
       },
       child: Container(
-        margin: EdgeInsets.only(right: 12),
+        margin: EdgeInsets.only(right: size.width * 0.015),
         child: Stack(
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(6),
               child: Image.asset(
                 imageUrl,
-                width: 120,
-                height: 90,
+                width: size.width * 0.33,
+                height: size.height * 0.20,
                 fit: BoxFit.cover,
               ),
             ),
             Container(
               alignment: Alignment.center,
-              width: 120,
-              height: 90,
+              width: size.width * 0.33,
+              height: size.height * 0.20,
               decoration: BoxDecoration(
                 color: Colors.black45,
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: BorderRadius.circular(size.height * 0.01),
               ),
               child: Text(
                 categoryName,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 16,
+                  fontSize: size.height * 0.020,
                   fontWeight: FontWeight.w500,
                 ),
               ),

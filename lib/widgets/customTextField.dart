@@ -23,10 +23,12 @@ class CustomTextField extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.symmetric(horizontal:16),
+      margin: EdgeInsets.symmetric(horizontal:size.width * 0.055),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(size.height * 0.014),
       ),
       child: TextFormField(
         showCursor: showCursor,
@@ -36,7 +38,7 @@ class CustomTextField extends StatelessWidget {
         decoration: InputDecoration(
           labelText: labelText,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
+            borderRadius: BorderRadius.circular(size.height * 0.011),
           ),
           prefixIcon: Icon(
             data,

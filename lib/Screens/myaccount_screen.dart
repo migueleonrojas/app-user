@@ -51,11 +51,11 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
         },
         child: Scaffold(
           
-          appBar: simpleAppBar(false, 'Mi Cuenta'),
+          appBar: simpleAppBar(false, 'Mi Cuenta', context),
           
           bottomNavigationBar: BottomAppBar(
             child: SizedBox(
-              height: 40,
+              height: size.height * 0.064,
               child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection("users")
@@ -163,13 +163,13 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                             }); */
                       },
                       /* color: Theme.of(context).accentColor, */
-                      child: const Text(
+                      child: Text(
                         "Actualizar Perfil",
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: "Brand-Bold",
                           letterSpacing: 1.5,
-                          fontSize: 18,
+                          fontSize: size.height * 0.022,
                         ),
                       ),
                     );
@@ -195,15 +195,15 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(height: 20),
+                            SizedBox(height: size.height * 0.022),
                             Center(
                               child: Material(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(80)),
+                                    BorderRadius.all(Radius.circular(size.height * 0.096)),
                                 elevation: 5.0,
                                 child: Container(
-                                  width: 140,
-                                  height: 140,
+                                  width: size.width * 0.385,
+                                  height: size.height * 0.174,
                                   child: CircleAvatar(
                                     radius: size.width * 0.15,
                                     backgroundColor: Colors.deepOrange,
@@ -218,19 +218,19 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 10),
+                            SizedBox(height: size.height * 0.014),
                             Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 14,
-                                vertical: 10,
+                              padding:  EdgeInsets.symmetric(
+                                horizontal: size.width * 0.09,
+                                vertical: size.height * 0.016,
                               ),
                               width: double.infinity,
                               child: Padding(
-                                padding: const EdgeInsets.all(4.0),
+                                padding:  EdgeInsets.all(size.height * 0.006),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const SizedBox(height: 10),
+                                    SizedBox(height: size.height * 0.006),
                                     ProfileText(
                                       title: "Nombre: ",
                                       informationtext: (snapshot.data!.docs[index] as dynamic)
@@ -238,7 +238,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                       // informationtext: AutoParts.sharedPreferences
                                       //     .getString(AutoParts.userName),
                                     ),
-                                    const SizedBox(height: 5),
+                                    SizedBox(height: size.height * 0.006),
                                     ProfileText(
                                       title: "Correo: ",
                                       informationtext: (snapshot.data!.docs[index] as dynamic)
@@ -246,7 +246,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                       // informationtext: AutoParts.sharedPreferences
                                       //     .getString(AutoParts.userEmail),
                                     ),
-                                    const SizedBox(height: 5),
+                                    SizedBox(height: size.height * 0.006),
                                     ProfileText(
                                       title: "Teléfono: ",
                                       informationtext: (snapshot.data!.docs[index] as dynamic)
@@ -254,7 +254,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                       // informationtext: AutoParts.sharedPreferences
                                       //     .getString(AutoParts.userPhone),
                                     ),
-                                    SizedBox(height: 5),
+                                    SizedBox(height: size.height * 0.006),
                                     ProfileText(
                                       title: "Dirección: ",
                                       informationtext: (snapshot.data!.docs[index] as dynamic)
@@ -262,7 +262,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                       // informationtext: AutoParts.sharedPreferences
                                       //     .getString(AutoParts.userAddress),
                                     ),
-                                    SizedBox(height: 10),
+                                    SizedBox(height: size.height * 0.006),
                                   ],
                                 ),
                               ),

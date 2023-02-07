@@ -57,6 +57,8 @@ class _AddBrandState extends State<AddBrand> {
   @override
   Widget build(BuildContext context) {
 
+    Size size = MediaQuery.of(context).size;
+
     return AlertDialog(
       title: const Center(child: Text('Marca')),
       content:
@@ -85,7 +87,7 @@ class _AddBrandState extends State<AddBrand> {
                 perspective: 0.010,
                 diameterRatio: 1.5,
                 squeeze: 0.8,
-                itemExtent: 40,
+                itemExtent: size.width * 0.1,
                 onSelectedItemChanged: (value) {
                 
                   changeIndex(
@@ -106,8 +108,8 @@ class _AddBrandState extends State<AddBrand> {
                         Image.network(
                           (snapshot.data!.docs[index] as dynamic).data()["logo"],
                           fit: BoxFit.scaleDown,
-                          width: 40,
-                          height: 30,
+                          width: size.width * 0.1,
+                          height: size.height * 0.35,
                         ),
                         GestureDetector(
                           onTap: () {
@@ -121,10 +123,10 @@ class _AddBrandState extends State<AddBrand> {
                           child: Material(
                             color: widget.brandName == (snapshot.data!.docs[index] as dynamic).data()["name"] ? Colors.blue:Colors.transparent,
                             
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(size.height * 0.035),
                             child: Container(
-                              width: 120,
-                              child: Center(child: Text((snapshot.data!.docs[index] as dynamic).data()["name"],style: TextStyle(fontSize: 15)),),
+                              width: size.width * 0.35,
+                              child: Center(child: Text((snapshot.data!.docs[index] as dynamic).data()["name"],style: TextStyle(fontSize: size.height * 0.020)),),
                             ),
                           ),
                         ),

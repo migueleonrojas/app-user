@@ -21,6 +21,7 @@ class _ServiceReviewsState extends State<ServiceReviews> {
       appBar: simpleAppBar(
         false,
         "Rating & Reviews",
+        context
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance

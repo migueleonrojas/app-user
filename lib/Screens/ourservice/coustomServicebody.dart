@@ -48,6 +48,9 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
   }
 
   Future pickDate(BuildContext context) async {
+
+    Size size = MediaQuery.of(context).size;
+
     final initialDate = DateTime.now();
     final newDate = await showDatePicker(
       cancelText: 'Cancelar',
@@ -79,6 +82,9 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
 
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
     return SingleChildScrollView(
       child: Container(
         child: StreamBuilder<QuerySnapshot>(
@@ -112,7 +118,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height: 100,
+                        height: size.height * 0.125,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -120,12 +126,12 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                               child: Text(
                                 serviceModel.serviceName!,
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   
                                   letterSpacing: 1.5,
                                   fontFamily: "Brand-Regular",
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 22,
+                                  fontSize: size.height * 0.025,
                                 ),
                               ),
                             ),
@@ -146,19 +152,19 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                               children: [
                                 Text(
                                   'Costo: ${serviceModel.newprice}',
-                                  style: const TextStyle(
+                                  style:  TextStyle(
                                     letterSpacing: 1,
                                     fontFamily: "Brand-Regular",
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 20,
+                                    fontSize: size.height * 0.025,
                                   ),
                                 ),
-                                SizedBox(width: 5,),
+                                SizedBox(width: size.width * 0.03,),
                                 Container(
                                   
                                   /* color: Colors.blue, */
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(30),
+                                    borderRadius: BorderRadius.circular(size.height * 0.035),
                                     color: Colors.transparent,
                                     border: Border.all(color: Colors.blueAccent),
                                     
@@ -222,14 +228,20 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                       Stack(
                         children: [
                           Container(
-                            height: 200,
+                            height: size.height * 0.230,
                             width: double.infinity,
-                            decoration: BoxDecoration(
+                            child: FadeInImage(
+                              placeholder: const AssetImage('assets/no-image/no-image.jpg'),
+                              image: NetworkImage(serviceModel.serviceImgUrl!),
+                              width: double.infinity,
+                              fit:BoxFit.contain
+                            ),
+                            /* decoration: BoxDecoration(
                               image: DecorationImage(
                                 image: NetworkImage(serviceModel.serviceImgUrl!),
                                 fit: BoxFit.cover,
                               ),
-                            ),
+                            ), */
                           ),
                           /* Container(
                             height: 200,
@@ -387,10 +399,10 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                           ? Card(
                               elevation: 3,
                               child: Container(
-                                  height: 300,
+                                  height: size.height * 0.45,
                                   width: double.infinity,
                                   child: Padding(
-                                    padding: const EdgeInsets.all(14.0),
+                                    padding: EdgeInsets.all(size.height * 0.022),
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -403,7 +415,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        const SizedBox(height: 10),
+                                        SizedBox(height: size.height * 0.014),
                                         Text(
                                           'Va a solicitar $quantity de ${serviceModel.serviceName!}',
                                           style: const TextStyle(
@@ -416,61 +428,14 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                               " necesita?",
                                           maxLines: 3,
                                         ), */
-                                        const SizedBox(height: 5),
-                                        Row(
-                                          children: [
-                                            /* Expanded(
-                                              child: SizedBox(
-                                                width: 55,
-                                                child: OutlinedButton(
-                                                  child: const Icon(Icons.remove),
-                                                  onPressed: () {
-                                                    if (quantity > 1) {
-                                                      setState(() {
-                                                        quantity--;
-                                                      });
-                                                    }
-                                                  },
-                                                ),
-                                              ),
-                                            ), */
-                                            /* Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                horizontal: 30,
-                                              ),
-                                              child: Text(
-                                                quantity.toString(),
-                                                style: const TextStyle(
-                                                  fontFamily: "Brand-Regular",
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                            ), */
-                                            /* Expanded(
-                                              child: SizedBox(
-                                                width: 55,
-                                                child: OutlinedButton(
-                                                  child: const Icon(Icons.add),
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      quantity++;
-                                                    });
-                                                  },
-                                                ),
-                                              ),
-                                            ), */
-                                          ],
-                                        ),
-                                        SizedBox(height: 5),
+                                        SizedBox(height: size.height * 0.014),                                        
                                         const Text(
                                           "Seleccione su horario para la cita",
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        const SizedBox(height: 10),
+                                        SizedBox(height: size.height * 0.014),
                                         SizedBox(
                                           width: double.infinity,
                                           child: Align(
@@ -493,11 +458,11 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                           InputDecoration(
                                             hintText: "Observaciones",
                                             border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(5),
+                                              borderRadius: BorderRadius.circular(size.height * 0.008),
                                             ),
                                           ),
                                         ),
-                                        const SizedBox(height: 20),
+                                        SizedBox(height: size.height * 0.024),
                                         Center(
                                           child: (!isContinue) 
                                             ? AnimatedConfirmButton(
@@ -539,28 +504,28 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                             initialText: "Solicitar",
                                             finalText: "Listo",
                                             iconData: Icons.check,
-                                            iconSize: 32.0,
+                                            iconSize: size.height * 0.036,
                                             
                                             buttonStyle: ConfirmButtonStyle(
                                               primaryColor: const Color.fromARGB(255, 3, 3, 247),
                                               secondaryColor: Colors.white,
                                               elevation: 10.0,
-                                              initialTextStyle: const TextStyle(
-                                                fontSize: 22.0,
+                                              initialTextStyle: TextStyle(
+                                                fontSize: size.height * 0.026,
                                                 color: Colors.white,
                                               ),
-                                              finalTextStyle: const TextStyle(
-                                                fontSize: 22.0,
-                                                color: Color.fromARGB(255, 3, 3, 247),
+                                              finalTextStyle: TextStyle(
+                                                fontSize: size.height * 0.026,
+                                                color: const Color.fromARGB(255, 3, 3, 247),
                                               ),
-                                              borderRadius: 30.0,
+                                              borderRadius: size.height * 0.034,
                                             ),
                                           )
                                           :ElevatedButton(
                                             style: ElevatedButton.styleFrom(
                                               backgroundColor: Color.fromARGB(255, 3, 3, 247),
                                               shape: const StadiumBorder(),
-                                              padding: EdgeInsets.symmetric(vertical: 18, horizontal: 75)                                            ),
+                                              padding: EdgeInsets.symmetric(vertical: size.height * 0.022, horizontal: size.width * 0.2)                                            ),
                                             child: Text('Siguiente'),
                                             onPressed: () {
 
@@ -585,7 +550,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                   )),
                             )
                           : Container(),
-                      const SizedBox(height: 10),
+                      SizedBox(height: size.height * 0.014),
                       /* (isContinue)
                           ? Center(
                               child: Container(
@@ -688,21 +653,21 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                       initialText: "Eliminar",
                                       finalText: "Eliminar Servicio",
                                       iconData: Icons.check,
-                                      iconSize: 32.0,
+                                      iconSize: size.height * 0.036,
                                       buttonStyle: ConfirmButtonStyle(
                                         primaryColor:
                                             Colors.deepOrangeAccent,
                                         secondaryColor: Colors.white,
                                         elevation: 10.0,
-                                        initialTextStyle: const TextStyle(
-                                          fontSize: 22.0,
+                                        initialTextStyle:  TextStyle(
+                                          fontSize: size.height * 0.026,
                                           color: Colors.white,
                                         ),
                                         finalTextStyle: TextStyle(
-                                          fontSize: 18.0,
+                                          fontSize: size.height * 0.023,
                                           color: Colors.deepOrangeAccent[200],
                                         ),
-                                        borderRadius: 10.0,
+                                        borderRadius: size.height * 0.014,
                                       ),
                                     ),
                                   );
@@ -1121,7 +1086,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                       //---------------------Note-------------------//
                       Padding(
 
-                        padding: const EdgeInsets.all(10),
+                        padding:  EdgeInsets.all(size.height * 0.014),
                         child: Row(
                           children: [
                             Text(
@@ -1133,13 +1098,13 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                 decoration: TextDecoration.underline,
                                 fontFamily: "Brand-Regular",
                                 fontWeight: FontWeight.w600,
-                                fontSize: 14,
+                                fontSize: size.height * 0.016,
                               ),
                             ),
-                            SizedBox(width: 10,),
+                            SizedBox(width: size.height * 0.014,),
                             Container(
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
+                                borderRadius: BorderRadius.circular(size.height * 0.036),
                                 color: Colors.transparent,
                                 border: Border.all(color: Colors.blueAccent),
                                     

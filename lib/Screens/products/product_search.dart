@@ -92,6 +92,9 @@ class _ProductSearchState extends State<ProductSearch> {
 
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
     int quantity = 1;
     return Scaffold(
       appBar: AppBar(
@@ -102,28 +105,28 @@ class _ProductSearchState extends State<ProductSearch> {
               searchProductController;
             });
           },
-          style: const TextStyle(
+          style: TextStyle(
             color: Colors.black,
-            fontSize: 18,
+            fontSize: size.height * 0.022,
             fontWeight: FontWeight.w600,
           ),
           controller: searchProductController,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(
-              vertical: 15.0,
+              vertical: size.width * 0.10,
               horizontal: 0,
             ),
             hintText: 'Buscar productos...',
             hintStyle: TextStyle(
               color: Colors.blueGrey,
-              fontSize: 18,
+              fontSize: size.height * 0.022/* 18 */,
               fontWeight: FontWeight.w600,
             ),
             border: InputBorder.none,
           ),
         ),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.black,
           ),
@@ -133,7 +136,7 @@ class _ProductSearchState extends State<ProductSearch> {
         ),
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.clear,
               color: Colors.black,
             ),
@@ -186,13 +189,16 @@ class SearchProductGridCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
     return SingleChildScrollView(
       child: Container(
         child: GridView.builder(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           itemCount: _productResultList.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 2.0,
             mainAxisSpacing: 2.0,
@@ -219,12 +225,12 @@ class SearchProductGridCard extends StatelessWidget {
                         children: [
                           Image.network(
                             productModel.productImgUrl!,
-                            width: 150,
-                            height: 100,
+                            width: size.width * 0.3,
+                            height: size.height * 0.11/* 100 */,
                           ),
-                          SizedBox(height: 5),
+                          SizedBox(height: size.height * 0.008),
                           Padding(
-                            padding: const EdgeInsets.all(4.0),
+                            padding: EdgeInsets.all(size.height * 0.006),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -232,21 +238,21 @@ class SearchProductGridCard extends StatelessWidget {
                                   productModel.productName!,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontFamily: "Brand-Regular",
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
                                 Row(
                                   children: [
-                                    Icon(Icons.branding_watermark_outlined),
-                                    SizedBox(width: 5),
+                                    const Icon(Icons.branding_watermark_outlined),
+                                    SizedBox(width: size.width * 0.02),
                                     Flexible(
                                       child: Text(
                                         productModel.brandName!,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontFamily: "Brand-Regular",
                                           fontWeight: FontWeight.w600,
                                         ),
@@ -257,12 +263,12 @@ class SearchProductGridCard extends StatelessWidget {
                                 (productModel.offervalue! < 1)
                                     ? Padding(
                                         padding:
-                                            const EdgeInsets.only(bottom: 10),
+                                             EdgeInsets.only(bottom: size.height * 0.015),
                                         child: Text(
                                           "\$${productModel.orginalprice}",
                                           style: TextStyle(
                                             fontFamily: "Brand-Regular",
-                                            fontSize: 16,
+                                            fontSize: size.height * 0.020,
                                             color: Colors.deepOrangeAccent,
                                             fontWeight: FontWeight.w800,
                                           ),
@@ -276,7 +282,7 @@ class SearchProductGridCard extends StatelessWidget {
                                             "\$${productModel.newprice}",
                                             style: TextStyle(
                                               fontFamily: "Brand-Regular",
-                                              fontSize: 16,
+                                              fontSize: size.height * 0.020,
                                               color: Colors.deepOrangeAccent,
                                               fontWeight: FontWeight.w800,
                                             ),
@@ -287,18 +293,18 @@ class SearchProductGridCard extends StatelessWidget {
                                                 "\$${productModel.orginalprice}",
                                                 style: TextStyle(
                                                   fontFamily: "Brand-Regular",
-                                                  fontSize: 16,
+                                                  fontSize: size.height * 0.020,
                                                   decoration: TextDecoration
                                                       .lineThrough,
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                               ),
-                                              SizedBox(width: 5),
+                                              SizedBox(width: size.width * 0.02),
                                               Text(
                                                 '- ${productModel.offervalue}%',
                                                 style: TextStyle(
                                                   fontFamily: "Brand-Regular",
-                                                  fontSize: 16,
+                                                  fontSize: size.height * 0.020,
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                               ),
@@ -317,19 +323,19 @@ class SearchProductGridCard extends StatelessWidget {
                     top: 0,
                     right: 0,
                     child: Container(
-                      height: 40,
-                      width: 40,
+                      height: size.height * 0.048/* 40 */,
+                      width: size.width * 0.115/* 40 */,
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
+                        boxShadow:  const [
+                           BoxShadow(
                             color: Colors.grey,
                             offset: Offset(1, 1),
                             blurRadius: 3,
                             spreadRadius: -2,
                           ),
                         ],
-                        borderRadius: BorderRadius.circular(50),
+                        borderRadius: BorderRadius.circular(size.height * 0.058),
                       ),
                       child: StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance
@@ -345,11 +351,11 @@ class SearchProductGridCard extends StatelessWidget {
                             return Center(
                               child: IconButton(
                                 icon: (snapshot.data!.docs.length == 1)
-                                    ? Icon(
+                                    ? const Icon(
                                         Icons.favorite,
                                         color: Colors.deepOrangeAccent,
                                       )
-                                    : Icon(
+                                    : const Icon(
                                         Icons.favorite_border_rounded,
                                         color: Colors.deepOrangeAccent,
                                       ),
@@ -371,15 +377,15 @@ class SearchProductGridCard extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    bottom: 1,
-                    right: 1,
+                    bottom: size.height * 0.004,
+                    right: size.width * 0.012,
                     child: Container(
-                      height: 40,
+                      height: size.height * 0.060,
                       decoration: BoxDecoration(
                         color: Colors.deepOrangeAccent,
                         borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
+                          topLeft: Radius.circular(size.width * 0.05/* 10 */),
+                          bottomRight: Radius.circular(size.width * 0.015),
                         ),
                       ),
                       child: StreamBuilder<QuerySnapshot>(
@@ -397,12 +403,12 @@ class SearchProductGridCard extends StatelessWidget {
                               icon: (snapshot.data!.docs.length == 1)
                                   ? Icon(
                                       Icons.shopping_bag,
-                                      size: 25,
+                                      size: size.height * 0.030,
                                       color: Colors.white,
                                     )
                                   : Icon(
                                       Icons.add_shopping_cart_outlined,
-                                      size: 25,
+                                      size: size.height * 0.030,
                                       color: Colors.white,
                                     ),
                               onPressed: () {

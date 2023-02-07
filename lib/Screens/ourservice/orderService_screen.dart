@@ -36,7 +36,7 @@ class _OrderServiceScreenState extends State<OrderServiceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: simpleAppBar(false, "Order Service"),
+      appBar: simpleAppBar(false, "Order Service",context),
       floatingActionButton: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
               .collection(AutoParts.collectionUser)

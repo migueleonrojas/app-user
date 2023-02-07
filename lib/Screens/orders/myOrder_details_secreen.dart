@@ -19,8 +19,11 @@ class MyOrderDetailsScreen extends StatefulWidget {
 class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
   @override
   Widget build(BuildContext context) {
+    
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
-      appBar: simpleAppBar(false, "Detalle de la Orden"),
+      appBar: simpleAppBar(false, "Detalle de la Orden", context),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -48,12 +51,12 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                       return Card(
                         elevation: 3,
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(size.height * 0.010),
                           child: ListTile(
                             leading: Image.network(
                               orderHistoyModel.pImage!,
-                              width: 80,
-                              height: 80,
+                              width: size.width * 0.145,
+                              height: size.height * 0.090,
                             ),
                             title: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,16 +64,16 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                                 Text(
                                   orderHistoyModel.pName!,
                                   maxLines: 2,
-                                  style: const TextStyle(
-                                    fontSize: 16,
+                                  style: TextStyle(
+                                    fontSize: size.height * 0.020,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                                SizedBox(height: 5),
+                                SizedBox(height: size.height * 0.005),
                                 Text(
                                   "\$" + orderHistoyModel.newPrice.toString(),
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: size.height * 0.020,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.deepOrangeAccent[200],
                                   ),
@@ -82,13 +85,13 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                               children: [
                                 Icon(
                                   Icons.clear,
-                                  size: 17,
+                                  size: size.height * 0.020,
                                   color: Colors.deepOrangeAccent[200],
                                 ),
                                 Text(
                                   orderHistoyModel.quantity.toString(),
-                                  style: const TextStyle(
-                                    fontSize: 22,
+                                  style: TextStyle(
+                                    fontSize: size.height * 0.026,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
                                   ),
@@ -120,8 +123,8 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 20),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: size.width * 0.040, vertical: size.height * 0.020),
                       child: Container(
                         width: double.infinity,
                         child: Table(
@@ -218,7 +221,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                             ? Card(
                                 elevation: 3,
                                 child: Container(
-                                  height: 50,
+                                  height: size.height * 0.060,
                                   width: double.infinity,
                                   child: Center(
                                     child: Text(
@@ -226,7 +229,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                                       style: TextStyle(
                                         letterSpacing: 1,
                                         color: Colors.deepOrangeAccent[200],
-                                        fontSize: 18,
+                                        fontSize: size.height * 0.022,
                                         fontWeight: FontWeight.w800,
                                       ),
                                     ),
@@ -237,10 +240,10 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                         Card(
                           elevation: 3,
                           child: Container(
-                            height: 500,
+                            height: size.height * 0.7,
                             width: double.infinity,
                             child: Padding(
-                              padding: const EdgeInsets.all(14.0),
+                              padding: EdgeInsets.all(size.height * 0.018),
                               child: Column(
                                 children: [
                                   Row(
@@ -263,6 +266,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                                                     'Done')
                                                 ? true
                                                 : false,
+                                                context
                                           ),
                                           IconDoneOrNotDone(
                                             isdone: ((snapshot.data!.docs[index] as dynamic)
@@ -278,6 +282,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                                                     'Done')
                                                 ? true
                                                 : false,
+                                                context
                                           ),
                                           IconDoneOrNotDone(
                                             isdone: ((snapshot.data!.docs[index] as dynamic)
@@ -292,6 +297,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                                                     'Done')
                                                 ? true
                                                 : false,
+                                                context
                                           ),
                                           IconDoneOrNotDone(
                                             isdone: ((snapshot.data!.docs[index] as dynamic)
@@ -302,7 +308,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                                           ),
                                         ],
                                       ),
-                                      SizedBox(width: 20),
+                                      SizedBox(width: size.width * 0.07),
                                       Expanded(
                                         child: Column(
                                           children: [
@@ -318,7 +324,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                                                   .add_jm()
                                                   .format(orderRecivedTime),
                                             ),
-                                            SizedBox(height: 15),
+                                            SizedBox(height: size.height * 0.020),
                                             OrderStatusCard(
                                               title: "Esta preparado",
                                               isDone: ((snapshot.data!.docs[index] as dynamic)
@@ -331,7 +337,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                                                   .add_jm()
                                                   .format(beingPreParedTime),
                                             ),
-                                            SizedBox(height: 15),
+                                            SizedBox(height: size.height * 0.020),
                                             OrderStatusCard(
                                               title: "En camino",
                                               isDone: ((snapshot.data!.docs[index] as dynamic)
@@ -343,7 +349,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                                                   .add_jm()
                                                   .format(onTheWayTime),
                                             ),
-                                            SizedBox(height: 15),
+                                            SizedBox(height: size.height * 0.020),
                                             OrderStatusCard(
                                               title: "Entregado",
                                               isDone: ((snapshot.data!.docs[index] as dynamic)
@@ -360,7 +366,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 20),
+                                  SizedBox(height: size.height * 0.020),
                                   Text(
                                     ((snapshot.data!.docs[index] as dynamic)
                                                 .data()['deliverd'] ==
@@ -370,7 +376,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       color: Colors.deepOrangeAccent[200],
-                                      fontSize: 16,
+                                      fontSize: size.height * 0.020,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -391,9 +397,12 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
     );
   }
 
-  Container dividerBetweenDoneIcon(bool isdone) {
+  Container dividerBetweenDoneIcon(bool isdone, BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
     return (isdone)
-        ? Container(height: 55, width: 2, color: Colors.deepOrangeAccent[200])
+        ? Container(height: size.height * 0.055, width: size.width * 0.008, color: Colors.deepOrangeAccent[200])
         : Container();
   }
 }
@@ -406,9 +415,12 @@ class IconDoneOrNotDone extends StatelessWidget {
   final bool ? isdone;
   @override
   Widget build(BuildContext context) {
+
+    Size size =  MediaQuery.of(context).size;
+
     return (isdone!)
         ? Container(
-            height: 30,
+            height: size.height * 0.040,
             child: CircleAvatar(
               backgroundColor: Colors.deepOrangeAccent[200],
               child: Icon(
@@ -435,6 +447,8 @@ class OrderStatusCard extends StatelessWidget {
   final bool? isDone;
   @override
   Widget build(BuildContext context) {
+    Size size =  MediaQuery.of(context).size;
+
     return (isDone!)
         ? Container(
             child: Column(
@@ -443,27 +457,27 @@ class OrderStatusCard extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: size.height * 0.025,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: size.height * 0.012),
                 Row(
                   children: [
                     Icon(
                       Icons.access_time,
                       color: Colors.grey,
                     ),
-                    SizedBox(width: 10),
+                    SizedBox(width: size.width * 0.04),
                     Text(
                       time,
                       style: TextStyle(color: Colors.grey),
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: size.height * 0.012),
                 Container(
-                  height: 3,
+                  height: size.height * 0.005,
                   width: double.infinity,
                   color: Colors.blueGrey[50],
                 ),
@@ -480,10 +494,11 @@ class KeyText extends StatelessWidget {
   const KeyText({Key? key, required this.msg}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Text(
       msg,
       style: TextStyle(
-        fontSize: 16,
+        fontSize: size.height *0.018,
         color: Colors.black,
         fontWeight: FontWeight.bold,
       ),

@@ -45,13 +45,16 @@ class _VehiclesState extends State<Vehicles> {
 
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(  
       appBar: AppBar(
         
-        title: const Text(
+        title: Text(
           "Mi Garage",
           style: TextStyle(
-            fontSize: 20,
+            fontSize: size.height * 0.026,
             letterSpacing: 1.5,
             fontWeight: FontWeight.bold,
             fontFamily: "Brand-Regular",
@@ -131,12 +134,11 @@ class _VehiclesState extends State<Vehicles> {
                     Stack(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(2.0),
+                          padding: EdgeInsets.all(size.height * 0.002),
                           child: Container(
-                            width: 80,
-                            height: 90,
+                            width: size.width * 0.235,
+                            height: size.height * 0.098,
                             child: SfRadialGauge(
-                              
                               enableLoadingAnimation: true,
                               axes: <RadialAxis> [
                                 RadialAxis(
@@ -146,27 +148,19 @@ class _VehiclesState extends State<Vehicles> {
                                   minimum: 0,
                                   maximum: vehicleWithNotificationsModel.days!.toDouble(),
                                   isInversed: true,
-                                  
-
                                   ranges: <GaugeRange> [
-
                                     GaugeRange(startValue: vehicleWithNotificationsModel.days!.toDouble(), endValue: 30,color: Colors.green),
                                     GaugeRange(startValue: 30, endValue: 8,color: Colors.orange),
-                                    GaugeRange(startValue: 8, endValue: 0, color: Colors.red),
-                                    
+                                    GaugeRange(startValue: 8, endValue: 0, color: Colors.red),                                  
                                   ],
                                   pointers: <GaugePointer> [
-                                    
                                     NeedlePointer(
-                                       
                                       value: (vehicleWithNotificationsModel.daysOfTheNextService! < 0) 
                                         ? 0
                                         : vehicleWithNotificationsModel.daysOfTheNextService!.toDouble(),
-                                      
                                       needleStartWidth: 0,
                                       needleEndWidth: 3,
                                       needleLength: 0.85,
-                                      
                                     )
                                   ],
                                   annotations: <GaugeAnnotation> [
@@ -193,8 +187,8 @@ class _VehiclesState extends State<Vehicles> {
                         Center(
                           child: Image.network(
                             vehicleModel.logo!,
-                            width: 80,
-                            height: 80,
+                            width: size.width * 0.25,
+                            height: size.height * 0.096,
                             fit: BoxFit.scaleDown,
                           ),
                         ),
@@ -222,7 +216,7 @@ class _VehiclesState extends State<Vehicles> {
                       ],
                     ),
                     
-                    const SizedBox(height: 10,),
+                    SizedBox(height: size.height * 0.012,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -235,17 +229,15 @@ class _VehiclesState extends State<Vehicles> {
                         
                       ],
                     ),
-                    const SizedBox(height: 10,),
+                    SizedBox(height: size.height * 0.012,),
                     (vehicleModel.name != "") ? Text('${vehicleModel.name}'): Container(),
-                    const SizedBox(height: 10,),
+                    SizedBox(height: size.height * 0.012,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text('Color:'),
                         IconButton(
-                          iconSize: 45,
-                          
-                          
+                          iconSize: size.height * 0.054,
                           icon:  Icon(
                             Icons.car_repair_rounded,
                             color: Color(vehicleModel.color!),
@@ -254,10 +246,10 @@ class _VehiclesState extends State<Vehicles> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10,),
+                    SizedBox(height: size.height * 0.012,),
                     TextButton(                      
                       style: TextButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                        padding: EdgeInsets.symmetric(vertical: 0, horizontal: size.width * 0.075),
                         backgroundColor: Color.fromARGB(255, 3, 3, 247),
                         shape: const StadiumBorder()
                       ),
@@ -270,16 +262,16 @@ class _VehiclesState extends State<Vehicles> {
                         );
                       },
                       child: Container(
-                        width: 125,
-                        height: 14,
-                        child: const Center(                        
+                        width: size.width * 0.40,
+                        height: size.height * 0.021,
+                        child: Center(                        
                           child:  Text(
                             "Solicitar un servicio",
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: "Brand-Regular",
                               fontWeight: FontWeight.bold,
-                              fontSize: 14,
+                              fontSize: size.height * 0.018,
                             ),
                             
                           ),
@@ -288,7 +280,7 @@ class _VehiclesState extends State<Vehicles> {
                     ),
                     TextButton(
                       style: TextButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                        padding: EdgeInsets.symmetric(vertical: 0, horizontal: size.width * 0.075),
                         backgroundColor: Color.fromARGB(255, 3, 3, 247),
                         shape: const StadiumBorder()
                       ),
@@ -302,16 +294,16 @@ class _VehiclesState extends State<Vehicles> {
                         );
                       },
                       child: Container(
-                        width: 125,
-                        height: 14,
-                        child: const Center(
+                        width: size.width * 0.40,
+                        height: size.height * 0.021,
+                        child: Center(
                           child:  Text(
                             "Mis ordenes de servicio",
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: "Brand-Regular",
                               fontWeight: FontWeight.bold,
-                              fontSize: 14,
+                              fontSize: size.height * 0.018,
                             ),
                           ),
                         ),
@@ -319,7 +311,7 @@ class _VehiclesState extends State<Vehicles> {
                     ),
                     TextButton(
                       style: TextButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                        padding: EdgeInsets.symmetric(vertical: 0, horizontal: size.width * 0.075),
                         backgroundColor: Color.fromARGB(255, 3, 3, 247),
                         shape: const StadiumBorder()
                       ),
@@ -329,16 +321,16 @@ class _VehiclesState extends State<Vehicles> {
                         
                       },
                       child: Container(
-                        width: 125,
-                        height: 14,
-                        child: const Center(
+                        width: size.width * 0.40,
+                        height: size.height * 0.021,
+                        child: Center(
                           child: Text(
                             "Agregar una nota",
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: "Brand-Regular",
                               fontWeight: FontWeight.bold,
-                              fontSize: 14,
+                              fontSize: size.height * 0.018,
                             ),
                           ),
                         ),
@@ -346,7 +338,7 @@ class _VehiclesState extends State<Vehicles> {
                     ),
                     TextButton(
                       style: TextButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                        padding: EdgeInsets.symmetric(vertical: 0, horizontal: size.width * 0.075),
                         backgroundColor: Color.fromARGB(255, 3, 3, 247),
                         shape: const StadiumBorder()
                       ),
@@ -359,16 +351,16 @@ class _VehiclesState extends State<Vehicles> {
                         );
                       },
                       child: Container(
-                        width: 125,
-                        height: 14,
-                        child: const Center(
+                        width: size.width * 0.40,
+                        height: size.height * 0.021,
+                        child: Center(
                           child: Text(
                             "Ver las notas de servicio",
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: "Brand-Regular",
                               fontWeight: FontWeight.bold,
-                              fontSize: 14,
+                              fontSize: size.height * 0.018,
                             ),
                           ),
                         ),

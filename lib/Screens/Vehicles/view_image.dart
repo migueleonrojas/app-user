@@ -26,13 +26,15 @@ class _ViewImageState extends State<ViewImage> {
 
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         
-        title: const Text(
+        title: Text(
           "Vista de Imagen",
           style: TextStyle(
-            fontSize: 20,
+            fontSize: size.height * 0.028,
             letterSpacing: 1.5,
             fontWeight: FontWeight.bold,
             fontFamily: "Brand-Regular",
@@ -88,20 +90,20 @@ class _ViewImageState extends State<ViewImage> {
         actions: <Widget>[
            GestureDetector(
             onTap: () => Navigator.of(context).pop(true),
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
+            child: Padding(
+              padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.012),
               child: Text("YES"),
             ),
           ),
-          const SizedBox(height: 16),
+           SizedBox(height: MediaQuery.of(context).size.height * 0.016),
            GestureDetector(
             onTap: () => Navigator.of(context).pop(false),
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
+            child:  Padding(
+              padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.012),
               child: Text("NO"),
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.020),
         ],
       ),
     ) ?? false;

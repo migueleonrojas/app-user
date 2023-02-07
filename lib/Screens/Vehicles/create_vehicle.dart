@@ -50,13 +50,16 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
   
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         
-        title: const Text(
+        title: Text(
           "Agregar Vehiculo",
           style: TextStyle(
-            fontSize: 20,
+            fontSize: size.height * 0.024,
             letterSpacing: 1.5,
             fontWeight: FontWeight.bold,
             fontFamily: "Brand-Regular",
@@ -64,6 +67,79 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
           ),
         ),
         centerTitle: true,
+        
+      ),
+      bottomNavigationBar: Container(
+        width: MediaQuery.of(context).size.width,
+        height: size.height * 0.058,
+        child: ElevatedButton(
+          onPressed: () async {
+            FocusScope.of(context).requestFocus(FocusNode());
+            if(brandController.text.isNotEmpty && modelController.text.isNotEmpty &&
+               yearController.text.isNotEmpty && colorController.text.isNotEmpty &&
+              mileageController.text.isNotEmpty && dateOfLastOilChangeService != null
+            ){
+              VehicleService vehicleService = VehicleService();
+                    
+              DateTime date = generateUpdateDateValue(dateOfLastOilChangeService!);
+                  
+              vehicleService.addVehicle(
+                brandController.text, 
+                modelController.text, 
+                int.parse(mileageController.text), 
+                int.parse(yearController.text), 
+                int.parse(colorController.text), 
+                tuitionController.text,
+                nameOwnerController.text,
+                logoBrand,
+                date
+              );
+
+              Fluttertoast.showToast(msg: 'Vehiculo agregado exitosamente');
+                    
+              setState(() {
+                selectedIndex = 0;
+                idBrand = null;
+                logoBrand = null;
+                indexBrandController = null;
+                indexModelController = null;
+                indexYearController = null;
+                indexColorController = null;
+                brandController.text = '';
+                modelController.text = '';
+                yearController.text = '';
+                colorController.text = '';
+                tuitionController.text = '';
+                nameOwnerController.text = '';
+                mileageController.text = '';
+              });
+
+              if(!mounted) return;
+              Navigator.pushAndRemoveUntil(
+                context, 
+                MaterialPageRoute(
+                  builder: (c) => const Vehicles(),
+                ), 
+                (route) => false
+              );
+                    
+      
+            }
+      
+            else {
+              showDialog(
+                context: context,
+                builder: (c) {
+                  return const ErrorAlertDialog(
+                    message: "Por favor ingrese toda la información solicitada.",
+                  );
+                },
+              );
+            }
+      
+          },
+          child: const Text('Agregar vehiculo')
+        ),
       ),
       body: SingleChildScrollView(
 
@@ -73,11 +149,11 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
               child: Form(
                 key: _vehicleformkey,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 30, top: 30, right: 30),
+                  padding: EdgeInsets.only(left: size.width * 0.06, top: 30, right: size.width * 0.06),
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding:  EdgeInsets.all(size.height * 0.010),
                         child: GestureDetector(
                           onTap:addBrand,
                           child: Row(
@@ -89,9 +165,9 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: size.height * 0.010),
                       Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: EdgeInsets.all(size.height * 0.010),
                         child: GestureDetector(
                           onTap:addModel,
                           child: Row(
@@ -103,9 +179,9 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: size.height * 0.010),
                       Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: EdgeInsets.all(size.height * 0.010),
                         child: GestureDetector(
                           onTap:addYear,
                           child: Row(
@@ -117,9 +193,9 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: size.height * 0.010),
                       Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: EdgeInsets.all(size.height * 0.010),
                         child: GestureDetector(
                           onTap: addColor,
                           child: Row(
@@ -128,12 +204,12 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
                               const Expanded(child: SizedBox(width: double.infinity,)),
                               (colorController.text.isEmpty) 
                                 ? const Text('Seleccione el color')
-                                : Container(height: 20,width: 60,color:Color(int.parse(colorController.text)))
+                                : Container(height: size.height * 0.027,width: size.width * 0.15,color:Color(int.parse(colorController.text)))
                             ],
                           ),
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: size.height * 0.010),
                       TextFormField(
                         keyboardType: TextInputType.number,
                         controller: mileageController,
@@ -141,14 +217,14 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
                           hintText: "Agregar Kilometraje",
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: size.height * 0.010),
                       TextFormField(
                         controller: tuitionController,
                         decoration: const InputDecoration(
                           hintText: "Agregar Matricula (Opcional)",
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: size.height * 0.010),
                       TextFormField(
                         controller: nameOwnerController,
                         decoration: const InputDecoration(
@@ -161,15 +237,15 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
       
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: size.width * 0.02, vertical: size.height * 0.025),
               width: MediaQuery.of(context).size.width * 0.90,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     '¿Cuando fue el ultimo cambio de aceite a tu vehiculo${brandController.text.isEmpty?'': ' '+ brandController.text}${modelController.text.isEmpty?'':' ' + modelController.text}${yearController.text.isEmpty?'':' ' + yearController.text}?',
-                    style: const TextStyle(
-                      fontSize: 18
+                    style:  TextStyle(
+                      fontSize: size.height * 0.023
                     ),    
                   ),
       
@@ -221,7 +297,8 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
               ),
             ),
             /* const Expanded(child: SizedBox(height: double.infinity,)), */
-            Container(
+            /* Boton de agregar */
+            /* Container(
               width: MediaQuery.of(context).size.width,
               height: 50,
               child: ElevatedButton(
@@ -292,7 +369,7 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
                 },
                 child: const Text('Agregar vehiculo')
               ),
-            )
+            ) */
           ],
         ),
       ),

@@ -11,14 +11,17 @@ class MyCustomAppBar extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
     return AppBar(
       iconTheme: IconThemeData(color: Colors.black),
       backgroundColor: Colors.white,
       titleTextStyle: TextStyle(color: Colors.black),
-      title: const Text(
+      title: Text(
         "GlobalOil",
         style: TextStyle(
-          fontSize: 20,
+          fontSize: size.height * 0.024,
           letterSpacing: 1.5,
           fontWeight: FontWeight.bold,
           fontFamily: "Brand-Regular",
@@ -48,23 +51,23 @@ class MyCustomAppBar extends StatelessWidget with PreferredSizeWidget {
               builder: (context, snapshot) {
                 if (!snapshot.hasData) return Container();
                 return Positioned(
-                  top: 3,
-                  left: 3,
+                  top: size.height * 0.003/* 3 */,
+                  left: size.width * 0.001,
                   child: Stack(
                     children: [
                       Container(
-                        height: 20,
-                        width: 20,
+                        height: size.height * 0.025,
+                        width: size.width * 0.055,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(size.height * 0.025),
                             color: Colors.red,
                             border: Border.all(color: Colors.orangeAccent)),
                       ),
                       (snapshot.data!.docs.length < 10)
                           ? Positioned(
-                              top: 2,
-                              bottom: 4,
-                              left: 6,
+                              top: size.height * 0.003,
+                              bottom: size.height * 0.005,
+                              left: size.width * 0.018,
                               child: Text(
                                 snapshot.data!.docs.length.toString(),
                                 style: const TextStyle(
@@ -74,14 +77,14 @@ class MyCustomAppBar extends StatelessWidget with PreferredSizeWidget {
                               ),
                             )
                           : Positioned(
-                              top: 3,
-                              bottom: 2,
-                              left: 3,
+                              top: size.height * 0.002,
+                              bottom: size.height * 0.0025,
+                              left: size.width * 0.009,
                               child: Text(
                                 snapshot.data!.docs.length.toString(),
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 12.0,
+                                  fontSize: size.height * 0.015,
                                 ),
                               ),
                             ),

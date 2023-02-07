@@ -53,12 +53,13 @@ class _ViewCarNotesState extends State<ViewCarNotes> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Notas de Servicio",
           style: TextStyle(
-            fontSize: 20,
+            fontSize: size.height * 0.024,
             letterSpacing: 1.5,
             fontWeight: FontWeight.bold,
             fontFamily: "Brand-Regular",
@@ -154,7 +155,7 @@ class _ViewCarNotesState extends State<ViewCarNotes> {
                       leading: FadeInImage(
                         placeholder: const AssetImage('assets/no-image/no-image.jpg'),
                         image: NetworkImage((snapshot.data!.docs[index].data() as dynamic)["serviceImage"]),
-                        width: 20,
+                        width: size.width * 0.07,
                         fit:BoxFit.contain
                       ),
                       title: Text((snapshot.data!.docs[index].data() as dynamic)["serviceName"]),

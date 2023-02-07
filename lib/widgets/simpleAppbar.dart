@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-AppBar simpleAppBar(bool isMainTitle, String title) {
+AppBar simpleAppBar(bool isMainTitle, String title, BuildContext context) {
+
+  Size size = MediaQuery.of(context).size;
+
   return AppBar(
     backgroundColor: Colors.white,
     iconTheme: IconThemeData(color: Colors.black),
@@ -9,7 +12,7 @@ AppBar simpleAppBar(bool isMainTitle, String title) {
       
       isMainTitle ? "AutoParts" : title,
       style: TextStyle(
-        fontSize: 20,
+        fontSize: size.height * 0.025,
         letterSpacing: 1.5,
         fontWeight: FontWeight.bold,
         fontFamily: "Brand-Regular",

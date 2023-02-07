@@ -41,22 +41,25 @@ class _MyServiceOrderDetailsByVehicleScreenState
   }
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
-      appBar: simpleAppBar(false, "Detalle de la orden"),
+      appBar: simpleAppBar(false, "Detalle de la orden", context),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 5,),
+            SizedBox(height: size.height * 0.008,),
             Center(
               child: Text(
                 'ID de la orden:${widget.orderId}',
-                style: const TextStyle(
-                  fontSize: 22,
+                style: TextStyle(
+                  fontSize: size.height * 0.022,
                   fontWeight: FontWeight.w600,
                 ),
               ),
             ),
-            SizedBox(height: 5,),
+            SizedBox(height: size.height * 0.008,),
             Container(
               child: Card(
                 elevation: 3,
@@ -65,8 +68,8 @@ class _MyServiceOrderDetailsByVehicleScreenState
                       Center(
                         child: Text(
                           'datos del vehiculo'.toUpperCase(),
-                          style: const TextStyle(
-                            fontSize: 16,
+                          style: TextStyle(
+                            fontSize: size.height * 0.026,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -75,46 +78,46 @@ class _MyServiceOrderDetailsByVehicleScreenState
                       SizedBox(height: 5,),
                       Text(
                         'Marca: ${widget.vehicleModel.brand}',
-                        style: const TextStyle(
-                          fontSize: 16,
+                        style: TextStyle(
+                          fontSize: size.height * 0.022,
                           fontWeight: FontWeight.w600,
                         )
                       ),
                       Text(
                         'Modelo: ${widget.vehicleModel.model}',
-                        style: const TextStyle(
-                          fontSize: 16,
+                        style: TextStyle(
+                          fontSize: size.height * 0.022,
                           fontWeight: FontWeight.w600,
                         )
                       ),
                       Text(
                         'Año: ${widget.vehicleModel.year}',
-                        style: const TextStyle(
-                          fontSize: 16,
+                        style: TextStyle(
+                          fontSize: size.height * 0.022,
                           fontWeight: FontWeight.w600,
                         )
                       ),
                       Row(
                         mainAxisAlignment:MainAxisAlignment.center ,
                         children: [
-                          const Text(
+                          Text(
                             'Color: ',
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: size.height * 0.022,
                                 fontWeight: FontWeight.w600,
                               )
                           ),
-                          Container(color: Color(widget.vehicleModel.color!),child: const SizedBox(height: 10, width: 30,),)
+                          Container(color: Color(widget.vehicleModel.color!),child: SizedBox(height: size.height * 0.012, width: size.width *0.07,),)
                         ],
                       ),
                       Text(
                         'Kilometraje: ${widget.vehicleModel.mileage}',
-                        style: const TextStyle(
-                          fontSize: 16,
+                        style: TextStyle(
+                          fontSize: size.height * 0.022,
                           fontWeight: FontWeight.w600,
                         )
                       ),
-                      const SizedBox(height: 5,)
+                      SizedBox(height: size.height * 0.008,)
                     ],
                   )
                 
@@ -150,28 +153,28 @@ class _MyServiceOrderDetailsByVehicleScreenState
                               Center(
                                 child: Text(
                                   'detalle del pago'.toUpperCase(),
-                                  style: const TextStyle(
-                                    fontSize: 16,
+                                  style: TextStyle(
+                                    fontSize: size.height * 0.026,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 )
                               ),
                               Padding(
-                                padding: EdgeInsets.all(8),
+                                padding: EdgeInsets.all(size.height * 0.012),
                                 child: Column(
                                   children: [
                                     Text(
                                       serviceOrderPaymentDetailsModel.paymentMethod!,
-                                      style: const TextStyle(
-                                        fontSize: 16,
+                                      style: TextStyle(
+                                        fontSize: size.height * 0.022,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                     (serviceOrderPaymentDetailsModel.confirmationNumber != 0)
                                       ? Text(
                                         'Número de Confirmación: ${serviceOrderPaymentDetailsModel.confirmationNumber.toString()}',
-                                        style: const TextStyle(
-                                          fontSize: 16,
+                                        style: TextStyle(
+                                          fontSize: size.height * 0.022,
                                           fontWeight: FontWeight.w600,
                                         ),
                                       )
@@ -179,8 +182,8 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                       (serviceOrderPaymentDetailsModel.paymentMethod == "Zelle")
                                       ? Text(
                                         'Fecha del Pago: ${DateFormat('dd/MM/yyyy').format(serviceOrderPaymentDetailsModel.paymentDate!)}',
-                                        style: const TextStyle(
-                                          fontSize: 16,
+                                        style: TextStyle(
+                                          fontSize: size.height * 0.022,
                                           fontWeight: FontWeight.w600,
                                         ),
                                       )
@@ -188,8 +191,8 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                     (serviceOrderPaymentDetailsModel.issuerName != "")
                                       ?Text(
                                         'Nombre del Emisor: ${serviceOrderPaymentDetailsModel.issuerName.toString()}',
-                                        style: const TextStyle(
-                                          fontSize: 16,
+                                        style: TextStyle(
+                                          fontSize: size.height * 0.022,
                                           fontWeight: FontWeight.w600,
                                         ),
                                       )
@@ -197,8 +200,8 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                     (serviceOrderPaymentDetailsModel.issuerName != "")
                                       ?Text(
                                         'Nombre del Titular: ${serviceOrderPaymentDetailsModel.holderName.toString()}',
-                                        style: const TextStyle(
-                                          fontSize: 16,
+                                        style: TextStyle(
+                                          fontSize: size.height * 0.022,
                                           fontWeight: FontWeight.w600,
                                         ),
                                       )
@@ -207,8 +210,8 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                       ?Text(                                        
                                         'Observaciones: ${serviceOrderPaymentDetailsModel.observations.toString()}',
                                         maxLines: 3,
-                                        style: const TextStyle(
-                                          fontSize: 16,
+                                        style: TextStyle(
+                                          fontSize: size.height * 0.022,
                                           fontWeight: FontWeight.w600,
                                         ),
                                       )
@@ -252,19 +255,19 @@ class _MyServiceOrderDetailsByVehicleScreenState
                              Center(
                               child: Text(
                               'detalle del servicio'.toUpperCase(),
-                              style: const TextStyle(
-                                fontSize: 16,
+                              style: TextStyle(
+                                fontSize: size.height * 0.026,
                                 fontWeight: FontWeight.w600,
                               ),
                               )
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(size.height * 0.008),
                               child: ListTile(
                                 leading: Image.network(
                                   (snapshot.data!.docs[index] as dynamic).data()['serviceImage'],
-                                  width: 80,
-                                  height: 80,
+                                  width: size.width * 0.22,
+                                  height: size.height * 0.096,
                                 ),
                                 title: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -273,29 +276,29 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                       (snapshot.data!.docs[index] as dynamic)
                                           .data()['serviceName'],
                                       maxLines: 2,
-                                      style: const TextStyle(
-                                        fontSize: 16,
+                                      style: TextStyle(
+                                        fontSize: size.height * 0.022,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    const SizedBox(height: 5),
+                                    SizedBox(height: size.height * 0.008),
                                     Text(
                                       "Fecha: " +
                                           (snapshot.data!.docs[index] as dynamic).data()['date'],
                                       maxLines: 2,
-                                      style: const TextStyle(
-                                        fontSize: 16,
+                                      style: TextStyle(
+                                        fontSize: size.height * 0.022,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    const SizedBox(height: 5),
+                                    SizedBox(height: size.height * 0.008),
                                     Text(
                                       "\$" +
                                           (snapshot.data!.docs[index] as dynamic)
                                               .data()['newPrice']
                                               .toString(),
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: size.height * 0.022,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.deepOrangeAccent[200],
                                       ),
@@ -305,9 +308,9 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                         .data()['observations']
                                               .toString()}',
                                       maxLines: 5,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         
-                                        fontSize: 16,
+                                        fontSize: size.height * 0.022,
                                         fontWeight: FontWeight.bold,
                                         
                                       ),
@@ -319,15 +322,15 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                   children: [
                                     Icon(
                                       Icons.clear,
-                                      size: 17,
+                                      size: size.height * 0.022,
                                       color: Colors.deepOrangeAccent[200],
                                     ),
                                     Text(
                                       (snapshot.data!.docs[index] as dynamic)
                                           .data()['quantity']
                                           .toString(),
-                                      style: const TextStyle(
-                                        fontSize: 22,
+                                      style: TextStyle(
+                                        fontSize: size.height * 0.026,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                       ),
@@ -375,8 +378,8 @@ class _MyServiceOrderDetailsByVehicleScreenState
                         )
                     );
                     return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 20),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: size.width * 0.07, vertical: size.height * 0.025),
                       child: Container(
                         width: double.infinity,
                         child: Column(
@@ -384,13 +387,13 @@ class _MyServiceOrderDetailsByVehicleScreenState
                             Center(
                               child: Text(
                               'dirección de entrega'.toUpperCase(),
-                              style: const TextStyle(
-                                fontSize: 16,
+                              style: TextStyle(
+                                fontSize: size.height * 0.026,
                                 fontWeight: FontWeight.w600,
                               ),
                               )
                             ),
-                            SizedBox(height: 5,),
+                            SizedBox(height: size.height * 0.008,),
                             Table(
                               children: [
                                 TableRow(
@@ -446,17 +449,17 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                 ),
                               ],
                             ),
-                            SizedBox(height: 5,),
+                            SizedBox(height: size.height * 0.008,),
                             Center(
                               child: Text(
                               'ubicación en el mapa'.toUpperCase(),
-                              style: const TextStyle(
-                                fontSize: 16,
+                              style: TextStyle(
+                                fontSize: size.height * 0.026,
                                 fontWeight: FontWeight.w600,
                               ),
                               )
                             ),
-                            SizedBox(height: 5,),
+                            SizedBox(height: size.height * 0.008,),
                             Container(
                               height: MediaQuery.of(context).size.height * 0.50,
                               child: GoogleMap(
@@ -468,7 +471,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                               markers: _markers,
                               ),
                             ),
-                            SizedBox(height: 10,),
+                            SizedBox(height: size.height * 0.012,),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Color.fromARGB(255, 3, 3, 247),
@@ -550,18 +553,18 @@ class _MyServiceOrderDetailsByVehicleScreenState
                             ? Card(
                                 elevation: 3,
                                 child: Container(
-                                  height: 80,
+                                  height: size.height * 0.096,
                                   width: double.infinity,
                                   child: Column(
                                     children: [
-                                      SizedBox(height: 5,),
+                                      SizedBox(height: size.height * 0.008,),
                                       Center(
                                         child: Text(
                                           "Estatus de Orden",
                                           style: TextStyle(
                                             letterSpacing: 1,
                                             color: Colors.deepOrangeAccent[200],
-                                            fontSize: 18,
+                                            fontSize: size.height * 0.026,
                                             fontWeight: FontWeight.w800,
                                           ),
                                         ),
@@ -621,6 +624,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                                     'Done')
                                                 ? true
                                                 : false,
+                                            size
                                           ),
                                           IconDoneOrNotDone(
                                             isdone: ((snapshot.data!.docs[index] as dynamic)
@@ -636,6 +640,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                                     'Done')
                                                 ? true
                                                 : false,
+                                            size
                                           ),
                                           IconDoneOrNotDone(
                                             isdone: ((snapshot.data!.docs[index] as dynamic)
@@ -650,6 +655,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                                     'Done')
                                                 ? true
                                                 : false,
+                                            size
                                           ),
                                           IconDoneOrNotDone(
                                             isdone: ((snapshot.data!.docs[index] as dynamic)
@@ -675,7 +681,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
 
                                         ],
                                       ),
-                                      SizedBox(width: 20),
+                                      SizedBox(width: size.width * 0.1),
                                       Expanded(
                                         child: Column(
                                           children: [
@@ -691,7 +697,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                                   .add_jm()
                                                   .format(orderRecivedTime),
                                             ),
-                                            SizedBox(height: 15),
+                                            SizedBox(height: size.height * 0.021),
                                             OrderStatusCard(
                                               title: "Servicio Cancelado",
                                               isDone: (
@@ -718,7 +724,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                                   .add_jm()
                                                   .format(beingPreParedTime),
                                             ),
-                                            SizedBox(height: 15),
+                                            SizedBox(height: size.height * 0.021),
                                             OrderStatusCard(
                                               title: "Servicio Cancelado",
                                               isDone: (
@@ -743,7 +749,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                                   .add_jm()
                                                   .format(onTheWayTime),
                                             ),
-                                            SizedBox(height: 15),
+                                            SizedBox(height: size.height * 0.021),
                                             OrderStatusCard(
                                               title: "Servicio Cancelado",
                                               isDone: (
@@ -768,7 +774,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                                   .add_jm()
                                                   .format(deliverdTime),
                                             ),
-                                            SizedBox(height: 15),
+                                            SizedBox(height: size.height * 0.021),
                                             
                                             
                                             
@@ -777,7 +783,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 20),
+                                  SizedBox(height: size.height * 0.028),
                                   Text(
                                     ((snapshot.data!.docs[index] as dynamic) 
                                                 .data()['deliverd'] ==
@@ -787,7 +793,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       color: Colors.deepOrangeAccent[200],
-                                      fontSize: 16,
+                                      fontSize: size.height * 0.022,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -817,29 +823,30 @@ class _MyServiceOrderDetailsByVehicleScreenState
             actions: <Widget>[
                GestureDetector(
                 onTap: () => Navigator.of(context).pop(true),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
+                child: Padding(
+                  padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.012 ),
                   child: Text("YES"),
                 ),
               ),
-              const SizedBox(height: 16),
+               SizedBox(height: MediaQuery.of(context).size.height * 0.019),
                GestureDetector(
                 onTap: () => Navigator.of(context).pop(false),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
+                child: Padding(
+                  padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.012 ),
                   child: Text("NO"),
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.019),
             ],
           ),
         ) ??
         false;
   }
 
-  Container dividerBetweenDoneIcon(bool isdone) {
+  Container dividerBetweenDoneIcon(bool isdone, Size size) {
+
     return (isdone)
-        ? Container(height: 55, width: 2, color: Colors.deepOrangeAccent[200])
+        ? Container(height: size.height * 0.065, width: size.width *0.007, color: Colors.deepOrangeAccent[200])
         : Container();
   }
 }
@@ -852,9 +859,10 @@ class IconDoneOrNotDone extends StatelessWidget {
   final bool ? isdone;
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return (isdone!)
         ? Container(
-            height: 30,
+            height: size.height * 0.038,
             child: CircleAvatar(
               backgroundColor: Colors.deepOrangeAccent[200],
               child: Icon(
@@ -881,6 +889,7 @@ class OrderStatusCard extends StatelessWidget {
   final bool? isDone;
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return (isDone!)
         ? Container(
             child: Column(
@@ -889,27 +898,27 @@ class OrderStatusCard extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: size.height * 0.024,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: size.height * 0.013),
                 Row(
                   children: [
                     Icon(
                       Icons.access_time,
                       color: Colors.grey,
                     ),
-                    SizedBox(width: 10),
+                    SizedBox(width: size.width * 0.02),
                     Text(
                       time,
                       style: TextStyle(color: Colors.grey),
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: size.height * 0.013),
                 Container(
-                  height: 3,
+                  height: size.height * 0.005,
                   width: double.infinity,
                   color: Colors.blueGrey[50],
                 ),
@@ -926,10 +935,11 @@ class KeyText extends StatelessWidget {
   const KeyText({Key? key, required this.msg}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Text(
       msg,
       style: TextStyle(
-        fontSize: 16,
+        fontSize: size.height * 0.022,
         color: Colors.black,
         fontWeight: FontWeight.bold,
       ),
