@@ -7,7 +7,7 @@ import 'package:oilapp/widgets/loading_widget.dart';
 
 class AddModel extends StatefulWidget {
   int? selectedIndex;
-  String? modelName;
+  dynamic modelName;
   int? brandId;
   bool holdIndex = false;
   late int previousSelectedIndex = 0;
@@ -37,7 +37,7 @@ class _AddModelState extends State<AddModel> {
     widget.previousModelName = (widget.modelName == null)? "": widget.modelName!;
     widget.previousModelId = (widget.brandId == null)? 0: widget.brandId!;
   }
-  void changeIndex(int index, String brandNameSnapshot) {
+  void changeIndex(int index, dynamic brandNameSnapshot) {
    setState(() {
     widget.selectedIndex = index;
     widget.modelName = brandNameSnapshot;
@@ -102,12 +102,12 @@ class _AddModelState extends State<AddModel> {
                             );
                           }, 
                           child: Material(
-                            color: widget.modelName == (snapshot.data!.docs[index] as dynamic).data()["name"] ? Colors.blue:Colors.transparent,
+                            color: widget.modelName == (snapshot.data!.docs[index] as dynamic).data()["name"].toString() ? Colors.blue:Colors.transparent,
                             /* color: widget.selectedIndex == index ? Colors.blue : Colors.transparent, */
                             borderRadius: BorderRadius.circular(size.height * 0.035),
                             child: Container(
                               width: size.width * 0.35,
-                              child: Center(child: Text((snapshot.data!.docs[index] as dynamic).data()["name"],style: TextStyle(fontSize: size.height * 0.020)),),
+                              child: Center(child: Text('${(snapshot.data!.docs[index] as dynamic).data()["name"].toString()}',style: TextStyle(fontSize: size.height * 0.020)),),
                             ),
                           ),
                         ),

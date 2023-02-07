@@ -141,9 +141,9 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                         padding: EdgeInsets.all(size.height * 0.016),
                         child: GestureDetector(
                           onTap: () {
-                            if(indexModelController != null) {
+                            /* if(indexModelController != null) { */
                               addModel();
-                            }
+                            /* } */
                           },
                           child: Row(
                             children: [
@@ -350,6 +350,7 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
         indexModelController = null;
       }
       
+      
       setState(() {});
     }
     
@@ -358,6 +359,7 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
   }
 
   void addModel() async {
+
     
     if(idBrand == null) return;
     final alert = (indexModelController == null && modelController.text == '') ? AddModel(brandId: idBrand):AddModel(selectedIndex:indexModelController, modelName: modelController.text, brandId: idBrand);
@@ -472,7 +474,8 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
       
       for(final modelsVehicle in modelsVehicles.docs){
         
-        if(widget.vehicleModel!.model == modelsVehicle.data()['name']){
+        if(widget.vehicleModel!.model == modelsVehicle.data()['name'].toString()){
+          
           break;
         }
         index++;

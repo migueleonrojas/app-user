@@ -408,7 +408,7 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
     final ModelName = (returnDataModel[1] == null)? '' : returnDataModel[1];
     if(indexModel != '' && ModelName != ''){
       indexModelController = indexModel;
-      modelController.text = ModelName;
+      modelController.text = ModelName.toString();
       setState(() {});
     }
     
