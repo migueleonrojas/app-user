@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Model/service_order_with_vehicle.dart';
 import 'package:oilapp/Model/vehicle_model.dart';
 import 'package:oilapp/Model/service_order_model.dart';
@@ -63,7 +64,7 @@ class _MyServiceOrderScreenState extends State<MyServiceOrderScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: AutoSizeText(
           "Mis ordenes de servicio",
           style: TextStyle(
             fontSize: size.height * 0.024,
@@ -193,7 +194,7 @@ class OrderBody extends StatelessWidget {
                   ],
                 ),
               ),
-              Text(
+              AutoSizeText(
                 "Vehiculo: ${vehicleModel.brand}, ${vehicleModel.model} ",
                 style: TextStyle(
                   color: Colors.black,
@@ -201,7 +202,7 @@ class OrderBody extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              Text(
+              AutoSizeText(
                 "Servicio: ${data.serviceName}",
                 style: TextStyle(
                   color: Colors.black,
@@ -209,7 +210,7 @@ class OrderBody extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              Text(
+              AutoSizeText(
                 "Precio Total: " + data.totalPrice.toString() + " \$.",
                 style: TextStyle(
                   color: Colors.black,
@@ -217,8 +218,8 @@ class OrderBody extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              Text(DateFormat.yMMMd().add_jm().format(myDateTime)),
-              Text(timeago.format(DateTime.tryParse(data.orderTime!.toDate().toString())!).toString()),
+              AutoSizeText(DateFormat.yMMMd().add_jm().format(myDateTime)),
+              AutoSizeText(timeago.format(DateTime.tryParse(data.orderTime!.toDate().toString())!).toString()),
               ElevatedButton(
                 /* shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -241,7 +242,7 @@ class OrderBody extends StatelessWidget {
                   );
                 },
                 /* color: Colors.deepOrangeAccent[200], */
-                child: const Text(
+                child: const AutoSizeText(
                   "Detalle de la orden",
                   style: TextStyle(
                     color: Colors.white,

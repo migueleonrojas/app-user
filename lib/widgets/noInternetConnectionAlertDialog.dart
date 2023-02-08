@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class NoInternetConnectionAlertDialog extends StatelessWidget {
@@ -8,10 +9,10 @@ class NoInternetConnectionAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(
+      title: AutoSizeText(
         "No posee conexión a internet",
       ),
-      content: Text("Comprueba la configuración de tu red e inténtalo de nuevo."),
+      content: AutoSizeText("Comprueba la configuración de tu red e inténtalo de nuevo."),
       actions: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -22,7 +23,7 @@ class NoInternetConnectionAlertDialog extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: Text("OK"),
+          child: AutoSizeText("OK"),
         ),
       ],
     );

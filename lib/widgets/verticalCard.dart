@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Model/product_model.dart';
 import 'package:oilapp/Screens/products/product_details.dart';
 import 'package:oilapp/config/config.dart';
@@ -29,7 +30,7 @@ class VerticalCard extends StatelessWidget {
               horizontal: size.width * 0.030,
               vertical: size.height * 0.010,
             ),
-            child: Text(
+            child: AutoSizeText(
               cardTitle!,
               style:  TextStyle(
                 fontSize: size.height * 0.020,
@@ -42,7 +43,7 @@ class VerticalCard extends StatelessWidget {
             stream: stream as dynamic,
             builder: (context, snapshot) {
               if (snapshot.data == null) {
-                return Text('');
+                return AutoSizeText('');
               }
               return Container(
                 height: size.height * 0.350,
@@ -90,7 +91,7 @@ class VerticalCard extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Text(
+                                        AutoSizeText(
                                           productModel.productName!,
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
@@ -106,7 +107,7 @@ class VerticalCard extends StatelessWidget {
                                                     EdgeInsets.symmetric(
                                                   vertical: size.height * 0.005,
                                                 ),
-                                                child: Text(
+                                                child: AutoSizeText(
                                                   "\$${productModel.orginalprice}",
                                                   style: TextStyle(
                                                     fontFamily: "Brand-Regular",
@@ -121,7 +122,7 @@ class VerticalCard extends StatelessWidget {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  Text(
+                                                  AutoSizeText(
                                                     "\$${productModel.newprice}",
                                                     style: TextStyle(
                                                       fontFamily:
@@ -140,7 +141,7 @@ class VerticalCard extends StatelessWidget {
                                                     children: [
                                                       Row(
                                                         children: [
-                                                          Text(
+                                                          AutoSizeText(
                                                             "\$${productModel.orginalprice}",
                                                             style: TextStyle(
                                                               fontFamily:
@@ -155,7 +156,7 @@ class VerticalCard extends StatelessWidget {
                                                             ),
                                                           ),
                                                           SizedBox(width: size.width * 0.005),
-                                                          Text(
+                                                          AutoSizeText(
                                                             '- ${productModel.offervalue}%',
                                                             style: TextStyle(
                                                               fontFamily:

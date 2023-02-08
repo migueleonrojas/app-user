@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Screens/home_screen.dart';
 import 'package:oilapp/Screens/orders/myOrder_details_secreen.dart';
 import 'package:oilapp/Screens/orders/myservice_order_screen.dart';
@@ -34,7 +35,7 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: AutoSizeText(
           "Mis Ordenes de productos",
           style: TextStyle(
             fontSize: size.height * 0.022,
@@ -169,7 +170,7 @@ class OrderBody extends StatelessWidget {
                         ),
                       ),
                       (data[index][AutoParts.productID].length  > 1)
-                      ?Text(
+                      ?AutoSizeText(
                         "(" +
                             (data[index][AutoParts.productID].length - 1)
                                 .toString() +
@@ -179,7 +180,7 @@ class OrderBody extends StatelessWidget {
                           fontSize: size.height * 0.022,
                         ),
                       )
-                      :Text(
+                      :AutoSizeText(
                         "(" +
                             (data[index][AutoParts.productID].length - 1)
                                 .toString() +
@@ -189,7 +190,7 @@ class OrderBody extends StatelessWidget {
                           fontSize: size.height * 0.022,
                         ),
                       ),
-                      Text(
+                      AutoSizeText(
                         "Precio total: " +
                             data[index]['totalPrice'].toString() +
                             " \$.",
@@ -199,8 +200,8 @@ class OrderBody extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Text(DateFormat.yMMMd().add_jm().format(myDateTime)),
-                      Text(timeago
+                      AutoSizeText(DateFormat.yMMMd().add_jm().format(myDateTime)),
+                      AutoSizeText(timeago
                           .format(DateTime.tryParse(data[index]
                               ['orderTime']
                               .toDate()
@@ -226,7 +227,7 @@ class OrderBody extends StatelessWidget {
                           );
                         },
                         /* color: Colors.deepOrangeAccent[200], */
-                        child: const Text(
+                        child: const AutoSizeText(
                           "Detalle de la Orden",
                           style: TextStyle(
                             color: Colors.white,

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Model/cart_model.dart';
 import 'package:oilapp/Screens/home_screen.dart';
 import 'package:oilapp/Screens/orders/myOrder_Screen.dart';
@@ -50,7 +51,7 @@ class _PaymentPageState extends State<PaymentPage> {
       ,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: AutoSizeText(
             "Metodo de Pago",
             style: TextStyle(
               fontSize: size.height * 0.020,
@@ -80,7 +81,7 @@ class _PaymentPageState extends State<PaymentPage> {
                 alignment: Alignment.topCenter,
                 child: Padding(
                   padding: EdgeInsets.all(size.height * 0.008),
-                  child:  Text(
+                  child:  AutoSizeText(
                     "Elige el método de pago",
                     style: TextStyle(
                       color: Colors.black,
@@ -151,7 +152,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               });
 
                             }, 
-                            child: const Text('Confirmar'))
+                            child: const AutoSizeText('Confirmar'))
                             /* AnimatedConfirmButton(
                                 onTap: () async {
                                   print('objectassaasasasasas');
@@ -248,7 +249,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                     Icons.shopping_bag,
                                     color: Colors.white,
                                   ),
-                                  label:  Text(
+                                  label:  AutoSizeText(
                                     "Ver las ordenes de productos",
                                     style: TextStyle(
                                       fontSize: size.height *0.022,
@@ -304,7 +305,7 @@ class PaymentButton extends StatelessWidget {
               width: size.width * 0.110,
               height: size.height * 0.050,
             ),
-            title: Text(
+            title: AutoSizeText(
               title,
               style: TextStyle(
                 fontSize: size.height * 0.022,

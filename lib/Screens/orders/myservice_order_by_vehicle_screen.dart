@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Model/vehicle_model.dart';
 import 'package:oilapp/Screens/home_screen.dart';
 import 'package:oilapp/Screens/orders/myservice_order_details_by_vehicle_screen.dart';
@@ -48,7 +49,7 @@ class _MyServiceOrderByVehicleScreenState extends State<MyServiceOrderByVehicleS
             }, 
             icon: const Icon(Icons.home))
         ],
-        title: Text(
+        title: AutoSizeText(
           "Mis ordenes de servicio",
           style: TextStyle(
             fontSize: size.height * 0.025,
@@ -195,7 +196,7 @@ class OrderBody extends StatelessWidget {
                           ],
                         ),
                       ),
-                      // Text(
+                      // AutoSizeText(
                       //   "(" +
                       //       (data[index].data()[AutoParts.productID].length - 1)
                       //           .toString() +
@@ -205,7 +206,7 @@ class OrderBody extends StatelessWidget {
                       //     fontSize: 16,
                       //   ),
                       // ),
-                      Text(
+                      AutoSizeText(
                         "Vehiculo: ${vehicleModel.brand}, ${vehicleModel.model} ",
                         style: TextStyle(
                           color: Colors.black,
@@ -213,7 +214,7 @@ class OrderBody extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Text(
+                      AutoSizeText(
                         "Servicio: ${data[index]['serviceName']}",
                         style: TextStyle(
                           color: Colors.black,
@@ -221,7 +222,7 @@ class OrderBody extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Text(
+                      AutoSizeText(
                         "Precio Total: ${data[index]['totalPrice']}\$.",                        
                         style: TextStyle(
                           color: Colors.black,
@@ -229,8 +230,8 @@ class OrderBody extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Text(DateFormat.yMMMd().add_jm().format(myDateTime)),
-                      Text(timeago
+                      AutoSizeText(DateFormat.yMMMd().add_jm().format(myDateTime)),
+                      AutoSizeText(timeago
                           .format(DateTime.tryParse(data[index]
                               ['orderTime']
                               .toDate()
@@ -256,7 +257,7 @@ class OrderBody extends StatelessWidget {
                           );
                         },
                         /* color: Colors.deepOrangeAccent[200], */
-                        child: const Text(
+                        child: const AutoSizeText(
                           "Detalle de la orden",
                           style: TextStyle(
                             color: Colors.white,

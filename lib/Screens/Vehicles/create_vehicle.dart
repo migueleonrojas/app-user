@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
@@ -56,7 +57,7 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
     return Scaffold(
       appBar: AppBar(
         
-        title: Text(
+        title: AutoSizeText(
           "Agregar Vehiculo",
           style: TextStyle(
             fontSize: size.height * 0.024,
@@ -138,7 +139,7 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
             }
       
           },
-          child: const Text('Agregar vehiculo')
+          child: const AutoSizeText('Agregar vehiculo')
         ),
       ),
       body: SingleChildScrollView(
@@ -158,9 +159,9 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
                           onTap:addBrand,
                           child: Row(
                             children: [
-                              const Text('* Marca'),
+                              const AutoSizeText('* Marca'),
                               const Expanded(child: SizedBox(width: double.infinity,)),
-                              Text((brandController.text.isEmpty? 'Seleccione la Marca': brandController.text))
+                              AutoSizeText((brandController.text.isEmpty? 'Seleccione la Marca': brandController.text))
                             ],
                           ),
                         ),
@@ -172,9 +173,9 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
                           onTap:addModel,
                           child: Row(
                             children: [
-                              const Text('* Modelo'),
+                              const AutoSizeText('* Modelo'),
                               const Expanded(child: SizedBox(width: double.infinity,)),
-                              Text((modelController.text.isEmpty? 'Seleccione el Modelo': modelController.text))
+                              AutoSizeText((modelController.text.isEmpty? 'Seleccione el Modelo': modelController.text))
                             ],
                           ),
                         ),
@@ -186,9 +187,9 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
                           onTap:addYear,
                           child: Row(
                             children: [
-                              const Text('* Año'),
+                              const AutoSizeText('* Año'),
                               const Expanded(child: SizedBox(width: double.infinity,)),
-                              Text((yearController.text.isEmpty? 'Seleccion el año': yearController.text))
+                              AutoSizeText((yearController.text.isEmpty? 'Seleccion el año': yearController.text))
                             ],
                           ),
                         ),
@@ -200,10 +201,10 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
                           onTap: addColor,
                           child: Row(
                             children: [
-                              const Text('* Color'),
+                              const AutoSizeText('* Color'),
                               const Expanded(child: SizedBox(width: double.infinity,)),
                               (colorController.text.isEmpty) 
-                                ? const Text('Seleccione el color')
+                                ? const AutoSizeText('Seleccione el color')
                                 : Container(height: size.height * 0.027,width: size.width * 0.15,color:Color(int.parse(colorController.text)))
                             ],
                           ),
@@ -242,7 +243,7 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  AutoSizeText(
                     '¿Cuando fue el ultimo cambio de aceite a tu vehiculo${brandController.text.isEmpty?'': ' '+ brandController.text}${modelController.text.isEmpty?'':' ' + modelController.text}${yearController.text.isEmpty?'':' ' + yearController.text}?',
                     style:  TextStyle(
                       fontSize: size.height * 0.023
@@ -250,7 +251,7 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
                   ),
       
                   ListTile(
-                    title: const Text('Hace 1 mes'),
+                    title: const AutoSizeText('Hace 1 mes'),
                     leading: Radio(
                       groupValue: dateOfLastOilChangeService,
                       value: DateOfLastOilChangeService.OneMonth,
@@ -261,7 +262,7 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
                     )
                   ),
                   ListTile(
-                    title: const Text('Hace 2 meses'),
+                    title: const AutoSizeText('Hace 2 meses'),
                     leading: Radio(
                       groupValue: dateOfLastOilChangeService,
                       value: DateOfLastOilChangeService.TwoMonth,
@@ -272,7 +273,7 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
                     )
                   ),
                   ListTile(
-                    title: const Text('Hace 3 meses'),
+                    title: const AutoSizeText('Hace 3 meses'),
                     leading: Radio(
                       groupValue: dateOfLastOilChangeService,
                       value: DateOfLastOilChangeService.ThreeMonth,
@@ -283,7 +284,7 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
                     )
                   ),
                   ListTile(
-                    title: const Text('No lo recuerdo'),
+                    title: const AutoSizeText('No lo recuerdo'),
                     leading: Radio(
                       groupValue: dateOfLastOilChangeService,
                       value: DateOfLastOilChangeService.MoreThreeMonth,
@@ -367,7 +368,7 @@ class _CreateVehicleScreenState extends State<CreateVehicleScreen> {
                   }
       
                 },
-                child: const Text('Agregar vehiculo')
+                child: const AutoSizeText('Agregar vehiculo')
               ),
             ) */
           ],

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Model/rating_review_model.dart';
 import 'package:oilapp/config/config.dart';
 import 'package:oilapp/widgets/emptycardmessage.dart';
@@ -62,7 +63,7 @@ class _MyReviewAndRatingState extends State<MyReviewAndRating> {
                         title: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            AutoSizeText(
                               ratingAndReviewModel.productName!,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
@@ -75,18 +76,18 @@ class _MyReviewAndRatingState extends State<MyReviewAndRating> {
                             ),
                             Row(
                               children: [
-                                Text(
+                                AutoSizeText(
                                   '${ratingAndReviewModel.rating} ',
                                 ),
                                 for (int i = 0;
                                     i < ratingAndReviewModel.rating!;
                                     i++)
-                                  Text('⭐'),
+                                  AutoSizeText('⭐'),
                               ],
                             ),
                           ],
                         ),
-                        subtitle: Text(ratingAndReviewModel.reviewMessage!),
+                        subtitle: AutoSizeText(ratingAndReviewModel.reviewMessage!),
                       );
                     },
                   ),

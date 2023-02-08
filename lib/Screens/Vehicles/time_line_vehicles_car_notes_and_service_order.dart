@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:oilapp/Model/vehicle_model.dart';
 import 'package:oilapp/Model/vehicle_model_notification.dart';
@@ -34,7 +35,7 @@ class _TimelineVehiclesCarNotesAndServiceOrderState extends State<TimelineVehicl
     return Scaffold(
       appBar: AppBar(
         
-        title: Text(
+        title: AutoSizeText(
           "Mis Ordenes de Servicio y Notas de Servicio",
           style: TextStyle(
             fontSize: size.height * 0.024,
@@ -139,9 +140,9 @@ class _TimelineVehiclesCarNotesAndServiceOrderState extends State<TimelineVehicl
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                (data['serviceId']!= null) ?Text('Orden de Servicio'):Text('Nota de Servicio'),
+                (data['serviceId']!= null) ?AutoSizeText('Orden de Servicio'):AutoSizeText('Nota de Servicio'),
                 SizedBox(height: size.height * 0.008,),
-                Text('${data["serviceName"]}'),
+                AutoSizeText('${data["serviceName"]}'),
                 SizedBox(height: size.height * 0.008,),
                 FadeInImage(
                   placeholder: const AssetImage('assets/no-image/no-image.jpg'),
@@ -150,7 +151,7 @@ class _TimelineVehiclesCarNotesAndServiceOrderState extends State<TimelineVehicl
                   height: size.height * 0.080,
                   fit:BoxFit.contain
                 ),
-                (data["mileage"] != null) ?Text('${data["mileage"]} km'):Text('${widget.vehicleWithNotificationsModel!.mileage} km'),
+                (data["mileage"] != null) ?AutoSizeText('${data["mileage"]} km'):AutoSizeText('${widget.vehicleWithNotificationsModel!.mileage} km'),
                 (data['serviceId']!= null) ?_status(data):const SizedBox()
               ]
             ),
@@ -163,25 +164,25 @@ class _TimelineVehiclesCarNotesAndServiceOrderState extends State<TimelineVehicl
 
   Widget _status(Map<String,dynamic> data) {
 
-    Widget text = Text('');
+    Widget text = AutoSizeText('');
 
     if(data["orderRecived"] == "Done") {
-      text = const Text('Estatus: Orden recibida.');
+      text = const AutoSizeText('Estatus: Orden recibida.');
     }
 
     if(data["beingPrePared"] == "Done"){
-      text = const Text('Estatus: Persona del servicio preparado.');
+      text = const AutoSizeText('Estatus: Persona del servicio preparado.');
     }
 
     if(data["onTheWay"] == "Done"){
-      text = const Text('Estatus: En camino.');
+      text = const AutoSizeText('Estatus: En camino.');
     }
 
     if(data["deliverd"] == "Done"){
-      text = const Text("Estatus: Servicio Completado.");
+      text = const AutoSizeText("Estatus: Servicio Completado.");
     }
     if (data["orderCancelled"] =="Done") {
-      text = const Text("Estatus: Servicio Cancelado.");
+      text = const AutoSizeText("Estatus: Servicio Cancelado.");
     }
 
     return text;
@@ -190,23 +191,23 @@ class _TimelineVehiclesCarNotesAndServiceOrderState extends State<TimelineVehicl
 
   Widget messageDayRest(int daysOfTheNextService,  String dateFromNextFormat) {
 
-    Widget text = Text('');
+    Widget text = AutoSizeText('');
     if(daysOfTheNextService <= 0) {
-      text =  Text(
+      text =  AutoSizeText(
         'Restan ${0} dias para el proximo cambio de aceite. El ${dateFromNextFormat}',
         style: const TextStyle(color: Colors.red),
       );
     }
 
     if(daysOfTheNextService > 0 && daysOfTheNextService <= 7) {
-      text =  Text(
+      text =  AutoSizeText(
         'Restan ${daysOfTheNextService} dias para el proximo cambio de aceite.\nEl ${dateFromNextFormat}.',
         style: const TextStyle(color: Colors.orange),
       );
     }
 
     if(daysOfTheNextService > 7){
-      text = Text('Restan ${daysOfTheNextService} dias para el proximo cambio de aceite. \nEl ${dateFromNextFormat}.');
+      text = AutoSizeText('Restan ${daysOfTheNextService} dias para el proximo cambio de aceite. \nEl ${dateFromNextFormat}.');
     }
 
     

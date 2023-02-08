@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 import 'package:googleapis_auth/auth_io.dart';
@@ -83,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     backgroundColor: Color.fromARGB(255, 3, 3, 247),
                     shape: const StadiumBorder()
                   ),
-                  child: const Text("Continuar"),
+                  child: const AutoSizeText("Continuar"),
                   onPressed: () async {
 
                     FocusScope.of(context).requestFocus(FocusNode());
@@ -205,7 +206,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void showSnackBar({required String title, int seconds = 4}) {
     final snackbar = SnackBar(
-      content: Text(
+      content: AutoSizeText(
         title,
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: MediaQuery.of(context).size.height.toDouble() * 0.020),

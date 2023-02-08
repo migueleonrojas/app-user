@@ -1,5 +1,7 @@
 /* import 'package:firebase_messaging/firebase_messaging.dart'; */
 import 'dart:async';
+import 'dart:math';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -28,7 +30,29 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>  {
   
-  
+  Color _buttonColor = Color(439533999);
+  Timer? timer;
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      /* Random().nextint(max - min) + min; */
+      int codeColorRandom = Random().nextInt(999999999 - 1) + 1;
+      _buttonColor = Color(codeColorRandom);
+      setState(() {
+        
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    timer!.cancel();
+  }
+
+
 
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -39,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen>  {
         iconTheme: const IconThemeData(color: Colors.black),
         elevation: 0,
         backgroundColor: Colors.white,
-        title:  Text(
+        title:  AutoSizeText(
           "GlobalOil",
           style: TextStyle(
             color: Colors.black,
@@ -89,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen>  {
                               top: size.height * 0.005,
                               bottom: size.height * 0.005,
                               left: size.height * 0.0080,
-                              child: Text(
+                              child: AutoSizeText(
                                 snapshot.data!.docs.length.toString(),
                                 style: const TextStyle(
                                   color: Colors.white,
@@ -101,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen>  {
                               top: size.height * 0.005,
                               bottom: size.height * 0.005,
                               left: size.height * 0.0080,
-                              child: Text(
+                              child: AutoSizeText(
                                 snapshot.data!.docs.length.toString(),
                                 style: TextStyle(
                                   color: Colors.white,
@@ -138,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen>  {
             //               left: 6,
             //               child: Consumer<CartItemCounter>(
             //                 builder: (context, counter, _) {
-            //                   return Text(
+            //                   return AutoSizeText(
             //                     (AutoParts.sharedPreferences
             //                                 .getStringList(
             //                                     AutoParts.userCartList)
@@ -159,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen>  {
             //               left: 3,
             //               child: Consumer<CartItemCounter>(
             //                 builder: (context, counter, _) {
-            //                   return Text(
+            //                   return AutoSizeText(
             //                     (AutoParts.sharedPreferences
             //                                 .getStringList(
             //                                     AutoParts.userCartList)
@@ -191,8 +215,10 @@ class _HomeScreenState extends State<HomeScreen>  {
           mainAxisAlignment:MainAxisAlignment.spaceBetween,
           
           children: [
-            
-            LoginHelper().loginLog(context),
+            SizedBox(height: size.height * 0.025,),
+            HomeHelper().buttonCreateVehicle(_buttonColor, context),
+            SizedBox(height: size.height * 0.025,),
+            /* LoginHelper().loginLog(context), */
             HomeHelper().mainButtons(context),
             SizedBox(height: size.height * 0.025,),
             
@@ -216,15 +242,15 @@ class _HomeScreenState extends State<HomeScreen>  {
     return await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('Estas seguro?'),
-            content: const Text('De que quieres salir!'),
+            title: const AutoSizeText('Estas seguro?'),
+            content: const AutoSizeText('De que quieres salir!'),
             actions: <Widget>[
               GestureDetector(
                 onTap: () { 
                   if(!mounted) return;
                   Navigator.of(context).pop(false);
                 },
-                child: const Text("NO"),
+                child: const AutoSizeText("NO"),
               ),
               const SizedBox(height: 16),
               GestureDetector(
@@ -233,7 +259,7 @@ class _HomeScreenState extends State<HomeScreen>  {
                   if(!mounted) return;
                   Navigator.of(context).pop(true);
                 },
-                child: const Text("YES"),
+                child: const AutoSizeText("YES"),
               ),
               const SizedBox(height: 16),
             ],

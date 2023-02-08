@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/widgets/simpleAppbar.dart';
 import 'package:flutter/material.dart';
 
@@ -71,7 +72,7 @@ class TitleBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Text(
+      child: AutoSizeText(
         title,
         style: TextStyle(
           fontSize: 18,
@@ -110,7 +111,7 @@ class DeveloperCard extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            title: Text(
+            title: AutoSizeText(
               title,
               style: TextStyle(
                 fontSize: 18,
@@ -119,7 +120,7 @@ class DeveloperCard extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            subtitle: Text(
+            subtitle: AutoSizeText(
               subtitle,
               style: TextStyle(
                 fontSize: 16,

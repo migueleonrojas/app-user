@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Screens/Authentication/signup_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class LoginHelper extends ChangeNotifier {
   }
 
   Widget welcomeText() {
-    return const Text(
+    return const AutoSizeText(
       "Bienvenido de nuevo!",
       style: TextStyle(
         fontSize: 30,
@@ -32,7 +33,7 @@ class LoginHelper extends ChangeNotifier {
     
     return  Padding(
       padding:  const EdgeInsets.symmetric(horizontal: 16.0),
-      child:  Text(
+      child:  AutoSizeText(
         msg,
         textAlign: TextAlign.center,
         style: TextStyle(
@@ -47,7 +48,7 @@ class LoginHelper extends ChangeNotifier {
   }
 
   Widget orText() {
-    return const Text(
+    return const AutoSizeText(
       'O',
       textAlign: TextAlign.center,
       style: TextStyle(
@@ -70,7 +71,7 @@ class LoginHelper extends ChangeNotifier {
   //         FontAwesomeIcons.google,
   //         color: Colors.redAccent,
   //       ),
-  //       label: Text(
+  //       label: AutoSizeText(
   //         " Continue with Google",
   //         style: TextStyle(
   //           fontSize: 22,
@@ -101,7 +102,7 @@ class LoginHelper extends ChangeNotifier {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text(
+        AutoSizeText(
           '¿No tiene una cuenta?',
           style: TextStyle(
             fontSize: (MediaQuery.of(context).size.height * 0.022).toDouble(),
@@ -118,7 +119,7 @@ class LoginHelper extends ChangeNotifier {
               ),
             );
           },
-          child: Text(
+          child: AutoSizeText(
             ' Registrarse',
             style: TextStyle(
               color: Colors.red,

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:oilapp/Model/addresss.dart';
 import 'package:oilapp/Model/service_order_payment_details_model.dart';
@@ -51,7 +52,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
           children: [
             SizedBox(height: size.height * 0.008,),
             Center(
-              child: Text(
+              child: AutoSizeText(
                 'ID de la orden:${widget.orderId}',
                 style: TextStyle(
                   fontSize: size.height * 0.022,
@@ -66,7 +67,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                   child: Column(
                     children: [
                       Center(
-                        child: Text(
+                        child: AutoSizeText(
                           'datos del vehiculo'.toUpperCase(),
                           style: TextStyle(
                             fontSize: size.height * 0.026,
@@ -76,21 +77,21 @@ class _MyServiceOrderDetailsByVehicleScreenState
                         
                       ),
                       SizedBox(height: 5,),
-                      Text(
+                      AutoSizeText(
                         'Marca: ${widget.vehicleModel.brand}',
                         style: TextStyle(
                           fontSize: size.height * 0.022,
                           fontWeight: FontWeight.w600,
                         )
                       ),
-                      Text(
+                      AutoSizeText(
                         'Modelo: ${widget.vehicleModel.model}',
                         style: TextStyle(
                           fontSize: size.height * 0.022,
                           fontWeight: FontWeight.w600,
                         )
                       ),
-                      Text(
+                      AutoSizeText(
                         'Año: ${widget.vehicleModel.year}',
                         style: TextStyle(
                           fontSize: size.height * 0.022,
@@ -100,7 +101,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                       Row(
                         mainAxisAlignment:MainAxisAlignment.center ,
                         children: [
-                          Text(
+                          AutoSizeText(
                             'Color: ',
                               style: TextStyle(
                                 fontSize: size.height * 0.022,
@@ -110,7 +111,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                           Container(color: Color(widget.vehicleModel.color!),child: SizedBox(height: size.height * 0.012, width: size.width *0.07,),)
                         ],
                       ),
-                      Text(
+                      AutoSizeText(
                         'Kilometraje: ${widget.vehicleModel.mileage}',
                         style: TextStyle(
                           fontSize: size.height * 0.022,
@@ -151,7 +152,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                           child: Column(
                             children: [
                               Center(
-                                child: Text(
+                                child: AutoSizeText(
                                   'detalle del pago'.toUpperCase(),
                                   style: TextStyle(
                                     fontSize: size.height * 0.026,
@@ -163,7 +164,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                 padding: EdgeInsets.all(size.height * 0.012),
                                 child: Column(
                                   children: [
-                                    Text(
+                                    AutoSizeText(
                                       serviceOrderPaymentDetailsModel.paymentMethod!,
                                       style: TextStyle(
                                         fontSize: size.height * 0.022,
@@ -171,7 +172,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                       ),
                                     ),
                                     (serviceOrderPaymentDetailsModel.confirmationNumber != 0)
-                                      ? Text(
+                                      ? AutoSizeText(
                                         'Número de Confirmación: ${serviceOrderPaymentDetailsModel.confirmationNumber.toString()}',
                                         style: TextStyle(
                                           fontSize: size.height * 0.022,
@@ -180,7 +181,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                       )
                                       : Container(),
                                       (serviceOrderPaymentDetailsModel.paymentMethod == "Zelle")
-                                      ? Text(
+                                      ? AutoSizeText(
                                         'Fecha del Pago: ${DateFormat('dd/MM/yyyy').format(serviceOrderPaymentDetailsModel.paymentDate!)}',
                                         style: TextStyle(
                                           fontSize: size.height * 0.022,
@@ -189,7 +190,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                       )
                                       :Container(),
                                     (serviceOrderPaymentDetailsModel.issuerName != "")
-                                      ?Text(
+                                      ?AutoSizeText(
                                         'Nombre del Emisor: ${serviceOrderPaymentDetailsModel.issuerName.toString()}',
                                         style: TextStyle(
                                           fontSize: size.height * 0.022,
@@ -198,7 +199,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                       )
                                       :Container(),
                                     (serviceOrderPaymentDetailsModel.issuerName != "")
-                                      ?Text(
+                                      ?AutoSizeText(
                                         'Nombre del Titular: ${serviceOrderPaymentDetailsModel.holderName.toString()}',
                                         style: TextStyle(
                                           fontSize: size.height * 0.022,
@@ -207,7 +208,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                       )
                                       :Container(),
                                     (serviceOrderPaymentDetailsModel.observations != "")
-                                      ?Text(                                        
+                                      ?AutoSizeText(                                        
                                         'Observaciones: ${serviceOrderPaymentDetailsModel.observations.toString()}',
                                         maxLines: 3,
                                         style: TextStyle(
@@ -253,7 +254,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                         child: Column(
                           children: [
                              Center(
-                              child: Text(
+                              child: AutoSizeText(
                               'detalle del servicio'.toUpperCase(),
                               style: TextStyle(
                                 fontSize: size.height * 0.026,
@@ -272,7 +273,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                 title: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    AutoSizeText(
                                       (snapshot.data!.docs[index] as dynamic)
                                           .data()['serviceName'],
                                       maxLines: 2,
@@ -282,7 +283,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                       ),
                                     ),
                                     SizedBox(height: size.height * 0.008),
-                                    Text(
+                                    AutoSizeText(
                                       "Fecha: " +
                                           (snapshot.data!.docs[index] as dynamic).data()['date'],
                                       maxLines: 2,
@@ -292,7 +293,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                       ),
                                     ),
                                     SizedBox(height: size.height * 0.008),
-                                    Text(
+                                    AutoSizeText(
                                       "\$" +
                                           (snapshot.data!.docs[index] as dynamic)
                                               .data()['newPrice']
@@ -303,7 +304,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                         color: Colors.deepOrangeAccent[200],
                                       ),
                                     ),
-                                    Text(
+                                    AutoSizeText(
                                       'Observaciones: ${(snapshot.data!.docs[index] as dynamic)
                                         .data()['observations']
                                               .toString()}',
@@ -325,7 +326,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                       size: size.height * 0.022,
                                       color: Colors.deepOrangeAccent[200],
                                     ),
-                                    Text(
+                                    AutoSizeText(
                                       (snapshot.data!.docs[index] as dynamic)
                                           .data()['quantity']
                                           .toString(),
@@ -385,7 +386,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                         child: Column(
                           children: [
                             Center(
-                              child: Text(
+                              child: AutoSizeText(
                               'dirección de entrega'.toUpperCase(),
                               style: TextStyle(
                                 fontSize: size.height * 0.026,
@@ -399,7 +400,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                 TableRow(
                                   children: [
                                     KeyText(msg: "Nombre del Cliente"),
-                                    Text(
+                                    AutoSizeText(
                                       (snapshot.data!.docs[index] as dynamic)
                                           .data()['customerName'],
                                     ),
@@ -408,7 +409,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                 TableRow(
                                   children: [
                                     KeyText(msg: "Teléfono"),
-                                    Text(
+                                    AutoSizeText(
                                       (snapshot.data!.docs[index] as dynamic)
                                           .data()['phoneNumber'],
                                     ),
@@ -417,7 +418,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                 TableRow(
                                   children: [
                                     KeyText(msg: "Ciudad"),
-                                    Text(
+                                    AutoSizeText(
                                       (snapshot.data!.docs[index] as dynamic).data()['city'],
                                     ),
                                   ],
@@ -425,7 +426,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                 TableRow(
                                   children: [
                                     KeyText(msg: "Area"),
-                                    Text(
+                                    AutoSizeText(
                                       (snapshot.data!.docs[index] as dynamic).data()['area'],
                                     ),
                                   ],
@@ -433,7 +434,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                 TableRow(
                                   children: [
                                     KeyText(msg: "Número de la casa"),
-                                    Text(
+                                    AutoSizeText(
                                       (snapshot.data!.docs[index] as dynamic)
                                           .data()['houseandroadno'],
                                     ),
@@ -442,7 +443,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                 TableRow(
                                   children: [
                                     KeyText(msg: "Código de Área"),
-                                    Text(
+                                    AutoSizeText(
                                       (snapshot.data!.docs[index] as dynamic).data()['areacode'],
                                     ),
                                   ],
@@ -451,7 +452,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                             ),
                             SizedBox(height: size.height * 0.008,),
                             Center(
-                              child: Text(
+                              child: AutoSizeText(
                               'ubicación en el mapa'.toUpperCase(),
                               style: TextStyle(
                                 fontSize: size.height * 0.026,
@@ -501,7 +502,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                 setState(() {});
 
                               }, 
-                              child: const Text('Editar dirección')
+                              child: const AutoSizeText('Editar dirección')
                             )
                           ],
                         ),
@@ -559,7 +560,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                     children: [
                                       SizedBox(height: size.height * 0.008,),
                                       Center(
-                                        child: Text(
+                                        child: AutoSizeText(
                                           "Estatus de Orden",
                                           style: TextStyle(
                                             letterSpacing: 1,
@@ -587,7 +588,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                           }
                                           await BackEndOrderService().cancelledOrder(widget.orderId);
                                         }, 
-                                        child: const Text('Cancelar Orden')
+                                        child: const AutoSizeText('Cancelar Orden')
                                       )
                                     ],
                                   ),
@@ -784,7 +785,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                     ],
                                   ),
                                   SizedBox(height: size.height * 0.028),
-                                  Text(
+                                  AutoSizeText(
                                     ((snapshot.data!.docs[index] as dynamic) 
                                                 .data()['deliverd'] ==
                                             'Done')
@@ -818,14 +819,14 @@ class _MyServiceOrderDetailsByVehicleScreenState
     return await showDialog(
           context: context,
           builder: (context) =>  AlertDialog(
-            title:  Text('Estas seguro?'),
-            content:  Text(msg),
+            title:  AutoSizeText('Estas seguro?'),
+            content:  AutoSizeText(msg),
             actions: <Widget>[
                GestureDetector(
                 onTap: () => Navigator.of(context).pop(true),
                 child: Padding(
                   padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.012 ),
-                  child: Text("YES"),
+                  child: AutoSizeText("YES"),
                 ),
               ),
                SizedBox(height: MediaQuery.of(context).size.height * 0.019),
@@ -833,7 +834,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                 onTap: () => Navigator.of(context).pop(false),
                 child: Padding(
                   padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.012 ),
-                  child: Text("NO"),
+                  child: AutoSizeText("NO"),
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.019),
@@ -895,7 +896,7 @@ class OrderStatusCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                AutoSizeText(
                   title,
                   style: TextStyle(
                     fontSize: size.height * 0.024,
@@ -910,7 +911,7 @@ class OrderStatusCard extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     SizedBox(width: size.width * 0.02),
-                    Text(
+                    AutoSizeText(
                       time,
                       style: TextStyle(color: Colors.grey),
                     ),
@@ -936,7 +937,7 @@ class KeyText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Text(
+    return AutoSizeText(
       msg,
       style: TextStyle(
         fontSize: size.height * 0.022,

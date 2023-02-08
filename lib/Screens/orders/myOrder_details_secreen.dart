@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Model/order_history_model.dart';
 import 'package:oilapp/config/config.dart';
 import 'package:oilapp/widgets/loading_widget.dart';
@@ -61,7 +62,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                             title: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                AutoSizeText(
                                   orderHistoyModel.pName!,
                                   maxLines: 2,
                                   style: TextStyle(
@@ -70,7 +71,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                                   ),
                                 ),
                                 SizedBox(height: size.height * 0.005),
-                                Text(
+                                AutoSizeText(
                                   "\$" + orderHistoyModel.newPrice.toString(),
                                   style: TextStyle(
                                     fontSize: size.height * 0.020,
@@ -88,7 +89,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                                   size: size.height * 0.020,
                                   color: Colors.deepOrangeAccent[200],
                                 ),
-                                Text(
+                                AutoSizeText(
                                   orderHistoyModel.quantity.toString(),
                                   style: TextStyle(
                                     fontSize: size.height * 0.026,
@@ -132,7 +133,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                             TableRow(
                               children: [
                                 const KeyText(msg: "Nombre del Cliente"),
-                                Text(
+                                AutoSizeText(
                                   (snapshot.data!.docs[index] as dynamic)
                                       .data()['customerName'],
                                 ),
@@ -141,7 +142,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                             TableRow(
                               children: [
                                 const KeyText(msg: "Teléfono"),
-                                Text(
+                                AutoSizeText(
                                   (snapshot.data!.docs[index] as dynamic)
                                       .data()['phoneNumber'],
                                 ),
@@ -150,7 +151,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                             TableRow(
                               children: [
                                 const KeyText(msg: "Ciudad"),
-                                Text(
+                                AutoSizeText(
                                   (snapshot.data!.docs[index] as dynamic).data()['city'],
                                 ),
                               ],
@@ -158,7 +159,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                             TableRow(
                               children: [
                                 const KeyText(msg: "Area"),
-                                Text(
+                                AutoSizeText(
                                   (snapshot.data!.docs[index] as dynamic ).data()['area'],
                                 ),
                               ],
@@ -166,7 +167,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                             TableRow(
                               children: [
                                 const KeyText(msg: "Número de la casa"),
-                                Text(
+                                AutoSizeText(
                                   (snapshot.data!.docs[index] as dynamic)
                                       .data()['houseandroadno'],
                                 ),
@@ -175,7 +176,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                             TableRow(
                               children: [
                                 const KeyText(msg: "Código de Área"),
-                                Text(
+                                AutoSizeText(
                                   (snapshot.data!.docs[index] as dynamic).data()['areacode'],
                                 ),
                               ],
@@ -224,7 +225,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                                   height: size.height * 0.060,
                                   width: double.infinity,
                                   child: Center(
-                                    child: Text(
+                                    child: AutoSizeText(
                                       "Estatus de la Orden",
                                       style: TextStyle(
                                         letterSpacing: 1,
@@ -367,7 +368,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                                     ],
                                   ),
                                   SizedBox(height: size.height * 0.020),
-                                  Text(
+                                  AutoSizeText(
                                     ((snapshot.data!.docs[index] as dynamic)
                                                 .data()['deliverd'] ==
                                             'Done')
@@ -454,7 +455,7 @@ class OrderStatusCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                AutoSizeText(
                   title,
                   style: TextStyle(
                     fontSize: size.height * 0.025,
@@ -469,7 +470,7 @@ class OrderStatusCard extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     SizedBox(width: size.width * 0.04),
-                    Text(
+                    AutoSizeText(
                       time,
                       style: TextStyle(color: Colors.grey),
                     ),
@@ -495,7 +496,7 @@ class KeyText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Text(
+    return AutoSizeText(
       msg,
       style: TextStyle(
         fontSize: size.height *0.018,

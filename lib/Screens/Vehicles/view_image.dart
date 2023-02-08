@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -31,7 +32,7 @@ class _ViewImageState extends State<ViewImage> {
     return Scaffold(
       appBar: AppBar(
         
-        title: Text(
+        title: AutoSizeText(
           "Vista de Imagen",
           style: TextStyle(
             fontSize: size.height * 0.028,
@@ -85,14 +86,14 @@ class _ViewImageState extends State<ViewImage> {
     return await showDialog(
       context: context,
       builder: (context) =>  AlertDialog(
-        title:  Text('Estas seguro?'),
-        content:  Text(msg),
+        title:  AutoSizeText('Estas seguro?'),
+        content:  AutoSizeText(msg),
         actions: <Widget>[
            GestureDetector(
             onTap: () => Navigator.of(context).pop(true),
             child: Padding(
               padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.012),
-              child: Text("YES"),
+              child: AutoSizeText("YES"),
             ),
           ),
            SizedBox(height: MediaQuery.of(context).size.height * 0.016),
@@ -100,7 +101,7 @@ class _ViewImageState extends State<ViewImage> {
             onTap: () => Navigator.of(context).pop(false),
             child:  Padding(
               padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.012),
-              child: Text("NO"),
+              child: AutoSizeText("NO"),
             ),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.020),

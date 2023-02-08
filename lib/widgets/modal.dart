@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class ModalAlertDialog extends StatelessWidget {
@@ -12,10 +13,10 @@ class ModalAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return AlertDialog(
-      title: Text(
+      title: AutoSizeText(
         title,
       ),
-      content: Text(content),
+      content: AutoSizeText(content),
       actions: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -26,7 +27,7 @@ class ModalAlertDialog extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: Text("OK"),
+          child: AutoSizeText("OK"),
         ),
       ],
     );

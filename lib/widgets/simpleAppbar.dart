@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 AppBar simpleAppBar(bool isMainTitle, String title, BuildContext context) {
@@ -8,7 +9,7 @@ AppBar simpleAppBar(bool isMainTitle, String title, BuildContext context) {
     backgroundColor: Colors.white,
     iconTheme: IconThemeData(color: Colors.black),
     elevation: 0,
-    title: Text(
+    title: AutoSizeText(
       
       isMainTitle ? "AutoParts" : title,
       style: TextStyle(

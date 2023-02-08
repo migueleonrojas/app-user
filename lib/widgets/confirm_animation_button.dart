@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedConfirmButton extends StatefulWidget {
@@ -126,7 +127,7 @@ class _AnimatedConfirmButtonState extends State<AnimatedConfirmButton>
 
   Widget getTextWidget() {
     if (_currentState == ButtonState.SHOW_ONLY_TEXT) {
-      return Text(
+      return AutoSizeText(
         widget.initialText!,
         style: widget.buttonStyle!.initialTextStyle,
       );
@@ -135,7 +136,7 @@ class _AnimatedConfirmButtonState extends State<AnimatedConfirmButton>
     } else {
       return ScaleTransition(
         scale: _scaleFinalTextAnimation!,
-        child: Text(
+        child: AutoSizeText(
           widget.finalText!,
           style: widget.buttonStyle!.finalTextStyle,
         ),

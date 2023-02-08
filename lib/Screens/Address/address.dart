@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:oilapp/Model/addresss.dart';
 
@@ -33,7 +34,7 @@ class _AddressState extends State<Address> {
     return Scaffold(
       appBar: AppBar(
         
-        title: Text(
+        title: AutoSizeText(
           "Global Oil",
           style: TextStyle(
             fontSize: size.height * 0.020,
@@ -62,7 +63,7 @@ class _AddressState extends State<Address> {
               alignment:   Alignment.topCenter,
               child: Padding(
                 padding: EdgeInsets.all(size.height * 0.008),
-                child: Text(
+                child: AutoSizeText(
                   "Seleccionar Dirección",
                   style: TextStyle(
                     color: Colors.black,
@@ -123,7 +124,7 @@ class _AddressState extends State<Address> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.add_location, color: Colors.white),
-            Text(
+            AutoSizeText(
               "No se ha guardado ninguna dirección de envío\nPor favor, agregue su dirección de envío para que podamos entregar su producto.",
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -195,37 +196,37 @@ class _AddressCardState extends State<AddressCard> {
                           TableRow(
                             children: [
                               KeyText(msg: "Nombre"),
-                              Text(widget.model.customerName!),
+                              AutoSizeText(widget.model.customerName!),
                             ],
                           ),
                           TableRow(
                             children: [
                               KeyText(msg: "Teléfono"),
-                              Text(widget.model.phoneNumber!),
+                              AutoSizeText(widget.model.phoneNumber!),
                             ],
                           ),
                           TableRow(
                             children: [
                               KeyText(msg: "Número de casa y calle"),
-                              Text(widget.model.houseandroadno!),
+                              AutoSizeText(widget.model.houseandroadno!),
                             ],
                           ),
                           TableRow(
                             children: [
                               KeyText(msg: "Ciudad"),
-                              Text(widget.model.city!),
+                              AutoSizeText(widget.model.city!),
                             ],
                           ),
                           TableRow(
                             children: [
                               KeyText(msg: "Area"),
-                              Text(widget.model.area!),
+                              AutoSizeText(widget.model.area!),
                             ],
                           ),
                           TableRow(
                             children: [
                               KeyText(msg: "Código de Area"),
-                              Text(widget.model.areacode!),
+                              AutoSizeText(widget.model.areacode!),
                             ],
                           ),
                         ],
@@ -297,14 +298,14 @@ class _AddressCardState extends State<AddressCard> {
     return await showDialog(
           context: context,
           builder: (context) =>  AlertDialog(
-            title:  Text('Estas seguro?'),
-            content:  Text(msg),
+            title:  AutoSizeText('Estas seguro?'),
+            content:  AutoSizeText(msg),
             actions: <Widget>[
                GestureDetector(
                 onTap: () => Navigator.of(context).pop(true),
                 child: Padding(
                   padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.008),
-                  child: Text("YES"),
+                  child: AutoSizeText("YES"),
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.016),
@@ -312,7 +313,7 @@ class _AddressCardState extends State<AddressCard> {
                 onTap: () => Navigator.of(context).pop(false),
                 child:  Padding(
                   padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.008),
-                  child: Text("NO"),
+                  child: AutoSizeText("NO"),
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.016 ),
@@ -330,7 +331,7 @@ class KeyText extends StatelessWidget {
   const KeyText({Key? key, required this.msg}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return AutoSizeText(
       msg,
       style: TextStyle(
         color: Colors.black,

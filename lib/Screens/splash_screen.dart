@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:oilapp/Helper/login_helper.dart';
 import 'package:oilapp/Screens/home_screen.dart';
@@ -98,7 +99,7 @@ class SplashScreenState extends State<SplashScreen> {
                 Padding(
                   padding: EdgeInsets.only(top: (MediaQuery.of(context).size.height * 0.05).toDouble()),
                 ),
-                Text(
+                AutoSizeText(
                   'Ahorre tiempo \nAdministrece con Global Oil',
                   textAlign: TextAlign.center,
                   style: TextStyle(

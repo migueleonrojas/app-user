@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:oilapp/config/config.dart';
@@ -50,7 +51,7 @@ class _AddYearState extends State<AddYear> {
     Size size = MediaQuery.of(context).size;
 
     return AlertDialog(
-      title: const Center(child: Text('Años')),
+      title: const Center(child: AutoSizeText('Años')),
       content:
         Container(
           height: MediaQuery.of(context).size.height * 0.20,
@@ -100,7 +101,7 @@ class _AddYearState extends State<AddYear> {
                             borderRadius: BorderRadius.circular(30),
                             child: Container(
                               width: size.width * 0.35,
-                              child: Center(child: Text((snapshot.data!.docs[index] as dynamic).data()["year"].toString(),style: TextStyle(fontSize: size.height * 0.020)),),
+                              child: Center(child: AutoSizeText((snapshot.data!.docs[index] as dynamic).data()["year"].toString(),style: TextStyle(fontSize: size.height * 0.020)),),
                             ),
                           ),
                         ),
@@ -132,7 +133,7 @@ class _AddYearState extends State<AddYear> {
                           borderRadius: BorderRadius.circular(30),
                           child: Container(
                             width: 120,
-                            child: Center(child: Text((snapshot.data!.docs[index] as dynamic).data()["year"].toString(),style: TextStyle(fontSize: 15)),),
+                            child: Center(child: AutoSizeText((snapshot.data!.docs[index] as dynamic).data()["year"].toString(),style: TextStyle(fontSize: 15)),),
                           ),
                         ),
                       ),
@@ -145,14 +146,14 @@ class _AddYearState extends State<AddYear> {
         ),
       actions: [
         TextButton(
-          child: const Text('Agregar'),
+          child: const AutoSizeText('Agregar'),
           onPressed: () {
             
             Navigator.of(context).pop([widget.selectedIndex, widget.year]);
           },
         ),
         TextButton(
-          child: const Text('Cancelar'),
+          child: const AutoSizeText('Cancelar'),
           onPressed: () {
             final returnedIndexBrand = (widget.holdIndex) ? widget.previousSelectedIndex : '';
             final returnedBrandId = (widget.holdIndex) ? widget.previousYear : '';
@@ -163,7 +164,7 @@ class _AddYearState extends State<AddYear> {
     );
     
     /* return AlertDialog(
-      title: const Center(child: Text('Brand')),
+      title: const Center(child: AutoSizeText('Brand')),
       content: Container(
         height: 200,
         child: ListView.builder(
@@ -183,7 +184,7 @@ class _AddYearState extends State<AddYear> {
                 borderRadius: BorderRadius.circular(30),
                 child: Container(
                   width: double.infinity,
-                  child: Center(child: Text(index.toString(),style: TextStyle(fontSize: 15)),),
+                  child: Center(child: AutoSizeText(index.toString(),style: TextStyle(fontSize: 15)),),
                 ),
               ),
             );
@@ -194,14 +195,14 @@ class _AddYearState extends State<AddYear> {
       ),
       actions: [
         TextButton(
-          child: const Text('Add'),
+          child: const AutoSizeText('Add'),
           onPressed: () {
             
             Navigator.of(context).pop(widget.selectedIndex);
           },
         ),
         TextButton(
-          child: const Text('Cancel'),
+          child: const AutoSizeText('Cancel'),
           onPressed: () {
             final returnedBrand = (widget.holdIndex) ? widget.previousSelectedIndex : '';
             Navigator.of(context).pop(returnedBrand);

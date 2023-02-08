@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Model/product_model.dart';
 import 'package:oilapp/widgets/simpleAppbar.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class ProductOnlyDetails extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              AutoSizeText(
                 "Especificaciones del producto",
                 style: TextStyle(
                   fontSize: 18,
@@ -31,7 +32,7 @@ class ProductOnlyDetails extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 4),
-              Text(
+              AutoSizeText(
                 productModel.shortInfo!.replaceAll("\\n", "\n"),
                 style: TextStyle(
                   fontSize: 16,
@@ -39,7 +40,7 @@ class ProductOnlyDetails extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 8),
-              Text(
+              AutoSizeText(
                 "Detalles del producto",
                 style: TextStyle(
                   fontSize: 18,
@@ -47,7 +48,7 @@ class ProductOnlyDetails extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 4),
-              Text(
+              AutoSizeText(
                 productModel.description!.replaceAll("\\n", "\n"),
                 style: TextStyle(
                   fontSize: 16,

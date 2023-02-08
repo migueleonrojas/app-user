@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Helper/product_details_helper.dart';
 import 'package:oilapp/Model/product_model.dart';
 import 'package:oilapp/Model/rating_review_model.dart';
@@ -83,7 +84,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                       Icons.favorite_border_outlined,
                                       color: Colors.white,
                                     ),
-                                    label:  Text(
+                                    label:  AutoSizeText(
                                       "Agregar a Favoritos",
                                       style: TextStyle(
                                         color: Colors.white,
@@ -126,7 +127,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                         padding:  EdgeInsets.symmetric(
                                           horizontal: size.width * 0.05,
                                         ),
-                                        child: Text(
+                                        child: AutoSizeText(
                                           quantity.toString(),
                                           style: TextStyle(
                                             fontFamily: "Brand-Regular",
@@ -167,7 +168,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    AutoSizeText(
                       "Valoración y comentarios",
                       style: TextStyle(
                         fontSize: size.height * 0.024,
@@ -206,7 +207,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        Text(
+                                        AutoSizeText(
                                           (snapshot.data!.docs.length == 0)
                                               ? "0.0"
                                               : "${(userrating / snapshot.data!.docs.length).toStringAsFixed(1)}",
@@ -225,8 +226,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Text('${userrating.toString()}/'),
-                                        Text(
+                                        AutoSizeText('${userrating.toString()}/'),
+                                        AutoSizeText(
                                           "${snapshot.data!.docs.length.toString()} Clasificaciones",
                                         )
                                       ],
@@ -261,7 +262,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                               borderRadius:
                                                   BorderRadius.circular(size.height * 0.035),
                                             ),
-                                            title: const Text(
+                                            title: const AutoSizeText(
                                               "Dé su opinión",
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
@@ -271,7 +272,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                             content: Column(
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
-                                                const Text(
+                                                const AutoSizeText(
                                                   "Escriba su valiosa opinión sobre este servicio. Nos ayudará a mejorar nuestro servicio.",
                                                   textAlign: TextAlign.center,
                                                 ),
@@ -324,7 +325,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                             "Gracias por darnos su valiosa calificación y reseña");
                                                     Navigator.pop(context);
                                                   },
-                                                  child: Text(
+                                                  child: AutoSizeText(
                                                     "Enviar",
                                                     style: TextStyle(
                                                       fontWeight:
@@ -356,7 +357,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 ),
                               ),
                               child: Center(
-                                child: Text(
+                                child: AutoSizeText(
                                   "Califique y opine...",
                                 ),
                               ),
@@ -406,7 +407,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Text(
+                                                AutoSizeText(
                                                   ratingAndReviewModel.userName!,
                                                   style: TextStyle(
                                                     fontSize: size.height * 0.022,
@@ -417,7 +418,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                 ),
                                                 Row(
                                                   children: [
-                                                    Text(
+                                                    AutoSizeText(
                                                       '${ratingAndReviewModel.rating} ',
                                                     ),
                                                     for (int i = 0;
@@ -425,12 +426,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                             ratingAndReviewModel
                                                                 .rating!;
                                                         i++)
-                                                      Text('⭐'),
+                                                      AutoSizeText('⭐'),
                                                   ],
                                                 ),
                                               ],
                                             ),
-                                            subtitle: Text(ratingAndReviewModel
+                                            subtitle: AutoSizeText(ratingAndReviewModel
                                                 .reviewMessage!),
                                           );
                                         },
@@ -449,7 +450,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                               ),
                                             );
                                           },
-                                          child: Text(
+                                          child: AutoSizeText(
                                             "Mas Opiniones....",
                                             style: TextStyle(
                                               fontSize: 18,
@@ -490,7 +491,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text(
+                                            AutoSizeText(
                                               ratingAndReviewModel.userName!,
                                               style:  TextStyle(
                                                 fontSize: size.height * 0.021,
@@ -501,19 +502,19 @@ class _ProductDetailsState extends State<ProductDetails> {
                                             ),
                                             Row(
                                               children: [
-                                                Text(
+                                                AutoSizeText(
                                                     '${ratingAndReviewModel.rating}'),
                                                 for (int i = 0;
                                                     i <
                                                         ratingAndReviewModel
                                                             .rating!;
                                                     i++)
-                                                  Text('⭐'),
+                                                  AutoSizeText('⭐'),
                                               ],
                                             )
                                           ],
                                         ),
-                                        subtitle: Text(
+                                        subtitle: AutoSizeText(
                                             ratingAndReviewModel.reviewMessage!),
                                       );
                                     },

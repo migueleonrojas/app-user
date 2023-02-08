@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class _TimeLineServiceOrderState extends State<TimeLineServiceOrder> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text(
+        const AutoSizeText(
           'Ordenes de Servicio',
           style:  TextStyle(
             fontSize: 20 
@@ -95,7 +96,7 @@ class _TimeLineServiceOrderState extends State<TimeLineServiceOrder> {
                             padding: EdgeInsets.all(8.0),
                             child: Column(
                               children: [
-                                Text('Servicio: ${serviceOrderModel.categoryName!}'),
+                                AutoSizeText('Servicio: ${serviceOrderModel.categoryName!}'),
                                 _status(serviceOrderModel)
                               ],
                             ),
@@ -117,25 +118,25 @@ class _TimeLineServiceOrderState extends State<TimeLineServiceOrder> {
 
   Widget _status(ServiceOrderModel serviceOrderModel) {
 
-    Widget text = Text('');
+    Widget text = AutoSizeText('');
 
     if(serviceOrderModel.orderRecived == "Done") {
-      text = const Text('Estatus: Orden recibida.');
+      text = const AutoSizeText('Estatus: Orden recibida.');
     }
 
     if(serviceOrderModel.beingPrePared == "Done"){
-      text = const Text('Estatus: Persona del servicio preparado.');
+      text = const AutoSizeText('Estatus: Persona del servicio preparado.');
     }
 
     if(serviceOrderModel.onTheWay == "Done"){
-      text = const Text('Estatus: En camino.');
+      text = const AutoSizeText('Estatus: En camino.');
     }
 
     if(serviceOrderModel.deliverd == "Done"){
-      text = const Text("Estatus: Servicio Completado.");
+      text = const AutoSizeText("Estatus: Servicio Completado.");
     }
     if (serviceOrderModel.orderCancelled =="Done") {
-      text = const Text("Estatus: Servicio Cancelado.");
+      text = const AutoSizeText("Estatus: Servicio Cancelado.");
     }
 
     return text;

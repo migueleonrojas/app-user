@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -49,7 +50,7 @@ class _AddCarNoteState extends State<AddCarNote> {
     return Scaffold(
       
       appBar: AppBar(
-        title:  Text(
+        title:  AutoSizeText(
           (!selectingAttachments)?"Agregar Servicio":"Selecionado: ${selectedAttachments.length}",
           style: TextStyle(
             fontSize: size.height * 0.024,
@@ -362,7 +363,7 @@ class _AddCarNoteState extends State<AddCarNote> {
                                 SizedBox(height: size.height * 0.008,),
                                 Padding(
                                   padding: EdgeInsets.symmetric(horizontal: size.width * 0.055, vertical: size.height * 0.014),
-                                  child:  Text(
+                                  child:  AutoSizeText(
                                     'Adjuntar',                    
                                     style: TextStyle(
                                       fontSize: size.height * 0.022,
@@ -372,17 +373,17 @@ class _AddCarNoteState extends State<AddCarNote> {
                                 ),
                                 ListTile(
                                   leading: const Icon(Icons.camera_alt_outlined),
-                                  title: const Text('Tomar foto'),
+                                  title: const AutoSizeText('Tomar foto'),
                                   onTap: capturePhotoWithCamera,
                                 ),
                                 ListTile(
                                   leading: const Icon(Icons.image),
-                                  title: const Text('Seleccionar imagen'),
+                                  title: const AutoSizeText('Seleccionar imagen'),
                                   onTap: pickPhotoFromGallery,
                                 ),
                                 ListTile(
                                   leading: const Icon(Icons.file_copy),
-                                  title: const Text('Seleccionar archivo'),
+                                  title: const AutoSizeText('Seleccionar archivo'),
                                   onTap: pickPhotoFromFile
                                 ),
                               ]
@@ -391,7 +392,7 @@ class _AddCarNoteState extends State<AddCarNote> {
                         );
 
                       }, 
-                      child: const Text('Adjuntar Archivo')
+                      child: const AutoSizeText('Adjuntar Archivo')
                     ),
                     SizedBox(height: size.height * 0.024),
                     (attachments.isNotEmpty)  
@@ -401,7 +402,7 @@ class _AddCarNoteState extends State<AddCarNote> {
                       height: size.height * 0.200,
                       child: Column(
                         children: [
-                          Text(
+                          AutoSizeText(
                             'Adjunto',
                             style: TextStyle(fontSize: size.height * 0.024),
                           ),
@@ -573,14 +574,14 @@ class _AddCarNoteState extends State<AddCarNote> {
     return await showDialog(
           context: context,
           builder: (context) =>  AlertDialog(
-            title:  Text('Estas seguro?'),
-            content:  Text(msg),
+            title:  AutoSizeText('Estas seguro?'),
+            content:  AutoSizeText(msg),
             actions: <Widget>[
                GestureDetector(
                 onTap: () => Navigator.of(context).pop(true),
                 child: Padding(
                   padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.010),
-                  child: Text("YES"),
+                  child: AutoSizeText("YES"),
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.019),
@@ -588,7 +589,7 @@ class _AddCarNoteState extends State<AddCarNote> {
                 onTap: () => Navigator.of(context).pop(false),
                 child: Padding(
                   padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.010),
-                  child: Text("NO"),
+                  child: AutoSizeText("NO"),
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.019),

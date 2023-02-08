@@ -1,5 +1,7 @@
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:oilapp/Screens/Vehicles/create_vehicle.dart';
 import 'package:oilapp/Screens/Vehicles/vehicles.dart';
 import 'package:oilapp/Screens/products/product_search.dart';
 import 'package:oilapp/service/category_data.dart';
@@ -26,7 +28,7 @@ class HomeHelper {
               horizontal: size.height * 0.020,
               vertical: size.height * 0.020 ,
             ),
-            child: Text(
+            child: AutoSizeText(
               'Categories',
               style: TextStyle(
                 fontSize: size.height * 0.025,
@@ -179,7 +181,7 @@ class HomeHelper {
               ),
             ),
             SizedBox(height: size.height * 0.010,),
-            Text(
+            AutoSizeText(
               'Mis Vehiculos',
               style: TextStyle(fontSize: size.height * 0.018),
             )
@@ -226,7 +228,7 @@ class HomeHelper {
               ),
             ),
             SizedBox(height: size.height * 0.010,),
-            Text(
+            AutoSizeText(
               'Tienda GO',
               style: TextStyle(fontSize: size.height * 0.018),
             )
@@ -236,6 +238,65 @@ class HomeHelper {
         
       ],
     );
+  }
+
+
+  Widget buttonCreateVehicle(Color color, BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
+    
+
+    return Container(
+      width: size.width *0.7,
+      height: size.height * 0.065,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(size.height *0.015),
+        boxShadow: [
+          for(double i = 1; i < 5; i++)
+            BoxShadow(
+              color: color,
+              blurRadius: 3 * i,
+              
+            ),
+          for(double i = 1; i < 5; i++)
+            BoxShadow(
+              color: color,
+              blurRadius: 3 * i,
+              offset: Offset.zero,
+              blurStyle: BlurStyle.outer
+            ),
+        ]
+
+      ),
+      child: TextButton(
+        onPressed: () {
+          Route route = MaterialPageRoute(builder: (_) => CreateVehicleScreen());
+          Navigator.push(context, route);
+        },
+        style: TextButton.styleFrom(
+          side: BorderSide(color: Colors.white, width: size.width *0.01),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(size.height *0.015)
+          )
+        ),
+        child: Text(
+          'Crear Vehiculo',
+          style: TextStyle(
+            color: Colors.black,
+            shadows: [
+              for(double i = 1; i < 4; i++)
+                Shadow(
+                  color: color,
+                  blurRadius: 3 * i
+      
+                )
+            ]
+          ),
+        ),
+      ),
+    );
+
   }
 
 }

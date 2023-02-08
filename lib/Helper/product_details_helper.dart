@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Model/product_model.dart';
 import 'package:oilapp/Screens/cart_screen.dart';
 import 'package:oilapp/Screens/products/product_onlydetails.dart';
@@ -36,7 +37,7 @@ class ProductDetailsHelper {
                 ? SizedBox(
                     height: 40,
                     child: ElevatedButton(
-                      child: Text(
+                      child: AutoSizeText(
                         "Ir a la carro de compras".toUpperCase(),
                         style: TextStyle(
                           color: Colors.white,
@@ -56,7 +57,7 @@ class ProductDetailsHelper {
                 : SizedBox(
                     height: 40,
                     child: ElevatedButton(
-                      child: Text(
+                      child: AutoSizeText(
                         "Añadir al carro de compras".toUpperCase(),
                         style: TextStyle(
                           color: Colors.white,
@@ -99,7 +100,7 @@ class ProductDetailsHelper {
   }
 
   productName() {
-    return Text(
+    return AutoSizeText(
       productModel.productName!,
       style: TextStyle(
         fontFamily: "Brand-Regular",
@@ -118,7 +119,7 @@ class ProductDetailsHelper {
                 padding: const EdgeInsets.symmetric(
                   vertical: 10,
                 ),
-                child: Text(
+                child: AutoSizeText(
                   "\$${productModel.orginalprice}",
                   style: TextStyle(
                     fontFamily: "Brand-Regular",
@@ -131,7 +132,7 @@ class ProductDetailsHelper {
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  AutoSizeText(
                     "\$${productModel.newprice}",
                     style:const TextStyle(
                       fontFamily: "Brand-Regular",
@@ -142,7 +143,7 @@ class ProductDetailsHelper {
                   ),
                   Row(
                     children: [
-                      Text(
+                      AutoSizeText(
                         "\$${productModel.orginalprice}",
                         style: const TextStyle(
                           fontFamily: "Brand-Regular",
@@ -152,7 +153,7 @@ class ProductDetailsHelper {
                         ),
                       ),
                       const SizedBox(width: 5),
-                      Text(
+                      AutoSizeText(
                         '- ${productModel.offervalue}%',
                         style: const TextStyle(
                           fontFamily: "Brand-Regular",
@@ -177,7 +178,7 @@ class ProductDetailsHelper {
         Icons.favorite_border_outlined,
         color: Colors.white,
       ),
-      label: const Text(
+      label: const AutoSizeText(
         "Agregar a Favoritos",
         style: TextStyle(
           color: Colors.white,
@@ -222,7 +223,7 @@ class ProductDetailsHelper {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              const AutoSizeText(
                 "Detalles",
                 style: TextStyle(
                   fontSize: 20,
@@ -245,7 +246,7 @@ class ProductDetailsHelper {
               ),
             ],
           ),
-          Text(
+          AutoSizeText(
             productModel.description!.replaceAll("\\n", "\n"),
             maxLines: 5,
             overflow: TextOverflow.ellipsis,

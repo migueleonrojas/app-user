@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
@@ -92,7 +93,7 @@ class _UpdateOtpConfirmPhoneScreenState extends State<UpdateOtpConfirmPhoneScree
                       backgroundColor: Color.fromARGB(255, 3, 3, 247),
                       shape: const StadiumBorder()
                     ),
-                    child: const Text("Continuar"),
+                    child: const AutoSizeText("Continuar"),
                     onPressed: () async {
                       
       
@@ -123,7 +124,7 @@ class _UpdateOtpConfirmPhoneScreenState extends State<UpdateOtpConfirmPhoneScree
                       backgroundColor: Color.fromARGB(255, 3, 3, 247),
                       shape: const StadiumBorder()
                     ),
-                    child: const Text("Enviar nuevo código"),
+                    child: const AutoSizeText("Enviar nuevo código"),
                     onPressed: () async {
                       int codeEmail = Random().nextInt(9999 - 1000 + 1) + 1000;
                       bool confirmSend= await sendCodeByPhone(
@@ -215,7 +216,7 @@ class _UpdateOtpConfirmPhoneScreenState extends State<UpdateOtpConfirmPhoneScree
 
   void showSnackBar({required String title, int seconds = 4}) {
     final snackbar = SnackBar(
-      content: Text(
+      content: AutoSizeText(
         title,
         textAlign: TextAlign.center,
         style: const TextStyle(fontSize: 15),

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -124,7 +125,7 @@ class _EditAddressState extends State<EditAddress> {
           children: [
             SizedBox(height: size.height * 0.031,),
             Center(
-              child: Text(
+              child: AutoSizeText(
                 "Marque su ubicación".toUpperCase(),
                 style:  TextStyle(
                   color: Colors.black,
@@ -181,7 +182,7 @@ class _EditAddressState extends State<EditAddress> {
               onPressed:() {
                 getCurrentPosition();
               }, 
-              child: const Text(
+              child: const AutoSizeText(
                 'Marcar mi ubicación actual',
                 
               )
@@ -201,7 +202,7 @@ class _EditAddressState extends State<EditAddress> {
               onPressed:() async {
                 await _controllerPage.animateToPage(1, duration: const Duration(seconds: 1), curve: Curves.linear);
               }, 
-              child: const Text(
+              child: const AutoSizeText(
                 'Ver la descripción de la ubicación',
               )
             ),
@@ -212,7 +213,7 @@ class _EditAddressState extends State<EditAddress> {
           child: Column(
             children: [
               SizedBox(height: size.height * 0.014,),
-              Center(child: Text(
+              Center(child: AutoSizeText(
                 "descripción de la ubicación".toUpperCase(),
                 style: TextStyle(
                   color: Colors.black,
@@ -272,7 +273,7 @@ class _EditAddressState extends State<EditAddress> {
                             backgroundColor: Color.fromARGB(255, 3, 3, 247),
                             shape: const StadiumBorder()
                           ),
-                          child: Text(
+                          child: AutoSizeText(
                             "Actualizar Dirección".toUpperCase(),
                             style: TextStyle(
                               color: Colors.white,
@@ -346,7 +347,7 @@ class _EditAddressState extends State<EditAddress> {
                           FocusScope.of(context).requestFocus(FocusNode());
                           await _controllerPage.animateToPage(0, duration: const Duration(seconds: 1), curve: Curves.linear);
                         }, 
-                        child: const Text(
+                        child: const AutoSizeText(
                           'Ver mapa',
                         )
                       ),
@@ -368,14 +369,14 @@ class _EditAddressState extends State<EditAddress> {
     return await showDialog(
           context: context,
           builder: (context) =>  AlertDialog(
-            title:  Text('Estas seguro?'),
-            content:  Text(msg),
+            title:  AutoSizeText('Estas seguro?'),
+            content:  AutoSizeText(msg),
             actions: <Widget>[
                GestureDetector(
                 onTap: () => Navigator.of(context).pop(true),
                 child:  Padding(
                   padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.012),
-                  child: Text("YES"),
+                  child: AutoSizeText("YES"),
                 ),
               ),
                SizedBox(height: MediaQuery.of(context).size.height * 0.020),
@@ -383,7 +384,7 @@ class _EditAddressState extends State<EditAddress> {
                 onTap: () => Navigator.of(context).pop(false),
                 child:  Padding(
                   padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.012),
-                  child: Text("NO"),
+                  child: AutoSizeText("NO"),
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.020),

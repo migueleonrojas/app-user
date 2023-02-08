@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Model/product_model.dart';
 import 'package:oilapp/Screens/products/product_details.dart';
 import 'package:oilapp/config/config.dart';
@@ -30,7 +31,7 @@ class HorizontalCard extends StatelessWidget {
               horizontal: 16,
               vertical: 10,
             ),
-            child: Text(
+            child: AutoSizeText(
               cardTitle!,
               style: TextStyle(
                 fontSize: 20,
@@ -43,7 +44,7 @@ class HorizontalCard extends StatelessWidget {
             stream: stream as dynamic,
             builder: (context, snapshot) {
               if (snapshot.data == null) {
-                return Text('');
+                return AutoSizeText('');
               }
               return Container(
                 height: 190,
@@ -105,7 +106,7 @@ class HorizontalCard extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Text(
+                                          AutoSizeText(
                                             productModel.productName!,
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
@@ -123,7 +124,7 @@ class HorizontalCard extends StatelessWidget {
                                               ),
                                               SizedBox(width: 4),
                                               Flexible(
-                                                child: Text(
+                                                child: AutoSizeText(
                                                   productModel.brandName!,
                                                   maxLines: 1,
                                                   overflow:
@@ -143,7 +144,7 @@ class HorizontalCard extends StatelessWidget {
                                                   padding:
                                                       const EdgeInsets.only(
                                                           bottom: 10),
-                                                  child: Text(
+                                                  child: AutoSizeText(
                                                     "\৳${productModel.orginalprice}",
                                                     style: TextStyle(
                                                       fontFamily:
@@ -160,7 +161,7 @@ class HorizontalCard extends StatelessWidget {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    Text(
+                                                    AutoSizeText(
                                                       "\৳${productModel.newprice}",
                                                       style: TextStyle(
                                                         fontFamily:
@@ -174,7 +175,7 @@ class HorizontalCard extends StatelessWidget {
                                                     ),
                                                     Row(
                                                       children: [
-                                                        Text(
+                                                        AutoSizeText(
                                                           "\৳${productModel.orginalprice}",
                                                           style: TextStyle(
                                                             fontFamily:
@@ -188,7 +189,7 @@ class HorizontalCard extends StatelessWidget {
                                                           ),
                                                         ),
                                                         SizedBox(width: 5),
-                                                        Text(
+                                                        AutoSizeText(
                                                           '- ${productModel.offervalue}%',
                                                           style: TextStyle(
                                                             fontFamily:

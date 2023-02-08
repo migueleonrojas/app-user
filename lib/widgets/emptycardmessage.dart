@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class EmptyCardMessage extends StatelessWidget {
@@ -22,7 +23,7 @@ class EmptyCardMessage extends StatelessWidget {
           children: [
             Icon(Icons.insert_emoticon, color: Colors.white),
             SizedBox(height: size.height * 0.015),
-            Text(
+            AutoSizeText(
               listTitle!,
               style: TextStyle(
                 fontSize: size.height * 0.020,
@@ -30,7 +31,7 @@ class EmptyCardMessage extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            Text(
+            AutoSizeText(
               message!,
               style: TextStyle(
                 fontSize: size.height * 0.020,

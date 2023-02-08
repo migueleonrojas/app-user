@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Model/user_model.dart';
 import 'package:oilapp/Screens/User/update_user.dart';
 import 'package:oilapp/widgets/customsimpledialogoption.dart';
@@ -88,7 +89,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                             context: context,
                             builder: (context) {
                               return CupertinoAlertDialog(
-                                title: const Text(
+                                title: const AutoSizeText(
                                   "Actualizar Perfil",
                                   textAlign: TextAlign.center,
                                 ),
@@ -101,14 +102,14 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                       });
                                       Navigator.of(context).pop();
                                     },
-                                    child: const Text('Enviar'),
+                                    child: const AutoSizeText('Enviar'),
                                   ),
                                   CupertinoDialogAction(
                                     isDestructiveAction: true,
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
-                                    child: const Text('Cancelar'),
+                                    child: const AutoSizeText('Cancelar'),
                                   ),
                                 ],
                                 content: SingleChildScrollView(
@@ -163,7 +164,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                             }); */
                       },
                       /* color: Theme.of(context).accentColor, */
-                      child: Text(
+                      child: AutoSizeText(
                         "Actualizar Perfil",
                         style: TextStyle(
                           color: Colors.white,
@@ -338,7 +339,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
           context: mContext,
           builder: (con) {
             return SimpleDialog(
-              title: const Text(
+              title: const AutoSizeText(
                 "Imagen del perfil",
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -362,7 +363,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                   ),
                 ),
                 SimpleDialogOption(
-                  child: const Text(
+                  child: const AutoSizeText(
                     "Cancelar",
                     textAlign: TextAlign.center,
                     style: TextStyle(

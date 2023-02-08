@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Model/cart_model.dart';
 
 import 'package:oilapp/Screens/Address/address.dart';
@@ -65,7 +66,7 @@ class _CartScreenState extends State<CartScreen> {
                         Navigator.push(context, route);
                       }
                     },
-                    label: Text(
+                    label: AutoSizeText(
                       "VERIFICAR",
                       style: TextStyle(
                         fontSize: size.height * 0.020,
@@ -91,7 +92,7 @@ class _CartScreenState extends State<CartScreen> {
                                 1) ==
                             0)
                         ? Container()
-                        : Text(
+                        : AutoSizeText(
                             "Precio Total: \$ ${amountProvider.totalPrice.toString()}",
                             style: TextStyle(
                                 color: Colors.black,
@@ -153,7 +154,7 @@ class _CartScreenState extends State<CartScreen> {
                                 title: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    AutoSizeText(
                                       cartModel.pName!,
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
@@ -183,7 +184,7 @@ class _CartScreenState extends State<CartScreen> {
                                               Icons.delete_outline_outlined,
                                               color: Colors.deepOrangeAccent,
                                             ),
-                                            label: const Text(
+                                            label: const AutoSizeText(
                                               'Remover',
                                               style: TextStyle(
                                                 color: Colors.deepOrangeAccent,
@@ -249,7 +250,7 @@ class _CartScreenState extends State<CartScreen> {
                                                   EdgeInsets.symmetric(
                                                 horizontal: size.height * 0.006,
                                               ),
-                                              child: Text(
+                                              child: AutoSizeText(
                                                 '${cartModel.quantity}',
                                                 style: TextStyle(
                                                   fontFamily: "Brand-Regular",
@@ -303,7 +304,7 @@ class _CartScreenState extends State<CartScreen> {
                                 ),
                                 trailing: Column(
                                   children: [
-                                    Text(
+                                    AutoSizeText(
                                       '\$${cartModel.newPrice}',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,

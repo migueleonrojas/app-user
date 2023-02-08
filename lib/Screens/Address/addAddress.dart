@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -78,7 +79,7 @@ class _AddAddressState extends State<AddAddress> {
           children: [
             SizedBox(height: size.height * 0.030,),
             Center(
-              child: Text(
+              child: AutoSizeText(
                 "Marque su ubicación".toUpperCase(),
                 style:  TextStyle(
                   color: Colors.black,
@@ -135,7 +136,7 @@ class _AddAddressState extends State<AddAddress> {
               onPressed:() {
                 getCurrentPosition();
               }, 
-              child: const Text(
+              child: const AutoSizeText(
                 'Marcar mi ubicación actual',
                 
               )
@@ -152,7 +153,7 @@ class _AddAddressState extends State<AddAddress> {
               onPressed:() async {
                 await _controllerPage.animateToPage(1, duration: const Duration(seconds: 1), curve: Curves.linear);
               }, 
-              child: const Text(
+              child: const AutoSizeText(
                 'Describir la ubicación',
               )
             ),
@@ -163,7 +164,7 @@ class _AddAddressState extends State<AddAddress> {
           child: Column(
             children: [
               SizedBox(height: size.height * 0.010,),
-              Center(child: Text(
+              Center(child: AutoSizeText(
                 "descripción de la ubicación".toUpperCase(),
                 style: TextStyle(
                   color: Colors.black,
@@ -224,7 +225,7 @@ class _AddAddressState extends State<AddAddress> {
                             shape: const StadiumBorder()
                           ),
                           
-                          child: Text(
+                          child: AutoSizeText(
                             "Agregar Dirección".toUpperCase(),
                             style: const TextStyle(
                               color: Colors.white,
@@ -289,7 +290,7 @@ class _AddAddressState extends State<AddAddress> {
                           FocusScope.of(context).requestFocus(FocusNode());
                           await _controllerPage.animateToPage(0, duration: const Duration(seconds: 1), curve: Curves.linear);
                         }, 
-                        child: const Text(
+                        child: const AutoSizeText(
                           'Regresar al mapa',
                         )
                       ),

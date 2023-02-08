@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Model/product_model.dart';
 import 'package:oilapp/Screens/products/product_details.dart';
 import 'package:oilapp/service/cart_service.dart';
@@ -58,7 +59,7 @@ class GridProductCard extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              AutoSizeText(
                                 productModel.productName!,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
@@ -72,7 +73,7 @@ class GridProductCard extends StatelessWidget {
                                   Icon(Icons.branding_watermark_outlined),
                                   SizedBox(width: 5),
                                   Flexible(
-                                    child: Text(
+                                    child: AutoSizeText(
                                       productModel.brandName!,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
@@ -88,7 +89,7 @@ class GridProductCard extends StatelessWidget {
                                   ? Padding(
                                       padding:
                                           const EdgeInsets.only(bottom: 10),
-                                      child: Text(
+                                      child: AutoSizeText(
                                         "\৳${productModel.orginalprice}",
                                         style: TextStyle(
                                           fontFamily: "Brand-Regular",
@@ -102,7 +103,7 @@ class GridProductCard extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
+                                        AutoSizeText(
                                           "\৳${productModel.newprice}",
                                           style: TextStyle(
                                             fontFamily: "Brand-Regular",
@@ -113,7 +114,7 @@ class GridProductCard extends StatelessWidget {
                                         ),
                                         Row(
                                           children: [
-                                            Text(
+                                            AutoSizeText(
                                               "\৳${productModel.orginalprice}",
                                               style: TextStyle(
                                                 fontFamily: "Brand-Regular",
@@ -124,7 +125,7 @@ class GridProductCard extends StatelessWidget {
                                               ),
                                             ),
                                             SizedBox(width: 5),
-                                            Text(
+                                            AutoSizeText(
                                               '- ${productModel.offervalue}%',
                                               style: TextStyle(
                                                 fontFamily: "Brand-Regular",

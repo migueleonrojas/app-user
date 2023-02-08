@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:mailer/mailer.dart';
@@ -93,7 +94,7 @@ class _UpdateOtpConfirmEmailScreenState extends State<UpdateOtpConfirmEmailScree
                       backgroundColor: Color.fromARGB(255, 3, 3, 247),
                       shape: const StadiumBorder()
                     ),
-                    child: const Text("Continuar"),
+                    child: const AutoSizeText("Continuar"),
                     onPressed: () async {
                       
       
@@ -124,7 +125,7 @@ class _UpdateOtpConfirmEmailScreenState extends State<UpdateOtpConfirmEmailScree
                       backgroundColor: Color.fromARGB(255, 3, 3, 247),
                       shape: const StadiumBorder()
                     ),
-                    child: const Text("Enviar nuevo código"),
+                    child: const AutoSizeText("Enviar nuevo código"),
                     onPressed: () async {
                       int codeEmail = Random().nextInt(9999 - 1000 + 1) + 1000;
                       bool confirmSend = await sendCodeByEmail(codeEmail);
@@ -180,7 +181,7 @@ class _UpdateOtpConfirmEmailScreenState extends State<UpdateOtpConfirmEmailScree
 
   void showSnackBar({required String title, int seconds = 4}) {
     final snackbar = SnackBar(
-      content: Text(
+      content: AutoSizeText(
         title,
         textAlign: TextAlign.center,
         style: const TextStyle(fontSize: 15),

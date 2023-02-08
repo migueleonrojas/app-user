@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
@@ -87,7 +88,7 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
     return Scaffold(
       appBar: AppBar(
         
-        title:  Text(
+        title:  AutoSizeText(
           "Editar Vehiculo",
           style: TextStyle(
             fontSize: size.height * 0.024,
@@ -129,9 +130,9 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                           },
                           child: Row(
                             children: [
-                              const Text('* Marca'),
+                              const AutoSizeText('* Marca'),
                               const Expanded(child: SizedBox(width: double.infinity,)),
-                              Text((brandController.text.isEmpty? 'Seleccione la Marca': brandController.text))
+                              AutoSizeText((brandController.text.isEmpty? 'Seleccione la Marca': brandController.text))
                             ],
                           ),
                         ),
@@ -147,9 +148,9 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                           },
                           child: Row(
                             children: [
-                              const Text('* Modelo'),
+                              const AutoSizeText('* Modelo'),
                               const Expanded(child: SizedBox(width: double.infinity,)),
-                              Text((modelController.text.isEmpty? 'Seleccione el Modelo': modelController.text))
+                              AutoSizeText((modelController.text.isEmpty? 'Seleccione el Modelo': modelController.text))
                             ],
                           ),
                         ),
@@ -165,9 +166,9 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                           },
                           child: Row(
                             children: [
-                              const Text('* Año'),
+                              const AutoSizeText('* Año'),
                               const Expanded(child: SizedBox(width: double.infinity,)),
-                              Text((yearController.text.isEmpty? 'Selecciona el año': yearController.text))
+                              AutoSizeText((yearController.text.isEmpty? 'Selecciona el año': yearController.text))
                             ],
                           ),
                         ),
@@ -179,10 +180,10 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                           onTap: addColor,
                           child: Row(
                             children: [
-                              const Text('* Color'),
+                              const AutoSizeText('* Color'),
                               const Expanded(child: SizedBox(width: double.infinity,)),
                               (colorController.text.isEmpty) 
-                                ? const Text('Seleccione el color')
+                                ? const AutoSizeText('Seleccione el color')
                                 : Container(height: size.height * 0.024,width: size.width * 0.15,color:Color(int.parse(colorController.text)))
                             ],
                           ),
@@ -287,7 +288,7 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                     shape: const StadiumBorder(),
                     backgroundColor: Color.fromARGB(255, 3, 3, 247),
                   ),
-                child: const Text(
+                child: const AutoSizeText(
                   'Editar vehiculos',
                   
                 )
@@ -317,7 +318,7 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                     (route) => false
                   );
                 },
-                child: const Text('Eliminar vehiculo'),
+                child: const AutoSizeText('Eliminar vehiculo'),
                 style: ElevatedButton.styleFrom(
                   shape: const StadiumBorder(),
                   backgroundColor: Color.fromARGB(255, 3, 3, 247),
@@ -411,17 +412,17 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
     return await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('Estas seguro?'),
-            content: Text(msg),
+            title: const AutoSizeText('Estas seguro?'),
+            content: AutoSizeText(msg),
             actions: <Widget>[
               GestureDetector(
                 onTap: () => Navigator.of(context).pop(true),
-                child: Text("YES"),
+                child: AutoSizeText("YES"),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.021),
               GestureDetector(
                 onTap: () => Navigator.of(context).pop(false),
-                child: Text("NO"),
+                child: AutoSizeText("NO"),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.021),
             ],
@@ -444,6 +445,7 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
     Future <int> getIndexBrand() async {
       QuerySnapshot<Map<String, dynamic>> brandsVehicles = await AutoParts.firestore!
         .collection(AutoParts.brandsVehicle)
+        .orderBy('name',descending: false)
         .get();
       int index = 0;
       for(final brandsVehicle in brandsVehicles.docs){
@@ -468,6 +470,7 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
       QuerySnapshot<Map<String, dynamic>> modelsVehicles = await AutoParts.firestore!
         .collection(AutoParts.modelsVehicle)
         .where('id_brand', isEqualTo: brand.docs[0].data()['id'])
+        .orderBy('name',descending: false)
         .get();
       int index = 0;
       idBrand = brand.docs[0].data()['id'];

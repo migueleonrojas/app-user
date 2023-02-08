@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Screens/cart_screen.dart';
 import 'package:oilapp/Screens/products/product_search.dart';
 import 'package:oilapp/config/config.dart';
@@ -18,7 +19,7 @@ class MyCustomAppBar extends StatelessWidget with PreferredSizeWidget {
       iconTheme: IconThemeData(color: Colors.black),
       backgroundColor: Colors.white,
       titleTextStyle: TextStyle(color: Colors.black),
-      title: Text(
+      title: AutoSizeText(
         "GlobalOil",
         style: TextStyle(
           fontSize: size.height * 0.024,
@@ -68,7 +69,7 @@ class MyCustomAppBar extends StatelessWidget with PreferredSizeWidget {
                               top: size.height * 0.003,
                               bottom: size.height * 0.005,
                               left: size.width * 0.018,
-                              child: Text(
+                              child: AutoSizeText(
                                 snapshot.data!.docs.length.toString(),
                                 style: const TextStyle(
                                   color: Colors.white,
@@ -80,7 +81,7 @@ class MyCustomAppBar extends StatelessWidget with PreferredSizeWidget {
                               top: size.height * 0.002,
                               bottom: size.height * 0.0025,
                               left: size.width * 0.009,
-                              child: Text(
+                              child: AutoSizeText(
                                 snapshot.data!.docs.length.toString(),
                                 style: TextStyle(
                                   color: Colors.white,
@@ -117,7 +118,7 @@ class MyCustomAppBar extends StatelessWidget with PreferredSizeWidget {
             //               left: 6,
             //               child: Consumer<CartItemCounter>(
             //                 builder: (context, counter, _) {
-            //                   return Text(
+            //                   return AutoSizeText(
             //                     (AutoParts.sharedPreferences
             //                                 .getStringList(
             //                                     AutoParts.userCartList)
@@ -138,7 +139,7 @@ class MyCustomAppBar extends StatelessWidget with PreferredSizeWidget {
             //               left: 3,
             //               child: Consumer<CartItemCounter>(
             //                 builder: (context, counter, _) {
-            //                   return Text(
+            //                   return AutoSizeText(
             //                     (AutoParts.sharedPreferences
             //                                 .getStringList(
             //                                     AutoParts.userCartList)

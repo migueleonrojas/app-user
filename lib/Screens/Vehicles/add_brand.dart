@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:oilapp/config/config.dart';
@@ -60,13 +61,14 @@ class _AddBrandState extends State<AddBrand> {
     Size size = MediaQuery.of(context).size;
 
     return AlertDialog(
-      title: const Center(child: Text('Marca')),
+      title: const Center(child: AutoSizeText('Marca')),
       content:
         Container(
           height: MediaQuery.of(context).size.height * 0.20,
           child: StreamBuilder<QuerySnapshot>(
             stream: AutoParts.firestore!
             .collection(AutoParts.brandsVehicle)
+            .orderBy('name',descending: false)
             .snapshots(),
             builder: (context, snapshot) {
 
@@ -127,7 +129,7 @@ class _AddBrandState extends State<AddBrand> {
                             borderRadius: BorderRadius.circular(size.height * 0.035),
                             child: Container(
                               width: size.width * 0.35,
-                              child: Center(child: Text((snapshot.data!.docs[index] as dynamic).data()["name"],style: TextStyle(fontSize: size.height * 0.020)),),
+                              child: Center(child: AutoSizeText((snapshot.data!.docs[index] as dynamic).data()["name"],style: TextStyle(fontSize: size.height * 0.020)),),
                             ),
                           ),
                         ),
@@ -180,7 +182,7 @@ class _AddBrandState extends State<AddBrand> {
                           borderRadius: BorderRadius.circular(30),
                           child: Container(
                             width: 120,
-                            child: Center(child: Text((snapshot.data!.docs[index] as dynamic).data()["name"],style: TextStyle(fontSize: 15)),),
+                            child: Center(child: AutoSizeText((snapshot.data!.docs[index] as dynamic).data()["name"],style: TextStyle(fontSize: 15)),),
                           ),
                         ),
                       ),
@@ -193,14 +195,14 @@ class _AddBrandState extends State<AddBrand> {
         ),
       actions: [
         TextButton(
-          child: const Text('Agregar'),
+          child: const AutoSizeText('Agregar'),
           onPressed: () {
             
             Navigator.of(context).pop([widget.selectedIndex, widget.brandName, widget.brandId, widget.logoBrand, true]);
           },
         ),
         TextButton(
-          child: const Text('Cancelar'),
+          child: const AutoSizeText('Cancelar'),
           onPressed: () {
             final returnedIndexBrand = (widget.holdIndex) ? widget.previousSelectedIndex : '';
             final returnedBrandName = (widget.holdIndex) ? widget.previousBrandName : '';

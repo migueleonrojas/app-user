@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Model/vehicle_model.dart';
 import 'package:oilapp/config/config.dart';
 import 'package:oilapp/widgets/loading_widget.dart';
@@ -64,7 +65,7 @@ class _MyServiceOrderDetailsScreenState
                             title: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                AutoSizeText(
                                   (snapshot.data!.docs[index] as dynamic)
                                       .data()['serviceName'],
                                   maxLines: 2,
@@ -74,7 +75,7 @@ class _MyServiceOrderDetailsScreenState
                                   ),
                                 ),
                                 SizedBox(height: 5),
-                                Text(
+                                AutoSizeText(
                                   "Fecha: " +
                                       (snapshot.data!.docs[index] as dynamic).data()['date'],
                                   maxLines: 2,
@@ -84,7 +85,7 @@ class _MyServiceOrderDetailsScreenState
                                   ),
                                 ),
                                 SizedBox(height: 5),
-                                Text(
+                                AutoSizeText(
                                   "\$" +
                                       (snapshot.data!.docs[index] as dynamic)
                                           .data()['newPrice']
@@ -105,7 +106,7 @@ class _MyServiceOrderDetailsScreenState
                                   size: 17,
                                   color: Colors.deepOrangeAccent[200],
                                 ),
-                                Text(
+                                AutoSizeText(
                                   (snapshot.data!.docs[index] as dynamic)
                                       .data()['quantity']
                                       .toString(),
@@ -151,7 +152,7 @@ class _MyServiceOrderDetailsScreenState
                             TableRow(
                               children: [
                                 KeyText(msg: "Nombre del Cliente"),
-                                Text(
+                                AutoSizeText(
                                   (snapshot.data!.docs[index] as dynamic)
                                       .data()['customerName'],
                                 ),
@@ -160,7 +161,7 @@ class _MyServiceOrderDetailsScreenState
                             TableRow(
                               children: [
                                 KeyText(msg: "Teléfono"),
-                                Text(
+                                AutoSizeText(
                                   (snapshot.data!.docs[index] as dynamic)
                                       .data()['phoneNumber'],
                                 ),
@@ -169,7 +170,7 @@ class _MyServiceOrderDetailsScreenState
                             TableRow(
                               children: [
                                 KeyText(msg: "Ciudad"),
-                                Text(
+                                AutoSizeText(
                                   (snapshot.data!.docs[index] as dynamic).data()['city'],
                                 ),
                               ],
@@ -177,7 +178,7 @@ class _MyServiceOrderDetailsScreenState
                             TableRow(
                               children: [
                                 KeyText(msg: "Area"),
-                                Text(
+                                AutoSizeText(
                                   (snapshot.data!.docs[index] as dynamic).data()['area'],
                                 ),
                               ],
@@ -185,7 +186,7 @@ class _MyServiceOrderDetailsScreenState
                             TableRow(
                               children: [
                                 KeyText(msg: "Número de la casa"),
-                                Text(
+                                AutoSizeText(
                                   (snapshot.data!.docs[index] as dynamic)
                                       .data()['houseandroadno'],
                                 ),
@@ -194,7 +195,7 @@ class _MyServiceOrderDetailsScreenState
                             TableRow(
                               children: [
                                 KeyText(msg: "Código de Área"),
-                                Text(
+                                AutoSizeText(
                                   (snapshot.data!.docs[index] as dynamic).data()['areacode'],
                                 ),
                               ],
@@ -247,7 +248,7 @@ class _MyServiceOrderDetailsScreenState
                                   height: 50,
                                   width: double.infinity,
                                   child: Center(
-                                    child: Text(
+                                    child: AutoSizeText(
                                       "Estatus de Orden",
                                       style: TextStyle(
                                         letterSpacing: 1,
@@ -387,7 +388,7 @@ class _MyServiceOrderDetailsScreenState
                                     ],
                                   ),
                                   SizedBox(height: 20),
-                                  Text(
+                                  AutoSizeText(
                                     ((snapshot.data!.docs[index] as dynamic) 
                                                 .data()['deliverd'] ==
                                             'Done')
@@ -466,7 +467,7 @@ class OrderStatusCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                AutoSizeText(
                   title,
                   style: TextStyle(
                     fontSize: 20,
@@ -481,7 +482,7 @@ class OrderStatusCard extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     SizedBox(width: 10),
-                    Text(
+                    AutoSizeText(
                       time,
                       style: TextStyle(color: Colors.grey),
                     ),
@@ -506,7 +507,7 @@ class KeyText extends StatelessWidget {
   const KeyText({Key? key, required this.msg}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return AutoSizeText(
       msg,
       style: TextStyle(
         fontSize: 16,

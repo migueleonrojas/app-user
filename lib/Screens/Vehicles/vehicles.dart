@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:oilapp/Model/vehicle_model.dart';
@@ -51,7 +52,7 @@ class _VehiclesState extends State<Vehicles> {
     return Scaffold(  
       appBar: AppBar(
         
-        title: Text(
+        title: AutoSizeText(
           "Mi Garage",
           style: TextStyle(
             fontSize: size.height * 0.026,
@@ -168,7 +169,7 @@ class _VehiclesState extends State<Vehicles> {
                                   annotations: <GaugeAnnotation> [
                                     GaugeAnnotation(
                                       widget: Container(
-                                        child: Text(
+                                        child: AutoSizeText(
                                           (vehicleWithNotificationsModel.daysOfTheNextService! < 0) 
                                             ? 'Restan 0 días para el próximo cambio de aceite.'
                                             :'Restan ${vehicleWithNotificationsModel.daysOfTheNextService} dias para el próximo cambio de aceite.', 
@@ -222,22 +223,22 @@ class _VehiclesState extends State<Vehicles> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(vehicleModel.brand!),
-                        /* const Text(" "), */
-                        Text(vehicleModel.model!),
-                        /* const Text(" "), */
-                        Text(vehicleModel.year.toString()),
+                        AutoSizeText(vehicleModel.brand!),
+                        /* const AutoSizeText(" "), */
+                        AutoSizeText(vehicleModel.model!),
+                        /* const AutoSizeText(" "), */
+                        AutoSizeText(vehicleModel.year.toString()),
                         
                         
                       ],
                     ),
                     SizedBox(height: size.height * 0.012,),
-                    (vehicleModel.name != "") ? Text('${vehicleModel.name}'): Container(),
+                    (vehicleModel.name != "") ? AutoSizeText('${vehicleModel.name}'): Container(),
                     SizedBox(height: size.height * 0.012,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text('Color:'),
+                        const AutoSizeText('Color:'),
                         IconButton(
                           iconSize: size.height * 0.054,
                           icon:  Icon(
@@ -267,7 +268,7 @@ class _VehiclesState extends State<Vehicles> {
                         width: size.width * 0.55,
                         height: size.height * 0.021,
                         child: Center(                        
-                          child:  Text(
+                          child:  AutoSizeText(
                             "Solicitar un servicio",
                             style: TextStyle(
                               color: Colors.white,
@@ -299,7 +300,7 @@ class _VehiclesState extends State<Vehicles> {
                         width: size.width * 0.55,
                         height: size.height * 0.021,
                         child: Center(
-                          child:  Text(
+                          child:  AutoSizeText(
                             "Mis ordenes de servicio",
                             style: TextStyle(
                               color: Colors.white,
@@ -326,7 +327,7 @@ class _VehiclesState extends State<Vehicles> {
                         width: size.width * 0.55,
                         height: size.height * 0.021,
                         child: Center(
-                          child: Text(
+                          child: AutoSizeText(
                             "Agregar una nota",
                             style: TextStyle(
                               color: Colors.white,
@@ -356,7 +357,7 @@ class _VehiclesState extends State<Vehicles> {
                         width: size.width * 0.55,
                         height: size.height * 0.021,
                         child: Center(
-                          child: Text(
+                          child: AutoSizeText(
                             "Ver las notas de servicio",
                             style: TextStyle(
                               color: Colors.white,
@@ -426,9 +427,9 @@ class _VehiclesState extends State<Vehicles> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(vehicleModel.brand!),
-                          Text(" - "),
-                          Text(vehicleModel.model!)
+                          AutoSizeText(vehicleModel.brand!),
+                          AutoSizeText(" - "),
+                          AutoSizeText(vehicleModel.model!)
                         ],
                       ),
                       const SizedBox(height: 10,),
@@ -437,7 +438,7 @@ class _VehiclesState extends State<Vehicles> {
                         child: const SizedBox(width: 40,height: 20,),
                       ),
                       const SizedBox(height: 10,),
-                      Text(vehicleModel.year.toString()),
+                      AutoSizeText(vehicleModel.year.toString()),
                       const SizedBox(height: 10,),
                       TextButton(                      
                         style: TextButton.styleFrom(
@@ -456,7 +457,7 @@ class _VehiclesState extends State<Vehicles> {
                         child: Container(
                           width: 200,
                           child: const Center(                        
-                            child:  Text(
+                            child:  AutoSizeText(
                               "Solicitar un servicio",
                               style: TextStyle(
                                 color: Colors.white,
@@ -487,7 +488,7 @@ class _VehiclesState extends State<Vehicles> {
                         child: Container(
                           width: 200,
                           child: const Center(
-                            child:  Text(
+                            child:  AutoSizeText(
                               "Mis ordenes de servicio",
                               style: TextStyle(
                                 color: Colors.white,
@@ -513,7 +514,7 @@ class _VehiclesState extends State<Vehicles> {
                         child: Container(
                           width: 200,
                           child: const Center(
-                            child: Text(
+                            child: AutoSizeText(
                               "Agregar una nota",
                               style: TextStyle(
                                 color: Colors.white,
@@ -542,7 +543,7 @@ class _VehiclesState extends State<Vehicles> {
                         child: Container(
                           width: 200,
                           child: const Center(
-                            child: Text(
+                            child: AutoSizeText(
                               "Ver las notas de servicio",
                               style: TextStyle(
                                 color: Colors.white,
@@ -588,13 +589,13 @@ class _VehiclesState extends State<Vehicles> {
 
   Widget progressiveBar(double percent, VehicleWithNotificationsModel vehicleWithNotificationsModel){
 
-    Widget text = Text('');
+    Widget text = AutoSizeText('');
 
     if(percent >= 100) {
 
       RoundedProgressBar(
         milliseconds:3000,
-        childLeft: Text(
+        childLeft: AutoSizeText(
           'Próximo cambio de aceite ${vehicleWithNotificationsModel.daysOfTheNextService} dias.',
           style: const TextStyle(
             color: Colors.white,
@@ -619,21 +620,21 @@ class _VehiclesState extends State<Vehicles> {
     }
 
     /* if(daysOfTheNextService <= 0) {
-      text =  Text(
+      text =  AutoSizeText(
         'Ya se le paso la fecha del cambio de aceite',
         style: const TextStyle(color: Colors.red),
       );
     }
 
     if(daysOfTheNextService > 0 && daysOfTheNextService <= 7) {
-      text =  Text(
+      text =  AutoSizeText(
         'Le quedan solo ${daysOfTheNextService} dias para hacer el cambio de aceite.',
         style: const TextStyle(color: Colors.orange),
       );
     }
 
     if(daysOfTheNextService > 7){
-      text = Text('Su próximo cambio de aceite es en: ${daysOfTheNextService} dias');
+      text = AutoSizeText('Su próximo cambio de aceite es en: ${daysOfTheNextService} dias');
     } */
 
     

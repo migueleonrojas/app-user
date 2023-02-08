@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class CustomSimpleDialogOption extends StatelessWidget {
@@ -20,7 +21,7 @@ class CustomSimpleDialogOption extends StatelessWidget {
               color: Colors.deepOrangeAccent,
             ),
             SizedBox(width: 5),
-            Text(
+            AutoSizeText(
               title,
               style: TextStyle(
                 color: Colors.deepOrangeAccent,

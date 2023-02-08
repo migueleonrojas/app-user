@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Model/rating_review_model.dart';
 import 'package:oilapp/Model/service_model.dart';
 import 'package:oilapp/Model/vehicle_model.dart';
@@ -123,7 +124,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Center(
-                              child: Text(
+                              child: AutoSizeText(
                                 serviceModel.serviceName!,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -136,7 +137,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                               ),
                             ),
                             /* const Center(
-                              child:  Text(
+                              child:  AutoSizeText(
                                 "Empezar desde",
                                 style: TextStyle(
                                   letterSpacing: 1,
@@ -150,7 +151,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                AutoSizeText(
                                   'Costo: ${serviceModel.newprice}',
                                   style:  TextStyle(
                                     letterSpacing: 1,
@@ -250,7 +251,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Center(
-                                  child: Text(
+                                  child: AutoSizeText(
                                     serviceModel.serviceName!,
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(
@@ -262,7 +263,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                     ),
                                   ),
                                 ),
-                                const Text(
+                                const AutoSizeText(
                                   "Empezar desde",
                                   style: TextStyle(
                                     color: Colors.white70,
@@ -310,7 +311,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                       //----------------------about title--------------------//
                       /* const Padding(
                         padding: const EdgeInsets.all(10),
-                        child: Text(
+                        child: AutoSizeText(
                           "Sobre el servicio",
                           style: TextStyle(
                             letterSpacing: 0.5,
@@ -324,7 +325,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
 //------------------------about text---------------------//
                       /* Padding(
                         padding: const EdgeInsets.all(10),
-                        child: Text(
+                        child: AutoSizeText(
                           serviceModel.aboutInfo!.replaceAll("\\n", "\n"),
                           style: const TextStyle(
                             fontFamily: "Brand-Regular",
@@ -337,7 +338,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                       //----------------expect title-------------------//
                       /* const Padding(
                         padding:  EdgeInsets.all(10),
-                        child:  Text(
+                        child:  AutoSizeText(
                           "Qué esperar",
                           style: TextStyle(
                             letterSpacing: 0.5,
@@ -350,7 +351,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                       //----------------------expectText-----------------//
                       /* Padding(
                         padding: const EdgeInsets.all(10),
-                        child: Text(
+                        child: AutoSizeText(
                           serviceModel.expectation!.replaceAll("\\n", "\n"),
                           style: const TextStyle(
                             fontFamily: "Brand-Regular",
@@ -378,7 +379,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                   istap = true;
                                 });
                               },
-                              child: const Text(
+                              child: const AutoSizeText(
                                 "Reservar ahora",
 
                                 
@@ -409,27 +410,27 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
+                                        AutoSizeText(
                                           serviceModel.serviceName!,
                                           style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                         SizedBox(height: size.height * 0.014),
-                                        Text(
+                                        AutoSizeText(
                                           'Va a solicitar $quantity de ${serviceModel.serviceName!}',
                                           style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        /* Text(
+                                        /* AutoSizeText(
                                           "Cuántos servicios de" +
                                               "\"${serviceModel.serviceName!}\"" +
                                               " necesita?",
                                           maxLines: 3,
                                         ), */
                                         SizedBox(height: size.height * 0.014),                                        
-                                        const Text(
+                                        const AutoSizeText(
                                           "Seleccione su horario para la cita",
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
@@ -446,7 +447,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                                   pickDate(context),
                                               icon: const Icon(Icons
                                                   .calendar_today_outlined),
-                                              label: Text(getDateText()),
+                                              label: AutoSizeText(getDateText()),
                                             ),
                                           ),
                                         ),
@@ -526,7 +527,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                               backgroundColor: Color.fromARGB(255, 3, 3, 247),
                                               shape: const StadiumBorder(),
                                               padding: EdgeInsets.symmetric(vertical: size.height * 0.022, horizontal: size.width * 0.2)                                            ),
-                                            child: Text('Siguiente'),
+                                            child: AutoSizeText('Siguiente'),
                                             onPressed: () {
 
                                               Navigator.push(
@@ -607,7 +608,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                     color: Colors.white,
                                     size: 32,
                                   ),
-                                  label: const Text("Continue",
+                                  label: const AutoSizeText("Continue",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 22,
@@ -685,7 +686,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            const AutoSizeText(
                               "Valoración y comentarios",
                               style: TextStyle(
                                 fontSize: 20,
@@ -725,7 +726,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.center,
                                               children: [
-                                                 Text(
+                                                 AutoSizeText(
                                                   (snapshot.data!.docs.length ==
                                                           0)
                                                       ? "0.0"
@@ -746,9 +747,9 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                Text(
+                                                AutoSizeText(
                                                     '${userrating.toString()}/'),
-                                                Text(
+                                                AutoSizeText(
                                                   "${snapshot.data!.docs.length.toString()} puntajes",
                                                 )
                                               ],
@@ -771,8 +772,8 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                               width: 100,
                                               height: 100,
                                             ),
-                                            title: const Text("Dar su calificación"),
-                                            message:const Text("Toque una estrella para establecer su calificación. Añade más descripción aquí si quieres."),
+                                            title: const AutoSizeText("Dar su calificación"),
+                                            message:const AutoSizeText("Toque una estrella para establecer su calificación. Añade más descripción aquí si quieres."),
                                             onSubmitted: (rating) {
                                               showDialog(
                                                 context: context,
@@ -784,7 +785,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                                           BorderRadius.circular(
                                                               30),
                                                     ),
-                                                    title: const Text(
+                                                    title: const AutoSizeText(
                                                       "Dé su opinión",
                                                       textAlign:
                                                           TextAlign.center,
@@ -797,7 +798,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                                       mainAxisSize:
                                                           MainAxisSize.min,
                                                       children: [
-                                                        const Text(
+                                                        const AutoSizeText(
                                                           "Escriba su valiosa opinión sobre este servicio. Nos ayudará a mejorar nuestro servicio.",
                                                           textAlign:
                                                               TextAlign.center,
@@ -860,7 +861,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                                             Navigator.pop(
                                                                 context);
                                                           },
-                                                          child: const Text(
+                                                          child: const AutoSizeText(
                                                             "Enviar",
                                                             style: TextStyle(
                                                               fontWeight:
@@ -894,7 +895,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                         ),
                                       ),
                                       child:const Center(
-                                        child:  Text(
+                                        child:  AutoSizeText(
                                           "Califique y opine...",
                                         ),
                                       ),
@@ -946,7 +947,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        Text(
+                                                        AutoSizeText(
                                                           ratingAndReviewModel
                                                               .userName!,
                                                           style: const TextStyle(
@@ -960,7 +961,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                                         ),
                                                         Row(
                                                           children: [
-                                                            Text(
+                                                            AutoSizeText(
                                                               '${ratingAndReviewModel.rating} ',
                                                             ),
                                                             for (int i = 0;
@@ -968,12 +969,12 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                                                     ratingAndReviewModel
                                                                         .rating!;
                                                                 i++)
-                                                              Text('⭐'),
+                                                              AutoSizeText('⭐'),
                                                           ],
                                                         ),
                                                       ],
                                                     ),
-                                                    subtitle: Text(
+                                                    subtitle: AutoSizeText(
                                                         ratingAndReviewModel
                                                             .reviewMessage!),
                                                   );
@@ -996,7 +997,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                                       ),
                                                     );
                                                   },
-                                                  child: Text(
+                                                  child: AutoSizeText(
                                                     "Más Opiniones....",
                                                     style: TextStyle(
                                                       fontSize: 18,
@@ -1045,7 +1046,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    Text(
+                                                    AutoSizeText(
                                                       ratingAndReviewModel
                                                           .userName!,
                                                       style: const TextStyle(
@@ -1059,19 +1060,19 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                                     ),
                                                     Row(
                                                       children: [
-                                                        Text(
+                                                        AutoSizeText(
                                                             '${ratingAndReviewModel.rating}'),
                                                         for (int i = 0;
                                                             i <
                                                                 ratingAndReviewModel
                                                                     .rating!;
                                                             i++)
-                                                          Text('⭐'),
+                                                          AutoSizeText('⭐'),
                                                       ],
                                                     )
                                                   ],
                                                 ),
-                                                subtitle: Text(
+                                                subtitle: AutoSizeText(
                                                     ratingAndReviewModel
                                                         .reviewMessage!),
                                               );
@@ -1089,7 +1090,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                         padding:  EdgeInsets.all(size.height * 0.014),
                         child: Row(
                           children: [
-                            Text(
+                            AutoSizeText(
                               "Nota:",
                               style: TextStyle(
                                 letterSpacing: 0.5,
@@ -1136,7 +1137,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                       /* const Padding(
                         padding:  EdgeInsets.symmetric(
                             horizontal: 10, vertical: 5),
-                        child: Text(
+                        child: AutoSizeText(
                           "Los precios mencionados son cargos de servicio estimados que pueden variar ligeramente dependiendo de: El tipo de vehículo, el modelo y la disponibilidad del servicio.",
                           style: TextStyle(
                             fontStyle: FontStyle.italic,
@@ -1149,7 +1150,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                       /* const Padding(
                         padding:  EdgeInsets.symmetric(
                             horizontal: 10, vertical: 5),
-                        child: Text(
+                        child: AutoSizeText(
                           "Política de servicio a domicilio: El cargo por servicio a domicilio de un máximo de 5\$ es aplicable si el cliente decide no tomar el servicio después de que el proveedor de servicios visitó el lugar.",
                           style: TextStyle(
                             fontStyle: FontStyle.italic,

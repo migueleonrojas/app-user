@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Model/rating_review_model.dart';
 import 'package:oilapp/widgets/simpleAppbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -58,7 +59,7 @@ class _ServiceReviewsState extends State<ServiceReviews> {
                           title: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              AutoSizeText(
                                 ratingAndReviewModel.userName!,
                                 style: TextStyle(
                                   fontSize: 18,
@@ -69,16 +70,16 @@ class _ServiceReviewsState extends State<ServiceReviews> {
                               ),
                               Row(
                                 children: [
-                                  Text('${ratingAndReviewModel.rating}'),
+                                  AutoSizeText('${ratingAndReviewModel.rating}'),
                                   for (int i = 0;
                                       i < ratingAndReviewModel.rating!;
                                       i++)
-                                    Text('⭐'),
+                                    AutoSizeText('⭐'),
                                 ],
                               )
                             ],
                           ),
-                          subtitle: Text(ratingAndReviewModel.reviewMessage!),
+                          subtitle: AutoSizeText(ratingAndReviewModel.reviewMessage!),
                         );
                       },
                     ),

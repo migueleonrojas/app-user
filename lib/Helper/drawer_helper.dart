@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class DrawerItems extends StatelessWidget {
@@ -24,7 +25,7 @@ class DrawerItems extends StatelessWidget {
           leadingIcon,
           color: Colors.black,
         ),
-        title: Text(
+        title: AutoSizeText(
           title,
           style: TextStyle(
             color: Colors.black,

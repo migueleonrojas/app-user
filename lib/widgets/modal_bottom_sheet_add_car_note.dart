@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:oilapp/Model/vehicle_model.dart';
@@ -44,7 +45,7 @@ class ModalBottomSheetAddCarNote {
                         endIndent: size.width * 0.45,
                       ),
                       SizedBox(height: size.height * 0.007,),
-                      Text(
+                      AutoSizeText(
                         'Seleccionar un servicio',                    
                         style: TextStyle(
                           fontSize: size.height * 0.027
@@ -68,7 +69,7 @@ class ModalBottomSheetAddCarNote {
                             width: size.width * 0.07,
                             fit:BoxFit.contain
                           ),
-                          title: Text((snapshot.data as dynamic)[index]["name"]),
+                          title: AutoSizeText((snapshot.data as dynamic)[index]["name"]),
                           onTap: () {
                             Navigator.push(
                               context,

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:oilapp/Helper/drawer_helper.dart';
@@ -78,7 +79,7 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
                     ),
                   ),
                   SizedBox(height: size.height * 0.015),
-                  Text(
+                  AutoSizeText(
                     AutoParts.sharedPreferences!.getString(AutoParts.userName) ?? '',
                     style: TextStyle(
                       fontSize: size.height * 0.020,
@@ -86,7 +87,7 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
                       color: Colors.white,
                     ),
                   ),
-                  Text(
+                  AutoSizeText(
                     AutoParts.sharedPreferences!.getString(AutoParts.userEmail) ?? '',
                     style: TextStyle(
                       fontSize: size.height * 0.020,
@@ -446,17 +447,17 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
     return await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('Estas seguro?'),
-            content: const Text('De que quieres salir!'),
+            title: const AutoSizeText('Estas seguro?'),
+            content: const AutoSizeText('De que quieres salir!'),
             actions: <Widget>[
               GestureDetector(
                 onTap: () => Navigator.of(context).pop(true),
-                child: Text("YES"),
+                child: AutoSizeText("YES"),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.015 ),
               GestureDetector(
                 onTap: () => Navigator.of(context).pop(false),
-                child: Text("NO"),
+                child: AutoSizeText("NO"),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.015 ),
             ],

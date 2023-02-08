@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:oilapp/Screens/products/category_products.dart';
 import 'package:flutter/material.dart';
@@ -20,16 +21,16 @@ class CategoryTile extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: Text(
+                title: AutoSizeText(
                   "No Internet Connection",
                 ),
-                content: Text("Check your network settings and try again."),
+                content: AutoSizeText("Check your network settings and try again."),
                 actions: [
                   TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text("OK"),
+                    child: AutoSizeText("OK"),
                   ),
                 ],
               );
@@ -64,7 +65,7 @@ class CategoryTile extends StatelessWidget {
                 color: Colors.black45,
                 borderRadius: BorderRadius.circular(size.height * 0.01),
               ),
-              child: Text(
+              child: AutoSizeText(
                 categoryName,
                 textAlign: TextAlign.center,
                 style: TextStyle(

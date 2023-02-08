@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:oilapp/config/config.dart';
@@ -51,7 +52,7 @@ class _AddModelState extends State<AddModel> {
 
     return AlertDialog(
 
-      title: const Center(child: Text('Models')),
+      title: const Center(child: AutoSizeText('Models')),
       content:
         Container(
           height: MediaQuery.of(context).size.height * 0.20,
@@ -59,6 +60,7 @@ class _AddModelState extends State<AddModel> {
             stream: AutoParts.firestore!
             .collection(AutoParts.modelsVehicle)
             .where('id_brand', isEqualTo: widget.brandId)
+            .orderBy('name',descending: false)
             .snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
@@ -107,7 +109,7 @@ class _AddModelState extends State<AddModel> {
                             borderRadius: BorderRadius.circular(size.height * 0.035),
                             child: Container(
                               width: size.width * 0.35,
-                              child: Center(child: Text('${(snapshot.data!.docs[index] as dynamic).data()["name"].toString()}',style: TextStyle(fontSize: size.height * 0.020)),),
+                              child: Center(child: AutoSizeText('${(snapshot.data!.docs[index] as dynamic).data()["name"].toString()}',style: TextStyle(fontSize: size.height * 0.020)),),
                             ),
                           ),
                         ),
@@ -143,7 +145,7 @@ class _AddModelState extends State<AddModel> {
                           borderRadius: BorderRadius.circular(30),
                           child: Container(
                             width: 120,
-                            child: Center(child: Text((snapshot.data!.docs[index] as dynamic).data()["name"],style: const TextStyle(fontSize: 15)),),
+                            child: Center(child: AutoSizeText((snapshot.data!.docs[index] as dynamic).data()["name"],style: const TextStyle(fontSize: 15)),),
                           ),
                         ),
                       ),
@@ -156,14 +158,14 @@ class _AddModelState extends State<AddModel> {
         ),
       actions: [
         TextButton(
-          child: const Text('Agregar'),
+          child: const AutoSizeText('Agregar'),
           onPressed: () {
             
             Navigator.of(context).pop([widget.selectedIndex, widget.modelName, widget.brandId]);
           },
         ),
         TextButton(
-          child: const Text('Cancelar'),
+          child: const AutoSizeText('Cancelar'),
           onPressed: () {
             final returnedIndexBrand = (widget.holdIndex) ? widget.previousSelectedIndex : '';
             final returnedBrandName = (widget.holdIndex) ? widget.previousModelName : '';

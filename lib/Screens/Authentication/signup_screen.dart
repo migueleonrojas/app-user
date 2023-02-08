@@ -1,5 +1,6 @@
 
 import 'dart:math';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 import 'package:googleapis_auth/auth_io.dart';
@@ -107,7 +108,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 
                 ElevatedButton(
                 
-                  child: const Text("Continuar"),
+                  child: const AutoSizeText("Continuar"),
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.030, horizontal: MediaQuery.of(context).size.width * 0.35),
                     backgroundColor: Color.fromARGB(255, 3, 3, 247),
@@ -215,7 +216,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
+                  AutoSizeText(
                     'Ya tienes una cuenta ?',
                     style: TextStyle(
                       fontSize: (MediaQuery.of(context).size.height * 0.025).toDouble(),
@@ -232,7 +233,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       );
                     },
-                    child: Text(
+                    child: AutoSizeText(
                       ' Entre Aquí',
                       style: TextStyle(
                         color: Colors.red[300],
@@ -328,7 +329,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void showSnackBar({required String title, int seconds = 4}) {
     final snackbar = SnackBar(
-      content: Text(
+      content: AutoSizeText(
         title,
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: MediaQuery.of(context).size.height.toDouble() * 0.020),

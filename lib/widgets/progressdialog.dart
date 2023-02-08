@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class ProgressDialog extends StatelessWidget {
@@ -30,7 +31,7 @@ class ProgressDialog extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 25),
-              Text(
+              AutoSizeText(
                 status!,
                 style: TextStyle(fontSize: 15),
               ),

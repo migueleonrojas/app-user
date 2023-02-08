@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:oilapp/Model/payment_method_details_model.dart';
@@ -63,7 +64,7 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
       ,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: AutoSizeText(
             "Metodo de Pago",
             style: TextStyle(
               fontSize: size.height * 0.024,
@@ -93,7 +94,7 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                 alignment: Alignment.topCenter,
                 child: Padding(
                   padding: EdgeInsets.all(size.height * 0.008),
-                  child: Text(
+                  child: AutoSizeText(
                     "Elija el método de pago",
                     style: TextStyle(
                       color: Colors.black,
@@ -196,7 +197,7 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                     
                                   
                                 },
-                                child: const Text('Confirmar'),
+                                child: const AutoSizeText('Confirmar'),
                               )
                             : Container(),
                         (goOrders)
@@ -226,7 +227,7 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                     Icons.home_outlined,
                                     color: Colors.white,
                                   ),
-                                  label: Text(
+                                  label: AutoSizeText(
                                     "Ir a Inicio",
                                     style: TextStyle(
                                       fontSize: size.height * 0.022,
@@ -284,7 +285,7 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           crossAxisAlignment: CrossAxisAlignment.center,
                                           children: [
-                                            Text('Datos del Pago Movil'),
+                                            AutoSizeText('Datos del Pago Movil'),
                                             SizedBox(height: size.height * 0.014,),
                                             StreamBuilder<QuerySnapshot>(
                                               stream: FirebaseFirestore.instance
@@ -304,7 +305,7 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
 
                                                   }
 
-                                                  return Text('Precio del dolar BCV: ${snapshot.data!.docs[0]['price']} ${snapshot.data!.docs[0]['currency']}');
+                                                  return AutoSizeText('Precio del dolar BCV: ${snapshot.data!.docs[0]['price']} ${snapshot.data!.docs[0]['currency']}');
 
                                                 },
                                             ),
@@ -313,10 +314,10 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                                               children: [
 
-                                                Text('Cédula'),
+                                                AutoSizeText('Cédula'),
                                                 Row(
                                                   children: [
-                                                    Text('${paymentMethodDetailsModel.kindOfPerson} - ${paymentMethodDetailsModel.identificationCard.toString()}'),
+                                                    AutoSizeText('${paymentMethodDetailsModel.kindOfPerson} - ${paymentMethodDetailsModel.identificationCard.toString()}'),
                                                     IconButton(
                                                       icon: const Icon(Icons.copy),
                                                       onPressed: () async {
@@ -332,10 +333,10 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                             Row(
                                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                                               children: [
-                                                Text('Teléfono'),
+                                                AutoSizeText('Teléfono'),
                                                 Row(
                                                   children: [
-                                                    Text(paymentMethodDetailsModel.numberPhone.toString().replaceFirst('58', '0')),
+                                                    AutoSizeText(paymentMethodDetailsModel.numberPhone.toString().replaceFirst('58', '0')),
                                                     IconButton(
                                                       icon: const Icon(Icons.copy),
                                                       onPressed: () async {
@@ -352,10 +353,10 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                             Row(
                                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                                               children: [
-                                                Text('Banco'),
+                                                AutoSizeText('Banco'),
                                                 Row(
                                                   children: [
-                                                    Text(paymentMethodDetailsModel.bank!),
+                                                    AutoSizeText(paymentMethodDetailsModel.bank!),
                                                     IconButton(
                                                       icon: const Icon(Icons.copy),
                                                       onPressed: () async {                                                    
@@ -373,7 +374,7 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                                 backgroundColor: Color.fromARGB(255, 3, 3, 247),
                                                 shape: const StadiumBorder()
                                               ),
-                                              child: const Text('Confirmar'),
+                                              child: const AutoSizeText('Confirmar'),
                                               onPressed: () async  {
                                                 _issuerNameTextEditingController.text = "";
                                                 _holderNameTextEditingController.text = ""; 
@@ -487,15 +488,15 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             crossAxisAlignment: CrossAxisAlignment.center,
                                             children: [
-                                              Text('Datos del Zelle'),
+                                              AutoSizeText('Datos del Zelle'),
                                               Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                 children: [
 
-                                                  Text('Correo'),
+                                                  AutoSizeText('Correo'),
                                                   Row(
                                                     children: [
-                                                      Text(paymentMethodDetailsModel.email.toString()),
+                                                      AutoSizeText(paymentMethodDetailsModel.email.toString()),
                                                       IconButton(
                                                         icon: const Icon(Icons.copy),
                                                         onPressed: () async {
@@ -509,7 +510,7 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                                 ],
                                               ),
                                               SizedBox(height: size.height * 0.015,),
-                                              Text(
+                                              AutoSizeText(
                                                 'Registro del Pago',
                                                 style: TextStyle(
                                                   fontSize: size.height * 0.024
@@ -613,7 +614,7 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                                   backgroundColor: Color.fromARGB(255, 3, 3, 247),
                                                   shape: const StadiumBorder()
                                                 ),
-                                                child: const Text('Confirmar'),
+                                                child: const AutoSizeText('Confirmar'),
                                                 onPressed: () async {
 
                                                   if(
@@ -751,7 +752,7 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
-                                        Text('Datos del Pago Movil'),
+                                        AutoSizeText('Datos del Pago Movil'),
                                         SizedBox(height: 10,),
                                         StreamBuilder<QuerySnapshot>(
                                           stream: FirebaseFirestore.instance
@@ -771,7 +772,7 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
 
                                             }
 
-                                            return Text('Precio del dolar BCV: ${snapshot.data!.docs[0]['price']} ${snapshot.data!.docs[0]['currency']}');
+                                            return AutoSizeText('Precio del dolar BCV: ${snapshot.data!.docs[0]['price']} ${snapshot.data!.docs[0]['currency']}');
 
                                           },
                                         ),
@@ -780,10 +781,10 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                                           children: [
 
-                                            Text('Cédula'),
+                                            AutoSizeText('Cédula'),
                                             Row(
                                               children: [
-                                                Text('${paymentMethodDetailsModel.kindOfPerson} - ${paymentMethodDetailsModel.identificationCard.toString()}'),
+                                                AutoSizeText('${paymentMethodDetailsModel.kindOfPerson} - ${paymentMethodDetailsModel.identificationCard.toString()}'),
                                                 IconButton(
                                                   icon: const Icon(Icons.copy),
                                                   onPressed: () async {
@@ -800,10 +801,10 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                                           children: [
 
-                                            Text('Teléfono'),
+                                            AutoSizeText('Teléfono'),
                                             Row(
                                               children: [
-                                                Text(paymentMethodDetailsModel.numberPhone.toString().replaceFirst('58', '0')),
+                                                AutoSizeText(paymentMethodDetailsModel.numberPhone.toString().replaceFirst('58', '0')),
                                                 IconButton(
                                                   icon: const Icon(Icons.copy),
                                                   onPressed: () async {
@@ -822,10 +823,10 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                                           children: [
 
-                                            Text('Banco'),
+                                            AutoSizeText('Banco'),
                                             Row(
                                               children: [
-                                                Text(paymentMethodDetailsModel.bank!),
+                                                AutoSizeText(paymentMethodDetailsModel.bank!),
                                                 IconButton(
                                                   icon: const Icon(Icons.copy),
                                                   onPressed: () async {                                                    
@@ -843,7 +844,7 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                             backgroundColor: Color.fromARGB(255, 3, 3, 247),
                                             shape: const StadiumBorder()
                                           ),
-                                          child: const Text('Confirmar'),
+                                          child: const AutoSizeText('Confirmar'),
                                           onPressed: () async  {
                                             _issuerNameTextEditingController.text = "";
                                             _holderNameTextEditingController.text = ""; 
@@ -960,15 +961,15 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
-                                        Text('Datos del Zelle'),
+                                        AutoSizeText('Datos del Zelle'),
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                                           children: [
 
-                                            Text('Correo'),
+                                            AutoSizeText('Correo'),
                                             Row(
                                               children: [
-                                                Text(paymentMethodDetailsModel.email.toString()),
+                                                AutoSizeText(paymentMethodDetailsModel.email.toString()),
                                                 IconButton(
                                                   icon: const Icon(Icons.copy),
                                                   onPressed: () async {
@@ -982,7 +983,7 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                           ],
                                         ),
                                         SizedBox(height: 10,),
-                                        Text(
+                                        AutoSizeText(
                                           'Registro del Pago',
                                           style: TextStyle(
                                             fontSize: 20
@@ -1086,7 +1087,7 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                             backgroundColor: Color.fromARGB(255, 3, 3, 247),
                                             shape: const StadiumBorder()
                                           ),
-                                          child: const Text('Confirmar'),
+                                          child: const AutoSizeText('Confirmar'),
                                           onPressed: () async {
 
                                             if(
@@ -1205,7 +1206,7 @@ class PaymentButton extends StatelessWidget {
               width: size.width * 0.11,
               height: size.height * 0.044,
             ),
-            title: Text(
+            title: AutoSizeText(
               title,
               style: TextStyle(
                 fontSize: size.height * 0.022,

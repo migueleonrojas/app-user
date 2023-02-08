@@ -1,4 +1,5 @@
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Screens/ourservice/backend_orderservice.dart';
 import 'package:oilapp/Screens/ourservice/service_shipping_address.dart';
 import 'package:oilapp/config/config.dart';
@@ -65,7 +66,7 @@ class _OrderServiceScreenState extends State<OrderServiceScreen> {
                         Navigator.push(context, route);
                       }
                     },
-                    label: Text(
+                    label: AutoSizeText(
                       "CHECKOUT",
                       style: TextStyle(
                         fontSize: 16,
@@ -90,7 +91,7 @@ class _OrderServiceScreenState extends State<OrderServiceScreen> {
                                 1) ==
                             0)
                         ? Container()
-                        : Text(
+                        : AutoSizeText(
                             "Total Price: \৳ ${amountProvider.totalPrice.toString()}",
                             style: TextStyle(
                                 color: Colors.black,
@@ -148,7 +149,7 @@ class _OrderServiceScreenState extends State<OrderServiceScreen> {
                                 title: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    AutoSizeText(
                                       (snapshot.data!.docs[index] as dynamic)
                                           .data()['serviceName'],
                                       maxLines: 2,
@@ -175,7 +176,7 @@ class _OrderServiceScreenState extends State<OrderServiceScreen> {
                                         Icons.delete_outline,
                                         color: Colors.white,
                                       ),
-                                      label: Text(
+                                      label: AutoSizeText(
                                         "Remove",
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
@@ -212,7 +213,7 @@ class _OrderServiceScreenState extends State<OrderServiceScreen> {
                                         ],
                                       ),
                                     ),
-                                    Text(
+                                    AutoSizeText(
                                       "\৳" +
                                           (snapshot.data!.docs[index] as dynamic)
                                               .data()['newPrice']

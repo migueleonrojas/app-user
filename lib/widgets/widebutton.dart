@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class WideButton extends StatelessWidget {
@@ -21,7 +22,7 @@ class WideButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(30),
             ),
             child: Center(
-              child: Text(
+              child: AutoSizeText(
                 message!.toUpperCase(),
                 style: TextStyle(
                   color: Colors.white,

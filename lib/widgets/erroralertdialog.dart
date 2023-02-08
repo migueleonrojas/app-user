@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class ErrorAlertDialog extends StatelessWidget {
@@ -9,7 +10,7 @@ class ErrorAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       key: key,
-      content: Text(message!),
+      content: AutoSizeText(message!),
       actions: [
         ElevatedButton(
           /* color: Colors.red, */
@@ -17,7 +18,7 @@ class ErrorAlertDialog extends StatelessWidget {
             Navigator.pop(context);
           },
           child: Center(
-            child: Text("Ok"),
+            child: AutoSizeText("Ok"),
           ),
         ),
       ],

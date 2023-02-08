@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class _TimeLineProductsState extends State<TimeLineProducts> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text(
+        const AutoSizeText(
           'Ordenes de Productos',
           style:  TextStyle(
             fontSize: 20 
@@ -91,9 +92,9 @@ class _TimeLineProductsState extends State<TimeLineProducts> {
                             padding: EdgeInsets.all(8.0),
                             child: Column(
                               children: [
-                                Text('Método de pago: ${snapshot.data!.docs[index].data()['paymentDetails']}'),
-                                Text('Fecha de Orden:  ${DateFormat('yyyy/MM/dd hh:mm a').format(snapshot.data!.docs[index].data()['orderTime'].toDate())}')
-                                /* Text('Fecha de Orden: ${snapshot.data!.docs[index].data()['orderTime'].toDate()}') */
+                                AutoSizeText('Método de pago: ${snapshot.data!.docs[index].data()['paymentDetails']}'),
+                                AutoSizeText('Fecha de Orden:  ${DateFormat('yyyy/MM/dd hh:mm a').format(snapshot.data!.docs[index].data()['orderTime'].toDate())}')
+                                /* AutoSizeText('Fecha de Orden: ${snapshot.data!.docs[index].data()['orderTime'].toDate()}') */
                                 
                               ],
                             ),
@@ -115,25 +116,25 @@ class _TimeLineProductsState extends State<TimeLineProducts> {
 
   Widget _status(ServiceOrderModel serviceOrderModel) {
 
-    Widget text = Text('');
+    Widget text = AutoSizeText('');
 
     if(serviceOrderModel.orderRecived == "Done") {
-      text =  const Text('Estatus: Orden recibida.');
+      text =  const AutoSizeText('Estatus: Orden recibida.');
     }
 
     if(serviceOrderModel.beingPrePared == "Done"){
-      text = const Text('Estatus: Persona del servicio preparado.');
+      text = const AutoSizeText('Estatus: Persona del servicio preparado.');
     }
 
     if(serviceOrderModel.onTheWay == "Done"){
-      text = const Text('Estatus: En camino.');
+      text = const AutoSizeText('Estatus: En camino.');
     }
 
     if(serviceOrderModel.deliverd == "Done"){
-      text = const Text("Estatus: Servicio Completado.");
+      text = const AutoSizeText("Estatus: Servicio Completado.");
     }
     if (serviceOrderModel.orderCancelled =="Done") {
-      text = const Text("Estatus: Servicio Cancelado.");
+      text = const AutoSizeText("Estatus: Servicio Cancelado.");
     }
 
     return text;

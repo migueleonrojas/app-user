@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Model/wish_model.dart';
 import 'package:oilapp/Screens/cart_screen.dart';
 import 'package:oilapp/Screens/products/product_search.dart';
@@ -22,7 +23,7 @@ class WishHelper {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          AutoSizeText(
             "Favoritos",
             style: TextStyle(
               fontSize: size.height * 0.024,
@@ -33,7 +34,7 @@ class WishHelper {
             ),
           ),
           SizedBox(width: size.width * 0.01),
-          Text(
+          AutoSizeText(
             "(",
             style: TextStyle(
               fontSize: size.height * 0.024,
@@ -49,9 +50,9 @@ class WishHelper {
                 .snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
-                return Text('');
+                return AutoSizeText('');
               }
-              return Text(
+              return AutoSizeText(
                 snapshot.data!.docs.length.toString(),
                 style: TextStyle(
                   fontSize: size.height * 0.024,
@@ -61,7 +62,7 @@ class WishHelper {
               );
             },
           ),
-          Text(
+          AutoSizeText(
             ")",
             style: TextStyle(
               fontSize: size.height * 0.024,
@@ -109,7 +110,7 @@ class WishHelper {
                           left: size.width * 0.016/* 6 */,
                           child: Consumer<CartItemCounter>(
                             builder: (context, counter, _) {
-                              return Text(
+                              return AutoSizeText(
                                 (AutoParts.sharedPreferences!
                                             .getStringList(
                                                 AutoParts.userCartList)!
@@ -130,7 +131,7 @@ class WishHelper {
                           left: size.width * 0.008,
                           child: Consumer<CartItemCounter>(
                             builder: (context, counter, _) {
-                              return Text(
+                              return AutoSizeText(
                                 (AutoParts.sharedPreferences!
                                             .getStringList(
                                                 AutoParts.userCartList)!
@@ -210,7 +211,7 @@ class WishHelper {
                                   ),
                                   title: Column(
                                     children: [
-                                      Text(
+                                      AutoSizeText(
                                         wishModel.pName!,
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
@@ -225,7 +226,7 @@ class WishHelper {
                                           Icon(Icons.branding_watermark_outlined),
                                           SizedBox(width: size.width *  0.01),
                                           Flexible(
-                                            child: Text(
+                                            child: AutoSizeText(
                                               wishModel.pBrand!,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
@@ -241,7 +242,7 @@ class WishHelper {
                                   trailing: Padding(
                                     padding: EdgeInsets.only(
                                         top: size.height * 0.014, bottom: size.width *0.03),
-                                    child: Text(
+                                    child: AutoSizeText(
                                       '\$${wishModel.newPrice}',
                                       style: TextStyle(
                                         fontSize: size.height * 0.020,

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:oilapp/Model/vehicle_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -56,7 +57,7 @@ class _ViewCarNotesState extends State<ViewCarNotes> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: AutoSizeText(
           "Notas de Servicio",
           style: TextStyle(
             fontSize: size.height * 0.024,
@@ -158,7 +159,7 @@ class _ViewCarNotesState extends State<ViewCarNotes> {
                         width: size.width * 0.07,
                         fit:BoxFit.contain
                       ),
-                      title: Text((snapshot.data!.docs[index].data() as dynamic)["serviceName"]),
+                      title: AutoSizeText((snapshot.data!.docs[index].data() as dynamic)["serviceName"]),
                       onTap: () async {
                         
                         VehicleModel? userVehicleReturned;

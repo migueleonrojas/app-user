@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Model/vehicle_model.dart';
 import 'package:oilapp/Screens/orders/myservice_order_by_vehicle_screen.dart';
 import 'package:oilapp/Screens/ourservice/coustomServicebody.dart';
@@ -25,7 +26,7 @@ class _OurServiceState extends State<OurService> {
     return Scaffold(
       appBar: AppBar(
         
-        title:  Text(
+        title:  AutoSizeText(
           "Servicios GlobalOil",
           style: TextStyle(
             fontSize: size.height * 0.024,
@@ -93,7 +94,7 @@ class _OurServiceState extends State<OurService> {
                               ? Colors.white
                               : Colors.white70,
                         ),
-                        label: Text(""),
+                        label: AutoSizeText(""),
                       ),
                       NavigationRailDestination(
                         icon: Image.asset(
@@ -104,7 +105,7 @@ class _OurServiceState extends State<OurService> {
                               ? Colors.white
                               : Colors.white70,
                         ),
-                        label: Text(""),
+                        label: AutoSizeText(""),
                       ),
                       NavigationRailDestination(
                         icon: Image.asset(
@@ -115,7 +116,7 @@ class _OurServiceState extends State<OurService> {
                               ? Colors.white
                               : Colors.white70,
                         ),
-                        label: Text(""),
+                        label: AutoSizeText(""),
                       ),
                       NavigationRailDestination(
                         icon: Image.asset(
@@ -126,7 +127,7 @@ class _OurServiceState extends State<OurService> {
                               ? Colors.white
                               : Colors.white70,
                         ),
-                        label: Text(""),
+                        label: AutoSizeText(""),
                       ),
                       NavigationRailDestination(
                         icon: Image.asset(
@@ -137,7 +138,7 @@ class _OurServiceState extends State<OurService> {
                               ? Colors.white
                               : Colors.white70,
                         ),
-                        label: Text(""),
+                        label: AutoSizeText(""),
                       ),
                       NavigationRailDestination(
                         icon: Image.asset(
@@ -148,7 +149,7 @@ class _OurServiceState extends State<OurService> {
                               ? Colors.white
                               : Colors.white70,
                         ),
-                        label: Text(""),
+                        label: AutoSizeText(""),
                       ), */
                     ],
                   ),

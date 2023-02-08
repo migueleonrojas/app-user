@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:oilapp/Model/vehicle_model.dart';
@@ -47,7 +48,7 @@ class ModalBottomSheetListVehicle{
                         endIndent: size.width * 0.45,
                       ),
                       SizedBox(height:size.height * 0.007,),
-                      Text(
+                      AutoSizeText(
                         'Selecciona un vehiculo',                    
                         style: TextStyle(
                           fontSize: size.height * 0.027
@@ -71,7 +72,7 @@ class ModalBottomSheetListVehicle{
                             width:  size.width * 0.07,
                             fit:BoxFit.contain
                           ),
-                          title: Text('Marca: ${(snapshot.data as dynamic)[index].brand}, Modelo: ${(snapshot.data as dynamic)[index].model!}'),
+                          title: AutoSizeText('Marca: ${(snapshot.data as dynamic)[index].brand}, Modelo: ${(snapshot.data as dynamic)[index].model!}'),
                           onTap: () {
                             Navigator.of(context).pop((snapshot.data as dynamic)[index]);
                           },
@@ -99,7 +100,7 @@ class ModalBottomSheetListVehicle{
                     endIndent: size.width * 0.45,
                   ),
                   const SizedBox(height: 5,),
-                  const Text(
+                  const AutoSizeText(
                     'Selecciona un vehiculo',                    
                     style: TextStyle(
                       fontSize: 20
@@ -123,7 +124,7 @@ class ModalBottomSheetListVehicle{
                         width: 20,
                         fit:BoxFit.contain
                       ),
-                      title: Text('Marca: ${listVehicles[index].brand}, Modelo: ${listVehicles[index].model!}'),
+                      title: AutoSizeText('Marca: ${listVehicles[index].brand}, Modelo: ${listVehicles[index].model!}'),
                       onTap: () {
                         Navigator.of(context).pop(listVehicles[index]);
                       },
