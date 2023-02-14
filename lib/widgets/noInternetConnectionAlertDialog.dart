@@ -9,10 +9,10 @@ class NoInternetConnectionAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: AutoSizeText(
+      title: Text(
         "No posee conexión a internet",
       ),
-      content: AutoSizeText("Comprueba la configuración de tu red e inténtalo de nuevo."),
+      content: Text("Comprueba la configuración de tu red e inténtalo de nuevo."),
       actions: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -23,7 +23,7 @@ class NoInternetConnectionAlertDialog extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: AutoSizeText("OK"),
+          child: Text("OK"),
         ),
       ],
     );

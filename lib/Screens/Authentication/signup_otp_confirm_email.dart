@@ -11,13 +11,12 @@ import 'package:oilapp/Screens/Authentication/signup_screen.dart';
 class SignUpOtpConfirmEmailScreen extends StatefulWidget {
 
   final int codeEmail;
-  final int codeNumber;
   final String phoneUser; 
   final String emailUser;
   final String nameUser;
 
 
-  const SignUpOtpConfirmEmailScreen({super.key, required this.codeEmail, required this.codeNumber, required this.phoneUser, required this.emailUser, required this.nameUser});
+  const SignUpOtpConfirmEmailScreen({super.key, required this.codeEmail, required this.phoneUser, required this.emailUser, required this.nameUser});
 
   @override
   State<SignUpOtpConfirmEmailScreen> createState() => _SignUpOtpConfirmEmailScreenState();
@@ -102,7 +101,6 @@ class _SignUpOtpConfirmEmailScreenState extends State<SignUpOtpConfirmEmailScree
                         showSnackBar(title: 'El código ingresado es exitoso.', seconds: 2);
                         Route route = MaterialPageRoute(builder: (_) => SignUpOtpConfirmPhoneScreen(
                           codeEmail: codeEmailOtp,
-                          codeNumber: widget.codeNumber,
                           emailUser: widget.emailUser,
                           nameUser: widget.nameUser,
                           phoneUser: widget.phoneUser,

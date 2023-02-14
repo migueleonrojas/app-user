@@ -262,7 +262,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                               borderRadius:
                                                   BorderRadius.circular(size.height * 0.035),
                                             ),
-                                            title: const AutoSizeText(
+                                            title: const Text(
                                               "Dé su opinión",
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
@@ -272,7 +272,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                             content: Column(
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
-                                                const AutoSizeText(
+                                                const Text(
                                                   "Escriba su valiosa opinión sobre este servicio. Nos ayudará a mejorar nuestro servicio.",
                                                   textAlign: TextAlign.center,
                                                 ),
@@ -325,7 +325,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                             "Gracias por darnos su valiosa calificación y reseña");
                                                     Navigator.pop(context);
                                                   },
-                                                  child: AutoSizeText(
+                                                  child: Text(
                                                     "Enviar",
                                                     style: TextStyle(
                                                       fontWeight:

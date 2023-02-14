@@ -61,7 +61,7 @@ class _AddBrandState extends State<AddBrand> {
     Size size = MediaQuery.of(context).size;
 
     return AlertDialog(
-      title: const Center(child: AutoSizeText('Marca')),
+      title: const Center(child: Text('Marca')),
       content:
         Container(
           height: MediaQuery.of(context).size.height * 0.20,
@@ -129,7 +129,7 @@ class _AddBrandState extends State<AddBrand> {
                             borderRadius: BorderRadius.circular(size.height * 0.035),
                             child: Container(
                               width: size.width * 0.35,
-                              child: Center(child: AutoSizeText((snapshot.data!.docs[index] as dynamic).data()["name"],style: TextStyle(fontSize: size.height * 0.020)),),
+                              child: Center(child: Text((snapshot.data!.docs[index] as dynamic).data()["name"],style: TextStyle(fontSize: size.height * 0.020)),),
                             ),
                           ),
                         ),
@@ -195,14 +195,14 @@ class _AddBrandState extends State<AddBrand> {
         ),
       actions: [
         TextButton(
-          child: const AutoSizeText('Agregar'),
+          child: const Text('Agregar'),
           onPressed: () {
             
             Navigator.of(context).pop([widget.selectedIndex, widget.brandName, widget.brandId, widget.logoBrand, true]);
           },
         ),
         TextButton(
-          child: const AutoSizeText('Cancelar'),
+          child: const Text('Cancelar'),
           onPressed: () {
             final returnedIndexBrand = (widget.holdIndex) ? widget.previousSelectedIndex : '';
             final returnedBrandName = (widget.holdIndex) ? widget.previousBrandName : '';

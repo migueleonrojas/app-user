@@ -51,7 +51,7 @@ class _AddYearState extends State<AddYear> {
     Size size = MediaQuery.of(context).size;
 
     return AlertDialog(
-      title: const Center(child: AutoSizeText('Años')),
+      title: const Center(child: Text('Años')),
       content:
         Container(
           height: MediaQuery.of(context).size.height * 0.20,
@@ -101,7 +101,7 @@ class _AddYearState extends State<AddYear> {
                             borderRadius: BorderRadius.circular(30),
                             child: Container(
                               width: size.width * 0.35,
-                              child: Center(child: AutoSizeText((snapshot.data!.docs[index] as dynamic).data()["year"].toString(),style: TextStyle(fontSize: size.height * 0.020)),),
+                              child: Center(child: Text((snapshot.data!.docs[index] as dynamic).data()["year"].toString(),style: TextStyle(fontSize: size.height * 0.020)),),
                             ),
                           ),
                         ),
@@ -146,14 +146,14 @@ class _AddYearState extends State<AddYear> {
         ),
       actions: [
         TextButton(
-          child: const AutoSizeText('Agregar'),
+          child: const Text('Agregar'),
           onPressed: () {
             
             Navigator.of(context).pop([widget.selectedIndex, widget.year]);
           },
         ),
         TextButton(
-          child: const AutoSizeText('Cancelar'),
+          child: const Text('Cancelar'),
           onPressed: () {
             final returnedIndexBrand = (widget.holdIndex) ? widget.previousSelectedIndex : '';
             final returnedBrandId = (widget.holdIndex) ? widget.previousYear : '';

@@ -257,6 +257,8 @@ class _AddCarNoteState extends State<AddCarNote> {
                 ),
               ),
               SizedBox(height: size.height * 0.028),
+              AutoSizeText('Kilometraje Actual: ${widget.vehicleModel.mileage} km.'),
+              SizedBox(height: size.height * 0.028),
               Form(
                 key: _formkey,
                 child: Column(
@@ -574,14 +576,18 @@ class _AddCarNoteState extends State<AddCarNote> {
     return await showDialog(
           context: context,
           builder: (context) =>  AlertDialog(
-            title:  AutoSizeText('Estas seguro?'),
-            content:  AutoSizeText(msg),
+            title:  Text('Estas seguro?'),
+            content:  Container(
+              height: MediaQuery.of(context).size.height * 0.04,
+              width: MediaQuery.of(context).size.width * 0.3,
+              child: Text(msg)
+            ),
             actions: <Widget>[
                GestureDetector(
                 onTap: () => Navigator.of(context).pop(true),
                 child: Padding(
                   padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.010),
-                  child: AutoSizeText("YES"),
+                  child: Text("YES"),
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.019),
@@ -589,7 +595,7 @@ class _AddCarNoteState extends State<AddCarNote> {
                 onTap: () => Navigator.of(context).pop(false),
                 child: Padding(
                   padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.010),
-                  child: AutoSizeText("NO"),
+                  child: Text("NO"),
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.019),

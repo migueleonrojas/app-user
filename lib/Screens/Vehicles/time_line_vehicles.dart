@@ -48,7 +48,9 @@ class _TimeLineVehiclesState extends State<TimeLineVehicles> {
         Text(
           'Próximos servicios de Cambio de Aceite',
           style:  TextStyle(
-            fontSize: size.height * 0.023
+            fontSize: size.height * 0.023,
+            color: Colors.white
+
           ),
         ),
         SizedBox(height: size.height * 0.015,),
@@ -74,8 +76,8 @@ class _TimeLineVehiclesState extends State<TimeLineVehicles> {
 
                 if (snapshot.data!.isEmpty) {
                   return const EmptyCardMessage(
-                    listTitle: 'No tiene ordenes de productos',
-                    message: 'Compre desde Global Oil',
+                    listTitle: 'No tienes vehiculos registrados',
+                    message: 'Agregue un vehiculo.',
                   );
                 }
                 

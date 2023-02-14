@@ -412,17 +412,17 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
     return await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: const AutoSizeText('Estas seguro?'),
-            content: AutoSizeText(msg),
+            title: const Text('Estas seguro?'),
+            content: Text(msg),
             actions: <Widget>[
               GestureDetector(
                 onTap: () => Navigator.of(context).pop(true),
-                child: AutoSizeText("YES"),
+                child: Text("YES"),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.021),
               GestureDetector(
                 onTap: () => Navigator.of(context).pop(false),
-                child: AutoSizeText("NO"),
+                child: Text("NO"),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.021),
             ],

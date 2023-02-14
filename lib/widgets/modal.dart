@@ -13,10 +13,10 @@ class ModalAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return AlertDialog(
-      title: AutoSizeText(
+      title: Text(
         title,
       ),
-      content: AutoSizeText(content),
+      content: Text(content),
       actions: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -27,7 +27,7 @@ class ModalAlertDialog extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: AutoSizeText("OK"),
+          child: Text("OK"),
         ),
       ],
     );

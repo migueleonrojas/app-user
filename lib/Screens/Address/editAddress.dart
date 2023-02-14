@@ -369,14 +369,18 @@ class _EditAddressState extends State<EditAddress> {
     return await showDialog(
           context: context,
           builder: (context) =>  AlertDialog(
-            title:  AutoSizeText('Estas seguro?'),
-            content:  AutoSizeText(msg),
+            title:  Text('Estas seguro?'),
+            content:  Container(
+              height: MediaQuery.of(context).size.height * 0.04,
+              width: MediaQuery.of(context).size.width * 0.3,
+              child: Text(msg)
+            ),
             actions: <Widget>[
                GestureDetector(
                 onTap: () => Navigator.of(context).pop(true),
                 child:  Padding(
                   padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.012),
-                  child: AutoSizeText("YES"),
+                  child: Text("YES"),
                 ),
               ),
                SizedBox(height: MediaQuery.of(context).size.height * 0.020),
@@ -384,7 +388,7 @@ class _EditAddressState extends State<EditAddress> {
                 onTap: () => Navigator.of(context).pop(false),
                 child:  Padding(
                   padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.012),
-                  child: AutoSizeText("NO"),
+                  child: Text("NO"),
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.020),

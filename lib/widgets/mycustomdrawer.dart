@@ -447,17 +447,21 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
     return await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: const AutoSizeText('Estas seguro?'),
-            content: const AutoSizeText('De que quieres salir!'),
+            title: const Text('Estas seguro?'),
+            content: Container(
+              height: MediaQuery.of(context).size.height * 0.04,
+              width: MediaQuery.of(context).size.width * 0.3,
+              child: const Text('De que quieres salir!')
+            ),
             actions: <Widget>[
               GestureDetector(
                 onTap: () => Navigator.of(context).pop(true),
-                child: AutoSizeText("YES"),
+                child: Text("YES"),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.015 ),
               GestureDetector(
                 onTap: () => Navigator.of(context).pop(false),
-                child: AutoSizeText("NO"),
+                child: Text("NO"),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.015 ),
             ],

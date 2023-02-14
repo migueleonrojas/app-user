@@ -11,17 +11,17 @@ import 'package:oilapp/Screens/Authentication/signup_screen.dart';
 import 'dart:convert';
 
 import 'package:oilapp/config/config.dart';
+import 'package:oilapp/widgets/modal.dart';
 import 'package:oilapp/widgets/progressdialog.dart';
 
 class SignUpOtpConfirmPhoneScreen extends StatefulWidget {
 
   final int codeEmail;
-  final int codeNumber;
   final String phoneUser; 
   final String emailUser;
   final String nameUser;
 
-  const SignUpOtpConfirmPhoneScreen({super.key, required this.codeEmail, required this.codeNumber, required this.phoneUser, required this.emailUser, required this.nameUser});
+  const SignUpOtpConfirmPhoneScreen({super.key, required this.codeEmail, required this.phoneUser, required this.emailUser, required this.nameUser});
 
   @override
   State<SignUpOtpConfirmPhoneScreen> createState() => _SignUpOtpConfirmPhoneScreenState();
@@ -35,11 +35,39 @@ class _SignUpOtpConfirmPhoneScreenState extends State<SignUpOtpConfirmPhoneScree
   @override
   void initState() {
     super.initState();
-    codePhoneOtp = widget.codeNumber;
+    Future.delayed(Duration.zero,   () async {
+      await showDialog(
+        context: context,
+          builder: (BuildContext context) {
+            return  const ModalAlertDialog(
+              title: 'Actualizar Terminos y Condiciones.',
+              content: 'Para poder recibir el otp de confirmación debe asegurarse de que los terminos y condiciones de whatsapp lo tenga actualizados.',
+            );
+          },
+      );
+
+      int codeNumber = Random().nextInt(9999 - 1000 + 1) + 1000;
+      
+      bool confirmSend= await sendCodeByPhone(
+        int.parse('58${widget.phoneUser}'.replaceFirst('0', '')),
+        codeNumber.toString()
+      );
+
+      if(!confirmSend){
+        showSnackBar(title: 'El codigo no se pudo enviar, intente de nuevo.'); 
+      }
+      codePhoneOtp = codeNumber; 
+      
+
+    });
+    
   }
 
   @override
   Widget build(BuildContext context) {
+
+    
+
     return SafeArea(
       child: WillPopScope(
         onWillPop: () async {
@@ -132,17 +160,17 @@ class _SignUpOtpConfirmPhoneScreenState extends State<SignUpOtpConfirmPhoneScree
                     ),
                     child: const AutoSizeText("Enviar nuevo código"),
                     onPressed: () async {
-                      int codeEmail = Random().nextInt(9999 - 1000 + 1) + 1000;
+                      int codePhone = Random().nextInt(9999 - 1000 + 1) + 1000;
                       bool confirmSend= await sendCodeByPhone(
                         int.parse('58${widget.phoneUser}'.replaceFirst('0', '')),
-                        codeEmail.toString()
+                        codePhone.toString()
                       );
                       if(!confirmSend){
                         showSnackBar(title: 'El codigo no se pudo enviar, intente de nuevo.');
                         return;
                       }
                       showSnackBar(title: 'El codigo se envio de nuevo a +58${widget.phoneUser.replaceFirst("0","")}');
-                      codePhoneOtp = codeEmail; 
+                      codePhoneOtp = codePhone; 
                       setState(() {});
                     }
                   ),
@@ -215,6 +243,9 @@ class _SignUpOtpConfirmPhoneScreenState extends State<SignUpOtpConfirmPhoneScree
       "address": "Venezuela",
       "url": "https://firebasestorage.googleapis.com/v0/b/oildatabase-781a4.appspot.com/o/no-image-user.png?alt=media&token=012134ea-3488-4061-ab18-a9f4196b202c",
       "logged": false,
+      "attempts": 0,
+      "timeForTheNextOtp": DateTime.now(),
+      "tokenFirebaseToken":tokenFirebaseMsg,
       AutoParts.userCartList: ["garbageValue"],
     });
     await AutoParts.sharedPreferences!.setString("uid", userId);

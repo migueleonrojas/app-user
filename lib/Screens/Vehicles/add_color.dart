@@ -31,14 +31,14 @@ class _AddColorState extends State<AddColor> {
       ),
       actions: [
         TextButton(
-          child: const AutoSizeText('Agregar'),
+          child: const Text('Agregar'),
           onPressed: () {
             Navigator.of(context).pop(widget.pickerColor!.value);
             
           },
         ),
         TextButton(
-          child: const AutoSizeText('Cancelar'),
+          child: const Text('Cancelar'),
           onPressed: () {
             Navigator.pop(context);
           },

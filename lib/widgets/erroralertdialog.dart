@@ -10,7 +10,7 @@ class ErrorAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       key: key,
-      content: AutoSizeText(message!),
+      content: Text(message!),
       actions: [
         ElevatedButton(
           /* color: Colors.red, */
@@ -18,7 +18,7 @@ class ErrorAlertDialog extends StatelessWidget {
             Navigator.pop(context);
           },
           child: Center(
-            child: AutoSizeText("Ok"),
+            child: Text("Ok"),
           ),
         ),
       ],

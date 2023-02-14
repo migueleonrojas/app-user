@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -31,12 +32,51 @@ class LoginOtpConfirmPhoneScreen extends StatefulWidget {
 class _LoginOtpConfirmPhoneScreenState extends State<LoginOtpConfirmPhoneScreen> {
 
   int codePhoneOtp = 0;
+  int timeForTheNextOtp = 0;
+  int attempts = 0;
   String codeOtpTextField  = "";
+  int? secondsNextOtp;
+  Timer? timer;
 
   @override
   void initState() {
     super.initState();
     codePhoneOtp = widget.codeNumber;
+    Future.delayed(Duration.zero,  () async {
+
+      DocumentSnapshot<Map<String, dynamic>> docUser = await FirebaseFirestore.instance
+        .collection(AutoParts.collectionUser)
+        .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
+        .get();
+
+      DateTime dateTimeForTheNextOtp = (docUser.data() as dynamic)['timeForTheNextOtp'].toDate();
+
+      attempts = (docUser.data() as dynamic)['attempts'];
+
+      DateTime timeNow = DateTime.now();
+        
+      secondsNextOtp = ((dateTimeForTheNextOtp.millisecondsSinceEpoch - timeNow.millisecondsSinceEpoch)/1000).truncate();
+
+      timer = Timer.periodic(Duration(seconds: 1), (timer) {
+
+
+
+        if(secondsNextOtp! < 0) return;
+        secondsNextOtp = secondsNextOtp! - 1;
+        setState(() {});
+        
+      
+      });
+      
+
+    });
+  }
+
+  @override
+  void dispose() {
+    
+    super.dispose();
+    timer!.cancel();
   }
 
   @override
@@ -99,11 +139,39 @@ class _LoginOtpConfirmPhoneScreenState extends State<LoginOtpConfirmPhoneScreen>
                         return; 
                       }
                       else if(codeOtpTextField != codePhoneOtp.toString()){
+
+                        if(attempts >= 3) {
+                          return;
+                        }
+
+                        attempts++;
+                        await FirebaseFirestore.instance
+                          .collection(AutoParts.collectionUser)
+                          .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
+                          .update({
+                            "attempts": attempts
+                          });
+                        if(attempts >= 3) {
+                          await FirebaseFirestore.instance
+                            .collection(AutoParts.collectionUser)
+                            .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
+                            .update({
+                              "timeForTheNextOtp": DateTime.now().add(Duration(hours: 1))
+                            });
+                          secondsNextOtp = ((DateTime.now().add(Duration(hours: 1)).millisecondsSinceEpoch - DateTime.now().millisecondsSinceEpoch)/1000).truncate();
+                        }
+
                         showSnackBar(title: 'El código ingresado esta errado.');
                         return; 
                       }
                       else{
                         showSnackBar(title: 'El código ingresado es exitoso.', seconds: 2);
+                        await FirebaseFirestore.instance
+                          .collection(AutoParts.collectionUser)
+                          .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
+                          .update({
+                            "attempts": 0
+                          });
 
                         showDialog(
                           barrierDismissible: false,
@@ -125,6 +193,7 @@ class _LoginOtpConfirmPhoneScreenState extends State<LoginOtpConfirmPhoneScreen>
                     }
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height.toDouble() * 0.050),
+                  if(secondsNextOtp != null && secondsNextOtp! < 0)
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.030, horizontal: MediaQuery.of(context).size.width * 0.15),
@@ -147,6 +216,9 @@ class _LoginOtpConfirmPhoneScreenState extends State<LoginOtpConfirmPhoneScreen>
                       setState(() {});
                     }
                   ),
+                  if(secondsNextOtp != null && secondsNextOtp! > 0)
+                  textNextTimeOtp(secondsNextOtp!)
+                  
                   
                 ]
               )
@@ -218,8 +290,41 @@ class _LoginOtpConfirmPhoneScreenState extends State<LoginOtpConfirmPhoneScreen>
     List<String> cartList = widget.user.docs[0].data()["userCart"].cast<String>();
     await AutoParts.sharedPreferences!.setStringList(AutoParts.userCartList, cartList);
     await widget.user.docs[0].reference.update({
-      "logged":true
+      "logged":true,
+      "tokenFirebaseToken":tokenFirebaseMsg
     });
+  }
+
+
+ 
+
+  Widget textNextTimeOtp(int secondsNextOtp) {
+    Text timeNextOtp = Text('');
+    if(secondsNextOtp < 0){
+      return timeNextOtp;
+    }
+    
+    int hourRest =   (secondsNextOtp/60/60).truncate();
+
+    int minutesRest =  ((secondsNextOtp/60) - ( (hourRest * 60) )).truncate();
+        
+    int secondRest =  ((secondsNextOtp) - ( (hourRest * 60 * 60) + (minutesRest * 60)  )).truncate();
+
+    String contentCountDown = '';
+
+    if(secondsNextOtp <= 90) {
+
+      contentCountDown = 'Restan ${minutesRest} minutos ${secondRest} segundos, para reenviar otp.';
+      timeNextOtp = Text(contentCountDown);
+      
+    }
+    else {
+      contentCountDown = 'Restan ${minutesRest} minutos ${secondRest} segundos, para reenviar otp.';
+      timeNextOtp = Text(contentCountDown);
+    }
+
+    return timeNextOtp;
+
   }
 
   void showSnackBar({required String title, int seconds = 4}) {

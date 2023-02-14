@@ -52,7 +52,7 @@ class _AddModelState extends State<AddModel> {
 
     return AlertDialog(
 
-      title: const Center(child: AutoSizeText('Models')),
+      title: const Center(child: Text('Models')),
       content:
         Container(
           height: MediaQuery.of(context).size.height * 0.20,
@@ -109,7 +109,7 @@ class _AddModelState extends State<AddModel> {
                             borderRadius: BorderRadius.circular(size.height * 0.035),
                             child: Container(
                               width: size.width * 0.35,
-                              child: Center(child: AutoSizeText('${(snapshot.data!.docs[index] as dynamic).data()["name"].toString()}',style: TextStyle(fontSize: size.height * 0.020)),),
+                              child: Center(child: Text('${(snapshot.data!.docs[index] as dynamic).data()["name"].toString()}',style: TextStyle(fontSize: size.height * 0.020)),),
                             ),
                           ),
                         ),
@@ -158,14 +158,14 @@ class _AddModelState extends State<AddModel> {
         ),
       actions: [
         TextButton(
-          child: const AutoSizeText('Agregar'),
+          child: const Text('Agregar'),
           onPressed: () {
             
             Navigator.of(context).pop([widget.selectedIndex, widget.modelName, widget.brandId]);
           },
         ),
         TextButton(
-          child: const AutoSizeText('Cancelar'),
+          child: const Text('Cancelar'),
           onPressed: () {
             final returnedIndexBrand = (widget.holdIndex) ? widget.previousSelectedIndex : '';
             final returnedBrandName = (widget.holdIndex) ? widget.previousModelName : '';

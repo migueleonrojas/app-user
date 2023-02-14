@@ -69,7 +69,7 @@ class _UpdateUserState extends State<UpdateUser> {
     Size size = MediaQuery.of(context).size;
 
     return CupertinoAlertDialog(
-      title: const AutoSizeText(
+      title: const Text(
         "Actualizar Perfil",
         textAlign: TextAlign.center,
       ),
@@ -111,14 +111,14 @@ class _UpdateUserState extends State<UpdateUser> {
 
             
           },
-          child: const AutoSizeText('Enviar'),
+          child: const Text('Enviar'),
         ),
         CupertinoDialogAction(
           isDestructiveAction: true,
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: const AutoSizeText('Cancelar'),
+          child: const Text('Cancelar'),
         ),
       ],
       content: SingleChildScrollView(
@@ -686,14 +686,18 @@ class _UpdateUserState extends State<UpdateUser> {
     return await showDialog(
           context: context,
           builder: (context) =>  AlertDialog(
-            title:  const AutoSizeText('¿Estas seguro?'),
-            content:  AutoSizeText(msg),
+            title:  const Text('¿Estas seguro?'),
+            content:  Container(
+              height: MediaQuery.of(context).size.height * 0.04,
+              width: MediaQuery.of(context).size.width * 0.3,
+              child: Text(msg)
+            ),
             actions: <Widget>[
                GestureDetector(
                 onTap: () => Navigator.of(context).pop(true),
                 child: const Padding(
                   padding:  EdgeInsets.all(8.0),
-                  child: AutoSizeText("YES"),
+                  child: Text("YES"),
                 ),
               ),
               const SizedBox(height: 16),
@@ -701,7 +705,7 @@ class _UpdateUserState extends State<UpdateUser> {
                 onTap: () => Navigator.of(context).pop(false),
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: AutoSizeText("NO"),
+                  child: Text("NO"),
                 ),
               ),
               const SizedBox(height: 16),
@@ -716,7 +720,7 @@ class _UpdateUserState extends State<UpdateUser> {
     return await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const AutoSizeText('Confimación de cambios en la cuenta'),
+        title: const Text('Confimación de cambios en la cuenta'),
         content: Container(
           height: 150,
           child: Column(
@@ -724,18 +728,18 @@ class _UpdateUserState extends State<UpdateUser> {
               Container(
                 child: Column(
                   children: [
-                    const AutoSizeText(
+                    const Text(
                       'Validando Cambios:'
                     ),
                     const SizedBox(height: 5,),
-                    const AutoSizeText('Debe colocar el código de validación.'),
+                    const Text('Debe colocar el código de validación.'),
                     ElevatedButton(
                       onPressed: () async {
                         bool confirmSendCode = await _onBackPressed("Se le va a enviar un código al siguiente número: ${phoneController.text}");
                         if(!confirmSendCode) return;
                         await sendMessageTextConfirmation(int.parse(phoneController.text), '$codeValidation');
                       }, 
-                      child: AutoSizeText('Solicitar el código de validación')
+                      child: Text('Solicitar el código de validación')
                     )
                   ],
                 ),
@@ -773,13 +777,13 @@ class _UpdateUserState extends State<UpdateUser> {
               }
             
             },
-            child: AutoSizeText('Aceptar')
+            child: Text('Aceptar')
           ),
           ElevatedButton(
             onPressed: (){
               Navigator.of(context).pop(false);
             }, 
-            child: AutoSizeText('Cancelar')
+            child: Text('Cancelar')
           )
         ], 
       )
@@ -790,7 +794,7 @@ class _UpdateUserState extends State<UpdateUser> {
     return await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const AutoSizeText('Ingrese las credenciales del correo actual'),
+        title: const Text('Ingrese las credenciales del correo actual'),
         content: Container(
           height: 280,
           child: Column(
@@ -799,7 +803,7 @@ class _UpdateUserState extends State<UpdateUser> {
               Form(
                   child: Column(
                     children: [
-                      const AutoSizeText('Ingrese el correo y la clave del correo actual'),
+                      const Text('Ingrese el correo y la clave del correo actual'),
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         controller: oldEmailController,
@@ -815,7 +819,7 @@ class _UpdateUserState extends State<UpdateUser> {
                         ),
                       ),
                       const SizedBox(height: 20,),
-                      const AutoSizeText('Coloque la nueva clave y la confirmación de la misma'),
+                      const Text('Coloque la nueva clave y la confirmación de la misma'),
                       TextFormField(
                         keyboardType: TextInputType.visiblePassword,
                         controller: newPasswordController,
@@ -893,14 +897,14 @@ class _UpdateUserState extends State<UpdateUser> {
               
             
             },
-            child: AutoSizeText('Aceptar')
+            child: Text('Aceptar')
           ),
           ElevatedButton(
             onPressed: (){
               Navigator.of(context).pop(false);
               
             }, 
-            child: AutoSizeText('Cancelar')
+            child: Text('Cancelar')
           )
         ], 
       )

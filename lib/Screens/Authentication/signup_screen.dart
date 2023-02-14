@@ -185,15 +185,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     
                     
                     int codeEmail = Random().nextInt(9999 - 1000 + 1) + 1000;
-                    int codeNumber = Random().nextInt(9999 - 1000 + 1) + 1000;
+                    /* int codeNumber = Random().nextInt(9999 - 1000 + 1) + 1000; */
                     String phoneUser = _userPhoneTextEditingController.text.toLowerCase().trim();
                     String emailUser = _emailTextEditingController.text.toLowerCase().trim();
                     String nameUser = _nameTextEditingController.text.toLowerCase().trim();
 
-                    bool confirmSendPhone = await sendCodeByPhone(int.parse(phone), '$codeNumber');
+                    /* bool confirmSendPhone = await sendCodeByPhone(int.parse(phone), '$codeNumber'); */
                     bool confirmSendEmail = await sendCodeByEmail(codeEmail);
-                    if(!confirmSendPhone || !confirmSendEmail){
-                      showSnackBar(title: 'No se enviaron los codigos, intentelo de nuevo');
+                    if(/* !confirmSendPhone ||  */!confirmSendEmail){
+                      showSnackBar(title: 'No se envio el código al correo, intentelo de nuevo');
+                      /* showSnackBar(title: 'No se enviaron los codigos, intentelo de nuevo'); */
                       if(!mounted) return;
                       Navigator.pop(context);
                       return;
@@ -202,7 +203,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Navigator.pop(context);
                     Route route = MaterialPageRoute(builder: (_) => SignUpOtpConfirmEmailScreen(
                       codeEmail: codeEmail,
-                      codeNumber: codeNumber,
+                      /*codeNumber: codeNumber,*/
                       phoneUser: phoneUser,
                       emailUser: emailUser,
                       nameUser: nameUser,

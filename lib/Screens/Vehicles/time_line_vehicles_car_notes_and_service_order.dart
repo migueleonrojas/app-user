@@ -35,7 +35,7 @@ class _TimelineVehiclesCarNotesAndServiceOrderState extends State<TimelineVehicl
     return Scaffold(
       appBar: AppBar(
         
-        title: AutoSizeText(
+        title: Text(
           "Mis Ordenes de Servicio y Notas de Servicio",
           style: TextStyle(
             fontSize: size.height * 0.024,
@@ -81,7 +81,6 @@ class _TimelineVehiclesCarNotesAndServiceOrderState extends State<TimelineVehicl
                     return const EmptyCardMessage(
                       listTitle: 'No tiene ordenes de productos o notas de servicios',
                       message: 'Solicite un servicio Global Oil o cree una nota de servicio',
-            
                     );
                   }
             
@@ -140,9 +139,9 @@ class _TimelineVehiclesCarNotesAndServiceOrderState extends State<TimelineVehicl
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                (data['serviceId']!= null) ?AutoSizeText('Orden de Servicio'):AutoSizeText('Nota de Servicio'),
+                (data['serviceId']!= null) ?Text('Orden de Servicio'):Text('Nota de Servicio'),
                 SizedBox(height: size.height * 0.008,),
-                AutoSizeText('${data["serviceName"]}'),
+                Text('${data["serviceName"]}'),
                 SizedBox(height: size.height * 0.008,),
                 FadeInImage(
                   placeholder: const AssetImage('assets/no-image/no-image.jpg'),
@@ -151,7 +150,7 @@ class _TimelineVehiclesCarNotesAndServiceOrderState extends State<TimelineVehicl
                   height: size.height * 0.080,
                   fit:BoxFit.contain
                 ),
-                (data["mileage"] != null) ?AutoSizeText('${data["mileage"]} km'):AutoSizeText('${widget.vehicleWithNotificationsModel!.mileage} km'),
+                (data["mileage"] != null) ?Text('${data["mileage"]} km'):Text('${widget.vehicleWithNotificationsModel!.mileage} km'),
                 (data['serviceId']!= null) ?_status(data):const SizedBox()
               ]
             ),
@@ -164,25 +163,25 @@ class _TimelineVehiclesCarNotesAndServiceOrderState extends State<TimelineVehicl
 
   Widget _status(Map<String,dynamic> data) {
 
-    Widget text = AutoSizeText('');
+    Widget text = Text('');
 
     if(data["orderRecived"] == "Done") {
-      text = const AutoSizeText('Estatus: Orden recibida.');
+      text = const Text('Estatus: Orden recibida.');
     }
 
     if(data["beingPrePared"] == "Done"){
-      text = const AutoSizeText('Estatus: Persona del servicio preparado.');
+      text = const Text('Estatus: Persona del servicio preparado.');
     }
 
     if(data["onTheWay"] == "Done"){
-      text = const AutoSizeText('Estatus: En camino.');
+      text = const Text('Estatus: En camino.');
     }
 
     if(data["deliverd"] == "Done"){
-      text = const AutoSizeText("Estatus: Servicio Completado.");
+      text = const Text("Estatus: Servicio Completado.");
     }
     if (data["orderCancelled"] =="Done") {
-      text = const AutoSizeText("Estatus: Servicio Cancelado.");
+      text = const Text("Estatus: Servicio Cancelado.");
     }
 
     return text;
@@ -191,23 +190,23 @@ class _TimelineVehiclesCarNotesAndServiceOrderState extends State<TimelineVehicl
 
   Widget messageDayRest(int daysOfTheNextService,  String dateFromNextFormat) {
 
-    Widget text = AutoSizeText('');
+    Widget text = Text('');
     if(daysOfTheNextService <= 0) {
-      text =  AutoSizeText(
+      text =  Text(
         'Restan ${0} dias para el proximo cambio de aceite. El ${dateFromNextFormat}',
         style: const TextStyle(color: Colors.red),
       );
     }
 
     if(daysOfTheNextService > 0 && daysOfTheNextService <= 7) {
-      text =  AutoSizeText(
+      text =  Text(
         'Restan ${daysOfTheNextService} dias para el proximo cambio de aceite.\nEl ${dateFromNextFormat}.',
         style: const TextStyle(color: Colors.orange),
       );
     }
 
     if(daysOfTheNextService > 7){
-      text = AutoSizeText('Restan ${daysOfTheNextService} dias para el proximo cambio de aceite. \nEl ${dateFromNextFormat}.');
+      text = Text('Restan ${daysOfTheNextService} dias para el proximo cambio de aceite. \nEl ${dateFromNextFormat}.');
     }
 
     

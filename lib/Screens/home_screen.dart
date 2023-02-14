@@ -29,17 +29,27 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen>  {
-  
-  Color _buttonColor = Color(439533999);
+
+  List<Color> colorButton = [
+    Color.fromRGBO(156, 141, 7, 1),
+    Color.fromRGBO(107, 106, 116, 1),
+    Color.fromRGBO(56, 48, 175, 1),
+  ];
+  int indexColor = 0;
+  Color  _buttonColor = Color.fromRGBO(156, 141, 7, 1);
   Timer? timer;
 
   @override
   void initState() {
     super.initState();
     timer = Timer.periodic(Duration(seconds: 1), (timer) {
+
+      if(indexColor > 2) indexColor = 0;
       /* Random().nextint(max - min) + min; */
-      int codeColorRandom = Random().nextInt(999999999 - 1) + 1;
-      _buttonColor = Color(codeColorRandom);
+      /* int codeColorRandom = Random().nextInt(999999999 - 1) + 1; */
+      /* _buttonColor = Color(codeColorRandom); */
+      _buttonColor = colorButton[indexColor];
+      indexColor++;
       setState(() {
         
       });
@@ -58,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen>  {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 34, 33, 33),
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
         elevation: 0,
@@ -242,15 +252,19 @@ class _HomeScreenState extends State<HomeScreen>  {
     return await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: const AutoSizeText('Estas seguro?'),
-            content: const AutoSizeText('De que quieres salir!'),
+            title: const Text('Estas seguro?'),
+            content: Container(
+              height: MediaQuery.of(context).size.height * 0.04,
+              width: MediaQuery.of(context).size.width * 0.3,
+              child: const Text('De que quieres salir!')
+            ),
             actions: <Widget>[
               GestureDetector(
                 onTap: () { 
                   if(!mounted) return;
                   Navigator.of(context).pop(false);
                 },
-                child: const AutoSizeText("NO"),
+                child: const Text("NO"),
               ),
               const SizedBox(height: 16),
               GestureDetector(
@@ -259,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen>  {
                   if(!mounted) return;
                   Navigator.of(context).pop(true);
                 },
-                child: const AutoSizeText("YES"),
+                child: const Text("YES"),
               ),
               const SizedBox(height: 16),
             ],

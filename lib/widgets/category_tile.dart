@@ -24,13 +24,13 @@ class CategoryTile extends StatelessWidget {
                 title: AutoSizeText(
                   "No Internet Connection",
                 ),
-                content: AutoSizeText("Check your network settings and try again."),
+                content: Text("Check your network settings and try again."),
                 actions: [
                   TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: AutoSizeText("OK"),
+                    child: Text("OK"),
                   ),
                 ],
               );
@@ -65,7 +65,7 @@ class CategoryTile extends StatelessWidget {
                 color: Colors.black45,
                 borderRadius: BorderRadius.circular(size.height * 0.01),
               ),
-              child: AutoSizeText(
+              child: Text(
                 categoryName,
                 textAlign: TextAlign.center,
                 style: TextStyle(

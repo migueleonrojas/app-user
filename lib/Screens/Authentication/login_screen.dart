@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:oilapp/Helper/login_helper.dart';
 import 'package:oilapp/Screens/Authentication/login_otp_confirm_email.dart';
 import 'package:oilapp/Screens/Authentication/login_otp_confirm_phone.dart';
+import 'package:oilapp/config/config.dart';
 import 'package:oilapp/widgets/noInternetConnectionAlertDialog.dart';
 import 'package:oilapp/widgets/progressdialog.dart';
 import 'dart:convert';
@@ -143,6 +144,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.pop(context);
                         return;
                       }
+                      if(emailExist.docs[0].data()['attempts'] < 3){
+                        await FirebaseFirestore.instance
+                          .collection(AutoParts.collectionUser)
+                          .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
+                          .update({
+                            "timeForTheNextOtp": DateTime.now().add(Duration(seconds: 90))
+                          });
+                      }
                       if(!mounted) return;
                       Navigator.pop(context);
                       Route route = MaterialPageRoute(builder: (_) => LoginOtpConfirmEmailScreen(
@@ -174,6 +183,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         return;
                       }
 
+                      if(phoneExist.docs[0].data()['attempts'] < 3){
+                        await FirebaseFirestore.instance
+                          .collection(AutoParts.collectionUser)
+                          .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
+                          .update({
+                            "timeForTheNextOtp": DateTime.now().add(Duration(seconds: 90))
+                          });
+                      }
                       if(!mounted) return;
                       Navigator.pop(context);
                       Route route = MaterialPageRoute(builder: (_) => LoginOtpConfirmPhoneScreen(

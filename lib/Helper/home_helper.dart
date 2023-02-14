@@ -183,7 +183,7 @@ class HomeHelper {
             SizedBox(height: size.height * 0.010,),
             AutoSizeText(
               'Mis Vehiculos',
-              style: TextStyle(fontSize: size.height * 0.018),
+              style: TextStyle(fontSize: size.height * 0.018,color: Colors.white),
             )
           ],
         ),
@@ -230,7 +230,7 @@ class HomeHelper {
             SizedBox(height: size.height * 0.010,),
             AutoSizeText(
               'Tienda GO',
-              style: TextStyle(fontSize: size.height * 0.018),
+              style: TextStyle(fontSize: size.height * 0.018, color: Colors.white),
             )
           ],
         ),
@@ -281,9 +281,9 @@ class HomeHelper {
           )
         ),
         child: Text(
-          'Crear Vehiculo',
+          'Registre su vehículo aqui',
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             shadows: [
               for(double i = 1; i < 4; i++)
                 Shadow(
