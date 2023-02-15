@@ -370,7 +370,7 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
     final ModelName = (returnDataModel[1] == null)? '' : returnDataModel[1];
     if(indexModel != '' && ModelName != ''){
       indexModelController = indexModel;
-      modelController.text = ModelName;
+      modelController.text = ModelName.toString();
       setState(() {});
     }
     

@@ -91,6 +91,7 @@ class _AddModelState extends State<AddModel> {
                 childDelegate: ListWheelChildBuilderDelegate(
                   childCount: snapshot.data!.docs.length,
                   builder: (context, index) {
+                    
                     return Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -104,12 +105,12 @@ class _AddModelState extends State<AddModel> {
                             );
                           }, 
                           child: Material(
-                            color: widget.modelName == (snapshot.data!.docs[index] as dynamic).data()["name"].toString() ? Colors.blue:Colors.transparent,
+                            color: widget.modelName.toString() == (snapshot.data!.docs[index] as dynamic).data()["name"].toString() ? Colors.blue:Colors.transparent,
                             /* color: widget.selectedIndex == index ? Colors.blue : Colors.transparent, */
                             borderRadius: BorderRadius.circular(size.height * 0.035),
                             child: Container(
                               width: size.width * 0.35,
-                              child: Center(child: Text('${(snapshot.data!.docs[index] as dynamic).data()["name"].toString()}',style: TextStyle(fontSize: size.height * 0.020)),),
+                              child: Center(child: Text('${(snapshot.data!.docs[index] as dynamic).data()["name"]}',style: TextStyle(fontSize: size.height * 0.020)),),
                             ),
                           ),
                         ),
