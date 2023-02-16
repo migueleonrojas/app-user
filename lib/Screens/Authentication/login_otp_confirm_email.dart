@@ -44,7 +44,7 @@ class _LoginOtpConfirmEmailScreenState extends State<LoginOtpConfirmEmailScreen>
 
       DocumentSnapshot<Map<String, dynamic>> docUser = await FirebaseFirestore.instance
         .collection(AutoParts.collectionUser)
-        .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
+        .doc(widget.user.docs[0].data()['uid'])
         .get();
 
       DateTime dateTimeForTheNextOtp = (docUser.data() as dynamic)['timeForTheNextOtp'].toDate();
@@ -139,14 +139,14 @@ class _LoginOtpConfirmEmailScreenState extends State<LoginOtpConfirmEmailScreen>
                         attempts++;
                         await FirebaseFirestore.instance
                           .collection(AutoParts.collectionUser)
-                          .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
+                          .doc(widget.user.docs[0].data()['uid'])
                           .update({
                             "attempts": attempts
                           });
                         if(attempts >= 3) {
                           await FirebaseFirestore.instance
                             .collection(AutoParts.collectionUser)
-                            .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
+                            .doc(widget.user.docs[0].data()['uid'])
                             .update({
                               "timeForTheNextOtp": DateTime.now().add(Duration(hours: 1))
                             });
@@ -162,7 +162,7 @@ class _LoginOtpConfirmEmailScreenState extends State<LoginOtpConfirmEmailScreen>
                         showSnackBar(title: 'El código ingresado es exitoso.', seconds: 2);
                         await FirebaseFirestore.instance
                           .collection(AutoParts.collectionUser)
-                          .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
+                          .doc(widget.user.docs[0].data()['uid'])
                           .update({
                             "attempts": 0
                           });
@@ -200,6 +200,13 @@ class _LoginOtpConfirmEmailScreenState extends State<LoginOtpConfirmEmailScreen>
                         showSnackBar(title: 'El codigo no se pudo enviar, intente de nuevo.');
                         return;
                       }
+                      await FirebaseFirestore.instance
+                            .collection(AutoParts.collectionUser)
+                            .doc(widget.user.docs[0].data()['uid'])
+                            .update({
+                              "timeForTheNextOtp": DateTime.now().add(Duration(seconds: 90))
+                            });
+                      secondsNextOtp = ((DateTime.now().add(Duration(seconds: 90)).millisecondsSinceEpoch - DateTime.now().millisecondsSinceEpoch)/1000).truncate();
                       showSnackBar(title: 'El codigo se envio de nuevo a ${widget.emailUser}.');
                       codeEmailOtp = codeEmail; 
                       setState(() {});

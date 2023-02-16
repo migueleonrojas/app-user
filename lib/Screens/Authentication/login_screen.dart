@@ -145,12 +145,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         return;
                       }
                       if(emailExist.docs[0].data()['attempts'] < 3){
-                        await FirebaseFirestore.instance
+                        await emailExist.docs[0].reference.update({
+                          "timeForTheNextOtp": DateTime.now().add(Duration(seconds: 90))
+                        });
+                        /* await FirebaseFirestore.instance
                           .collection(AutoParts.collectionUser)
                           .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
                           .update({
                             "timeForTheNextOtp": DateTime.now().add(Duration(seconds: 90))
-                          });
+                          }); */
                       }
                       if(!mounted) return;
                       Navigator.pop(context);
@@ -184,12 +187,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
 
                       if(phoneExist.docs[0].data()['attempts'] < 3){
-                        await FirebaseFirestore.instance
+                        await phoneExist.docs[0].reference.update({
+                          "timeForTheNextOtp": DateTime.now().add(Duration(seconds: 90))
+                        });
+                        /* await FirebaseFirestore.instance
                           .collection(AutoParts.collectionUser)
                           .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
                           .update({
                             "timeForTheNextOtp": DateTime.now().add(Duration(seconds: 90))
-                          });
+                          }); */
                       }
                       if(!mounted) return;
                       Navigator.pop(context);
