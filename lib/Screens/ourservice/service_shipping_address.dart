@@ -96,13 +96,11 @@ class _ServiceShippingAddressState extends State<ServiceShippingAddress> {
                     alignment: AlignmentDirectional.centerStart,
                     children:  [
                       Center(
-                        child:  Expanded(
-                          child: AutoSizeText(
-                            'Agregar Dirección',
-                            style: TextStyle(
-                              fontSize: size.height * 0.018,
-                              fontWeight: FontWeight.bold
-                            ),
+                        child:  AutoSizeText(
+                          'Agregar Dirección',
+                          style: TextStyle(
+                            fontSize: size.height * 0.018,
+                            fontWeight: FontWeight.bold
                           ),
                         ),
                       ),

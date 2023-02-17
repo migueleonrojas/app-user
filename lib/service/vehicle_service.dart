@@ -140,11 +140,12 @@ class VehicleService {
   ) async {
 
     QuerySnapshot<Map<String, dynamic>> serviceOrder = await FirebaseFirestore.instance
-      .collection(AutoParts.collectionUser)
+      /* .collection(AutoParts.collectionUser)
       .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
       .collection(AutoParts.vehicles)
-      .doc(vehicleIdFromDB)
+      .doc(vehicleIdFromDB) */
       .collection("serviceOrder")
+      .where('orderBy', isEqualTo: AutoParts.sharedPreferences!.getString(AutoParts.userUID))
       .where('vehicleId', isEqualTo: vehicleIdFromDB)
       .where('orderCancelled', isEqualTo: 'UnDone')
       .get();
@@ -226,11 +227,12 @@ class VehicleService {
   Future <bool> deleteVehicle(String vehicleIdFromDB) async {
 
     QuerySnapshot<Map<String, dynamic>> serviceOrder = await FirebaseFirestore.instance
-      .collection(AutoParts.collectionUser)
+      /* .collection(AutoParts.collectionUser)
       .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
       .collection(AutoParts.vehicles)
-      .doc(vehicleIdFromDB)
+      .doc(vehicleIdFromDB) */
       .collection("serviceOrder")
+      .where('orderBy', isEqualTo: AutoParts.sharedPreferences!.getString(AutoParts.userUID))
       .where('vehicleId', isEqualTo: vehicleIdFromDB)
       .where('orderCancelled', isEqualTo: 'UnDone')
       .get();
