@@ -16,7 +16,13 @@ class ModalAlertDialog extends StatelessWidget {
       title: Text(
         title,
       ),
-      content: Text(content),
+      /* content: Text(content), */
+      /* content: Container(
+        child: Text(content),
+      ), */
+      content: SingleChildScrollView(
+        child: Text(content),
+      ),
       actions: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(

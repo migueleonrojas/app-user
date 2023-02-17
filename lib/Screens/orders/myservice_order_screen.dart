@@ -92,7 +92,7 @@ class _MyServiceOrderScreenState extends State<MyServiceOrderScreen> {
                 if (snapshot.data!.isEmpty) {
                   return const EmptyCardMessage(
                     listTitle: 'No tiene servicios',
-                    message: 'Solicite un servicio desde Global Oil',
+                    message: 'Solicite un servicio desde MetaOil',
                   );
                 }
                 
@@ -220,6 +220,7 @@ class OrderBody extends StatelessWidget {
               ),
               AutoSizeText(DateFormat.yMMMd().add_jm().format(myDateTime)),
               AutoSizeText(timeago.format(DateTime.tryParse(data.orderTime!.toDate().toString())!).toString()),
+              _status(data),
               ElevatedButton(
                 /* shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -255,4 +256,34 @@ class OrderBody extends StatelessWidget {
       )
     );
   }
+
+  Widget _status(ServiceOrderModel data) {
+
+    
+
+    Widget text = AutoSizeText('');
+
+    if(data.orderRecived == "Done") {
+      text = const AutoSizeText('Estatus: Orden recibida.');
+    }
+
+    if(data.beingPrePared == "Done"){
+      text = const AutoSizeText('Estatus: Persona del servicio preparado.');
+    }
+
+    if(data.onTheWay == "Done"){
+      text = const AutoSizeText('Estatus: En camino.');
+    }
+
+    if(data.deliverd == "Done"){
+      text = const AutoSizeText("Estatus: Servicio Completado.");
+    }
+    if (data.orderCancelled =="Done") {
+      text = const AutoSizeText("Estatus: Servicio Cancelado.");
+    }
+
+    return text;
+
+  }
+
 }

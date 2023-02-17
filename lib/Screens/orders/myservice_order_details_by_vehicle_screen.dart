@@ -554,7 +554,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                             ? Card(
                                 elevation: 3,
                                 child: Container(
-                                  height: size.height * 0.096,
+                                  
                                   width: double.infinity,
                                   child: Column(
                                     children: [

@@ -79,7 +79,7 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
           if(snapshot.data!.isEmpty) {
             return const EmptyCardMessage(
               listTitle: 'No tiene productos',
-              message: 'Compre desde Global Oil',
+              message: 'Compre desde MetaOil',
             );
           }
 

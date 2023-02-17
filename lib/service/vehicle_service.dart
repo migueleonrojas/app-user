@@ -146,6 +146,7 @@ class VehicleService {
       .doc(vehicleIdFromDB)
       .collection("serviceOrder")
       .where('vehicleId', isEqualTo: vehicleIdFromDB)
+      .where('orderCancelled', isEqualTo: 'UnDone')
       .get();
     if(serviceOrder.size > 0) {
       Fluttertoast.showToast(
@@ -231,6 +232,7 @@ class VehicleService {
       .doc(vehicleIdFromDB)
       .collection("serviceOrder")
       .where('vehicleId', isEqualTo: vehicleIdFromDB)
+      .where('orderCancelled', isEqualTo: 'UnDone')
       .get();
     if(serviceOrder.size > 0) {
       Fluttertoast.showToast(

@@ -74,7 +74,7 @@ class BackEndOrderService {
     
     for(final documentsServiceOrder in documentsServiceOrders) {
      
-      QuerySnapshot<Map<String, dynamic>> querySnapshotVehicle = await FirebaseFirestore.instance.collection('usersVehicles').where('vehicleId', isEqualTo: (documentsServiceOrder.data() as dynamic)['vehicleId']).get();
+      QuerySnapshot<Map<String, dynamic>> querySnapshotVehicle = await FirebaseFirestore.instance.collection('usersVehicles')/* .where('vehicleId', isEqualTo: (documentsServiceOrder.data() as dynamic)['vehicleId']) */.get();
       List<QueryDocumentSnapshot<Map<String,dynamic>>> documentsVehicles = querySnapshotVehicle.docs;
       for(final documentsVehicle in  documentsVehicles) {
 

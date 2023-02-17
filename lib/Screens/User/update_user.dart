@@ -571,10 +571,10 @@ class _UpdateUserState extends State<UpdateUser> {
       final message = Message()
       ..from = Address(username)
       ..recipients.add(emailController.text.toLowerCase().trim())
-      ..subject = 'Validando Registro en el app Global Oil'
+      ..subject = 'Validando Registro en el app MetaOil'
       ..text = ''
       ..html = ''' 
-        <h2>Validando registro en el app Global Oil</h2>
+        <h2>Validando registro en el app MetaOil</h2>
         <br/>
         <p>Valide su registro ingresando el siguiente codigo en el app <b>$code</b></p>
       '''

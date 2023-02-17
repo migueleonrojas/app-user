@@ -54,9 +54,9 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
           children: [
             Container(
               padding:  EdgeInsets.only(top: size.height * 0.020, bottom: size.height * 0.015),
-              decoration: const BoxDecoration(
+              decoration:  BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.deepOrangeAccent, Colors.orange],
+                  colors: [Colors.grey.shade300, Colors.grey.shade200],
                   begin: FractionalOffset(0.0, 0.0),
                   end: FractionalOffset(1.0, 0.0),
                   stops: [0.0, 1.0],
@@ -84,7 +84,7 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
                     style: TextStyle(
                       fontSize: size.height * 0.020,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                   AutoSizeText(
@@ -92,7 +92,7 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
                     style: TextStyle(
                       fontSize: size.height * 0.020,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                 ],

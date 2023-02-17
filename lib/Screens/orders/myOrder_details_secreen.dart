@@ -222,7 +222,7 @@ class _MyOrderDetailsScreenState extends State<MyOrderDetailsScreen> {
                             ? Card(
                                 elevation: 3,
                                 child: Container(
-                                  height: size.height * 0.060,
+                                  
                                   width: double.infinity,
                                   child: Center(
                                     child: AutoSizeText(

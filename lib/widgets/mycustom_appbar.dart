@@ -20,7 +20,7 @@ class MyCustomAppBar extends StatelessWidget with PreferredSizeWidget {
       backgroundColor: Colors.white,
       titleTextStyle: TextStyle(color: Colors.black),
       title: AutoSizeText(
-        "GlobalOil",
+        "MetaOil",
         style: TextStyle(
           fontSize: size.height * 0.024,
           letterSpacing: 1.5,

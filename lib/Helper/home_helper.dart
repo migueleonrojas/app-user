@@ -183,7 +183,7 @@ class HomeHelper {
             SizedBox(height: size.height * 0.010,),
             AutoSizeText(
               'Mis Vehiculos',
-              style: TextStyle(fontSize: size.height * 0.018,color: Colors.white),
+              style: TextStyle(fontSize: size.height * 0.018,color: Colors.black),
             )
           ],
         ),
@@ -230,7 +230,7 @@ class HomeHelper {
             SizedBox(height: size.height * 0.010,),
             AutoSizeText(
               'Tienda GO',
-              style: TextStyle(fontSize: size.height * 0.018, color: Colors.white),
+              style: TextStyle(fontSize: size.height * 0.018, color: Colors.black),
             )
           ],
         ),
@@ -255,13 +255,13 @@ class HomeHelper {
         boxShadow: [
           for(double i = 1; i < 5; i++)
             BoxShadow(
-              color: color,
+              color: Colors.grey.shade300,
               blurRadius: 3 * i,
               
             ),
           for(double i = 1; i < 5; i++)
             BoxShadow(
-              color: color,
+              color: Colors.grey.shade300,
               blurRadius: 3 * i,
               offset: Offset.zero,
               blurStyle: BlurStyle.outer
@@ -275,7 +275,7 @@ class HomeHelper {
           Navigator.push(context, route);
         },
         style: TextButton.styleFrom(
-          side: BorderSide(color: Colors.white, width: size.width *0.01),
+          side: BorderSide(color: color, width: size.width *0.01),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(size.height *0.015)
           )
@@ -283,11 +283,11 @@ class HomeHelper {
         child: Text(
           'Registre su vehículo aqui',
           style: TextStyle(
-            color: Colors.white,
+            color: color,
             shadows: [
               for(double i = 1; i < 4; i++)
                 Shadow(
-                  color: color,
+                  color: Colors.grey.shade300,
                   blurRadius: 3 * i
       
                 )

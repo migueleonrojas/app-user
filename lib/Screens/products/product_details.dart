@@ -180,7 +180,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     Row(
                       children: [
                         Expanded(
-                          flex: 1,
+                          flex: 2,
                           child: StreamBuilder<QuerySnapshot>(
                               stream: FirebaseFirestore.instance
                                   .collection('ratingandreviews')
@@ -202,15 +202,15 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 return Column(
                                   children: [
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment:CrossAxisAlignment.center,
                                       children: [
                                         AutoSizeText(
+                                          
                                           (snapshot.data!.docs.length == 0)
                                               ? "0.0"
                                               : "${(userrating / snapshot.data!.docs.length).toStringAsFixed(1)}",
+                                          
                                           style: TextStyle(
                                             fontSize: size.height *0.064,
                                           ),
@@ -226,9 +226,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        AutoSizeText('${userrating.toString()}/'),
-                                        AutoSizeText(
-                                          "${snapshot.data!.docs.length.toString()} Clasificaciones",
+                                        Expanded(child: AutoSizeText('${userrating.toString()}/')),
+                                        Expanded(
+                                          child: AutoSizeText(
+                                            "${snapshot.data!.docs.length.toString()} Clasificaciones",
+                                          ),
                                         )
                                       ],
                                     ),

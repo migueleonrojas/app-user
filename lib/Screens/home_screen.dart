@@ -68,13 +68,13 @@ class _HomeScreenState extends State<HomeScreen>  {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 34, 33, 33),
+      
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
         elevation: 0,
         backgroundColor: Colors.white,
         title:  AutoSizeText(
-          "GlobalOil",
+          "MetaOil",
           style: TextStyle(
             color: Colors.black,
             fontSize: size.height * 0.028,

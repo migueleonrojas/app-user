@@ -119,7 +119,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'GlobalOil',
+        title: 'MetaOil',
         theme: ThemeData(
           primaryColor: Colors.deepOrange,
           accentColor: Colors.deepOrangeAccent,

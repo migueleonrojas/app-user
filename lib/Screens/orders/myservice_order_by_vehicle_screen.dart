@@ -70,7 +70,7 @@ class _MyServiceOrderByVehicleScreenState extends State<MyServiceOrderByVehicleS
           if(snapshot.data!.isEmpty) {
             return const EmptyCardMessage(
               listTitle: 'No tiene servicios para este vehiculo',
-              message: 'Solicite un servicio desde Global Oil',
+              message: 'Solicite un servicio desde MetaOil',
             );
           }
 
@@ -98,14 +98,25 @@ class _MyServiceOrderByVehicleScreenState extends State<MyServiceOrderByVehicleS
 
       List <Map<String,dynamic>> listServiceOrders = [];
 
+      /* await FirebaseFirestore.instance.collection("serviceOrder").doc(orderId).update({
+      "orderCancelled": "Done",
+      "orderCancelledTime": DateTime.now(),
+    }); */
+
       QuerySnapshot<Map<String, dynamic>> serviceOrders = await AutoParts.firestore!
+        .collection("serviceOrder")
+        .where('vehicleId', isEqualTo: widget.vehicleModel!.vehicleId)
+        .orderBy("orderTime", descending: true)
+        .get();
+
+      /* QuerySnapshot<Map<String, dynamic>> serviceOrders = await AutoParts.firestore!
         .collection(AutoParts.collectionUser)
         .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
         .collection(AutoParts.vehicles)
         .doc(widget.vehicleModel!.vehicleId ?? "")
         .collection('serviceOrder')
         .orderBy("orderTime", descending: true)
-        .get();
+        .get(); */
 
       for(final serviceOrder in serviceOrders.docs) {
 
@@ -237,6 +248,7 @@ class OrderBody extends StatelessWidget {
                               .toDate()
                               .toString())!)
                           .toString()),
+                      _status(data[index]),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color.fromARGB(255, 3, 3, 247),
@@ -278,5 +290,33 @@ class OrderBody extends StatelessWidget {
         },
       ),
     );
+  }
+  Widget _status(Map<String,dynamic> data) {
+
+    
+
+    Widget text = AutoSizeText('');
+
+    if(data["orderRecived"] == "Done") {
+      text = const AutoSizeText('Estatus: Orden recibida.');
+    }
+
+    if(data["beingPrePared"] == "Done"){
+      text = const AutoSizeText('Estatus: Persona del servicio preparado.');
+    }
+
+    if(data["onTheWay"] == "Done"){
+      text = const AutoSizeText('Estatus: En camino.');
+    }
+
+    if(data["deliverd"] == "Done"){
+      text = const AutoSizeText("Estatus: Servicio Completado.");
+    }
+    if (data["orderCancelled"] =="Done") {
+      text = const AutoSizeText("Estatus: Servicio Cancelado.");
+    }
+
+    return text;
+
   }
 }

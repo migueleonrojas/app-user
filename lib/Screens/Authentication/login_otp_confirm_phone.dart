@@ -183,7 +183,7 @@ class _LoginOtpConfirmPhoneScreenState extends State<LoginOtpConfirmPhoneScreen>
                         await loginUser();
                         if(!mounted) return;
                         Navigator.pop(context);
-                        showSnackBar(title: 'Ingreso con exito a Global Oil.');
+                        showSnackBar(title: 'Ingreso con exito a MetaOil.');
                         Route route = MaterialPageRoute(builder: (_) => HomeScreen());
                         Navigator.pushAndRemoveUntil(context, route, (route) => false);
                         

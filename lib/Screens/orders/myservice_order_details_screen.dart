@@ -245,7 +245,7 @@ class _MyServiceOrderDetailsScreenState
                             ? Card(
                                 elevation: 3,
                                 child: Container(
-                                  height: 50,
+                                  
                                   width: double.infinity,
                                   child: Center(
                                     child: AutoSizeText(

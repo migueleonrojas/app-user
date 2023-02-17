@@ -50,16 +50,18 @@ class _TimelineVehiclesCarNotesAndServiceOrderState extends State<TimelineVehicl
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(
-            child: Card(
-              margin: EdgeInsets.all(size.height * 0.021),
-              child: Padding(
-                padding: EdgeInsets.all(size.height * 0.008),
-                child: messageDayRest(
-                  widget.vehicleWithNotificationsModel!.daysOfTheNextService!, 
-                  widget.vehicleWithNotificationsModel!.dateFromNextFormat!
-                ),
-              )
+          Expanded(
+            child: Center(
+              child: Card(
+                margin: EdgeInsets.all(size.height * 0.021),
+                child: Padding(
+                  padding: EdgeInsets.all(size.height * 0.008),
+                  child: messageDayRest(
+                    widget.vehicleWithNotificationsModel!.daysOfTheNextService!, 
+                    widget.vehicleWithNotificationsModel!.dateFromNextFormat!
+                  ),
+                )
+              ),
             ),
           ),
           SizedBox(height: size.height * 0.021,),
@@ -80,7 +82,7 @@ class _TimelineVehiclesCarNotesAndServiceOrderState extends State<TimelineVehicl
                   if (snapshot.data!.isEmpty) {
                     return const EmptyCardMessage(
                       listTitle: 'No tiene ordenes de productos o notas de servicios',
-                      message: 'Solicite un servicio Global Oil o cree una nota de servicio',
+                      message: 'Solicite un servicio MetaOil o cree una nota de servicio',
                     );
                   }
             

@@ -27,7 +27,7 @@ class _OurServiceState extends State<OurService> {
       appBar: AppBar(
         
         title:  AutoSizeText(
-          "Servicios GlobalOil",
+          "Servicios MetaOil",
           style: TextStyle(
             fontSize: size.height * 0.024,
             letterSpacing: 1.5,

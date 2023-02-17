@@ -217,29 +217,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  AutoSizeText(
-                    'Ya tienes una cuenta ?',
-                    style: TextStyle(
-                      fontSize: (MediaQuery.of(context).size.height * 0.025).toDouble(),
-                      color: Colors.blueGrey,
-                      fontWeight: FontWeight.w800,
+                  Expanded(
+                    child: AutoSizeText(
+                      'Ya tienes una cuenta ?',
+                      style: TextStyle(
+                        fontSize: (MediaQuery.of(context).size.height * 0.025).toDouble(),
+                        color: Colors.blueGrey,
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (c) => LoginScreen(),
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (c) => LoginScreen(),
+                          ),
+                        );
+                      },
+                      child: AutoSizeText(
+                        ' Entre Aquí',
+                        style: TextStyle(
+                          color: Colors.red[300],
+                          fontSize: (MediaQuery.of(context).size.height * 0.025).toDouble(),
+                          fontWeight: FontWeight.bold,
                         ),
-                      );
-                    },
-                    child: AutoSizeText(
-                      ' Entre Aquí',
-                      style: TextStyle(
-                        color: Colors.red[300],
-                        fontSize: (MediaQuery.of(context).size.height * 0.025).toDouble(),
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -307,10 +311,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       final message = Message()
       ..from = Address(username)
       ..recipients.add(_emailTextEditingController.text.toLowerCase().trim())
-      ..subject = 'Validando Registro en el app Global Oil'
+      ..subject = 'Validando Registro en el app MetaOil'
       ..text = ''
       ..html = ''' 
-        <h2>Validando registro en el app Global Oil</h2>
+        <h2>Validando registro en el app MetaOil</h2>
         <br/>
         <p>Valide su registro ingresando el siguiente codigo en el app <b>$code</b></p>
       '''

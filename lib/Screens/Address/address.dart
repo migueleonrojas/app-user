@@ -35,7 +35,7 @@ class _AddressState extends State<Address> {
       appBar: AppBar(
         
         title: AutoSizeText(
-          "Global Oil",
+          "MetaOil",
           style: TextStyle(
             fontSize: size.height * 0.020,
             letterSpacing: 1.5,

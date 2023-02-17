@@ -200,8 +200,8 @@ class _AddAddressState extends State<AddAddress> {
                       MyTextFormField(
                         maxLine: 2,
                         controller: cArea,
-                        hintText: "Ingrese el Área",
-                        labelText: "Area",
+                        hintText: "Ingrese la Urbanización o Sector",
+                        labelText: "Código postal",
                       ),
                       MyTextFormField(
                         maxLine: 3,
@@ -250,7 +250,6 @@ class _AddAddressState extends State<AddAddress> {
                                 cPhoneNumber.text.isNotEmpty &&
                                 cHouseandRoadNumber.text.isNotEmpty &&
                                 cCity.text.isNotEmpty &&
-                                cArea.text.isNotEmpty &&
                                 cAreaCode.text.isNotEmpty && 
                                 _markers.isNotEmpty) {
                               _addressService.addAddress(
