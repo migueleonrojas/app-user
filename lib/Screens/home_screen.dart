@@ -7,7 +7,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:oilapp/Helper/home_helper.dart';
 import 'package:oilapp/Helper/login_helper.dart';
-import 'package:oilapp/Screens/Vehicles/time_line_vehicles.dart';
+import 'package:oilapp/Screens/Vehicles/time_line_car.dart';
+import 'package:oilapp/Screens/Vehicles/timelines_vehicles.dart';
 import 'package:oilapp/Screens/Vehicles/vehicles.dart';
 import 'package:oilapp/Screens/cart_screen.dart';
 import 'package:oilapp/Screens/orders/timeline_service_order.dart';
@@ -231,8 +232,8 @@ class _HomeScreenState extends State<HomeScreen>  {
             /* LoginHelper().loginLog(context), */
             HomeHelper().mainButtons(context),
             SizedBox(height: size.height * 0.025,),
-            
-            const TimeLineVehicles(),
+            const TimelinesVehicles()
+            /* const TimeLineCars(), */
             /* HomeHelper().homeCarousel(context),
             HomeHelper().categoriesCard(context),
             HomeHelper().uptoFiftyPercentOFFCard(),

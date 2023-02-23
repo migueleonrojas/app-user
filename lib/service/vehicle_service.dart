@@ -16,7 +16,8 @@ class VehicleService {
     String? tuitionVehicle,
     String? nameVehicle,
     String? logoVehicle,
-    DateTime? updateDate
+    DateTime? updateDate,
+    String typeOfVehicle
   ){
     final model = VehicleModel(
       vehicleId: vehicleId,
@@ -31,7 +32,8 @@ class VehicleService {
       logo: logoVehicle,
       registrationDate: DateTime.now(),
       updateDate: updateDate,
-      phoneUser: int.parse(AutoParts.sharedPreferences!.getString(AutoParts.userPhone)!)
+      phoneUser: int.parse(AutoParts.sharedPreferences!.getString(AutoParts.userPhone)!),
+      typeOfVehicle: typeOfVehicle
     ).toJson();
 
     FirebaseFirestore.instance
@@ -41,7 +43,7 @@ class VehicleService {
       .doc(vehicleId)
       .set(model)
       .whenComplete(() { 
-        addVehicleForAdmin(brandVehicle, modelVehicle, mileageVehicle, yearVehicle, colorVehicle, tuitionVehicle, nameVehicle, logoVehicle, updateDate);
+        addVehicleForAdmin(brandVehicle, modelVehicle, mileageVehicle, yearVehicle, colorVehicle, tuitionVehicle, nameVehicle, logoVehicle, updateDate, typeOfVehicle);
       })
       .then((value) => {
 
@@ -57,7 +59,8 @@ class VehicleService {
     String? tuitionVehicle,
     String? nameVehicle,
     String? logoVehicle,
-    DateTime? updateDate
+    DateTime? updateDate,
+    typeOfVehicle
   ){
     final model = VehicleModel(
       vehicleId: vehicleId,
@@ -72,7 +75,8 @@ class VehicleService {
       logo: logoVehicle,
       registrationDate: DateTime.now(),
       updateDate: updateDate,
-      phoneUser: int.parse(AutoParts.sharedPreferences!.getString(AutoParts.userPhone)!)
+      phoneUser: int.parse(AutoParts.sharedPreferences!.getString(AutoParts.userPhone)!),
+      typeOfVehicle:typeOfVehicle
     ).toJson();
 
     FirebaseFirestore.instance.collection('usersVehicles')
@@ -91,7 +95,8 @@ class VehicleService {
     String? nameVehicle,
     String? logoVehicle,
     DateTime registrationDate,
-    DateTime updateDate
+    DateTime updateDate,
+    String typeOfVehicle
   ) async {
     final model = VehicleModel(
       vehicleId: vehicleIdFromDB,
@@ -106,7 +111,8 @@ class VehicleService {
       logo: logoVehicle,
       registrationDate: registrationDate,
       updateDate: updateDate,
-      phoneUser: int.parse(AutoParts.sharedPreferences!.getString(AutoParts.userPhone)!)
+      phoneUser: int.parse(AutoParts.sharedPreferences!.getString(AutoParts.userPhone)!),
+      typeOfVehicle: typeOfVehicle
     ).toJson();
 
     await FirebaseFirestore.instance
@@ -116,7 +122,7 @@ class VehicleService {
       .doc(vehicleIdFromDB)
       .update(model)
       .whenComplete(() async { 
-        await updateVehicleForAdmin(vehicleIdFromDB, brandVehicle, modelVehicle, mileageVehicle, yearVehicle, colorVehicle, tuitionVehicle, nameVehicle, logoVehicle, registrationDate, updateDate);
+        await updateVehicleForAdmin(vehicleIdFromDB, brandVehicle, modelVehicle, mileageVehicle, yearVehicle, colorVehicle, tuitionVehicle, nameVehicle, logoVehicle, registrationDate, updateDate, typeOfVehicle);
       })
       .then((value) => {
 
@@ -136,7 +142,8 @@ class VehicleService {
     String? nameVehicle,
     String? logoVehicle,
     DateTime registrationDate,
-    DateTime updateDate
+    DateTime updateDate,
+    String typeOfVehicle
   ) async {
 
     QuerySnapshot<Map<String, dynamic>> serviceOrder = await FirebaseFirestore.instance
@@ -170,7 +177,8 @@ class VehicleService {
       logo: logoVehicle,
       registrationDate: registrationDate,
       updateDate: updateDate,
-      phoneUser: int.parse(AutoParts.sharedPreferences!.getString(AutoParts.userPhone)!)
+      phoneUser: int.parse(AutoParts.sharedPreferences!.getString(AutoParts.userPhone)!),
+      typeOfVehicle:typeOfVehicle
     ).toJson();
 
     
@@ -181,7 +189,7 @@ class VehicleService {
       .doc(vehicleIdFromDB)
       .update(model)
       .whenComplete(() async { 
-        await updateVehicleForAdmin(vehicleIdFromDB, brandVehicle, modelVehicle, mileageVehicle, yearVehicle, colorVehicle, tuitionVehicle, nameVehicle, logoVehicle, registrationDate, updateDate);
+        await updateVehicleForAdmin(vehicleIdFromDB, brandVehicle, modelVehicle, mileageVehicle, yearVehicle, colorVehicle, tuitionVehicle, nameVehicle, logoVehicle, registrationDate, updateDate, typeOfVehicle);
       })
       .then((value) => {
 
@@ -201,6 +209,7 @@ class VehicleService {
     String? logoVehicle,
     DateTime registrationDate,
     DateTime updateDate,
+    String typeOfVehicle
   ){
     final model = VehicleModel(
       vehicleId: vehicleIdFromDB,
@@ -215,7 +224,8 @@ class VehicleService {
       logo: logoVehicle,
       registrationDate: registrationDate,
       updateDate: updateDate,
-      phoneUser: int.parse(AutoParts.sharedPreferences!.getString(AutoParts.userPhone)!)
+      phoneUser: int.parse(AutoParts.sharedPreferences!.getString(AutoParts.userPhone)!),
+      typeOfVehicle: typeOfVehicle
     ).toJson();
 
     FirebaseFirestore.instance.collection('usersVehicles')

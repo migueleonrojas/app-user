@@ -14,7 +14,8 @@ class AddModel extends StatefulWidget {
   late int previousSelectedIndex = 0;
   late String previousModelName;
   late int previousModelId;
-  AddModel({super.key, this.selectedIndex, this.modelName, this.brandId});
+  final String collection;
+  AddModel({super.key, this.selectedIndex, this.modelName, this.brandId, required this.collection});
 
   @override
   State<AddModel> createState() => _AddModelState();
@@ -58,7 +59,7 @@ class _AddModelState extends State<AddModel> {
           height: MediaQuery.of(context).size.height * 0.20,
           child: StreamBuilder<QuerySnapshot>(
             stream: AutoParts.firestore!
-            .collection(AutoParts.modelsVehicle)
+            .collection(widget.collection)
             .where('id_brand', isEqualTo: widget.brandId)
             .orderBy('name',descending: false)
             .snapshots(),

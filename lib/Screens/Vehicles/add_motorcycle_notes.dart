@@ -16,17 +16,17 @@ import 'package:oilapp/service/vehicle_service.dart';
 import 'package:oilapp/widgets/customTextField.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:oilapp/widgets/progressdialog.dart';
-class AddCarNote extends StatefulWidget {
+class AddMotorCycleNote extends StatefulWidget {
 
   final Map<String,dynamic> noteCar;
   final VehicleModel vehicleModel;
-  const AddCarNote({super.key, required this.noteCar, required this.vehicleModel});
+  const AddMotorCycleNote({super.key, required this.noteCar, required this.vehicleModel});
   
   @override
-  State<AddCarNote> createState() => _AddCarNoteState();
+  State<AddMotorCycleNote> createState() => _AddMotorCycleNoteState();
 }
 
-class _AddCarNoteState extends State<AddCarNote> {
+class _AddMotorCycleNoteState extends State<AddMotorCycleNote> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   final _serviceNameTextEditingController = TextEditingController();
   final _mileageTextEditingController = TextEditingController();
@@ -201,7 +201,7 @@ class _AddCarNoteState extends State<AddCarNote> {
                         widget.vehicleModel.logo!, 
                         widget.vehicleModel.registrationDate!, 
                         date,
-                        "car"
+                        "motorcycle"
                       );
                     }
 
@@ -220,7 +220,7 @@ class _AddCarNoteState extends State<AddCarNote> {
                         widget.vehicleModel.logo!, 
                         widget.vehicleModel.registrationDate!, 
                         date,
-                        'car'
+                        'motorcycle'
                       );
                     }
                   }

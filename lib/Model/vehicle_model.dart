@@ -12,6 +12,7 @@ class VehicleModel {
   DateTime? registrationDate;
   DateTime? updateDate;
   int? phoneUser;
+  String? typeOfVehicle;
   VehicleModel({
     this.vehicleId,
     this.userId,
@@ -25,7 +26,8 @@ class VehicleModel {
     this.logo,
     this.registrationDate,
     this.updateDate,
-    this.phoneUser
+    this.phoneUser,
+    this.typeOfVehicle
   });
   VehicleModel.fromJson(Map<String, dynamic> json) {
     vehicleId = json['vehicleId'];
@@ -41,6 +43,7 @@ class VehicleModel {
     registrationDate = json['registrationDate'].toDate();
     updateDate = json['updateDate'].toDate();
     phoneUser = json['phoneUser'];
+    typeOfVehicle = json['typeOfVehicle'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -57,6 +60,7 @@ class VehicleModel {
     data['registrationDate'] = this.registrationDate;
     data['updateDate'] = this.updateDate;
     data['phoneUser'] = this.phoneUser;
+    data['typeOfVehicle'] = this.typeOfVehicle;
     return data;
   }
 }

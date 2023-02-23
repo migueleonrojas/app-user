@@ -17,7 +17,7 @@ class BackEndVehiclesService {
   Stream<List<Map<String,dynamic>>> get suggestionCarNotesAndOrderServiceByVehicle => _suggestionStreamCarNotesAndOrderServiceByVehicle.stream;
 
 
-  getVehiclesWithNotification() async {
+  getVehiclesWithNotification(String typeOfVehicle) async {
     List<Map<String,dynamic>> vehiclesWithNotifications = [];
 
     QuerySnapshot<Map<String, dynamic>> querySnapshotNotificationMessage = await FirebaseFirestore.instance
@@ -28,6 +28,7 @@ class BackEndVehiclesService {
     QuerySnapshot<Map<String, dynamic>> querySnapshotUsersVehicles = await FirebaseFirestore.instance
       .collection('usersVehicles')
       .where('userId', isEqualTo: AutoParts.sharedPreferences!.getString(AutoParts.userUID))
+      .where('typeOfVehicle', isEqualTo: typeOfVehicle)
       .orderBy("updateDate", descending: true)
       .get();
 
@@ -60,7 +61,7 @@ class BackEndVehiclesService {
   }
 
 
-  getUserVehiclesWithNotification() async{
+  getUserVehiclesWithNotification(String typeOfVehicle) async{
 
     List<Map<String,dynamic>> vehiclesUserWithNotifications = [];
 
@@ -73,6 +74,7 @@ class BackEndVehiclesService {
       .collection(AutoParts.collectionUser)
       .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
       .collection(AutoParts.vehicles)
+      .where('typeOfVehicle',isEqualTo: typeOfVehicle)
       .get();
 
     List<QueryDocumentSnapshot<Map<String,dynamic>>> documentsUsersVehicles = querySnapshotUsersVehicles.docs;

@@ -16,17 +16,17 @@ import 'package:oilapp/widgets/loading_widget.dart';
 
 import '../../widgets/erroralertdialog.dart';
 
-class EditVehicleScreen extends StatefulWidget {
+class EditMotorCycleScreen extends StatefulWidget {
 
   final VehicleModel? vehicleModel;
 
-  const EditVehicleScreen({super.key, this.vehicleModel});
+  const EditMotorCycleScreen({super.key, this.vehicleModel});
 
   @override
-  State<EditVehicleScreen> createState() => _EditVehicleScreenState();
+  State<EditMotorCycleScreen> createState() => _EditMotorCycleScreenState();
 }
 
-class _EditVehicleScreenState extends State<EditVehicleScreen> {
+class _EditMotorCycleScreenState extends State<EditMotorCycleScreen> {
 
  
 
@@ -78,6 +78,12 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
     
     
     
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    
+    super.dispose();
   }
   
   
@@ -255,7 +261,8 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
                       nameOwnerController.text, 
                       logoBrand, 
                       widget.vehicleModel!.registrationDate!,
-                      widget.vehicleModel!.updateDate!
+                      widget.vehicleModel!.updateDate!,
+                      "motorcycle"
                     );
                     if(!canUpdate) return;
 
@@ -333,7 +340,7 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
   }
 
   void addBrand() async {
-    final alert = (indexBrandController == null && brandController.text == '' && idBrand == null && logoBrand == null) ? AddBrand():AddBrand(selectedIndex:indexBrandController, brandName: brandController.text, brandId: idBrand, logoBrand:logoBrand,);
+    final alert = (indexBrandController == null && brandController.text == '' && idBrand == null && logoBrand == null) ? AddBrand(collection: 'brandsMotorcycle',):AddBrand(collection: 'brandsMotorcycle', selectedIndex:indexBrandController, brandName: brandController.text, brandId: idBrand, logoBrand:logoBrand,);
     
     final returnDataBrand = await showDialog(context: context, barrierDismissible: false, builder: (_) => alert);
     final indexBrand = (returnDataBrand[0] == '')? '' : returnDataBrand[0];
@@ -363,7 +370,7 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
 
     
     if(idBrand == null) return;
-    final alert = (indexModelController == null && modelController.text == '') ? AddModel(brandId: idBrand):AddModel(selectedIndex:indexModelController, modelName: modelController.text, brandId: idBrand);
+    final alert = (indexModelController == null && modelController.text == '') ? AddModel(collection: 'modelsMotorcycle',brandId: idBrand):AddModel(collection: 'modelsMotorcycle',selectedIndex:indexModelController, modelName: modelController.text, brandId: idBrand);
     
     final returnDataModel = await showDialog(context: context, barrierDismissible: false, builder: (_) => alert);
     final indexModel = (returnDataModel[0] == '')? '' : returnDataModel[0];
@@ -434,7 +441,7 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
 
     getIdBrand() async {
       final modelByName = await AutoParts.firestore!
-        .collection('modelsVehicle')
+        .collection('modelsMotorcycle')
         .where('name', isEqualTo: widget.vehicleModel!.model).get();
       final docModel = modelByName.docs;
       for(final doc in docModel){
@@ -443,20 +450,20 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
     }
 
     Future <int> getIndexBrand() async {
-      QuerySnapshot<Map<String, dynamic>> brandsVehicles = await AutoParts.firestore!
-        .collection(AutoParts.brandsVehicle)
+      QuerySnapshot<Map<String, dynamic>> brandsMotocycles = await AutoParts.firestore!
+        .collection('brandsMotorcycle')
         .orderBy('name',descending: false)
         .get();
       int index = 0;
-      for(final brandsVehicle in brandsVehicles.docs){
+      for(final brandsMotocycle in brandsMotocycles.docs){
         
-        if(widget.vehicleModel!.brand == brandsVehicle.data()['name']){
+        if(widget.vehicleModel!.brand == brandsMotocycle.data()['name']){
           break;
         }
         index++;
       }
       indexBrandController = index;
-      setState(() {});
+      
       return index;
 
     }
@@ -464,27 +471,27 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
     Future <int> getIndexModel() async {
 
       final brand = await AutoParts.firestore!
-        .collection('brandsVehicle')
+        .collection('brandsMotorcycle')
         .where('name', isEqualTo: widget.vehicleModel!.brand).get();
 
-      QuerySnapshot<Map<String, dynamic>> modelsVehicles = await AutoParts.firestore!
-        .collection(AutoParts.modelsVehicle)
+      QuerySnapshot<Map<String, dynamic>> modelsMotorcycles = await AutoParts.firestore!
+        .collection('modelsMotorcycle')
         .where('id_brand', isEqualTo: brand.docs[0].data()['id'])
         .orderBy('name',descending: false)
         .get();
       int index = 0;
       idBrand = brand.docs[0].data()['id'];
       
-      for(final modelsVehicle in modelsVehicles.docs){
+      for(final modelsMotorcycle in modelsMotorcycles.docs){
         
-        if(widget.vehicleModel!.model == modelsVehicle.data()['name'].toString()){
+        if(widget.vehicleModel!.model == modelsMotorcycle.data()['name'].toString()){
           
           break;
         }
         index++;
       }
       indexModelController = index;
-      setState(() {});
+      
       return index;
 
 
@@ -505,7 +512,7 @@ class _EditVehicleScreenState extends State<EditVehicleScreen> {
         index++;
       }
       indexYearController = index;
-      setState(() {});
+      
       return index;
 
 

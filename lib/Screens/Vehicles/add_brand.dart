@@ -16,7 +16,9 @@ class AddBrand extends StatefulWidget {
   late String previousBrandName;
   late int previousBrandId;
   late String previousLogoBrand;
-  AddBrand({super.key, this.selectedIndex, this.brandName, this.brandId, this.logoBrand});
+  final String collection;
+  
+  AddBrand({super.key, this.selectedIndex, this.brandName, this.brandId, this.logoBrand, required this.collection});
 
   @override
   State<AddBrand> createState() => _AddBrandState();
@@ -67,7 +69,7 @@ class _AddBrandState extends State<AddBrand> {
           height: MediaQuery.of(context).size.height * 0.20,
           child: StreamBuilder<QuerySnapshot>(
             stream: AutoParts.firestore!
-            .collection(AutoParts.brandsVehicle)
+            .collection(widget.collection)
             .orderBy('name',descending: false)
             .snapshots(),
             builder: (context, snapshot) {

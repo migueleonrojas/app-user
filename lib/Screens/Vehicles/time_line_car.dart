@@ -17,17 +17,17 @@ import 'package:oilapp/widgets/loading_widget.dart';
 import 'package:timelines/timelines.dart';
 import 'package:intl/intl.dart';
 
-class TimeLineVehicles extends StatefulWidget {
+class TimeLineCars extends StatefulWidget {
 
   
 
-  const TimeLineVehicles({super.key});
+  const TimeLineCars({super.key});
 
   @override
-  State<TimeLineVehicles> createState() => _TimeLineVehiclesState();
+  State<TimeLineCars> createState() => _TimeLineCarsState();
 }
 
-class _TimeLineVehiclesState extends State<TimeLineVehicles> {
+class _TimeLineCarsState extends State<TimeLineCars> {
 
   final backEndVehiclesService = BackEndVehiclesService();
   final ScrollController scrollController = ScrollController();
@@ -36,7 +36,7 @@ class _TimeLineVehiclesState extends State<TimeLineVehicles> {
   @override
   void initState() {
     super.initState();
-    backEndVehiclesService.getVehiclesWithNotification();
+    backEndVehiclesService.getVehiclesWithNotification('car');
   }
 
   @override
@@ -45,11 +45,12 @@ class _TimeLineVehiclesState extends State<TimeLineVehicles> {
     Size size = MediaQuery.of(context).size;
     return Column(
       children: [
+        SizedBox(height: size.height * 0.015,),
         Text(
-          'Próximos servicios de Cambio de Aceite',
+          'Carros',
           style:  TextStyle(
             fontSize: size.height * 0.023,
-            color: Colors.white
+            color: Colors.black
 
           ),
         ),
