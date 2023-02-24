@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:oilapp/Model/vehicle_model.dart';
 import 'package:oilapp/config/config.dart';
 
 class BackEndVehiclesService {
@@ -16,6 +17,8 @@ class BackEndVehiclesService {
   final StreamController <List<Map<String,dynamic>>> _suggestionStreamCarNotesAndOrderServiceByVehicle = StreamController.broadcast();
   Stream<List<Map<String,dynamic>>> get suggestionCarNotesAndOrderServiceByVehicle => _suggestionStreamCarNotesAndOrderServiceByVehicle.stream;
 
+  final StreamController <List<Map<String,dynamic>>> _suggestionStreamServiceCartVehicles = StreamController.broadcast();
+  Stream<List<Map<String,dynamic>>> get suggestionServiceCartVehicles => _suggestionStreamServiceCartVehicles.stream;
 
   getVehiclesWithNotification(String typeOfVehicle) async {
     List<Map<String,dynamic>> vehiclesWithNotifications = [];
@@ -145,6 +148,27 @@ class BackEndVehiclesService {
 
   }
 
+  getServiceCartVehicles(List<VehicleModel> vehiclesModelsList) async {
+    List<Map<String,dynamic>> serviceCartVehicles = [];
+
+    for(final vehiclesModel in vehiclesModelsList) {
+
+      QuerySnapshot<Map<String, dynamic>> queryServiceCart = await FirebaseFirestore.instance
+        .collection(AutoParts.collectionUser)
+        .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
+        .collection(AutoParts.vehicles)
+        .doc(vehiclesModel.vehicleId)
+        .collection('ServiceCart')
+        .get();
+
+      serviceCartVehicles.add(queryServiceCart.docs[0].data());
+      
+      
+    }
+
+    _suggestionStreamServiceCartVehicles.add(serviceCartVehicles);
+
+  }
 
   
 }

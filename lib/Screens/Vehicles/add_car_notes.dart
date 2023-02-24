@@ -427,6 +427,7 @@ class _AddCarNoteState extends State<AddCarNote> {
                                       selectedAttachments.add(attachments[index]);
                                       setState(() {});
                                     },
+                                    
                                     onTap: () async {
                                       if(selectingAttachments){
                                         if(selectedAttachments.contains(attachments[index])){

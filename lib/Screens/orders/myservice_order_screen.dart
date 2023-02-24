@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:oilapp/Model/service_order_with_vehicle.dart';
 import 'package:oilapp/Model/vehicle_model.dart';
 import 'package:oilapp/Model/service_order_model.dart';
+import 'package:oilapp/Screens/home_screen.dart';
 import 'package:oilapp/Screens/orders/myservice_order_details_by_vehicle_screen.dart';
 import 'package:oilapp/Screens/orders/myservice_order_details_screen.dart';
 import 'package:oilapp/Screens/ourservice/backend_orderservice.dart';
@@ -74,6 +75,16 @@ class _MyServiceOrderScreenState extends State<MyServiceOrderScreen> {
           ),
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Route route = MaterialPageRoute(
+                builder: (_) => HomeScreen(),
+              );
+              Navigator.push(context, route);
+            }, 
+            icon: const Icon(Icons.home))
+        ],
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),

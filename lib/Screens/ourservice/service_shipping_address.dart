@@ -19,7 +19,7 @@ import 'package:oilapp/service/address_service.dart';
 
 class ServiceShippingAddress extends StatefulWidget {
   final int? totalPrice;
-  final VehicleModel? vehicleModel;
+  final List<VehicleModel>? vehicleModel;
 
   const ServiceShippingAddress({
     Key? key,
@@ -281,7 +281,7 @@ class _ServiceShippingAddressState extends State<ServiceShippingAddress> {
 }
 
 class AddressCard extends StatefulWidget {
-  final VehicleModel vehicleModel;
+  final List<VehicleModel> vehicleModel;
   final AddressModel? model;
   final String? addressId;
   final int? totalPrice;

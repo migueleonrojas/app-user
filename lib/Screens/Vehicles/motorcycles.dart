@@ -39,6 +39,10 @@ class _MotocyclesState extends State<Motocycles> {
   final backEndVehiclesService = BackEndVehiclesService();
   ModalBottomSheetAddMotorcycleNote motorcyclesNotes =  ModalBottomSheetAddMotorcycleNote();
 
+  List<VehicleModel> vehiclesModels = [];
+  List<VehicleModel> selectedVehiclesModels = [];
+  bool selectingVehicleModel = false;
+
   @override
   void initState() {
     
@@ -56,16 +60,62 @@ class _MotocyclesState extends State<Motocycles> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: AutoSizeText(
-          "Motos",
+          (!selectingVehicleModel)?"Motos":"Selecionados: ${selectedVehiclesModels.length}",          
           style: TextStyle(
-            fontSize: size.height * 0.026,
+            fontSize: size.height * 0.017,
             letterSpacing: 1.5,
             fontWeight: FontWeight.bold,
             fontFamily: "Brand-Regular",
           ),
         ),
+        leading: (selectingVehicleModel)
+          ? IconButton(//dejar se seleccionar vehiculos
+              icon: const Icon(Icons.disabled_by_default_outlined),
+              onPressed: () {
+                selectingVehicleModel = false;
+                selectedVehiclesModels = [];
+                setState(() {});
+              },
+          )
+          :null,
         centerTitle: true,
         actions: [
+          if(selectingVehicleModel)
+          IconButton(//seleccionar todos los vehiculos
+              icon: const Icon(Icons.list_sharp),
+              onPressed: () {
+                
+                for(final vehiclesModel in vehiclesModels){
+                  if(!selectedVehiclesModels.contains(vehiclesModel)){
+                    selectedVehiclesModels.add(vehiclesModel);
+                  }
+                  
+                }
+                setState(() {});
+              },  
+            ),
+            if(selectingVehicleModel)
+            IconButton(//eliminar todos los vehiculos seleccionados de la lista de seleccionados
+              icon: const Icon(Icons.delete),
+              onPressed: () async {
+
+                bool confirm =  await _onBackPressed("De que quieres eliminar las motos seleccionadas");
+
+                if(!confirm) return;
+
+                for(final selectedVehiclesModel in selectedVehiclesModels){
+                  
+                  if(vehiclesModels.contains(selectedVehiclesModel)){
+                    vehiclesModels.remove(selectedVehiclesModel);
+                  }
+                  
+                }
+                selectedVehiclesModels = [];
+                selectingVehicleModel = false;
+                setState(() {});
+              },  
+            ),
+          if(!selectingVehicleModel)
           IconButton(
             icon: const Icon(
               Icons.add
@@ -86,6 +136,22 @@ class _MotocyclesState extends State<Motocycles> {
           ),
         ],
       ),
+      floatingActionButton: (selectingVehicleModel)
+        ? FloatingActionButton.extended(
+          onPressed: () {//para solicitar el servicios a diferentes vehiculos
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (c) => OurService(vehicleModel: selectedVehiclesModels)
+              ),
+            );
+          },
+          label: const Text('Solicitar servicios por lote'),
+          icon: const Icon(Icons.thumb_up),
+          backgroundColor: Colors.blue,
+        )
+        : null
+      ,
 
       body: StreamBuilder(
         stream:backEndVehiclesService.suggestionVehicleUserStream,
@@ -101,6 +167,15 @@ class _MotocyclesState extends State<Motocycles> {
             );
           }
 
+          int lenght = snapshot.data!.length;
+          
+           snapshot.data!.map((doc) {
+            VehicleModel vehicleModel = VehicleModel.fromJson(doc);
+              if(vehiclesModels.length < lenght){
+                vehiclesModels.add(vehicleModel);
+              }
+              
+           }).toList();
 
 
           return ListView.builder(
@@ -115,267 +190,286 @@ class _MotocyclesState extends State<Motocycles> {
             );
 
             double percent = (100 - ( 100 * vehicleWithNotificationsModel.daysOfTheNextService!.toDouble()) / vehicleWithNotificationsModel.days!.toDouble());
-            return Card(
-              elevation: 2,
-              child: ListTile(
-                
-                onTap: () {
-                  //timelines
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (c) => TimelineVehiclesCarNotesAndServiceOrder(
-                        vehicleWithNotificationsModel: vehicleWithNotificationsModel,
-                      )
-                    ),
-                  );
-
-                },
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    
-                    Stack(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(right: size.width * 0.2),
-                          
-                          child: Container(
-                        
-                            width: size.width * 0.205,
-                            height: size.height * 0.110,
-                            child: SfRadialGauge(
-                              enableLoadingAnimation: true,
-                              axes: <RadialAxis> [
-                                RadialAxis(
-                                  showLabels: false,
-                                  showAxisLine: false,
-                                  radiusFactor: 1.0,
-                                  minimum: 0,
-                                  maximum: vehicleWithNotificationsModel.days!.toDouble(),
-                                  isInversed: true,
-                                  ranges: <GaugeRange> [
-                                    GaugeRange(startValue: vehicleWithNotificationsModel.days!.toDouble(), endValue: 30,color: Colors.green),
-                                    GaugeRange(startValue: 30, endValue: 8,color: Colors.orange),
-                                    GaugeRange(startValue: 8, endValue: 0, color: Colors.red),                                  
-                                  ],
-                                  pointers: <GaugePointer> [
-                                    NeedlePointer(
-                                      value: (vehicleWithNotificationsModel.daysOfTheNextService! < 0) 
-                                        ? 0
-                                        : vehicleWithNotificationsModel.daysOfTheNextService!.toDouble(),
-                                      needleStartWidth: 0,
-                                      needleEndWidth: 3,
-                                      needleLength: 0.85,
-                                    )
-                                  ],
-                                  annotations: <GaugeAnnotation> [
-                                    GaugeAnnotation(
-                                      widget: Container(
-                                        child: AutoSizeText(
-                                          (vehicleWithNotificationsModel.daysOfTheNextService! < 0) 
-                                            ? 'Restan 0 días para el próximo cambio de aceite.'
-                                            :'Restan ${vehicleWithNotificationsModel.daysOfTheNextService} dias para el próximo cambio de aceite.', 
-                                        ),
-                                        
-                                      ),
-                                      angle: 90,
-                                      positionFactor: 2,
-                                    )
-                                  ],
-                                  
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        
-                        Center(
-                          child: Image.network(
-                            vehicleModel.logo!,
-                            width: size.width * 0.25,
-                            height: size.height * 0.096,
-                            fit: BoxFit.scaleDown,
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            IconButton(
-                              icon: const Icon(
-                                Icons.edit,
-                                color: Colors.black,
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (c) => EditMotorCycleScreen(
-                                      vehicleModel: vehicleModel,
-                                    ),
-                                  ),
-                                );
-                              },
-                            )
-                          ],
+            
+            return GestureDetector(
+              onLongPress: () {
+                selectingVehicleModel = true;
+                selectedVehiclesModels.add(vehiclesModels[index]);
+                setState(() {});
+              },
+              child: Card(
+                color: (selectedVehiclesModels.contains(vehiclesModels[index]))? Colors.teal:Colors.white,
+                elevation: 2,
+                child: ListTile(
+                  
+                  onTap: () {
+                    if(selectingVehicleModel){
+                      if(selectedVehiclesModels.contains(vehiclesModels[index])){
+                        selectedVehiclesModels.remove(vehiclesModels[index]);
+                        setState(() {});
+                        return;
+                      }
+                      selectedVehiclesModels.add(vehiclesModels[index]);
+                      setState(() {});
+                      return;
+                    }
+                    //timelines
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (c) => TimelineVehiclesCarNotesAndServiceOrder(
+                          vehicleWithNotificationsModel: vehicleWithNotificationsModel,
                         )
-                      ],
-                    ),
-                    
-                    SizedBox(height: size.height * 0.012,),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        AutoSizeText(vehicleModel.brand!),
-                        /* const AutoSizeText(" "), */
-                        AutoSizeText(vehicleModel.model!),
-                        /* const AutoSizeText(" "), */
-                        AutoSizeText(vehicleModel.year.toString()),
-                        
-                        
-                      ],
-                    ),
-                    SizedBox(height: size.height * 0.012,),
-                    (vehicleModel.name != "") ? AutoSizeText('${vehicleModel.name}'): Container(),
-                    SizedBox(height: size.height * 0.012,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const AutoSizeText('Color:'),
-                        IconButton(
-                          iconSize: size.height * 0.054,
-                          icon:  Icon(
-                            Icons.motorcycle,
-                            color: Color(vehicleModel.color!),
-                            ),
-                          onPressed: null,
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: size.height * 0.012,),
-                    TextButton(                      
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 0, horizontal: size.width * 0.075),
-                        backgroundColor: Color.fromARGB(255, 3, 3, 247),
-                        shape: const StadiumBorder()
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (c) => OurService(vehicleModel: vehicleModel)
-                          ),
-                        );
-                      },
-                      child: Container(
-                        width: size.width * 0.55,
-                        height: size.height * 0.021,
-                        child: Center(                        
-                          child:  AutoSizeText(
-                            "Solicitar un servicio",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "Brand-Regular",
-                              fontWeight: FontWeight.bold,
-                              fontSize: size.height * 0.018,
-                            ),
+                    );
+            
+                  },
+                  title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      
+                      Stack(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(right: size.width * 0.2),
                             
+                            child: Container(
+                          
+                              width: size.width * 0.205,
+                              height: size.height * 0.110,
+                              child: SfRadialGauge(
+                                enableLoadingAnimation: true,
+                                axes: <RadialAxis> [
+                                  RadialAxis(
+                                    showLabels: false,
+                                    showAxisLine: false,
+                                    radiusFactor: 1.0,
+                                    minimum: 0,
+                                    maximum: vehicleWithNotificationsModel.days!.toDouble(),
+                                    isInversed: true,
+                                    ranges: <GaugeRange> [
+                                      GaugeRange(startValue: vehicleWithNotificationsModel.days!.toDouble(), endValue: 30,color: Colors.green),
+                                      GaugeRange(startValue: 30, endValue: 8,color: Colors.orange),
+                                      GaugeRange(startValue: 8, endValue: 0, color: Colors.red),                                  
+                                    ],
+                                    pointers: <GaugePointer> [
+                                      NeedlePointer(
+                                        value: (vehicleWithNotificationsModel.daysOfTheNextService! < 0) 
+                                          ? 0
+                                          : vehicleWithNotificationsModel.daysOfTheNextService!.toDouble(),
+                                        needleStartWidth: 0,
+                                        needleEndWidth: 3,
+                                        needleLength: 0.85,
+                                      )
+                                    ],
+                                    annotations: <GaugeAnnotation> [
+                                      GaugeAnnotation(
+                                        widget: Container(
+                                          child: AutoSizeText(
+                                            (vehicleWithNotificationsModel.daysOfTheNextService! < 0) 
+                                              ? 'Restan 0 días para el próximo cambio de aceite.'
+                                              :'Restan ${vehicleWithNotificationsModel.daysOfTheNextService} dias para el próximo cambio de aceite.', 
+                                          ),
+                                          
+                                        ),
+                                        angle: 90,
+                                        positionFactor: 2,
+                                      )
+                                    ],
+                                    
+                                  )
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 0, horizontal: size.width * 0.075),
-                        backgroundColor: Color.fromARGB(255, 3, 3, 247),
-                        shape: const StadiumBorder()
+                          
+                          Center(
+                            child: Image.network(
+                              vehicleModel.logo!,
+                              width: size.width * 0.25,
+                              height: size.height * 0.096,
+                              fit: BoxFit.scaleDown,
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.edit,
+                                  color: Colors.black,
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (c) => EditMotorCycleScreen(
+                                        vehicleModel: vehicleModel,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              )
+                            ],
+                          )
+                        ],
                       ),
                       
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (c) => MyServiceOrderByVehicleScreen(vehicleModel: vehicleModel)
+                      SizedBox(height: size.height * 0.012,),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          AutoSizeText(vehicleModel.brand!),
+                          /* const AutoSizeText(" "), */
+                          AutoSizeText(vehicleModel.model!),
+                          /* const AutoSizeText(" "), */
+                          AutoSizeText(vehicleModel.year.toString()),
+                          
+                          
+                        ],
+                      ),
+                      SizedBox(height: size.height * 0.012,),
+                      (vehicleModel.name != "") ? AutoSizeText('${vehicleModel.name}'): Container(),
+                      SizedBox(height: size.height * 0.012,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const AutoSizeText('Color:'),
+                          IconButton(
+                            iconSize: size.height * 0.054,
+                            icon:  Icon(
+                              Icons.motorcycle,
+                              color: Color(vehicleModel.color!),
+                              ),
+                            onPressed: null,
                           ),
-                        );
-                      },
-                      child: Container(
-                        width: size.width * 0.55,
-                        height: size.height * 0.021,
-                        child: Center(
-                          child:  AutoSizeText(
-                            "Mis ordenes de servicio",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "Brand-Regular",
-                              fontWeight: FontWeight.bold,
-                              fontSize: size.height * 0.018,
+                        ],
+                      ),
+                      SizedBox(height: size.height * 0.012,),
+                      TextButton(                      
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.symmetric(vertical: 0, horizontal: size.width * 0.075),
+                          backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                          shape: const StadiumBorder()
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (c) => OurService(vehicleModel: [vehicleModel])
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: size.width * 0.55,
+                          height: size.height * 0.021,
+                          child: Center(                        
+                            child:  AutoSizeText(
+                              "Solicitar un servicio",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Brand-Regular",
+                                fontWeight: FontWeight.bold,
+                                fontSize: size.height * 0.018,
+                              ),
+                              
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 0, horizontal: size.width * 0.075),
-                        backgroundColor: Color.fromARGB(255, 3, 3, 247),
-                        shape: const StadiumBorder()
-                      ),
-                      onPressed: () async {
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.symmetric(vertical: 0, horizontal: size.width * 0.075),
+                          backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                          shape: const StadiumBorder()
+                        ),
                         
-                        await motorcyclesNotes.showModalBottomSheetByAddMotorcyclesNotes(context: context, vehicle: vehicleModel );
-                        
-                      },
-                      child: Container(
-                        width: size.width * 0.55,
-                        height: size.height * 0.021,
-                        child: Center(
-                          child: AutoSizeText(
-                            "Agregar una nota",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "Brand-Regular",
-                              fontWeight: FontWeight.bold,
-                              fontSize: size.height * 0.018,
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (c) => MyServiceOrderByVehicleScreen(vehicleModel: vehicleModel)
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: size.width * 0.55,
+                          height: size.height * 0.021,
+                          child: Center(
+                            child:  AutoSizeText(
+                              "Mis ordenes de servicio",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Brand-Regular",
+                                fontWeight: FontWeight.bold,
+                                fontSize: size.height * 0.018,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 0, horizontal: size.width * 0.075),
-                        backgroundColor: Color.fromARGB(255, 3, 3, 247),
-                        shape: const StadiumBorder()
-                      ),
-                      onPressed: () async {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (c) => ViewCarNotes(vehicleModel: vehicleModel, goToHome: false,)
-                          ),
-                        );
-                      },
-                      child: Container(
-                        width: size.width * 0.55,
-                        height: size.height * 0.021,
-                        child: Center(
-                          child: AutoSizeText(
-                            "Ver las notas de servicio",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "Brand-Regular",
-                              fontWeight: FontWeight.bold,
-                              fontSize: size.height * 0.018,
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.symmetric(vertical: 0, horizontal: size.width * 0.075),
+                          backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                          shape: const StadiumBorder()
+                        ),
+                        onPressed: () async {
+                          
+                          await motorcyclesNotes.showModalBottomSheetByAddMotorcyclesNotes(context: context, vehicle: vehicleModel );
+                          
+                        },
+                        child: Container(
+                          width: size.width * 0.55,
+                          height: size.height * 0.021,
+                          child: Center(
+                            child: AutoSizeText(
+                              "Agregar una nota",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Brand-Regular",
+                                fontWeight: FontWeight.bold,
+                                fontSize: size.height * 0.018,
+                              ),
                             ),
                           ),
                         ),
                       ),
-
-                    ),
-                  ],
-                ),
-              ),      
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.symmetric(vertical: 0, horizontal: size.width * 0.075),
+                          backgroundColor: Color.fromARGB(255, 3, 3, 247),
+                          shape: const StadiumBorder()
+                        ),
+                        onPressed: () async {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (c) => ViewCarNotes(vehicleModel: vehicleModel, goToHome: false,)
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: size.width * 0.55,
+                          height: size.height * 0.021,
+                          child: Center(
+                            child: AutoSizeText(
+                              "Ver las notas de servicio",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Brand-Regular",
+                                fontWeight: FontWeight.bold,
+                                fontSize: size.height * 0.018,
+                              ),
+                            ),
+                          ),
+                        ),
+            
+                      ),
+                    ],
+                  ),
+                ),      
+              ),
             );
           }
         );
@@ -568,6 +662,39 @@ class _MotocyclesState extends State<Motocycles> {
         },
       ), */ 
     );
+  }
+
+    Future<bool> _onBackPressed(String msg) async {
+    return await showDialog(
+          context: context,
+          builder: (context) =>  AlertDialog(
+            title:  Text('Estas seguro?'),
+            content:  Container(
+              height: MediaQuery.of(context).size.height * 0.04,
+              width: MediaQuery.of(context).size.width * 0.3,
+              child: Text(msg)
+            ),
+            actions: <Widget>[
+               GestureDetector(
+                onTap: () => Navigator.of(context).pop(true),
+                child: Padding(
+                  padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.010),
+                  child: Text("YES"),
+                ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.019),
+               GestureDetector(
+                onTap: () => Navigator.of(context).pop(false),
+                child: Padding(
+                  padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.010),
+                  child: Text("NO"),
+                ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.019),
+            ],
+          ),
+        ) ??
+        false;
   }
 
   Future<List<Map<String,dynamic>>> gerVehicles() async {

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class OurService extends StatefulWidget {
 
-  final VehicleModel vehicleModel;
+  final List<VehicleModel> vehicleModel;
 
   const OurService({required this.vehicleModel});
 

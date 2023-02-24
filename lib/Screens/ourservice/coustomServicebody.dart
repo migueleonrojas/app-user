@@ -22,7 +22,7 @@ import 'package:rating_dialog/rating_dialog.dart';
 
 class CoustomServiceBody extends StatefulWidget {
   final dynamic isEqualTo;
-  final VehicleModel vehicleModel; 
+  final List<VehicleModel> vehicleModel; 
 
   const CoustomServiceBody({Key? key, this.isEqualTo, required this.vehicleModel}) : super(key: key);
   @override
@@ -476,7 +476,24 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                             
                                 
                                               Timer(const Duration(seconds: 1), () async {
-                                                await BackEndOrderService()
+
+                                                for(final VehicleModel oneVehicleModel in widget.vehicleModel){
+                                                  await BackEndOrderService()
+                                                    .addService(
+                                                      oneVehicleModel.vehicleId!, 
+                                                      serviceModel.serviceId!, 
+                                                      serviceModel.newprice = serviceModel.newprice! * quantity, 
+                                                      serviceModel.orginalprice!, 
+                                                      serviceModel.serviceImgUrl!, 
+                                                      serviceModel.serviceName!, 
+                                                      getDateText(), 
+                                                      quantity, 
+                                                      observationsController.text, 
+                                                      serviceModel.categoryName!
+                                                    );
+                                                }
+                                                /*  */
+                                                /* await BackEndOrderService()
                                                     .addService(
                                                       widget.vehicleModel.vehicleId!,
                                                       serviceModel.serviceId!,
@@ -488,7 +505,8 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                                       quantity,
                                                       observationsController.text,
                                                       serviceModel.categoryName!
-                                                    );
+                                                    ); */
+                                                /*  */
                                                 Fluttertoast.showToast(
                                                     msg:
                                                         "El servicio está listo para ser pedido!");
@@ -641,11 +659,18 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                   child: AnimatedConfirmButton(
                                     onTap: () {
                                       Timer(Duration(seconds: 1), () {
-                                        BackEndOrderService().deleteService(
+                                        for(final VehicleModel oneVehicleModel in widget.vehicleModel){
+                                          BackEndOrderService().deleteService(
+                                          serviceModel.serviceId!,
+                                          oneVehicleModel.vehicleId!,
+                                          (snapshot.data!.docs[index] as dynamic).data()['servicecartId'],
+                                        );
+                                        }
+                                        /* BackEndOrderService().deleteService(
                                           serviceModel.serviceId!,
                                           widget.vehicleModel.vehicleId!,
                                           (snapshot.data!.docs[index] as dynamic).data()['servicecartId'],
-                                        );
+                                        ); */
                                         setState(() {
                                           isContinue = false;
                                           istap = false;
