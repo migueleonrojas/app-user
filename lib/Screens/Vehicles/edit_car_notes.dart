@@ -303,73 +303,75 @@ class _EditCarNoteState extends State<EditCarNote> {
                             'Adjunto',
                             style: TextStyle(fontSize: size.height * 0.024),
                           ),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            physics: const BouncingScrollPhysics(),
-                            itemCount: attachments.length,
-                            itemBuilder: ( _, int index) {
-                              
-                              return Center(
+                          Expanded(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: attachments.length,
+                              itemBuilder: ( _, int index) {
                                 
-                                child: GestureDetector(
-                                  onLongPress: () {
-                                    selectingAttachments = true;
-                                    selectedAttachments.add(attachments[index]);
-                                    setState(() {});
-                                  },
-                                  onTap: () async {
-                                    if(selectingAttachments){
-                                      if(selectedAttachments.contains(attachments[index])){
-                                        selectedAttachments.remove(attachments[index]);
-                                        setState(() {});
-                                        return;
-                                      }
+                                return Center(
+                                  
+                                  child: GestureDetector(
+                                    onLongPress: () {
+                                      selectingAttachments = true;
                                       selectedAttachments.add(attachments[index]);
                                       setState(() {});
-                                    }
-                                    else{
-                                      final attachmentsDeleted = await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (c) =>  ViewImage(
-                                            pathImage: attachments[index]
-                                          )
-                                        ),
-                                      );
-
-                                      if(attachmentsDeleted == null) return;
-
-                                      attachments.remove(attachmentsDeleted);
-                                      setState(() {});
-
-                                    }
-                                  },
-                                  child: Container(
-                                    width:(selectedAttachments.contains(attachments[index]))? size.width * 0.23:size.width * 0.28,
-                                    height:(selectedAttachments.contains(attachments[index]))? size.height * 0.135:size.height * 0.1450,
-                                    margin: EdgeInsets.symmetric(horizontal: size.height * 0.019),
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: NetworkImage(attachments[index]),
-                                        fit: BoxFit.cover,
-                                      )
-                                    ),
-                                    child:(selectedAttachments.contains(attachments[index]))
-                                      ? IconButton(
-                                        alignment: AlignmentDirectional.topEnd,
-                                        padding: const EdgeInsets.symmetric(vertical: 0),
-                                        icon: Icon(
-                                          Icons.cancel,
-                                          color: Colors.blue,
-                                          size: size.height * 0.035
-                                        ),
-                                        onPressed: null,
-                                      ): null
-                                  ),                                    
-                                ),
-                              );        
-                            },
+                                    },
+                                    onTap: () async {
+                                      if(selectingAttachments){
+                                        if(selectedAttachments.contains(attachments[index])){
+                                          selectedAttachments.remove(attachments[index]);
+                                          setState(() {});
+                                          return;
+                                        }
+                                        selectedAttachments.add(attachments[index]);
+                                        setState(() {});
+                                      }
+                                      else{
+                                        final attachmentsDeleted = await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (c) =>  ViewImage(
+                                              pathImage: attachments[index]
+                                            )
+                                          ),
+                                        );
+                          
+                                        if(attachmentsDeleted == null) return;
+                          
+                                        attachments.remove(attachmentsDeleted);
+                                        setState(() {});
+                          
+                                      }
+                                    },
+                                    child: Container(
+                                      width:(selectedAttachments.contains(attachments[index]))? size.width * 0.23:size.width * 0.28,
+                                      height:(selectedAttachments.contains(attachments[index]))? size.height * 0.135:size.height * 0.1450,
+                                      margin: EdgeInsets.symmetric(horizontal: size.height * 0.019),
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: NetworkImage(attachments[index]),
+                                          fit: BoxFit.cover,
+                                        )
+                                      ),
+                                      child:(selectedAttachments.contains(attachments[index]))
+                                        ? IconButton(
+                                          alignment: AlignmentDirectional.topEnd,
+                                          padding: const EdgeInsets.symmetric(vertical: 0),
+                                          icon: Icon(
+                                            Icons.cancel,
+                                            color: Colors.blue,
+                                            size: size.height * 0.035
+                                          ),
+                                          onPressed: null,
+                                        ): null
+                                    ),                                    
+                                  ),
+                                );        
+                              },
+                            ),
                           )
                         ]
                       )

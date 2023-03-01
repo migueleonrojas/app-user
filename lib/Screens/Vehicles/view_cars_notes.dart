@@ -49,6 +49,9 @@ class _ViewCarNotesState extends State<ViewCarNotes> {
     
     }
     getListAttachments();
+    if(mounted){
+      setState(() {});
+    }
     
   }
 
@@ -144,7 +147,10 @@ class _ViewCarNotesState extends State<ViewCarNotes> {
                   );
                 }
                 
-                 return ListView.builder(
+                  return 
+                    listAttachments.isEmpty
+                    ? circularProgress()
+                    : ListView.builder(
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
                   itemCount: snapshot.data!.docs.length,
@@ -179,6 +185,8 @@ class _ViewCarNotesState extends State<ViewCarNotes> {
                           }
 
                         }
+
+                        if(listAttachments.isEmpty) return;
                         
                         Navigator.push(
                           context,
@@ -243,6 +251,8 @@ class _ViewCarNotesState extends State<ViewCarNotes> {
       }
 
     }
+
+
    
   }
 
