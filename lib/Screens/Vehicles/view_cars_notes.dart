@@ -148,9 +148,9 @@ class _ViewCarNotesState extends State<ViewCarNotes> {
                 }
                 
                   return 
-                    listAttachments.isEmpty
+                    /* listAttachments.isEmpty
                     ? circularProgress()
-                    : ListView.builder(
+                    :  */ListView.builder(
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
                   itemCount: snapshot.data!.docs.length,
@@ -234,7 +234,9 @@ class _ViewCarNotesState extends State<ViewCarNotes> {
 
   getListAttachments() async {
     QuerySnapshot<Map<String, dynamic>> carNotesUsers = await FirebaseFirestore.instance
-      .collection("carNotesUserVehicles").get();
+      .collection("carNotesUserVehicles")
+      .where('userId',isEqualTo: AutoParts.sharedPreferences!.getString(AutoParts.userUID))
+      .get();
     QuerySnapshot<Map<String, dynamic>>? attachmentsDocs;
 
     
