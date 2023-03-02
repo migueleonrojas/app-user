@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:oilapp/Model/vehicle_model.dart';
@@ -5,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:oilapp/Screens/Vehicles/edit_car_notes.dart';
 import 'package:oilapp/Screens/home_screen.dart';
 import 'package:oilapp/config/config.dart';
+import 'package:oilapp/service/carNotes_service.dart';
 import 'package:oilapp/widgets/emptycardmessage.dart';
 import 'package:oilapp/widgets/loading_widget.dart';
 import 'package:oilapp/widgets/modal_bottom_sheet_add_car_note.dart';
@@ -25,33 +28,69 @@ class _ViewCarNotesState extends State<ViewCarNotes> {
   List <VehicleModel>? usersVehicles = [];
   List <Map<String,dynamic>> listAttachments = [];
   ModalBottomSheetAddCarNote carNotes =  ModalBottomSheetAddCarNote();
-
-  late Stream<QuerySnapshot<Map<String, dynamic>>> streamCarNotes = (widget.vehicleModel == null) 
-    ? FirebaseFirestore.instance
-      .collection('carNotesUserVehicles')
-      .where('userId', isEqualTo: AutoParts.sharedPreferences!.getString(AutoParts.userUID))
-      
-      .snapshots()
-    : FirebaseFirestore.instance
-        .collection(AutoParts.collectionUser)
-        .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
-        .collection(AutoParts.vehicles)
-        .doc(widget.vehicleModel!.vehicleId)
-        .collection('carNotes')
-        .snapshots();
+  CarNoteService carNoteService = CarNoteService();
+  final ScrollController scrollController = ScrollController();
+  int limit = 5;
+  bool dataFinish = false;
+  bool isLoading =  false;
+  bool dataFinishByUser = false;
+  bool isLoadingByUser =  false;
+  bool attachmentsLoaded = false;
+  
 
   @override
   void initState() {
     super.initState();
+    Future.delayed(Duration.zero, () async {
+      await getListAttachments();
+      if(widget.vehicleModel == null) {
+        await getUserVehicle();
+      }
+      if(mounted){
+        setState(() {});
+      }
+    });
     if(widget.vehicleModel == null) {
 
-      getUserVehicle();
+      carNoteService.getCarNotes(limit: 15);
+
+      
     
     }
-    getListAttachments();
-    if(mounted){
-      setState(() {});
+    else{
+      carNoteService.getCarNotesByUser(limit: 15, vehicleId: widget.vehicleModel!.vehicleId!);
     }
+    scrollController.addListener(() async {
+      
+      if(scrollController.position.pixels + 200 > scrollController.position.maxScrollExtent) {
+        if(isLoading) return;
+        if(dataFinish) return;
+        if(isLoadingByUser) return;
+        if(dataFinishByUser) return;
+        
+        if(widget.vehicleModel == null) {
+          isLoading = true;
+          await Future.delayed(const Duration(seconds: 1));
+          dataFinish = await carNoteService.getCarNotes(limit: limit, nextDocument: true, vehicleId: widget.vehicleModel!.vehicleId!);
+          isLoading = false;
+        }
+        else{
+          isLoadingByUser = true;
+          await Future.delayed(const Duration(seconds: 1));
+          dataFinish = await carNoteService.getCarNotesByUser(limit: limit, nextDocument: true, vehicleId: widget.vehicleModel!.vehicleId!);
+          isLoadingByUser = false;
+        }
+        if(scrollController.position.pixels + 200 <= scrollController.position.maxScrollExtent) return;
+        scrollController.animateTo(
+          scrollController.position.maxScrollExtent + 120, 
+          duration: const Duration(milliseconds: 300), 
+          curve: Curves.fastOutSlowIn
+        );
+
+      }
+    });
+
+    
     
   }
 
@@ -129,8 +168,11 @@ class _ViewCarNotesState extends State<ViewCarNotes> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            StreamBuilder<QuerySnapshot>(
-              stream: streamCarNotes,
+            StreamBuilder(
+              stream: (widget.vehicleModel == null) 
+              ? carNoteService.suggestionStreamCarNotes
+              : carNoteService.suggestionStreamCarNotesByUser
+              ,
               builder: (context, snapshot) {
                 
                 if (snapshot.data == null) {
@@ -140,7 +182,7 @@ class _ViewCarNotesState extends State<ViewCarNotes> {
                 }
 
                 
-                if(snapshot.data!.size == 0) {
+                if(snapshot.data!.isEmpty) {
                    return const  EmptyCardMessage(
                     listTitle: "No hay notas de servicio",
                     message: "Comienza a agregar notas de servicio",
@@ -148,12 +190,12 @@ class _ViewCarNotesState extends State<ViewCarNotes> {
                 }
                 
                   return 
-                    /* listAttachments.isEmpty
+                    listAttachments.isEmpty
                     ? circularProgress()
-                    :  */ListView.builder(
+                    : ListView.builder(
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
-                  itemCount: snapshot.data!.docs.length,
+                  itemCount: snapshot.data!.length,
                   reverse: true,
                   scrollDirection: Axis.vertical,
                   itemBuilder:  (context, index) {
@@ -161,17 +203,17 @@ class _ViewCarNotesState extends State<ViewCarNotes> {
                     return ListTile(
                       leading: FadeInImage(
                         placeholder: const AssetImage('assets/no-image/no-image.jpg'),
-                        image: NetworkImage((snapshot.data!.docs[index].data() as dynamic)["serviceImage"]),
+                        image: NetworkImage((snapshot.data![index] as dynamic)["serviceImage"]),
                         width: size.width * 0.07,
                         fit:BoxFit.contain
                       ),
-                      title: AutoSizeText((snapshot.data!.docs[index].data() as dynamic)["serviceName"]),
+                      title: AutoSizeText((snapshot.data![index] as dynamic)["serviceName"]),
                       onTap: () async {
                         
                         VehicleModel? userVehicleReturned;
                         List listAttachmentsReturned = [];
                         for(final listAttachment in listAttachments) {
-                         if(listAttachment["carNoteId"] == (snapshot.data!.docs[index].data() as dynamic)["carNoteId"] ){
+                         if(listAttachment["carNoteId"] == (snapshot.data![index] as dynamic)["carNoteId"] ){
                           listAttachmentsReturned.add(listAttachment["urlImg"]);
                          }
                         }
@@ -179,7 +221,7 @@ class _ViewCarNotesState extends State<ViewCarNotes> {
                         if(widget.vehicleModel == null) {
 
                           for(final userVehicle in usersVehicles!){
-                            if(userVehicle.vehicleId == (snapshot.data!.docs[index].data() as dynamic)["vehicleId"]){
+                            if(userVehicle.vehicleId == (snapshot.data![index] as dynamic)["vehicleId"]){
                               userVehicleReturned = userVehicle;
                             }
                           }
@@ -193,12 +235,12 @@ class _ViewCarNotesState extends State<ViewCarNotes> {
                           MaterialPageRoute(
                             builder: (c) =>  EditCarNote(
                               noteCar: {
-                                "image":(snapshot.data!.docs[index].data() as dynamic)["serviceImage"],
-                                "name":(snapshot.data!.docs[index].data() as dynamic)["serviceName"],
-                                "date":(snapshot.data!.docs[index].data() as dynamic)["date"],
-                                "comments":(snapshot.data!.docs[index].data() as dynamic)["comments"],
-                                "carNoteId":(snapshot.data!.docs[index].data() as dynamic)["carNoteId"],
-                                "mileage":(snapshot.data!.docs[index].data() as dynamic)["mileage"] 
+                                "image":(snapshot.data![index] as dynamic)["serviceImage"],
+                                "name":(snapshot.data![index] as dynamic)["serviceName"],
+                                "date":(snapshot.data![index] as dynamic)["date"],
+                                "comments":(snapshot.data![index] as dynamic)["comments"],
+                                "carNoteId":(snapshot.data![index] as dynamic)["carNoteId"],
+                                "mileage":(snapshot.data![index] as dynamic)["mileage"] 
                               }, 
                               vehicleModel:(widget.vehicleModel == null)? userVehicleReturned!:widget.vehicleModel!,
                               attachmentsFromDB: listAttachmentsReturned,
