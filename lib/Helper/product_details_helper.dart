@@ -57,9 +57,14 @@ class ProductDetailsHelper {
                 : SizedBox(
                     height: 40,
                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black
+                      ),
                       child: AutoSizeText(
                         "Añadir al carro de compras".toUpperCase(),
+                        textAlign: TextAlign.center,
                         style: TextStyle(
+                          
                           color: Colors.white,
                           fontFamily: "Brand-Bold",
                           letterSpacing: 1.5,

@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 import 'dart:io';
@@ -438,6 +439,9 @@ class _UpdateUserState extends State<UpdateUser> {
       newUrlImage = downloadUrl;
     }
 
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    final String? tokenFirebaseMsg = await messaging.getToken();
+
     FirebaseFirestore.instance
       .collection("users")
       .doc(AutoParts.sharedPreferences!.getString(AutoParts.userUID))
@@ -449,11 +453,12 @@ class _UpdateUserState extends State<UpdateUser> {
         "address":widget.userModel.address,
         "url": newUrlImage,
         "logged": true,
+        "attempts": 0,
+        "timeForTheNextOtp": DateTime.now(),
+        "tokenFirebaseToken":tokenFirebaseMsg,
         AutoParts.userCartList: ["garbageValue"]
       });
-
-  
-      
+    
 
     final QuerySnapshot<Map<String, dynamic>> reviews = await FirebaseFirestore.instance
         .collection('ratingandreviews')
@@ -571,10 +576,10 @@ class _UpdateUserState extends State<UpdateUser> {
       final message = Message()
       ..from = Address(username)
       ..recipients.add(emailController.text.toLowerCase().trim())
-      ..subject = 'Validando Registro en el app MetaOil'
+      ..subject = 'Validando Registro en el app'
       ..text = ''
       ..html = ''' 
-        <h2>Validando registro en el app MetaOil</h2>
+        <h2>Validando registro en el app</h2>
         <br/>
         <p>Valide su registro ingresando el siguiente codigo en el app <b>$code</b></p>
       '''

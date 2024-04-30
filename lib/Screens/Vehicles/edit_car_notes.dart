@@ -260,6 +260,7 @@ class _EditCarNoteState extends State<EditCarNote> {
                                     'Adjuntar',                    
                                     style: TextStyle(
                                       fontSize: size.height * 0.022,
+                                      color: Colors.white
                                       
                                     ),
                                   ),
@@ -285,7 +286,12 @@ class _EditCarNoteState extends State<EditCarNote> {
                         );
 
                       }, 
-                      child: const AutoSizeText('Adjuntar Archivo'),
+                      child: const AutoSizeText(
+                        'Adjuntar Archivo',
+                        style: TextStyle(
+                          color: Colors.white
+                        ),
+                        ),
                       style: ElevatedButton.styleFrom(
                         shape: const StadiumBorder(),
                         backgroundColor: Color.fromARGB(255, 3, 3, 247),

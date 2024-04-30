@@ -152,7 +152,10 @@ class _PaymentPageState extends State<PaymentPage> {
                               });
 
                             }, 
-                            child: const AutoSizeText('Confirmar'))
+                            child: const AutoSizeText(
+                              'Confirmar',
+                              style: TextStyle(color: Colors.white),
+                            ))
                             /* AnimatedConfirmButton(
                                 onTap: () async {
                                   print('objectassaasasasasas');

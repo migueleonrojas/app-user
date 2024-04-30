@@ -548,7 +548,10 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                             backgroundColor: Color.fromARGB(255, 3, 3, 247),
                                             shape: const StadiumBorder(),
                                             padding: EdgeInsets.symmetric(vertical: size.height * 0.022, horizontal: size.width * 0.2)                                            ),
-                                          child: AutoSizeText('Siguiente'),
+                                          child: AutoSizeText(
+                                            'Siguiente',
+                                            style: TextStyle(color: Colors.white),
+                                          ),
                                           onPressed: () {
                                 
                                             Navigator.push(
@@ -1149,6 +1152,7 @@ class _CoustomServiceBodyState extends State<CoustomServiceBody> {
                                   context: context,
                                   builder: (BuildContext context) {
                                     return  ModalAlertDialog(
+                                      
                                       title: 'Nota',
                                       content: "Los precios mencionados son cargos de servicio estimados que pueden variar ligeramente dependiendo de: El tipo de vehículo, el modelo y la disponibilidad del servicio.\n\nPolítica de servicio a domicilio: El cargo por servicio a domicilio de un máximo de 5\$ es aplicable si el cliente decide no tomar el servicio después de que el proveedor de servicios visitó el lugar.",
                                     );

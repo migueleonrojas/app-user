@@ -27,7 +27,7 @@ class _OurServiceState extends State<OurService> {
       appBar: AppBar(
         
         title:  AutoSizeText(
-          "Servicios MetaOil",
+          "Servicios del app",
           style: TextStyle(
             fontSize: size.height * 0.024,
             letterSpacing: 1.5,
@@ -74,12 +74,14 @@ class _OurServiceState extends State<OurService> {
                     destinations: [
                       /* modifique el codigo de este widget NavigationRailDestination, el destinations.length >= 1 */
                       NavigationRailDestination(
+                        indicatorColor: Colors.white,
                         icon: Image.asset(
                           "assets/icons/car_oilchange.png",
                           width: size.width * 0.1,
                           height: size.height * 0.038,
+                          
                           color: (selectedIndex == 0)
-                              ? Colors.white
+                              ? Colors.black
                               : Colors.white70,
                         ),
                         label: const Text(""),

@@ -11,12 +11,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:oilapp/firebase_options.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:oilapp/counter/cart_item_counter.dart';
 import 'package:oilapp/counter/total_money.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'dart:io' as io;
 
 
 initFirebaseMessaging() async {
@@ -75,8 +77,17 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  if(kIsWeb){
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.web
+    );
+  }
+  else if(!kIsWeb && io.Platform.isAndroid) {
+    await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.android
+      );
+  }
   
-  await Firebase.initializeApp();
   await initFirebaseMessaging();
   
   AutoParts.auth = FirebaseAuth.instance;
@@ -122,7 +133,7 @@ class _MyAppState extends State<MyApp> {
         title: 'MetaOil',
         theme: ThemeData(
           primaryColor: Colors.deepOrange,
-          accentColor: Colors.deepOrangeAccent,
+          /* accentColor: Colors.deepOrangeAccent, */
           visualDensity: VisualDensity.adaptivePlatformDensity,
           appBarTheme: const AppBarTheme(
             elevation: 0,

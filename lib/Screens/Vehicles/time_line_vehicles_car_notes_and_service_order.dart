@@ -82,7 +82,7 @@ class _TimelineVehiclesCarNotesAndServiceOrderState extends State<TimelineVehicl
                   if (snapshot.data!.isEmpty) {
                     return const EmptyCardMessage(
                       listTitle: 'No tiene ordenes de productos o notas de servicios',
-                      message: 'Solicite un servicio MetaOil o cree una nota de servicio',
+                      message: 'Solicite un servicio en el app o cree una nota de servicio',
                     );
                   }
             

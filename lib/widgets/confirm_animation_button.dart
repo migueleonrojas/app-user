@@ -98,7 +98,7 @@ class _AnimatedConfirmButtonState extends State<AnimatedConfirmButton>
             vertical: 8.0,
           ),
           child: AnimatedSize(
-            vsync: this,
+            /* vsync: this, */
             curve: Curves.easeIn,
             duration: _smallDuration!,
             child: Row(

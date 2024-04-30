@@ -69,6 +69,9 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                     UserModel userModel = UserModel.fromJson(
                               (snapshot.data!.docs[0] as dynamic).data());
                     return ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black
+                      ),
                       onPressed: () async {
                         final alert =  UpdateUser(userModel: userModel);
                         final newValues = await showDialog(context: context, builder: (_) => alert);

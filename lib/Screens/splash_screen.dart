@@ -100,7 +100,7 @@ class SplashScreenState extends State<SplashScreen> {
                   padding: EdgeInsets.only(top: (MediaQuery.of(context).size.height * 0.05).toDouble()),
                 ),
                 AutoSizeText(
-                  'Ahorre tiempo \nAdministrece con MetaOil',
+                  'Ahorre tiempo \nAdministrece',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.black,

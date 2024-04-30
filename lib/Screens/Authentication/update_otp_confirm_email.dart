@@ -151,18 +151,18 @@ class _UpdateOtpConfirmEmailScreenState extends State<UpdateOtpConfirmEmailScree
 
     Future <bool> sendCodeByEmail(int code) async{
 
-    String username = 'info@globaloil.app';
-    String password = 'rzvkfjuolafkuquf';
+    String username = 'migueleonrojas@gmail.com';
+    String password = 'iguqlscuzmzjyrpy';
 
     try{
       final smtpServer = gmail(username, password);
       final message = Message()
       ..from = Address(username)
       ..recipients.add(widget.emailUser)
-      ..subject = 'Validando Registro en el app MetaOil'
+      ..subject = 'Validando Registro en el app'
       ..text = ''
       ..html = ''' 
-        <h2>Validando registro en el app MetaOil</h2>
+        <h2>Validando registro en el app</h2>
         <br/>
         <p>Valide su registro ingresando el siguiente codigo en el app <b>$code</b></p>
       '''

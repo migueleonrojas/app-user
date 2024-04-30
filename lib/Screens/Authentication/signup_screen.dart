@@ -1,7 +1,8 @@
 
 import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:mailer/mailer.dart';
+import 'package:mailer/mailer.dart' as mailer;
+import 'package:sendgrid_mailer/sendgrid_mailer.dart' as sendgrid_mailer;
 import 'package:mailer/smtp_server.dart';
 import 'package:googleapis_auth/auth_io.dart';
 import 'package:http/http.dart' as http;
@@ -14,6 +15,9 @@ import 'package:oilapp/Screens/Authentication/signup_otp_confirm_email.dart';
 import 'package:oilapp/widgets/noInternetConnectionAlertDialog.dart';
 import 'package:oilapp/widgets/progressdialog.dart';
 import 'dart:convert';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'dart:io' as io;
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
@@ -108,7 +112,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 
                 ElevatedButton(
                 
-                  child: const AutoSizeText("Continuar"),
+                  child: const AutoSizeText(
+                    "Continuar",
+                    style: TextStyle(color: Colors.white),
+                  ),
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.030, horizontal: MediaQuery.of(context).size.width * 0.35),
                     backgroundColor: Color.fromARGB(255, 3, 3, 247),
@@ -117,12 +124,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     
                   ),
                   onPressed: () async {
+
                     FocusScope.of(context).requestFocus(FocusNode());
                     showDialog(
+
                       barrierDismissible: false,
                       context: context,
                       builder: (BuildContext context) => const ProgressDialog(
                         status: "Validando Datos, Por favor espere....",
+                        
+                      
                       ),
                     );
 
@@ -191,7 +202,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     String nameUser = _nameTextEditingController.text.toLowerCase().trim();
 
                     /* bool confirmSendPhone = await sendCodeByPhone(int.parse(phone), '$codeNumber'); */
-                    bool confirmSendEmail = await sendCodeByEmail(codeEmail);
+                    bool confirmSendEmail = (!kIsWeb && io.Platform.isAndroid) 
+                      ? await sendCodeByEmail(codeEmail)
+                      : await sendCodeByEmailWeb(codeEmail);
+
                     if(/* !confirmSendPhone ||  */!confirmSendEmail){
                       showSnackBar(title: 'No se envio el código al correo, intentelo de nuevo');
                       /* showSnackBar(title: 'No se enviaron los codigos, intentelo de nuevo'); */
@@ -217,38 +231,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Expanded(
-                    child: AutoSizeText(
-                      'Ya tienes una cuenta ?',
-                      style: TextStyle(
-                        fontSize: (MediaQuery.of(context).size.height * 0.025).toDouble(),
-                        color: Colors.blueGrey,
-                        fontWeight: FontWeight.w800,
-                      ),
+                  Expanded(child: SizedBox()),
+                  AutoSizeText(
+                    '¿Ya tienes una cuenta ?',
+                    style: TextStyle(
+                      fontSize: (MediaQuery.of(context).size.height * 0.025).toDouble(),
+                      color: Colors.blueGrey,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (c) => LoginScreen(),
-                          ),
-                        );
-                      },
-                      child: AutoSizeText(
-                        ' Entre Aquí',
-                        style: TextStyle(
-                          color: Colors.red[300],
-                          fontSize: (MediaQuery.of(context).size.height * 0.025).toDouble(),
-                          fontWeight: FontWeight.bold,
+                  SizedBox(width: 10,),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (c) => LoginScreen(),
                         ),
+                      );
+                    },
+                    child: AutoSizeText(
+                      ' Entre Aquí',
+                      style: TextStyle(
+                        color: Colors.red[300],
+                        fontSize: (MediaQuery.of(context).size.height * 0.025).toDouble(),
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
+                  Expanded(child: SizedBox()),
                 ],
               ),
+              SizedBox(height: 10,)
 
               ],
             ),
@@ -303,31 +317,64 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future <bool> sendCodeByEmail(int code) async{
 
-    String username = 'info@globaloil.app';
-    String password = 'rzvkfjuolafkuquf';
+    String username = 'migueleonrojas@gmail.com';
+    String password = 'iguqlscuzmzjyrpy';
 
     try{
       final smtpServer = gmail(username, password);
-      final message = Message()
-      ..from = Address(username)
+      final message = mailer.Message()
+      ..from = mailer.Address(username)
       ..recipients.add(_emailTextEditingController.text.toLowerCase().trim())
-      ..subject = 'Validando Registro en el app MetaOil'
+      ..subject = 'Validando Registro en el app'
       ..text = ''
       ..html = ''' 
-        <h2>Validando registro en el app MetaOil</h2>
+        <h2>Validando registro en el app</h2>
         <br/>
         <p>Valide su registro ingresando el siguiente codigo en el app <b>$code</b></p>
       '''
       ;
-       final sendReport = await send(message, smtpServer);
+       final sendReport = await mailer.send(message, smtpServer);
       return true;
     }
     catch(e){
-      
+      print('------------------------------------------');
+      print(e);
+      print('-------------------------------------------');
       return false;
     }
+  }
 
+  Future <bool> sendCodeByEmailWeb(int code) async{
     
+    String username = 'migueleonrojas@gmail.com';
+    String password = 'iguqlscuzmzjyrpy';
+
+    try{
+      final mailer = sendgrid_mailer.Mailer(password);
+      final toAddress = sendgrid_mailer.Address(_emailTextEditingController.text.toLowerCase().trim());
+      final fromAddress = sendgrid_mailer.Address(username);
+      final content = sendgrid_mailer.Content(
+        'text/html', 
+        '''
+          <h2>Validando registro en el app</h2>
+          <br/>
+          <p>Valide su registro ingresando el siguiente codigo en el app <b>$code</b></p>
+        '''
+      );
+      final subject = 'Validando Registro en el app';
+      final personalization = sendgrid_mailer.Personalization([toAddress]);
+      final email = sendgrid_mailer.Email([personalization], fromAddress, subject, content: [content]);
+
+      await mailer.send(email);
+
+      return true;
+    }
+    catch(e){
+      print('------------------------------------------');
+      print(e);
+      print('-------------------------------------------');
+      return false; 
+    }
   }
 
 

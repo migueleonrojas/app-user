@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: TextFormField(
                           controller: _credentialTextEditingController,
                           decoration: InputDecoration(
-                            hintText: "04141234567 o correo@dominio.com",
+                            hintText: "correo@dominio.com",
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height.toDouble() * 0.040),
                             ),
@@ -85,8 +85,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     backgroundColor: Color.fromARGB(255, 3, 3, 247),
                     shape: const StadiumBorder()
                   ),
-                  child: const AutoSizeText("Continuar"),
+                  child: const AutoSizeText(
+                    "Continuar",
+                    style: TextStyle(color: Colors.white),
+                  ),
                   onPressed: () async {
+                    
 
                     FocusScope.of(context).requestFocus(FocusNode());
                     showDialog(
@@ -166,7 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.pushAndRemoveUntil(context, route, (route) => false);
 
                     }
-                    if(isPhone) {
+                    if(false/* isPhone */) {
                       
                       int codeNumber = Random().nextInt(9999 - 1000 + 1) + 1000;
                       String phone = '58${_credentialTextEditingController.text.toLowerCase().trim().replaceFirst('0', '')}';
@@ -209,10 +213,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       
                     }
 
-                    if(!isEmail && !isPhone) {
+                    if(!isEmail /* && !isPhone */) {
                       if(!mounted) return;
                       Navigator.pop(context);
-                      showSnackBar(title: 'Debe ingresar un correo o número de teléfono valido');
+                      showSnackBar(title: 'Debe ingresar un correo valido');
                       return;
                     }
                   }, 
@@ -285,20 +289,20 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future <bool> sendCodeByEmail(int code) async{
 
-    String username = 'info@globaloil.app';
-    String password = 'rzvkfjuolafkuquf';
+    String username = 'migueleonrojas@gmail.com';
+    String password = 'iguqlscuzmzjyrpy';
 
     try{
       final smtpServer = gmail(username, password);
       final message = Message()
       ..from = Address(username)
       ..recipients.add(_credentialTextEditingController.text.toLowerCase().trim())
-      ..subject = 'Validando Registro en el app MetaOil'
+      ..subject = 'Validando Acceso en el app'
       ..text = ''
       ..html = ''' 
-        <h2>Validando registro en el app MetaOil</h2>
+        <h2>Validando Acceso en el app</h2>
         <br/>
-        <p>Valide su registro ingresando el siguiente codigo en el app <b>$code</b></p>
+        <p>Valide su Acceso ingresando el siguiente codigo en el app <b>$code</b></p>
       '''
       ;
        final sendReport = await send(message, smtpServer);

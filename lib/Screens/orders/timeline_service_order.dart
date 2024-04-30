@@ -58,7 +58,7 @@ class _TimeLineServiceOrderState extends State<TimeLineServiceOrder> {
                 if (snapshot.data!.docs.isEmpty) {
                   return const EmptyCardMessage(
                     listTitle: 'No tiene servicios',
-                    message: 'Solicite un servicio desde MetaOil',
+                    message: 'Solicite un servicio desde el app',
                   );
                 }
                 return ListView.builder(

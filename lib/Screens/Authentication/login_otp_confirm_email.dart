@@ -40,6 +40,7 @@ class _LoginOtpConfirmEmailScreenState extends State<LoginOtpConfirmEmailScreen>
   void initState() {
     super.initState();
     codeEmailOtp = widget.codeEmail;
+
     Future.delayed(Duration.zero,  () async {
 
       DocumentSnapshot<Map<String, dynamic>> docUser = await FirebaseFirestore.instance
@@ -123,7 +124,10 @@ class _LoginOtpConfirmEmailScreenState extends State<LoginOtpConfirmEmailScreen>
                       backgroundColor: Color.fromARGB(255, 3, 3, 247),
                       shape: const StadiumBorder()
                     ),
-                    child: const AutoSizeText("Continuar"),
+                    child: const AutoSizeText(
+                      "Continuar",
+                      style: TextStyle(color: Colors.white),
+                    ),
                     onPressed: () async {
                       
       
@@ -176,7 +180,7 @@ class _LoginOtpConfirmEmailScreenState extends State<LoginOtpConfirmEmailScreen>
                         await loginUser();
                         if(!mounted) return;
                         Navigator.pop(context);
-                        showSnackBar(title: 'Ingreso con exito a MetaOil.');
+                        showSnackBar(title: 'Ingreso con exito.');
                         Route route = MaterialPageRoute(builder: (_) => HomeScreen());
                         Navigator.pushAndRemoveUntil(context, route, (route) => false);
                       }
@@ -192,7 +196,10 @@ class _LoginOtpConfirmEmailScreenState extends State<LoginOtpConfirmEmailScreen>
                       backgroundColor: Color.fromARGB(255, 3, 3, 247),
                       shape: const StadiumBorder()
                     ),
-                    child: const AutoSizeText("Enviar nuevo código"),
+                    child: const AutoSizeText(
+                      "Enviar nuevo código",
+                      style: TextStyle(color: Colors.white),
+                    ),
                     onPressed: () async {
                       int codeEmail = Random().nextInt(9999 - 1000 + 1) + 1000;
                       bool confirmSend = await sendCodeByEmail(codeEmail);
@@ -227,18 +234,18 @@ class _LoginOtpConfirmEmailScreenState extends State<LoginOtpConfirmEmailScreen>
 
     Future <bool> sendCodeByEmail(int code) async{
 
-    String username = 'info@globaloil.app';
-    String password = 'rzvkfjuolafkuquf';
+    String username = 'migueleonrojas@gmail.com';
+    String password = 'iguqlscuzmzjyrpy';
 
     try{
       final smtpServer = gmail(username, password);
       final message = Message()
       ..from = Address(username)
       ..recipients.add(widget.emailUser)
-      ..subject = 'Validando Registro en el app MetaOil'
+      ..subject = 'Validando Registro en el app'
       ..text = ''
       ..html = ''' 
-        <h2>Validando registro en el app MetaOil</h2>
+        <h2>Validando registro en el app</h2>
         <br/>
         <p>Valide su registro ingresando el siguiente codigo en el app <b>$code</b></p>
       '''

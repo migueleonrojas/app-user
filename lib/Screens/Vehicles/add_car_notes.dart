@@ -396,7 +396,10 @@ class _AddCarNoteState extends State<AddCarNote> {
                         );
 
                       }, 
-                      child: const AutoSizeText('Adjuntar Archivo')
+                      child: const AutoSizeText(
+                        'Adjuntar Archivo',
+                        style: TextStyle(color: Colors.white),
+                      )
                     ),
                     SizedBox(height: size.height * 0.024),
                     (attachments.isNotEmpty)  

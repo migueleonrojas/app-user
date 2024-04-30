@@ -103,7 +103,7 @@ class _MyServiceOrderScreenState extends State<MyServiceOrderScreen> {
                 if (snapshot.data!.isEmpty) {
                   return const EmptyCardMessage(
                     listTitle: 'No tiene servicios',
-                    message: 'Solicite un servicio desde MetaOil',
+                    message: 'Solicite un servicio desde el app',
                   );
                 }
                 

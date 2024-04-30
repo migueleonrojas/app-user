@@ -164,7 +164,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                 padding: EdgeInsets.all(size.height * 0.012),
                                 child: Column(
                                   children: [
-                                    AutoSizeText(
+                                    Text(
                                       serviceOrderPaymentDetailsModel.paymentMethod!,
                                       style: TextStyle(
                                         fontSize: size.height * 0.022,
@@ -172,7 +172,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                       ),
                                     ),
                                     (serviceOrderPaymentDetailsModel.confirmationNumber != 0)
-                                      ? AutoSizeText(
+                                      ? Text(
                                         'Número de Confirmación: ${serviceOrderPaymentDetailsModel.confirmationNumber.toString()}',
                                         style: TextStyle(
                                           fontSize: size.height * 0.022,
@@ -181,7 +181,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                       )
                                       : Container(),
                                       (serviceOrderPaymentDetailsModel.paymentMethod == "Zelle")
-                                      ? AutoSizeText(
+                                      ? Text(
                                         'Fecha del Pago: ${DateFormat('dd/MM/yyyy').format(serviceOrderPaymentDetailsModel.paymentDate!)}',
                                         style: TextStyle(
                                           fontSize: size.height * 0.022,
@@ -190,7 +190,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                       )
                                       :Container(),
                                     (serviceOrderPaymentDetailsModel.issuerName != "")
-                                      ?AutoSizeText(
+                                      ?Text(
                                         'Nombre del Emisor: ${serviceOrderPaymentDetailsModel.issuerName.toString()}',
                                         style: TextStyle(
                                           fontSize: size.height * 0.022,
@@ -199,7 +199,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                       )
                                       :Container(),
                                     (serviceOrderPaymentDetailsModel.issuerName != "")
-                                      ?AutoSizeText(
+                                      ?Text(
                                         'Nombre del Titular: ${serviceOrderPaymentDetailsModel.holderName.toString()}',
                                         style: TextStyle(
                                           fontSize: size.height * 0.022,
@@ -208,7 +208,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                       )
                                       :Container(),
                                     (serviceOrderPaymentDetailsModel.observations != "")
-                                      ?AutoSizeText(                                        
+                                      ?Text(                                        
                                         'Observaciones: ${serviceOrderPaymentDetailsModel.observations.toString()}',
                                         maxLines: 3,
                                         style: TextStyle(
@@ -254,7 +254,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                         child: Column(
                           children: [
                              Center(
-                              child: AutoSizeText(
+                              child: Text(
                               'detalle del servicio'.toUpperCase(),
                               style: TextStyle(
                                 fontSize: size.height * 0.026,
@@ -273,7 +273,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                 title: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    AutoSizeText(
+                                    Text(
                                       (snapshot.data!.docs[index] as dynamic)
                                           .data()['serviceName'],
                                       maxLines: 2,
@@ -283,7 +283,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                       ),
                                     ),
                                     SizedBox(height: size.height * 0.008),
-                                    AutoSizeText(
+                                    Text(
                                       "Fecha: " +
                                           (snapshot.data!.docs[index] as dynamic).data()['date'],
                                       maxLines: 2,
@@ -293,7 +293,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                       ),
                                     ),
                                     SizedBox(height: size.height * 0.008),
-                                    AutoSizeText(
+                                    Text(
                                       "\$" +
                                           (snapshot.data!.docs[index] as dynamic)
                                               .data()['newPrice']
@@ -304,7 +304,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                         color: Colors.deepOrangeAccent[200],
                                       ),
                                     ),
-                                    AutoSizeText(
+                                    Text(
                                       'Observaciones: ${(snapshot.data!.docs[index] as dynamic)
                                         .data()['observations']
                                               .toString()}',
@@ -326,7 +326,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                       size: size.height * 0.022,
                                       color: Colors.deepOrangeAccent[200],
                                     ),
-                                    AutoSizeText(
+                                    Text(
                                       (snapshot.data!.docs[index] as dynamic)
                                           .data()['quantity']
                                           .toString(),
@@ -386,7 +386,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                         child: Column(
                           children: [
                             Center(
-                              child: AutoSizeText(
+                              child: Text(
                               'dirección de entrega'.toUpperCase(),
                               style: TextStyle(
                                 fontSize: size.height * 0.026,
@@ -400,7 +400,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                 TableRow(
                                   children: [
                                     KeyText(msg: "Nombre del Cliente"),
-                                    AutoSizeText(
+                                    Text(
                                       (snapshot.data!.docs[index] as dynamic)
                                           .data()['customerName'],
                                     ),
@@ -409,7 +409,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                 TableRow(
                                   children: [
                                     KeyText(msg: "Teléfono"),
-                                    AutoSizeText(
+                                    Text(
                                       (snapshot.data!.docs[index] as dynamic)
                                           .data()['phoneNumber'],
                                     ),
@@ -418,7 +418,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                 TableRow(
                                   children: [
                                     KeyText(msg: "Ciudad"),
-                                    AutoSizeText(
+                                    Text(
                                       (snapshot.data!.docs[index] as dynamic).data()['city'],
                                     ),
                                   ],
@@ -426,7 +426,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                 TableRow(
                                   children: [
                                     KeyText(msg: "Area"),
-                                    AutoSizeText(
+                                    Text(
                                       (snapshot.data!.docs[index] as dynamic).data()['area'],
                                     ),
                                   ],
@@ -434,7 +434,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                 TableRow(
                                   children: [
                                     KeyText(msg: "Número de la casa"),
-                                    AutoSizeText(
+                                    Text(
                                       (snapshot.data!.docs[index] as dynamic)
                                           .data()['houseandroadno'],
                                     ),
@@ -443,7 +443,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                 TableRow(
                                   children: [
                                     KeyText(msg: "Código de Área"),
-                                    AutoSizeText(
+                                    Text(
                                       (snapshot.data!.docs[index] as dynamic).data()['areacode'],
                                     ),
                                   ],
@@ -452,7 +452,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                             ),
                             SizedBox(height: size.height * 0.008,),
                             Center(
-                              child: AutoSizeText(
+                              child: Text(
                               'ubicación en el mapa'.toUpperCase(),
                               style: TextStyle(
                                 fontSize: size.height * 0.026,
@@ -502,7 +502,10 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                 setState(() {});
 
                               }, 
-                              child: const AutoSizeText('Editar dirección')
+                              child: const Text(
+                                'Editar dirección',
+                                style: TextStyle(color: Colors.white),
+                              )
                             )
                           ],
                         ),
@@ -560,7 +563,7 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                     children: [
                                       SizedBox(height: size.height * 0.008,),
                                       Center(
-                                        child: AutoSizeText(
+                                        child: Text(
                                           "Estatus de Orden",
                                           style: TextStyle(
                                             letterSpacing: 1,
@@ -588,7 +591,10 @@ class _MyServiceOrderDetailsByVehicleScreenState
                                           }
                                           await BackEndOrderService().cancelledOrder(widget.orderId);
                                         }, 
-                                        child: const AutoSizeText('Cancelar Orden')
+                                        child: const AutoSizeText(
+                                          'Cancelar Orden',
+                                          style: TextStyle(color: Colors.white),
+                                          )
                                       )
                                     ],
                                   ),

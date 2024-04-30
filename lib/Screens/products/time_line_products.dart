@@ -59,7 +59,7 @@ class _TimeLineProductsState extends State<TimeLineProducts> {
                 if (snapshot.data!.docs.isEmpty) {
                   return const EmptyCardMessage(
                     listTitle: 'No tiene ordenes de productos',
-                    message: 'Compre desde MetaOil',
+                    message: 'Compre desde el app',
                   );
                 }
                 return ListView.builder(

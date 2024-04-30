@@ -227,7 +227,10 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                   
                                 },
                                 child: (!loading) 
-                                  ? const AutoSizeText('Confirmar')
+                                  ? const AutoSizeText(
+                                    'Confirmar',
+                                    style: TextStyle(color: Colors.white),
+                                    )
                                   : const CircularProgressIndicator(
                                     valueColor: AlwaysStoppedAnimation(Colors.white),
                                   ),
@@ -274,7 +277,7 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                         StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance
                             .collection(AutoParts.paymentMethodDetails)
-                            .where('paymentMethod', isEqualTo: 'Pago Movil')
+                            .where('paymentMethod', isEqualTo: 'Pago Móvil')
                             .snapshots(),
                           builder: (context, snapshotMobilePayment) {
                             if (!snapshotMobilePayment.hasData) {
@@ -393,7 +396,7 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                                     IconButton(
                                                       icon: const Icon(Icons.copy),
                                                       onPressed: () async {                                                    
-                                                        await Clipboard.setData(ClipboardData(text: paymentMethodDetailsModel.bank));
+                                                        await Clipboard.setData(ClipboardData(text: paymentMethodDetailsModel.bank!));
                                                         Fluttertoast.showToast(msg: 'El banco se copio exitosamente');
                                                       },
                                                     )
@@ -409,7 +412,10 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10)
                                               ),
                                               child: (!loading) 
-                                                ? const AutoSizeText('Confirmar')
+                                                ? const AutoSizeText(
+                                                  'Confirmar',
+                                                  style: TextStyle(color: Colors.white),
+                                                )
                                                 : const CircularProgressIndicator(
                                                   valueColor: AlwaysStoppedAnimation(Colors.white),
                                                 ),
@@ -678,7 +684,10 @@ class _ServicePaymentPageState extends State<ServicePaymentPage> {
                                                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10)
                                                 ),
                                                 child: (!loading) 
-                                                ? const AutoSizeText('Confirmar')
+                                                ? const AutoSizeText(
+                                                  'Confirmar',
+                                                  style: TextStyle(color: Colors.white),
+                                                  )
                                                 : const CircularProgressIndicator(
                                                   valueColor: AlwaysStoppedAnimation(Colors.white),
                                                 ),

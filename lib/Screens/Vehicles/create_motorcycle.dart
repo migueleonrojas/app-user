@@ -76,6 +76,9 @@ class _CreateMotorcycleScreenState extends State<CreateMotorcycleScreen> {
         width: MediaQuery.of(context).size.width,
         height: size.height * 0.058,
         child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.black
+          ),
           onPressed: () async {
             FocusScope.of(context).requestFocus(FocusNode());
             if(brandController.text.isNotEmpty && modelController.text.isNotEmpty &&
@@ -142,7 +145,12 @@ class _CreateMotorcycleScreenState extends State<CreateMotorcycleScreen> {
             }
       
           },
-          child: const AutoSizeText('Agregar vehiculo')
+          child: const AutoSizeText(
+            'Agregar vehiculo',
+            style: TextStyle(
+              color: Colors.white
+            ),
+            )
         ),
       ),
       body: SingleChildScrollView(

@@ -102,37 +102,39 @@ class LoginHelper extends ChangeNotifier {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Expanded(
-          child: AutoSizeText(
-            '¿No tiene una cuenta?',
-            style: TextStyle(
-              fontSize: (MediaQuery.of(context).size.height * 0.022).toDouble(),
-              color: Colors.black,
-              fontWeight: FontWeight.w800,
-            ),
+
+        
+        Expanded(child: SizedBox()),
+        AutoSizeText(
+          '¿No tiene una cuenta?',
+          style: TextStyle(
+            fontSize: (MediaQuery.of(context).size.height * 0.022).toDouble(),
+            color: Colors.black,
+            fontWeight: FontWeight.w800,
           ),
         ),
-        Expanded(
-          child: InkWell(
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (c) => SignUpScreen(),
-                ),
-              );
-            },
-            child: AutoSizeText(
-              ' Registrarse',
-              style: TextStyle(
-                color: Colors.red,
-                fontSize: (MediaQuery.of(context).size.height * 0.024).toDouble(),
-                fontWeight: FontWeight.bold,
+        SizedBox(width: 5,),
+        InkWell(
+          onTap: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (c) => SignUpScreen(),
               ),
+            );
+          },
+          child: AutoSizeText(
+            ' Registrarse',
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: (MediaQuery.of(context).size.height * 0.024).toDouble(),
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
+        Expanded(child: SizedBox())
       ],
+
     );
   }
 }

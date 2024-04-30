@@ -71,11 +71,12 @@ class _CartScreenState extends State<CartScreen> {
                       style: TextStyle(
                         fontSize: size.height * 0.020,
                         fontWeight: FontWeight.w600,
+                        color: Colors.white
                       ),
                     ),
                     
                     backgroundColor: Color.fromARGB(255, 3, 3, 247),
-                    icon: Icon(Icons.shopping_cart_outlined),
+                    icon: Icon(Icons.shopping_cart_outlined,color: Colors.white),
                   );
           }),
       body: SingleChildScrollView(

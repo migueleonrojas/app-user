@@ -70,7 +70,7 @@ class _MyServiceOrderByVehicleScreenState extends State<MyServiceOrderByVehicleS
           if(snapshot.data!.isEmpty) {
             return const EmptyCardMessage(
               listTitle: 'No tiene servicios para este vehiculo',
-              message: 'Solicite un servicio desde MetaOil',
+              message: 'Solicite un servicio desde el app',
             );
           }
 
