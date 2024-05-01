@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:oilapp/Screens/Vehicles/cars.dart';
-import 'package:oilapp/Screens/Vehicles/create_car.dart';
-import 'package:oilapp/Screens/Vehicles/create_motorcycle.dart';
-import 'package:oilapp/Screens/Vehicles/motorcycles.dart';
+import 'package:oil_app/Screens/Vehicles/cars.dart';
+import 'package:oil_app/Screens/Vehicles/create_car.dart';
+import 'package:oil_app/Screens/Vehicles/create_motorcycle.dart';
+import 'package:oil_app/Screens/Vehicles/motorcycles.dart';
 class Vehicles extends StatefulWidget {
   const Vehicles({super.key});
 

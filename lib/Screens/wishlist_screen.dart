@@ -1,4 +1,4 @@
-import 'package:oilapp/Helper/wish_helper.dart';
+import 'package:oil_app/Helper/wish_helper.dart';
 import 'package:flutter/material.dart';
 
 class WishListScreen extends StatelessWidget {

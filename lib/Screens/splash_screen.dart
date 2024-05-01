@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:oilapp/Helper/login_helper.dart';
-import 'package:oilapp/Screens/home_screen.dart';
-import 'package:oilapp/config/config.dart';
+import 'package:oil_app/Helper/login_helper.dart';
+import 'package:oil_app/Screens/home_screen.dart';
+import 'package:oil_app/config/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:oilapp/Screens/Authentication/login_screen.dart';
+import 'package:oil_app/Screens/Authentication/login_screen.dart';
 
 
 class SplashScreen extends StatefulWidget {

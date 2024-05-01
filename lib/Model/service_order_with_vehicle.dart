@@ -1,5 +1,5 @@
-import 'package:oilapp/Model/service_order_model.dart';
-import 'package:oilapp/Model/vehicle_model.dart';
+import 'package:oil_app/Model/service_order_model.dart';
+import 'package:oil_app/Model/vehicle_model.dart';
 
 class SeviceOrderWithVehicleModel {
 

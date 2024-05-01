@@ -1,11 +1,11 @@
 import 'dart:async';
 
 
-import 'package:oilapp/Model/service_order_model.dart';
-import 'package:oilapp/Model/service_order_with_vehicle.dart';
-import 'package:oilapp/Model/vehicle_model.dart';
-import 'package:oilapp/config/config.dart';
-import 'package:oilapp/counter/service_item_counter.dart';
+import 'package:oil_app/Model/service_order_model.dart';
+import 'package:oil_app/Model/service_order_with_vehicle.dart';
+import 'package:oil_app/Model/vehicle_model.dart';
+import 'package:oil_app/config/config.dart';
+import 'package:oil_app/counter/service_item_counter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';

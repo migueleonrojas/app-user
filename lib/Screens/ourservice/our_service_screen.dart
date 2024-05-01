@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:oilapp/Model/vehicle_model.dart';
-import 'package:oilapp/Screens/orders/myservice_order_by_vehicle_screen.dart';
-import 'package:oilapp/Screens/ourservice/coustomServicebody.dart';
+import 'package:oil_app/Model/vehicle_model.dart';
+import 'package:oil_app/Screens/orders/myservice_order_by_vehicle_screen.dart';
+import 'package:oil_app/Screens/ourservice/coustomServicebody.dart';
 import 'package:flutter/material.dart';
 
 class OurService extends StatefulWidget {

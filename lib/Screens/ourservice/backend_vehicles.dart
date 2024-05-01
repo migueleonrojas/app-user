@@ -3,8 +3,8 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
-import 'package:oilapp/Model/vehicle_model.dart';
-import 'package:oilapp/config/config.dart';
+import 'package:oil_app/Model/vehicle_model.dart';
+import 'package:oil_app/config/config.dart';
 
 class BackEndVehiclesService {
 

@@ -36,8 +36,13 @@ Future <void> initNotifications() async {
 Future <void> showNotification({required int idNotification}) async {
 
 
-  await flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
-    AndroidFlutterLocalNotificationsPlugin>()!.requestPermission();
+  await flutterLocalNotificationsPlugin
+    .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+    !.requestNotificationsPermission();
+
+  await flutterLocalNotificationsPlugin
+    .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+    !.requestExactAlarmsPermission();
 
 
   const AndroidNotificationDetails androidNotificationDetails = AndroidNotificationDetails(

@@ -1,6 +1,6 @@
-import 'package:oilapp/widgets/gridproductcard.dart';
-import 'package:oilapp/widgets/loading_widget.dart';
-import 'package:oilapp/widgets/mycustom_appbar.dart';
+import 'package:oil_app/widgets/gridproductcard.dart';
+import 'package:oil_app/widgets/loading_widget.dart';
+import 'package:oil_app/widgets/mycustom_appbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

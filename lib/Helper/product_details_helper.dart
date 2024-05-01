@@ -1,12 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:oilapp/Model/product_model.dart';
-import 'package:oilapp/Screens/cart_screen.dart';
-import 'package:oilapp/Screens/products/product_onlydetails.dart';
-import 'package:oilapp/config/config.dart';
-import 'package:oilapp/service/cart_service.dart';
+import 'package:oil_app/Model/product_model.dart';
+import 'package:oil_app/Screens/cart_screen.dart';
+import 'package:oil_app/Screens/products/product_onlydetails.dart';
+import 'package:oil_app/config/config.dart';
+import 'package:oil_app/service/cart_service.dart';
 
-import 'package:oilapp/widgets/loading_widget.dart';
-import 'package:oilapp/widgets/horizontalCard.dart';
+import 'package:oil_app/widgets/loading_widget.dart';
+import 'package:oil_app/widgets/horizontalCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

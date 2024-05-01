@@ -6,12 +6,12 @@ import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-import 'package:oilapp/Helper/login_helper.dart';
-import 'package:oilapp/Screens/Authentication/login_screen.dart';
-import 'package:oilapp/Screens/Authentication/signup_otp_confirm_phone.dart';
-import 'package:oilapp/Screens/Authentication/signup_screen.dart';
-import 'package:oilapp/config/config.dart';
-import 'package:oilapp/widgets/progressdialog.dart';
+import 'package:oil_app/Helper/login_helper.dart';
+import 'package:oil_app/Screens/Authentication/login_screen.dart';
+import 'package:oil_app/Screens/Authentication/signup_otp_confirm_phone.dart';
+import 'package:oil_app/Screens/Authentication/signup_screen.dart';
+import 'package:oil_app/config/config.dart';
+import 'package:oil_app/widgets/progressdialog.dart';
 
 class SignUpOtpConfirmEmailScreen extends StatefulWidget {
 

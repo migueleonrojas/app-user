@@ -1,17 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:oilapp/Model/service_order_with_vehicle.dart';
-import 'package:oilapp/Model/vehicle_model.dart';
-import 'package:oilapp/Model/service_order_model.dart';
-import 'package:oilapp/Screens/home_screen.dart';
-import 'package:oilapp/Screens/orders/myservice_order_details_by_vehicle_screen.dart';
-import 'package:oilapp/Screens/orders/myservice_order_details_screen.dart';
-import 'package:oilapp/Screens/ourservice/backend_orderservice.dart';
-import 'package:oilapp/config/config.dart';
-import 'package:oilapp/widgets/emptycardmessage.dart';
+import 'package:oil_app/Model/service_order_with_vehicle.dart';
+import 'package:oil_app/Model/vehicle_model.dart';
+import 'package:oil_app/Model/service_order_model.dart';
+import 'package:oil_app/Screens/home_screen.dart';
+import 'package:oil_app/Screens/orders/myservice_order_details_by_vehicle_screen.dart';
+import 'package:oil_app/Screens/orders/myservice_order_details_screen.dart';
+import 'package:oil_app/Screens/ourservice/backend_orderservice.dart';
+import 'package:oil_app/config/config.dart';
+import 'package:oil_app/widgets/emptycardmessage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:oilapp/widgets/loading_widget.dart';
+import 'package:oil_app/widgets/loading_widget.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 

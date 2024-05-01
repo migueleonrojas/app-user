@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:oilapp/Model/vehicle_model.dart';
-import 'package:oilapp/config/config.dart';
+import 'package:oil_app/Model/vehicle_model.dart';
+import 'package:oil_app/config/config.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 

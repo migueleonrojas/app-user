@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:oilapp/Screens/Authentication/signup_screen.dart';
+import 'package:oil_app/Screens/Authentication/signup_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

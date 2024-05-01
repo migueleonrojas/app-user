@@ -10,21 +10,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import 'package:oilapp/Model/user_model.dart';
-import 'package:oilapp/Screens/Authentication/update_otp_confirm_email.dart';
-import 'package:oilapp/Screens/Authentication/update_otp_confirm_phone.dart';
-import 'package:oilapp/Screens/home_screen.dart';
-import 'package:oilapp/Screens/myaccount_screen.dart';
-import 'package:oilapp/Screens/splash_screen.dart';
-import 'package:oilapp/widgets/progressdialog.dart';
+import 'package:oil_app/Model/user_model.dart';
+import 'package:oil_app/Screens/Authentication/update_otp_confirm_email.dart';
+import 'package:oil_app/Screens/Authentication/update_otp_confirm_phone.dart';
+import 'package:oil_app/Screens/home_screen.dart';
+import 'package:oil_app/Screens/myaccount_screen.dart';
+import 'package:oil_app/Screens/splash_screen.dart';
+import 'package:oil_app/widgets/progressdialog.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:oilapp/config/config.dart';
-import 'package:oilapp/widgets/customsimpledialogoption.dart';
-import 'package:oilapp/widgets/mytextFormfield.dart';
+import 'package:oil_app/config/config.dart';
+import 'package:oil_app/widgets/customsimpledialogoption.dart';
+import 'package:oil_app/widgets/mytextFormfield.dart';
 
 class UpdateUser extends StatefulWidget {
 

@@ -1,4 +1,4 @@
-import 'package:oilapp/Model/category_model.dart';
+import 'package:oil_app/Model/category_model.dart';
 
 final _speakers = CategoryModel(
   imageUrl: "assets/category/Speakers.jpg",

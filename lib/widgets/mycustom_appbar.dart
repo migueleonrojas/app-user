@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:oilapp/Screens/cart_screen.dart';
-import 'package:oilapp/Screens/products/product_search.dart';
-import 'package:oilapp/config/config.dart';
+import 'package:oil_app/Screens/cart_screen.dart';
+import 'package:oil_app/Screens/products/product_search.dart';
+import 'package:oil_app/config/config.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

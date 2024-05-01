@@ -1,7 +1,7 @@
 
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:oilapp/Model/vehicle_model.dart';
-import 'package:oilapp/config/config.dart';
+import 'package:oil_app/Model/vehicle_model.dart';
+import 'package:oil_app/config/config.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 

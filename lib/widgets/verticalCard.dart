@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:oilapp/Model/product_model.dart';
-import 'package:oilapp/Screens/products/product_details.dart';
-import 'package:oilapp/config/config.dart';
-import 'package:oilapp/service/cart_service.dart';
-import 'package:oilapp/service/wishlist_service.dart';
+import 'package:oil_app/Model/product_model.dart';
+import 'package:oil_app/Screens/products/product_details.dart';
+import 'package:oil_app/config/config.dart';
+import 'package:oil_app/service/cart_service.dart';
+import 'package:oil_app/service/wishlist_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

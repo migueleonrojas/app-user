@@ -6,16 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:oilapp/Model/vehicle_model.dart';
-import 'package:oilapp/Screens/Vehicles/view_cars_notes.dart';
-import 'package:oilapp/Screens/Vehicles/view_image.dart';
-import 'package:oilapp/Screens/home_screen.dart';
-import 'package:oilapp/Screens/ourservice/backend_carnoteservice.dart';
-import 'package:oilapp/config/config.dart';
-import 'package:oilapp/service/vehicle_service.dart';
-import 'package:oilapp/widgets/customTextField.dart';
+import 'package:oil_app/Model/vehicle_model.dart';
+import 'package:oil_app/Screens/Vehicles/view_cars_notes.dart';
+import 'package:oil_app/Screens/Vehicles/view_image.dart';
+import 'package:oil_app/Screens/home_screen.dart';
+import 'package:oil_app/Screens/ourservice/backend_carnoteservice.dart';
+import 'package:oil_app/config/config.dart';
+import 'package:oil_app/service/vehicle_service.dart';
+import 'package:oil_app/widgets/customTextField.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:oilapp/widgets/progressdialog.dart';
+import 'package:oil_app/widgets/progressdialog.dart';
 class AddCarNote extends StatefulWidget {
 
   final Map<String,dynamic> noteCar;

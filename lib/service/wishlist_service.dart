@@ -1,6 +1,6 @@
-import 'package:oilapp/Model/wish_model.dart';
-import 'package:oilapp/config/config.dart';
-import 'package:oilapp/counter/wishlist_item_count.dart';
+import 'package:oil_app/Model/wish_model.dart';
+import 'package:oil_app/config/config.dart';
+import 'package:oil_app/counter/wishlist_item_count.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

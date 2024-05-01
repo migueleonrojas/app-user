@@ -1,5 +1,5 @@
-import 'package:oilapp/Model/addresss.dart';
-import 'package:oilapp/config/config.dart';
+import 'package:oil_app/Model/addresss.dart';
+import 'package:oil_app/config/config.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

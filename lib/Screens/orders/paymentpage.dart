@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:oilapp/Model/cart_model.dart';
-import 'package:oilapp/Screens/home_screen.dart';
-import 'package:oilapp/Screens/orders/myOrder_Screen.dart';
-import 'package:oilapp/config/config.dart';
-import 'package:oilapp/service/order_service.dart';
-import 'package:oilapp/widgets/confirm_animation_button.dart';
-import 'package:oilapp/widgets/simpleAppbar.dart';
+import 'package:oil_app/Model/cart_model.dart';
+import 'package:oil_app/Screens/home_screen.dart';
+import 'package:oil_app/Screens/orders/myOrder_Screen.dart';
+import 'package:oil_app/config/config.dart';
+import 'package:oil_app/service/order_service.dart';
+import 'package:oil_app/widgets/confirm_animation_button.dart';
+import 'package:oil_app/widgets/simpleAppbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

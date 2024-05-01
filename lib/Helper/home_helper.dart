@@ -1,14 +1,14 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:oilapp/Screens/Vehicles/create_vehicle.dart';
-import 'package:oilapp/Screens/Vehicles/vehicles.dart';
-import 'package:oilapp/Screens/products/product_search.dart';
-import 'package:oilapp/service/category_data.dart';
-import 'package:oilapp/widgets/category_tile.dart';
-import 'package:oilapp/widgets/loading_widget.dart';
-import 'package:oilapp/widgets/verticalCard.dart';
-import 'package:oilapp/widgets/horizontalCard.dart';
+import 'package:oil_app/Screens/Vehicles/create_vehicle.dart';
+import 'package:oil_app/Screens/Vehicles/vehicles.dart';
+import 'package:oil_app/Screens/products/product_search.dart';
+import 'package:oil_app/service/category_data.dart';
+import 'package:oil_app/widgets/category_tile.dart';
+import 'package:oil_app/widgets/loading_widget.dart';
+import 'package:oil_app/widgets/verticalCard.dart';
+import 'package:oil_app/widgets/horizontalCard.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';

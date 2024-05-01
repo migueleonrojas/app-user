@@ -5,14 +5,14 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-import 'package:oilapp/Helper/login_helper.dart';
-import 'package:oilapp/Screens/Authentication/login_screen.dart';
-import 'package:oilapp/Screens/Authentication/signup_screen.dart';
+import 'package:oil_app/Helper/login_helper.dart';
+import 'package:oil_app/Screens/Authentication/login_screen.dart';
+import 'package:oil_app/Screens/Authentication/signup_screen.dart';
 import 'dart:convert';
 
-import 'package:oilapp/config/config.dart';
-import 'package:oilapp/widgets/modal.dart';
-import 'package:oilapp/widgets/progressdialog.dart';
+import 'package:oil_app/config/config.dart';
+import 'package:oil_app/widgets/modal.dart';
+import 'package:oil_app/widgets/progressdialog.dart';
 
 class SignUpOtpConfirmPhoneScreen extends StatefulWidget {
 

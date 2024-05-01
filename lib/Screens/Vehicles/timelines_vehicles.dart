@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:oilapp/Screens/Vehicles/time_line_car.dart';
-import 'package:oilapp/Screens/Vehicles/time_line_motorcycle.dart';
+import 'package:oil_app/Screens/Vehicles/time_line_car.dart';
+import 'package:oil_app/Screens/Vehicles/time_line_motorcycle.dart';
 
 class TimelinesVehicles extends StatefulWidget {
   const TimelinesVehicles({super.key});

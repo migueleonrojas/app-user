@@ -1,21 +1,21 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:oilapp/Model/addresss.dart';
-import 'package:oilapp/Model/vehicle_model.dart';
-import 'package:oilapp/Screens/Address/addAddress.dart';
-import 'package:oilapp/Screens/Address/editAddress.dart';
-import 'package:oilapp/Screens/ourservice/service_payment.dart';
-import 'package:oilapp/config/config.dart';
-import 'package:oilapp/counter/changeAddress.dart';
-import 'package:oilapp/service/category_data.dart';
-import 'package:oilapp/widgets/emptycardmessage.dart';
-import 'package:oilapp/widgets/erroralertdialog.dart';
-import 'package:oilapp/widgets/loading_widget.dart';
-import 'package:oilapp/widgets/widebutton.dart';
+import 'package:oil_app/Model/addresss.dart';
+import 'package:oil_app/Model/vehicle_model.dart';
+import 'package:oil_app/Screens/Address/addAddress.dart';
+import 'package:oil_app/Screens/Address/editAddress.dart';
+import 'package:oil_app/Screens/ourservice/service_payment.dart';
+import 'package:oil_app/config/config.dart';
+import 'package:oil_app/counter/changeAddress.dart';
+import 'package:oil_app/service/category_data.dart';
+import 'package:oil_app/widgets/emptycardmessage.dart';
+import 'package:oil_app/widgets/erroralertdialog.dart';
+import 'package:oil_app/widgets/loading_widget.dart';
+import 'package:oil_app/widgets/widebutton.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:oilapp/service/address_service.dart';
+import 'package:oil_app/service/address_service.dart';
 
 class ServiceShippingAddress extends StatefulWidget {
   final int? totalPrice;

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:oilapp/config/config.dart';
+import 'package:oil_app/config/config.dart';
 
 class CarNoteService{
 

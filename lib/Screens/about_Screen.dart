@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:oilapp/widgets/simpleAppbar.dart';
+import 'package:oil_app/widgets/simpleAppbar.dart';
 import 'package:flutter/material.dart';
 
 class AboutScreen extends StatefulWidget {

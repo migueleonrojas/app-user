@@ -7,12 +7,12 @@ import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:oilapp/Helper/login_helper.dart';
-import 'package:oilapp/Screens/Authentication/login_otp_confirm_email.dart';
-import 'package:oilapp/Screens/Authentication/login_otp_confirm_phone.dart';
-import 'package:oilapp/config/config.dart';
-import 'package:oilapp/widgets/noInternetConnectionAlertDialog.dart';
-import 'package:oilapp/widgets/progressdialog.dart';
+import 'package:oil_app/Helper/login_helper.dart';
+import 'package:oil_app/Screens/Authentication/login_otp_confirm_email.dart';
+import 'package:oil_app/Screens/Authentication/login_otp_confirm_phone.dart';
+import 'package:oil_app/config/config.dart';
+import 'package:oil_app/widgets/noInternetConnectionAlertDialog.dart';
+import 'package:oil_app/widgets/progressdialog.dart';
 import 'dart:convert';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

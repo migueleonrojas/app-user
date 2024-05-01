@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:oilapp/Screens/products/category_products.dart';
+import 'package:oil_app/Screens/products/category_products.dart';
 import 'package:flutter/material.dart';
 
 class CategoryTile extends StatelessWidget {

@@ -1,13 +1,13 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:oilapp/Screens/ourservice/backend_orderservice.dart';
-import 'package:oilapp/Screens/ourservice/service_shipping_address.dart';
-import 'package:oilapp/config/config.dart';
-import 'package:oilapp/counter/service_item_counter.dart';
-import 'package:oilapp/counter/service_total_money.dart';
-import 'package:oilapp/widgets/emptycardmessage.dart';
-import 'package:oilapp/widgets/loading_widget.dart';
-import 'package:oilapp/widgets/simpleAppbar.dart';
+import 'package:oil_app/Screens/ourservice/backend_orderservice.dart';
+import 'package:oil_app/Screens/ourservice/service_shipping_address.dart';
+import 'package:oil_app/config/config.dart';
+import 'package:oil_app/counter/service_item_counter.dart';
+import 'package:oil_app/counter/service_total_money.dart';
+import 'package:oil_app/widgets/emptycardmessage.dart';
+import 'package:oil_app/widgets/loading_widget.dart';
+import 'package:oil_app/widgets/simpleAppbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

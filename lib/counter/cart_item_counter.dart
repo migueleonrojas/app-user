@@ -1,4 +1,4 @@
-import 'package:oilapp/config/config.dart';
+import 'package:oil_app/config/config.dart';
 import 'package:flutter/material.dart';
 
 class CartItemCounter extends ChangeNotifier {

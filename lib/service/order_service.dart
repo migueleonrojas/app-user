@@ -1,6 +1,6 @@
-import 'package:oilapp/Model/order_history_model.dart';
-import 'package:oilapp/config/config.dart';
-import 'package:oilapp/counter/cart_item_counter.dart';
+import 'package:oil_app/Model/order_history_model.dart';
+import 'package:oil_app/config/config.dart';
+import 'package:oil_app/counter/cart_item_counter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

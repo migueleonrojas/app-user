@@ -4,15 +4,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:oilapp/Model/vehicle_model.dart';
-import 'package:oilapp/Screens/Vehicles/add_brand.dart';
-import 'package:oilapp/Screens/Vehicles/add_color.dart';
-import 'package:oilapp/Screens/Vehicles/add_model.dart';
-import 'package:oilapp/Screens/Vehicles/add_year.dart';
-import 'package:oilapp/Screens/Vehicles/vehicles.dart';
-import 'package:oilapp/config/config.dart';
-import 'package:oilapp/service/vehicle_service.dart';
-import 'package:oilapp/widgets/loading_widget.dart';
+import 'package:oil_app/Model/vehicle_model.dart';
+import 'package:oil_app/Screens/Vehicles/add_brand.dart';
+import 'package:oil_app/Screens/Vehicles/add_color.dart';
+import 'package:oil_app/Screens/Vehicles/add_model.dart';
+import 'package:oil_app/Screens/Vehicles/add_year.dart';
+import 'package:oil_app/Screens/Vehicles/vehicles.dart';
+import 'package:oil_app/config/config.dart';
+import 'package:oil_app/service/vehicle_service.dart';
+import 'package:oil_app/widgets/loading_widget.dart';
 
 import '../../widgets/erroralertdialog.dart';
 

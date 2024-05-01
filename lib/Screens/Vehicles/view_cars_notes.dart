@@ -2,16 +2,16 @@ import 'dart:async';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:oilapp/Model/vehicle_model.dart';
+import 'package:oil_app/Model/vehicle_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:oilapp/Screens/Vehicles/edit_car_notes.dart';
-import 'package:oilapp/Screens/home_screen.dart';
-import 'package:oilapp/config/config.dart';
-import 'package:oilapp/service/carNotes_service.dart';
-import 'package:oilapp/widgets/emptycardmessage.dart';
-import 'package:oilapp/widgets/loading_widget.dart';
-import 'package:oilapp/widgets/modal_bottom_sheet_add_car_note.dart';
-import 'package:oilapp/widgets/model_bottom_sheet_list.dart';
+import 'package:oil_app/Screens/Vehicles/edit_car_notes.dart';
+import 'package:oil_app/Screens/home_screen.dart';
+import 'package:oil_app/config/config.dart';
+import 'package:oil_app/service/carNotes_service.dart';
+import 'package:oil_app/widgets/emptycardmessage.dart';
+import 'package:oil_app/widgets/loading_widget.dart';
+import 'package:oil_app/widgets/modal_bottom_sheet_add_car_note.dart';
+import 'package:oil_app/widgets/model_bottom_sheet_list.dart';
 class ViewCarNotes extends StatefulWidget {
 
   final VehicleModel? vehicleModel;
